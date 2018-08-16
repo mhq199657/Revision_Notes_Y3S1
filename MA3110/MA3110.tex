@@ -1,0 +1,90 @@
+\PassOptionsToPackage{svgnames}{xcolor}
+\documentclass[12pt]{article}
+
+
+
+\usepackage[margin=1in]{geometry}  
+\usepackage{graphicx}             
+\usepackage{amsmath}              
+\usepackage{amsfonts}              
+\usepackage{framed}               
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{amsthm}
+\usepackage[nottoc]{tocbibind}
+\usepackage{bm}
+\usepackage{enumitem}
+
+ \newcommand{\im}{\mathrm{i}}
+  \newcommand{\diff}{\mathrm{d}}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0em}
+\newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+\theoremstyle{definition}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arccsc}{arccsc}
+\setcounter{tocdepth}{1}
+\begin{document}
+
+\title{Revision notes - MA3110}
+\author{Ma Hongqiang}
+\maketitle
+\tableofcontents
+
+\clearpage
+\section{Review}
+\begin{definition}[Limit of Sequence]
+\hfill\\\normalfont For a sequence $(x_n)_{n\in \mathbb{N}}$, we say $\lim_{n\to \infty} x_n = a$ if and only if
+\[
+\forall \epsilon >0, \exists n_0\in \mathbb{N} \text{ such that }\forall n\geq n_0, |x_n-a|\leq \epsilon
+\]
+\end{definition}
+Similarly, we define $\lim_{n\to \infty} x_n = \infty$ if and only if
+\[
+\forall M>0, \exists n_0\text{ depending on }M, \text{s.t. }\forall n\geq n_0, x_n\geq M
+\]
+\begin{definition}[Limit Point(Subsequential Limit in \texttt{MA2108} notes)]
+\hfill\\\normalfont A number $a\in[-\infty, \infty]$ is called a \textbf{limit point} of the sequence $(x_n)_{n\in \mathbb{N}}$, if there exists an increasing sequence of indices $n_1<n_2<n_3<\cdots$ such that $\lim_{i\to \infty} x_{n_i} = a$.
+\end{definition}
+\begin{theorem}
+\hfill\\\normalfont $\lim_{n\to \infty}x_n$ does not exist in $[-\infty, \infty]$ if and only if $(x_n)_{n\in \mathbb{N}}$ has more than 1 limit point in $[-\infty, \infty]$.
+\end{theorem}
+\begin{definition}[Supremum and Infimum]
+\hfill\\\normalfont Let $A\subset[-\infty, \infty]$. The \textbf{supremum} of $A$, denoted by $\sup A$, is defined to be the \textbf{least upper bound} of $A$.\\
+Essentially, $p = \sup A$ if and only if
+\begin{enumerate}
+  \item $x\leq p\forall x\in A$
+  \item if $x\leq u\forall x\in A$ for some $u\in [-\infty, \infty]$, then $p\leq u$.
+\end{enumerate}
+The infimum is defined in a similar fashion. For detailed definition, check MA2108 revision notes.
+\end{definition}
+\begin{definition}[Limit Supremum and Infimum]
+\hfill\\\normalfont Given a sequence of real numbers $(x_n)_{n\in \mathbb{N}}$,
+\[
+\lim\sup_{n\to\infty} x_n :=\lim_{n\to \infty}(\sup_{m\geq n} x_m)
+\]
+and 
+\[
+\lim\inf_{n\to\infty} x_n :=\lim_{n\to \infty}(\inf_{m\geq n} x_m)
+\]
+\end{definition}
+\begin{theorem}
+\hfill\\\normalfont $\lim\sup_{n\to \infty} x_n$ is a limit point and the \textbf{largest limit point} of the sequence $(x_n)_{n\in \mathbb{N}}$. $\lim\inf_{n\to \infty} x_n$ is the smallest limit point.
+\end{theorem}
+\begin{theorem}
+\hfill\\\normalfont $\lim_{n\to\infty} x_n$ exists in $[-\infty,\infty]$ if and only if $\lim\sup_{n\to\infty} x_n = \lim\inf_{n\to\infty} x_n$.
+\end{theorem}
+\begin{definition}[Continuity]
+\hfill\\\normalfont A function $f:\mathbb{R}\to\mathbb{R}$ is said to be \textbf{continuous} at $x$ if $\lim_{y\to x} f(y)$ exists and equals $f(x)$.\\
+Equivalently,
+\[
+\forall \epsilon>0, \exists \delta>0\text{ such that } \sup_{y\in[x-\delta, x+\delta]}|f(y)-f(x)|\leq \epsilon
+\]
+\end{definition}
+\end{document}
+

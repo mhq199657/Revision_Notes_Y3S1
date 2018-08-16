@@ -1,0 +1,213 @@
+\PassOptionsToPackage{svgnames}{xcolor}
+\documentclass[12pt]{article}
+
+
+
+\usepackage[margin=1in]{geometry}  
+\usepackage{graphicx}             
+\usepackage{amsmath}              
+\usepackage{amsfonts}              
+\usepackage{framed}               
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{amsthm}
+\usepackage[nottoc]{tocbibind}
+\usepackage{bm}
+\usepackage{enumitem}
+
+
+\DeclareMathOperator{\Tr}{Tr}
+ \newcommand{\im}{\mathrm{i}}
+  \newcommand{\diff}{\mathrm{d}}
+  \newcommand{\col}{\mathrm{Col}}
+  \newcommand{\row}{\mathrm{R}}
+  \newcommand{\kerne}{\mathrm{Ker}}
+  \newcommand{\nul}{\mathrm{Null}}
+  \newcommand{\nullity}{\mathrm{nullity}}
+  \newcommand{\rank}{\mathrm{rank}}
+  \newcommand{\Hom}{\mathrm{Hom}}
+  \newcommand{\id}{\mathrm{id}}
+  \newcommand{\ima}{\mathrm{Im}}
+  \newcommand{\lcm}{\mathrm{lcm}}
+  \newcommand{\st}{\mathrm{s.t.}}
+  \newcommand{\T}{\mathrm{T}}
+  \newcommand{\va}{\mathbf{a}}
+  \newcommand\norm[1]{\left\lVert#1\right\rVert}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0em}
+\newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{notation}{Notation}[section]
+\theoremstyle{definition}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arccsc}{arccsc}
+\DeclareMathOperator{\spn}{Span}
+\DeclareMathOperator{\x}{\mathbf{x}}
+\setcounter{tocdepth}{1}
+\begin{document}
+
+\title{Revision notes - MA4254}
+\author{Ma Hongqiang}
+\maketitle
+\tableofcontents
+
+\clearpage
+%\twocolumn
+\section{Graph and Digraph}
+\subsection{Graphs}
+\begin{definition}[Graph]
+\hfill\\\normalfont A graph $G$ is a pair $(V,E)$, where
+\begin{itemize}
+  \item $V$ is a finite set, and
+  \item $E$ is a set of unordered pairs of elements of $V$.
+\end{itemize}
+Elements of $V$ are called vertices and elements of $E$ edges.\\
+A pair of distinct vertices are \textbf{adjacent} if they define an edge. The edge is said to be \textbf{incident} to its defining vertices.\\
+The \textbf{degree} of a vertex $v$, denoted as $\deg(v)$, is the number of edges incident to that vertex.
+\end{definition}
+\begin{definition}[Path, Cycle]
+\hfill\\\normalfont A $v_1v_k$-\textbf{path} is a sequence of edges
+\[
+\{v_1, v_2\}, \{v_2, v_3\},\ldots, \{v_{k-1}, v_k\}
+\]
+A \textbf{cycle} is a sequence of edges
+\[
+\{v_1, v_2\}, \{v_2, v_3\},\ldots, \{v_{k-1}, v_k\}, \{v_k, v_1\}
+\]
+In both case we require the vertices to be all \textit{distinct}.\\
+A graph is said to be \textbf{acyclic} if it has no cycle.
+\end{definition}
+\begin{theorem}
+\hfill\\\normalfont If every vertex of $G$ has degree at least two, then $G$ has a cycle.
+\end{theorem}
+\begin{definition}[Connected Graph]
+\hfill\\\normalfont $G$ is connected if each pair of vertices is connected by a path.
+\end{definition}
+\begin{theorem}
+\hfill\\\normalfont Let $G$ be a connected graph with a cycle $C$ and let $e$ be an edge of $C$. Then $G-e$ is connected.
+\end{theorem}
+\begin{definition}[Subgraph]
+\hfill\\\normalfont $H$ is a \textbf{subgraph} of $G$ if $V(H)\subseteq V(G)$ and $E(H)\subseteq E(G)$. \\
+It is a spanning subgraph if in addition $V(H) = V(G)$.
+\end{definition}
+\begin{definition}[Tree]
+\hfill\\\normalfont A \textbf{tree} is a connected acyclic graph.
+\end{definition}
+\begin{theorem}
+\hfill\\\normalfont If $T=G(V,E)$ is a tree, then $|E|= |V|-1$.
+\end{theorem}
+\begin{theorem}
+\hfill\\\normalfont :et $G=(V,E)$ be a connected graph. Then $|E|\geq |V|-1$. Moreover, $G$ is a tree if equality holds.
+\end{theorem}
+\begin{definition}[Bipartite Graph]
+\hfill\\\normalfont $G=(S,T,E)$ is a bipartite graph if any edge in $E$ has one vertex in $S$ and the other in $T$.
+\end{definition}
+\begin{definition}[Vertex-Edge Incidence Matrix]
+\hfill\\\normalfont The \textbf{vertex-edge incidence matrix} of a graph $G=(V,E)$ is a matrix $A\in \{0,1\}^{|V|\times|E|}$ such that
+\begin{itemize}
+\item The rows correspond to the edges of $G$,
+\item the columns correspond to the edges of $G$,
+\item entry $A_{v,ij}$ for vertex $v$ and edge $ij$ is
+\[
+A_{v,ij} = \begin{cases}
+0&\text{if }v\neq i\text{ and }v\neq j\\
+1&\text{if }v=i\text{ or }j
+\end{cases}
+\] 
+\end{itemize}
+\end{definition}
+\begin{definition}[Digraph]
+\hfill\\\normalfont A \textbf{directed graph}(digraph) $D$ is a pair $(N,A)$ where
+\begin{itemize}
+  \item $N$ is a finite set and
+  \item $A$ is a set of ordered pairs of elements of $N$
+\end{itemize}
+Elements of $N$ are called nodes and elements of $A$ arcs.
+\begin{itemize}
+  \item Node $i$ is the tail of arc $(i,j)$.
+  \item Node $j$ is the head of arc $(i,j)$.
+\end{itemize}
+The in-degree (resp. out-degree) of node $v$, denoted $\deg^+(v)$(resp. $\deg^-(v)$) is the number of arcs with head(resp. tail) $v$.
+\end{definition}
+\begin{definition}[Bipartite Digraph]
+\hfill\\\normalfont A bipartite digraph is defined as $D=(S,T,A)$ where for all edges in $A$, it is incident from a node in $S$ to a node in $S$.
+\end{definition}
+\begin{definition}[Node-Arc Incidence Matrix]
+\hfill\\\normalfont The \textbf{node-arc incidence matrix} of a graph $D=(N,A)$ is a matrix $M\in\{0,\pm 1\} ^{|V|\times |A|}$ such that
+\begin{itemize}
+  \item The rows correspond to the nodes of $D$.
+  \item The columns correspond to the arcs of $D$
+  \item the entry $M_{v,ij}$ for node $v$ and arc $ij$ is
+  \[
+M_{v,ij} = \begin{cases}
+0&\text{ if } v\neq i \text{ and } v\neq j\\
+-1&\text{ if } v=j,\\
++1&\text{ if } v=i
+\end{cases}
+  \]
+\end{itemize}
+\end{definition}
+\subsection{Convex Set}
+\begin{definition}[Convex Set]
+\hfill\\\normalfont A set $S\subseteq\mathbb{R}^n$ is \textbf{convex} if for any $x,y\in S$ and any $\lambda\in[0,1]$, we have $\lambda x+(1-\lambda)y\in S$
+\end{definition}
+\subsection{Hyperplanes and Half Spaces}
+\begin{definition}[Hyperplane]
+\hfill\\\normalfont Let $a\in\mathbb{R}^n\setminus\{0\}$ abd $b\in\mathbb{R}$. Then the set 
+\[
+\{x\in\mathbb{R}^n \mid a^\T x = b\}
+\]
+is called a \textbf{hyperplane}.
+\end{definition}
+Geometrically, the hyperplane above can be understood by expressing it in the form
+\[
+\{x\in\mathbb{R}^n\mid a^\T(x-x^0) = 0\}
+\]
+where $x^0$ is any point in the hyperplane, i.e., $a^\T x^0=b$.
+\begin{definition}[Half Space]
+\hfill\\\normalfont Let $a\in\mathbb{R}^n\setminus\{0\}$ and $b\in\mathbb{R}$. Then the set
+\[
+\{x\in\mathbb{R}^n\mid a^\T x\geq b\}
+\]
+is called a \textbf{halfspace}.
+\end{definition}
+Notably, a halfspace is a convex set.
+\subsection{Polyhedra}
+\begin{definition}[Polyhedron]
+\hfill\\\normalfont A \textbf{polyhedron} is a set of the form $\{x\in\mathbb{R}^n\mid Ax\geq b\}$, for some $A\in\mathbb{R}^{m\times n}$ and $b\in\mathbb{R}^m$.
+\end{definition}
+By letting $A=\begin{pmatrix} a_1^\T\\\vdots\\ a_m^\T\end{pmatrix}$ and $b=\begin{pmatrix} b_1\\\vdots\\b_m\end{pmatrix}$, we can understand the polyhedron to be the intersection of the halfspaces
+\[
+\{x\in\mathbb{R}^n \mid a_i^\T x\geq b_i\}, \;\;\; i = 1,\ldots, m
+\]
+From this point of view, we can see that the intersection of two polyhedra is again a polyhedron.\\
+A bounded polyhedron is sometimes called a \textbf{polytype}.
+\begin{definition}[Convex Combination]
+\hfill\\\normalfont Let $x^1,\ldots, x^k\in\mathbb{R}^n$ and let $\lambda_1,\ldots, \lambda_k$ be nonnegative scalars whose sum is one.
+\begin{enumerate}
+  \item The vector $\sum_{i=1}^n \lambda_ix^i$ is said to be a \textbf{convex combination} of the vectors $x^1,\ldots, x^k$.
+  \item The \textbf{convex hull} of the vectors $x^1,\ldots, x^k$ is the set of all convex combinations of these vectors.
+\end{enumerate}
+\end{definition}
+\subsection{Basic Feasible Solution}
+\begin{definition}[Extreme Point]
+\hfill\\\normalfont Letr $P\subseteq \mathbb{R}^n$ be a polyhedron. A vector $x\in P$ is an \textbf{extreme point} of $P$ if we cannot find $y,z\in P$ distinct from $x$, and $\lambda\in[0,1]$, such that $x=\lambda y+(1-\lambda)z$.
+\end{definition}
+\begin{definition}[Active Constraint]
+\hfill\\\normalfont 
+Consider a polyhedron $P\in\mathbb{R}^n$, partition the constraints according to the sign:
+\begin{itemize}
+  \item $a_i^\T x\geq b_i, i\in M_1$
+  \item $a_i^\T x\leq b_i, i\in M_2$
+  \item $a_i^\T x= b_i, i\in M_3$
+\end{itemize}
+where $M_1, M_2, M_3$ are finite index sets, each $a_i\in\mathbb{R}^n\setminus\{0\}$ and each $b_i\in \mathbb{R}$.\\
+If $x^\ast\in\mathbb{R}^n$ satisfies $a_i^\T x^\ast = b_i$ for some $i\in M_1, M_2, M_3$, we say that the corresponding constraint is \textbf{active} at $x^\ast$. The \textbf{active set} of $P$ at $x^\ast$ is
+\[
+I(x^\ast) = \{i\in M_1\cup M_2\cup M_3\mid a_i^\T x^\ast = b_i\}
+\]
+i.e., $I(x^\ast)$ is the set of indices of constraints active at $x^\ast$.
+\end{definition}
+\end{document}

@@ -1,0 +1,386 @@
+\PassOptionsToPackage{svgnames}{xcolor}
+\documentclass[12pt]{article}
+
+
+
+\usepackage[margin=1in]{geometry}  
+\usepackage{graphicx}             
+\usepackage{amsmath}              
+\usepackage{amsfonts}              
+\usepackage{framed}               
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{amsthm}
+\usepackage[nottoc]{tocbibind}
+\usepackage{bm}
+\usepackage{enumitem}
+
+ \newcommand{\im}{\mathrm{i}}
+  \newcommand{\diff}{\mathrm{d}}
+  \newcommand{\be}{\mathrm{Be}}
+  \newcommand{\var}{\mathrm{Var}}
+  \newcommand{\expec}{\mathrm{E}}
+  \newcommand{\bin}{\mathrm{Bin}}
+  \newcommand{\geom}{\mathrm{Geom}}
+  \newcommand{\Poi}{\mathrm{Poisson}}
+  \newcommand{\nb}{\mathrm{NB}}
+  \newcommand{\hg}{\mathrm{H}}
+  \newcommand{\expo}{\mathrm{Exp}}
+  \newcommand{\betadis}{\mathrm{Beta}}
+  \newcommand{\cauchy}{\mathrm{Cauchy}}
+  \newcommand{\cov}{\mathrm{cov}}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0em}
+\newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\theoremstyle{definition}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arccsc}{arccsc}
+\setcounter{tocdepth}{1}
+\begin{document}
+\title{Revision notes - ST2132}
+\author{Ma Hongqiang}
+\maketitle
+\tableofcontents
+
+\clearpage
+\section{Review}
+\subsection{Probability}
+Suppose we have a sample space $\Omega$. Then, 
+\begin{itemize}
+  \item An element of $\Omega$ is denoted by $\omega$, i.e., $\omega \in \Omega$.
+  \item A subset $S$ of $\Omega$ is called \textbf{event}, i.e., $S\subseteq \Omega$.
+\end{itemize}
+\begin{definition}[Probability Measure]
+\hfill\\\normalfont \textbf{Probability measure} on $\Omega$ is a function $P$ from subsets of $\Omega$ to the real numbers
+\[
+P:\Omega \supseteq S \mapsto \mathbb{R}
+\]
+that satisfies the axioms:
+\begin{itemize}
+  \item $P(\Omega) = 1$.
+  \item If $A\subseteq \Omega$, then $P(A)\geq 0$.
+  \item If $A_1, A_2, \ldots, A_n,\ldots$ are mutually disjoint, then $P\left(\bigcup_{i=1}^\infty A_i\right) = \sum_{i=1}^\infty P(A_i)$.
+\end{itemize}
+\end{definition}
+More generally, we have the addition law
+\[
+P(A\cup B) = P(A)+P(B)-P(A\cap B)
+\]
+to hold true in all cases.
+\begin{theorem}[Multiplication Principle]
+\hfill\\\normalfont If there are $p$ experiments and the $i$th experiment has $n_i$ possible outcomes. Then there are a total of $n_1\times n_2\times \cdots\times n_p$ possible outcomes for the $p$ experiments.
+\end{theorem}
+When we calculate permutation, which is sampling $r$ items from $n$ items and list them in order, 
+\begin{itemize}
+  \item Sampling with Replacement: $n^r$ ways
+  \item Sampling without Replacement: $n(n-1)\cdots(n-r+1)$ ways
+\end{itemize}
+When we calculate combination, which is sampling without replcement $r$ items from $n$ items un-orderly,
+there are
+\[
+\frac{n(n-1)\cdots(n-r+1)}{r!}=\binom{n}{r}
+\]
+ways.
+\begin{theorem}[Multinomial Coefficient]
+\hfill\\\normalfont The number of ways that $n$ objects can be grouped into $r$ classes with $n_i$ in the $i$-th class, $i=1,\ldots, r$, and $\sum_{i=1}^r n_i=n$ is
+\[
+\binom{n}{n_1,n_2,\ldots, n_r} = \frac{n!}{n_1!n_2!\cdots n_r!}
+\]
+\end{theorem}
+\begin{definition}[Conditional Probability]
+\hfill\\\normalfont Suppose there are two events $A$ and $B$ without a sample space $\Omega$ with $P(B)>0$. The \textbf{conditional probability} of $A$ given $B$ is defined to be
+\[
+P(A\mid B) = \frac{P(A\cap B)}{P(B)}
+\]
+\end{definition}
+\begin{definition}[Independence]
+\hfill\\\normalfont Two events $A$ and $B$ are said to be independent events if $P(A\cap B)=P(A)P(B)$.
+\end{definition}
+\begin{theorem}[Law of Total Probability]
+\hfill\\\normalfont Let $B_1, B_2, \ldots, B_n$ are a partition of $\Omega$, i.e., $\bigcup_{i=1}^n B_i=\Omega$ and $B_i\cap B_j=\varnothing$ for $i\neq j$ with $P(B_i)>0$ for all $i$. Then for any event $A$, we have
+\[
+P(A)=\sum_{i=1}^n P(A\cap B_i)
+\]
+\end{theorem}
+\begin{theorem}[Bayes' Rule]
+\hfill\\\normalfont Suppose once more that $B_1, B_2,\ldots, B_n$ are a partition of $\Omega$. Then for any event $A$, we have
+\[
+P(B_j\mid A) = \frac{P(A\mid B_j)P(B_j)}{\sum_{i=1}^n P(A\mid B_i)P(B_i)}
+\]
+\end{theorem}
+\subsection{Random Variable}
+Random variable is a function from $\Omega$ to the real numbers:
+\[
+X: \Omega \to \mathbb{R}
+\]
+\begin{definition}[Probability Distribution]
+\hfill\\\normalfont The probability distribution of probability measure on $\Omega$ which determines the probabilities of the various values of $X$: $x_1, x_2,\ldots$, with the following properties
+\begin{itemize}
+  \item $p(x_i)=P(X=x_i)$
+  \item $\sum_{i} p(x_i)=1$
+\end{itemize}
+It is called \textbf{probability mass function}(pmf) of the random variable $X$.\\
+\textbf{Cumulative distribution function}(cdf) $F(x)$ is defined as 
+\[
+F(x) = P(X\leq x), \;\;\;-\infty<x<\infty
+\]
+\end{definition}
+The cdf is \textit{non-decreasing} and satisfies
+\[
+\lim_{x\to -\infty} F(x)=0\text{   and   }\lim_{x\to \infty} F(x)=1
+\]
+\begin{definition}[Discrete and Continuous Random Variables]
+\hfill\\\normalfont A \textbf{discrete} random variable is a random variable that can take on only finite or at most a countably infinite number of values.\\
+A \textbf{continuous} random variable is a random variable that can take on a continuum of values.
+\end{definition}
+For a continuous random variable $X$, the role of frequency function is taken by a \textbf{density function}(pdf) $f(x)$, which satisfies the following properties:
+\begin{itemize}
+  \item $f(x)\geq 0$
+  \item $f$ is piecewise continuous
+  \item $\int_{-\infty}^{\infty} f(x)\diff x=1$.
+\end{itemize}
+For a continuous random variable $X$, for any $a<b$, $P(a<X<b)=\int_a^b f(x)\diff x$, hence the probability that rv $X$ takes a \textit{particular value} is $0$.
+\begin{definition}[Binomial Distribution]
+\hfill\\\normalfont Suppose we have
+\begin{itemize}
+  \item $n$ trials, each of which has 2 possible outcomes, namely \textbf{success} and \textbf{failure}
+  \item Each trial has the same probability of success $p$
+  \item The $n$ trials are independent.
+\end{itemize}
+The binomial random variable $X\sim \bin(n,p)$ is the total number of successes in the $n$ trials. \\
+The probability distribution is
+\[
+P(X=k)=\binom{n}{k} p^k(1-p)^{n-k},\;\;\;k=0,1,\ldots, n
+\]
+\end{definition}
+The Bernoulli distribution is the special case of binomial distribution when $n=1$.
+\begin{definition}[Geometric Distribution]
+\hfill\\\normalfont Suppose we have
+\begin{itemize}
+  \item Infinite trials, each of which has two possible outcomes, namely success or failure
+  \item Each trial has the same probability of success $p$
+  \item The trials are independent
+\end{itemize}
+Let $X$ be the \textbf{total number of trials up to and including the first success}, then $X\sim\geom(p)$ has geometric distribution.\\
+The proability distribution is
+\[
+p(k) = P(X=k)=(1-p)^{k-1}p, \;\;\; k=0,1,\ldots
+\]
+\end{definition}
+\begin{definition}[Negative Binomial Distribution]
+\hfill\\\normalfont Suppose we have
+\begin{itemize}
+  \item The trials are independent
+  \item Each trial has teh same probability of success $p$.
+  \item Sequence of these trials is performed until there are $r$ successes in all.
+\end{itemize}
+Let $X$ be the total number of trials, then $X\sim \nb(r,p)$ has negative binomial distribution.\\
+The probability distribution is
+\[
+P(X=k) = \binom{k-1}{r-1}p^r(1-p)^{k-r}
+\]
+\end{definition}
+The negative binomial distribution is a generalisation of the geometric distribution.
+\begin{definition}[Poisson Distribution]
+\hfill\\\normalfont Random variable $X\sim\Poi(\lambda)$ follows \textbf{Poisson distribution} with parameter $\lambda>0$ if
+\[
+P(X=k) = \frac{\lambda^k}{k!}e^{-\lambda}
+\]
+\end{definition}
+\begin{theorem}[Approximation of Binomial using Poisson]
+\hfill\\\normalfont $\Poi(\lambda :=np)$ can be derived as the limit of a binomial distribution $\bin(n,p)$ when $n$ approaches infinity, $p$ approaches $0$ with $np = \lambda$.
+\end{theorem}
+\begin{definition}[Uniform Distribution]
+\hfill\\\normalfont Let $X$ be a random variable between $a$ and $b$ where $b>a$. $X\sim U(a,b)$ follows a uniform distribution if the density function of $X$ is
+\[
+f(x)=\begin{cases}
+\frac{1}{b-a},&\text{if } a\leq x\leq b\\
+0,\;\;\;      &\text{if } x<a\text{ or }x>b
+\end{cases}
+\]
+Therefore, $F(x) = (x-a)/(b-a) $ on $[a,b]$, 0 on the left of $a$ and $1$ on the right of $b$.
+\end{definition}
+\begin{definition}[Exponential Distribution]
+\hfill\\\normalfont A random variable $X\sim\expo(\lambda)$ follows an exponential distribution if its density function follows
+\[
+f(x)=\begin{cases}
+\lambda e^{-\lambda x}, &x\geq 0\\
+0 &x<0
+\end{cases}
+\]
+where $\lambda>0$.\\
+The cdf of $X$ is
+\[
+F(x) = \begin{cases}
+1-e^{-\lambda x} & x\geq 0\\
+0 & x<0
+\end{cases}
+\]
+\end{definition}
+Exponential distribution is a special case of gamma distribution.
+\begin{definition}[Gamma Distribution]
+\hfill\\\normalfont A random variable $X\sim\Gamma(\alpha, \lambda)$ follows an gamma distribution if its density function follows
+\[
+f(x) = \begin{cases} \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha-1}e^{-\lambda x}, &x\geq 0\\
+0 & x<0
+\end{cases}
+\]
+where $\Gamma(x) = \int_0^\infty u^{x-1}e^{-u}\diff u$ for $x>0$.
+Here, we denote $\alpha$ as the \textbf{shape parameter} and $\lambda$ as the \textbf{scale parameter}.
+\end{definition}
+\begin{definition}[Normal Distribution]
+\hfill\\\normalfont A random variable $X\sim N(\mu, \gamma^2)$ follows a normal distribution if the density function follows
+\[
+f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-(x-\mu)^2/2\sigma^2}
+\]
+Obviously, we have $f(\mu-x) = f(\mu+x)$.
+\end{definition}
+\begin{theorem}[Distribution of a Function of Variable]
+\hfill Suppose $Y\sim g(X)$ where $X$ admits $f_X, F_X$ as pdf and cdf respectively. To calculate $f_Y$, we first compute
+\[
+F_Y(y) = P(Y\leq y) = P(g(X)\leq y) = P(X in I) 
+\]
+where $I$ is a subset of $\mathbb{R}$. Then take differentiation.
+\end{theorem}
+We can easily derive the following result:
+\begin{theorem}
+\hfill\\\normalfont If $X\sim N(\mu, \sigma^2)$, and $Y=aX+b$, then $Y\sim N(a\mu+b, a^2\sigma^2)$.
+\end{theorem}
+If the function $g$ admits nicer properties, we can have the following theorem
+\begin{theorem}
+\hfill\\\normalfont Let $X$ be a continuous rv with density $f(x)$ annd let $Y = g(X)$ where $g$ is a \textbf{differentiable, strictly monotonic} function on some interval $I$. Suppose that $f(x) = 0$ if $X$ is not in $I$. Then $Y$ has the density function
+\[
+f_Y(y) = f_X(g^{-1}(y))\lvert\frac{\diff}{\diff y} g^{-1}(y)\rvert
+\]
+for $y$ such that $y=g(x)$ for some $x$ and $f_Y(y) = 0$ for $y\neq g(x)$ for any $x$ in $I$. 
+\end{theorem}
+From the theorem, we have the following results:
+\begin{theorem}
+\hfill\\\normalfont Let $Z=F(X)$, where $X$ admits a cdf $F$. Then $Z$ has a uniform distribution on $[0,1]$.
+\end{theorem}
+\begin{theorem}
+\hfill\\\normalfont Let $U$ be uniform on $[0,1]$, and let $X=F^{-1}(U)$. Then the cdf of $X$ is $F$.
+\end{theorem}
+\subsection{Joint Distributions}
+The joint behaviour of 2 random variable $X$ and $Y$ is determined by the cdf
+\[
+F(x,y) = P(X\leq x, Y\leq y)
+\]
+\begin{theorem}
+\[
+P(x_1<X\leq x_2, y_1<Y\leq y_2) = F(x_2, y_2)-F(x_2, y_1)-F(x_1, y_2)+F(x_1, y_1)
+\]
+\end{theorem}
+Generally, if $X_1,\ldots, X_n$ are jointly distributed random variable, their joint cdf is
+\[
+F(x_1, \ldots, x_n) = P(X_1\leq x_1, \ldots, X_n\leq x_n)
+\]
+\begin{definition}[Joint Distribution of Discrete Random Variable]
+\hfill\\\normalfont Suppose $X_1,\ldots, X_m$ are discrete random variable defined on same sample space $\Omega$, their joint frequency function $p(x,y)$ is
+\[
+p(x_1, \ldots, x_m) = P(X=x_1,\ldots,  X_m=x_m)
+\]
+The marginal frequency function of $X_1$ is
+\[
+p_{X_1}(x_1) = \sum\cdots\sum_{x_2,\ldots,x_m} p(x_1, \ldots, x_m)
+\]
+Higher dimensional marginal frequency function of $X_1$ and $X_2$ can be defined in a similar fashion.
+\end{definition}
+\begin{definition}[Joint Distribution of Continuous Random Variables]
+\hfill\\\normalfont The definition is similar and is omitted. Details can be found in \texttt{ST2131} Revision Notes.
+\end{definition}
+\begin{definition}[Independent Random Variables]
+\hfill\\\normalfont Random variables $X_1, \ldots, X_n$ are said to be independent if their joint cdf factors into the product of their marginal cdf's:
+\[
+F(x_1, \ldots, x_n) = F_{X_1}{x_1}\cdots F_{X_n}{x_n}
+\]
+for all $x_1,\ldots, x_n$.
+\end{definition}
+This definition holds for both continuous and discrete random variables.
+\begin{definition}[Discrete Case]
+\hfill\\\normalfont $X$ and $Y$ are discrete random variable jointly distributed, If $p_Y(y_j)>0$, the conditional probability that $X=x_i$, given 
+ $Y=y_j$ is
+ \[
+p_{X\mid Y}(x\mid y) := P(X=x_i\mid Y=y_j) = \frac{P(X=x_i, Y=y_j)}{P(Y=y_j)} = \frac{p_XY(x_i, y_j)}{p_Y(y_j)}
+ \]
+\textbf{Remark}: This probability is defined to be zero if $p_Y(y_j) = 0$.\\
+\end{definition}
+\begin{theorem}
+\hfill\\\normalfont $p_{X\mid Y}(x\mid y) = p_X(x)$ if $X$ and $Y$ are independent.
+\end{theorem}
+Similarly, we define, in the continuous case
+\[
+f_{Y\mid X}(y\mid x) = \begin{cases}
+\frac{f_{XY}(x,y)}{f_X(x)} & \text{if } 0<f_X(x)<\infty\\
+0 & \text{otherwise}
+\end{cases}
+\]
+\begin{definition}[Extrema Statistics]
+\hfill\\\normalfont Assumer $X_1, \ldots, X_n$ are independent random variable with common cdf $F$ and density $f$.\\
+Let $U$ be maximum of $X_i$ and $V$ the minimum.\\
+The cdf of $U$ is 
+\[
+F_U(u) = [F(u)]^n
+\]
+and density of $U$ is
+\[
+f_U(u) = nf(u)[F(u)]^{n-1}
+\]
+Similarly,
+\[
+F_V(v) = 1-[1-F(v)]^n
+\]
+and density of $V$ is
+\[
+f_V(v) = nf(v)[1-F(v)]^{n-1}
+\]
+\end{definition}
+\begin{theorem}[Order Statistics]
+\hfill\\\normalfont Let $X_{(1)}<X_{(2)}<\ldots<X_{(n)}$. The density of $X_{(k)}$ is
+\[
+f_k(x) = \frac{n!}{(k-1)!(n-k)!} f(x) F^{k-1}(x)[1-F(x)]^{n-k}
+\]
+\end{theorem}
+\subsection{Expected Values}
+\begin{definition}[Expected Value]
+\hfill\\\normalfont If $X$ is a discrete random variable with frequency function $p(x)$, the expected value of $X$, denoted by $E(X)$ is
+\[
+E(X) = \sum_i x_ip(x_i)
+\]
+provided that $\sum_i |x_i|p(x_i)<\infty$. If the sum diverges, the expected is undefined.\\
+Similarly, if $X$ is a continuous random variable with density $f(x)$, then
+\[
+E(X) = \int_{-\infty}^\infty xf(x)\diff x
+\]
+provided that $\int |x|f(x)\diff x<\infty$. If the integral diverges, the expectation is undefined.
+\end{definition}
+\begin{theorem}[Markov Inequality]
+\hfill\\\normalfont If $X$ is a random variable with $P(X\geq 0)=1$, and for which $E(X)$ exists, then 
+\[
+P(X\geq t) \leq \frac{E(X)}{t}
+\]
+\end{theorem}
+\begin{theorem}[Expectation of Function of Variable]
+\hfill\\\normalfont Suppose that $Y=g(X)$,
+\begin{itemize}
+  \item If $X$ is discrete with frequency function $p(x)$ then $E(Y) = \sum_{x}g(x)p(x)$ provided that $\sum|g(x)|p(x)<\infty$.
+  \item If $X$ is continuous with density function $f(x)$ then $E(Y) = \int_{-\infty}^\infty g(x)f(x)\diff x$  provided that it converges.
+\end{itemize}
+\end{theorem}
+\begin{theorem}[Expectation of Independent Random Variables]
+\hfill\\\normalfont If $X$ and $Y$ are independent random variable and $g$ and $h$ are fixed functions, then 
+\[
+E[g(X)h(Y)] = E[g(X)]E[h(Y)]
+\]
+provided that the expectations on the right hand side exist.
+\end{theorem}
+\begin{theorem}[Expectation is Linear]
+\hfill\\\normalfont If $X_1,\ldots,X_n$ are jointly distributed random variable with expectation $E(X_i)$ and $Y$ is a linear function of $X_i$, i.e., $Y=a+\sum_{i=1}^n b_iX_i$, then
+\[
+E(Y) = a+\sum_{i=1}^n b_iE(X_i)
+\]
+\end{theorem}
+\end{document}

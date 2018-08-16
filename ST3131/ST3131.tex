@@ -1,0 +1,130 @@
+\PassOptionsToPackage{svgnames}{xcolor}
+\documentclass[12pt]{article}
+
+
+
+\usepackage[margin=1in]{geometry}  
+\usepackage{graphicx}             
+\usepackage{amsmath}              
+\usepackage{amsfonts}              
+\usepackage{framed}               
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{amsthm}
+\usepackage[nottoc]{tocbibind}
+\usepackage{bm}
+\usepackage{enumitem}
+
+ \newcommand{\im}{\mathrm{i}}
+  \newcommand{\diff}{\mathrm{d}}
+  \newcommand{\be}{\mathrm{Be}}
+  \newcommand{\var}{\mathrm{Var}}
+  \newcommand{\expec}{\mathrm{E}}
+  \newcommand{\bin}{\mathrm{Bin}}
+  \newcommand{\geom}{\mathrm{Geom}}
+  \newcommand{\Poi}{\mathrm{Poisson}}
+  \newcommand{\nb}{\mathrm{NB}}
+  \newcommand{\hg}{\mathrm{H}}
+  \newcommand{\expo}{\mathrm{Exp}}
+  \newcommand{\betadis}{\mathrm{Beta}}
+  \newcommand{\cauchy}{\mathrm{Cauchy}}
+  \newcommand{\cov}{\mathrm{cov}}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0em}
+\newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\theoremstyle{definition}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arccsc}{arccsc}
+\setcounter{tocdepth}{1}
+\begin{document}
+\title{Revision notes - ST3131}
+\author{Ma Hongqiang}
+\maketitle
+\tableofcontents
+
+\clearpage
+\section{Simple Linear Regression}
+\subsection{Simple Linear Regression Model}
+\begin{definition}[Simple Linear Regression Model]
+\hfill\\\normalfont Suppose $x, y$ are two variables. The simple linear regression model makes the following assumption on the relation of $y$ with respect to $x$:
+\begin{enumerate}
+  \item $y=\beta_0+\beta_1x+\varepsilon$
+  \item $E(y\mid x) = \beta_0+\beta_1x$
+  \item $\var(y\mid x) = \var(\beta_0+\beta_1x+\varepsilon) = \var(\varepsilon) = \sigma^2$
+\end{enumerate}
+\end{definition}
+\subsection{Least Square Estimation of Parameters}
+Suppose we have data $\{(y_i, x_i)\}$ for $i=1, 2, \ldots, n$. The method of least square estimation estimates $\beta_0$ and $\beta_1$ such that the sum of squares of the differences between the observations $y_i$ and the striaght line is minimum.\\
+Essentially, the sum can be expressed as 
+\[
+S(\beta_0, \beta_1) = \sum_{i=1}^n (y_i-\beta_0-\beta_1x_i)^2
+\]
+and we need to minimise the sum with respect to $\beta_0, \beta_1$, so we have the following result
+\[
+\frac{\partial S}{\partial \beta_0}\rvert_{\hat{\beta_0}, \hat{\beta_1}} = -2\sum_{i=1}^n(y_i-\hat{\beta_0}-\hat{\beta_1}x_i) = 0
+\]
+and
+\[
+\frac{\partial S}{\partial \beta_1}\rvert_{\hat{\beta_0}, \hat{\beta_1}} = -2\sum_{i=1}^n(y_i-\hat{\beta_0}-\hat{\beta_1}x_i)x_i = 0
+\]
+where $\hat{\beta_0}, \hat{\beta_1}$ are estimator of $\beta_0, \beta_1$.
+Notably, after rearranging the first equation, we have
+\[
+\hat{\beta_0} + \hat{\beta_1}\bar{x} = \bar{y}
+\]
+Solving the two equations, we have
+\[
+\hat{\beta_1} = \frac{S_{xy}}{S_{xx}}
+\]
+where 
+\[
+S_{xx} = \sum_{i=1}^n x_i^2 - \frac{\left(\sum_{i=1}^n x_i\right)^2}{n} = \sum_{i=1}^n (x_i-\bar{x})^2
+\]
+and 
+\[
+S_{xy} = \sum_{i=1}^n x_iy_i - \frac{\left(\sum_{i=1}^n x_i\right)\left(\sum_{i=1}^n y_i\right)}{n} = \sum_{i=1}^n y_i(x_i-\bar{x})
+\]
+from which, $\hat{\beta_0}$ can be easily obtained.\\
+\begin{definition}[Residual]
+\hfill\\\normalfont The $i$th residual of the data $e_i$ is defined as
+\[
+e_i = y_i-\hat{y_i} = y_i-(\hat{\beta_0}+\hat{\beta_1}x_i)
+\]
+\end{definition}
+\begin{theorem}[Unbiasness of {$\hat{\beta_0}$} and {$\hat{\beta_1}$}]
+\hfill\\\normalfont Both $\hat{\beta_0}$ and $\hat{\beta_1}$ are unbiased estimator.\\
+This can be easily proven by writing $\hat{\beta_1} = \sum_{i=1}^n c_iy_i$ where $c_i=\frac{x_i-\bar{x}}{S_{xx}}$, and take expectation.\\
+The unbiasness of $\hat{\beta_0}$ follows immediately.\\
+Notably, some important intermediate results are
+\begin{itemize}
+  \item $\sum_{i=1}^n c_i = 0$
+  \item $\sum_{i=1}^n c_ix_i = 1$
+\end{itemize}
+\end{theorem}
+Note, for any $\tilde{\beta_1}= \mathbf{c}\cdot\mathbf{y}$, as long as $\mathbf{c}\cdot \mathbf{1} = 0$ and $\mathbf{c}\cdot \mathbf{x} = 1$, we will have $\tilde{\beta_1}$ to be unbiased.
+\begin{theorem}[Variance of {$\hat{\beta_0}$} and {$\hat{\beta_1}$}]
+\hfill\\\normalfont 
+We have
+\begin{itemize}
+  \item $\var(\hat{\beta_1}) = \frac{\sigma^2}{S_{xx}}$
+  \item $\var(\hat{\beta_0}) = \sigma^2\left(\frac{1}{n}+\frac{\bar{x}^2}{S_{xx}}\right)$
+\end{itemize}
+\end{theorem}
+\begin{theorem}[Gauss-Markov Theorem]
+\hfill\\\normalfont Gauss-Markov Theorem suggusts that for the simple linear regression model mentioned before, with assumption $E(\varepsilon) = 0$ and $\var(\varepsilon) = \sigma^2$ and uncorrelated errors, $\hat{\beta_0}$ and $\hat{\beta_1}$ are unbiased and have minimum variance whenm compared with all other unbiased estimators that are linear combinations of the $y_i$.
+\end{theorem}
+Therefore, least square estimators are the best linear unbiased estimators.
+\begin{theorem}[Properties of Least Square Fit]
+\hfill\\\normalfont \begin{enumerate}
+\item $\sum_{i=1}^n (y_i-\hat{y_i}) =\sum_{i=1}^n e_i = 0$ (from $\frac{\partial S}{\partial \beta_0}$)
+\item The least-square regression line always passes through the centroid, i.e., $(\bar{y}, \bar{x})$ of the data.
+\item $\sum_{i=1}^n x_ie_i = 0$ (from $\frac{\partial S}{\partial \beta_1}$)
+\item $\sum_{i=1}^n \hat{y_i}e_i = 0$ (from (1) and (3))
+\end{enumerate}
+\end{theorem}
+\subsection{Esimtation of {$\sigma^2$}}
+
+\end{document}

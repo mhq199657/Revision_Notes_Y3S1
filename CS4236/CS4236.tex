@@ -1,0 +1,148 @@
+\PassOptionsToPackage{svgnames}{xcolor}
+\documentclass[12pt]{article}
+
+
+
+\usepackage[margin=1in]{geometry}  
+\usepackage{graphicx}             
+\usepackage{amsmath}              
+\usepackage{amsfonts}              
+\usepackage{framed}               
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{amsthm}
+\usepackage[nottoc]{tocbibind}
+\usepackage{bm}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{enumitem}
+\usepackage{wrapfig}
+\algdef{SE}[SUBALG]{Indent}{EndIndent}{}{\algorithmicend\ }%
+\algtext*{Indent}
+\algtext*{EndIndent}
+  \newcommand\norm[1]{\left\lVert#1\right\rVert}
+  \newcommand\TCP{\texttt{TCP} }
+  \newcommand\UDP{\texttt{UDP} }
+  \newcommand\IP{\texttt{IP} }
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0em}
+\newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{notation}{Notation}[section]
+\theoremstyle{definition}
+\setcounter{tocdepth}{1}
+\setcounter{section}{0}
+\begin{document}
+\title{Revision notes - CS4236}
+\author{Ma Hongqiang}
+\maketitle
+\tableofcontents
+
+\clearpage
+%\twocolumn
+\section{Classical Cipher System}
+\begin{definition}[Syntax of Encryption]
+\hfill\\\normalfont 
+\begin{itemize}
+\item $\mathcal{M}$: Message space, which a set of legal messages
+\item \texttt{Gen}: Procedure for generating key. It should be a probabilistic algorithm that outputs a key $k\in K$ chosen according to some distribution.
+\item \texttt{Enc}: Procedure for encrypting. Takes as input a key $k$ and message $m$ and outputs a ciphertext $c$. Denote by $\texttt{Enc}_k(m)$.
+\item \texttt{Dec}: Procedure for decrypting. Takes as input a key $k$ and a ciphertext $c$ and outputs a plaintext $m$. Denote by $\texttt{Dec}_k(c)$.
+\end{itemize}
+\end{definition}
+\begin{theorem}[Correctness Requirement]
+\hfill\\\normalfont An encryption scheme must satisfy the correctness requirement: \\
+\fbox{For every key $k$ output by \texttt{Gen} and every message $m\in\mathcal{M}$, we have $\texttt{Dec}_k(\texttt{Enc}_k(m))=m$
+}
+\end{theorem}
+\begin{theorem}[Kerckhoff's Principle]
+\hfill\\\normalfont Security should rely \textit{only} on the secrecy of the key.
+\end{theorem}
+Therefore, there should never be ``security by obsecurity''.
+\subsection{Classical Cryptography}
+\begin{definition}[Caesar's Cipher]
+\hfill\\\normalfont Original Caesar Cipher encrypts messages by shifting the letters of the alphabet 3 places forward. \\
+\textbf{Problem}: There is \textbf{no key}.\\
+Keyed shift cipher, which shifts $k$(key) places forward, is also vulnerable to \textbf{brute-force or exhaustive search}.\\
+Also, key space is too small(26).
+\end{definition}
+\begin{theorem}[Sufficient Key-space Principle]
+\hfill\\\normalfont Any secure encryption scheme must have a key space that is sufficiently large to make an exhaustive-search attack infeasible.
+\end{theorem}
+\begin{definition}[Substitution Cipher]
+\hfill\\\normalfont Substitution cipher encrypts messages by mapping plaintext alphabet to ciphertext alphabet according to a \textbf{bijection}.\\
+\textbf{Problem}: Vulnerable to \textbf{Frequency analysis} of alphabet or $n$-gram.
+\end{definition}
+\begin{definition}[Vigenere Cipher]
+\hfill\\\normalfont Vigenere cipher has a key word, which is repeated until its length is the same as the plaintext. Then the shifting is done according to the key.\\
+\textbf{Problem}:
+\begin{enumerate}
+  \item When the length($t$) of the key is known,
+  \begin{itemize}
+    \item Divide ciphertext into $t$ parts
+    \item Perform statistical analysis for each part
+  \end{itemize}
+  \item When the length is unknown, but max length $T$ is known
+  \begin{itemize}
+    \item Repeat (1) $T$ times
+  \end{itemize}
+\end{enumerate}
+Apart from the breaking algorithm above, it is also vulnerable to the Kasiski's method.
+\end{definition}
+\subsection{Principles of Modern Cryptography}
+\begin{definition}[Security Definition]
+\hfill\\\normalfont Security Definition is a tuple
+\begin{enumerate}
+  \item \textbf{Security guarantee}: what the scheme is intended to prevent the attack from doing; and
+  \item \textbf{Threat model}: the capability of the adversary
+\end{enumerate}
+Typically, the security guarantee is to make it impossible for an attacker to \textbf{learn any additional information} aboue the underlying plaintext, whereas the threat model can be either one of the below:
+\begin{itemize}
+  \item Ciphertext-only attack: most basic attack
+  \item Known-plaintext attack: attacker learns plaintext/cipphertext pairs
+  \item Chosen-plaintext-attack: attacker obtains plaintext/ciphertext pairs for plaintext of its choice
+  \item Chosen-ciphertext attack: attacker obtains plaintext/ciphertext pairs for ciphertexts of its choice
+\end{itemize}
+\end{definition}
+\subsection{Perfectly Secret Encryption}
+There are two equivalent definition of perfect secrecy.
+\begin{definition}[Perfect Secrecy]
+\hfill\\\normalfont An encryption scheme(\texttt{Gen}, \texttt{Enc},\texttt{Dec}) with message space $\mathcal{M}$ is \textbf{perfectly secret} if for \textit{every} probability distribution over $\mathcal{M}$, every message $m\in \mathcal{M}$, and every ciphertext $c\in \mathcal{C}$ for which $P(C=c)>0$, we have
+\[
+P(\mathcal{M}=m|\mathcal{C}=c) = P(\mathcal{M}=m)
+\]
+\end{definition}
+\begin{definition}[Perfect Secrecy Equivalent Definition]
+\hfill\\\normalfont For every $m, m'\in\mathcal{M}$, and every $c\in\mathcal{C}$, we have
+\[
+P(\texttt{Enc}_K(m)=c) = P(\texttt{Enc}_K(m') = c)
+\]
+\end{definition}
+\begin{definition}[Perfect Indistinguishability]
+\hfill\\\normalfont Consider an experiment with an adversary $\mathcal{A}$ and an encryption oracle $\Pi=(\texttt{Gen}, \texttt{Enc},\texttt{Dec})$. The process goes like this:
+\begin{enumerate}
+  \item $\mathcal{A}$ sends $m_0, m_1\in\mathcal{M}$ to $\Pi$
+  \item $\Pi$ generates key $k$ using \texttt{Gen}; picks $0$ or $1$ with equal chance and set as $b$; send back $\texttt{Enc}_k(m_b)$.
+  \item $\mathcal{A}$ outputs the guess of $b$ as $b'$.
+\end{enumerate}
+We say that $\Pi$ is perfectly indistinguishable if for \textit{every} $\mathcal{A}$, it holds that
+\[
+P(b'=b) = \frac{1}{2}
+\]
+\end{definition}
+It is known that perfect indistinguishability is equivalent to perfect secrecy.
+\begin{definition}[Vernam's One Time Pad]
+\hfill\\\normalfont Fix an integer $l>0$. The space of $\mathcal{M}, \mathcal{K}, \mathcal{C}$ are all equal to $\{0,1\}^l$. We define the oracle as
+\begin{itemize}
+  \item \texttt{Gen}: choose a key from $\mathcal{K}$ with uniform distribution
+  \item \texttt{Enc}: $c=k\oplus m$.
+  \item \texttt{Dec}: $m=k\oplus c$.
+\end{itemize}
+\end{definition}
+It is known that one time pad has perfect secrecy. However, the problem of perfect secrecy is that
+\begin{itemize}
+  \item The key should be at least as long as the message
+  \item The key can be used only once
+\end{itemize}
+\end{document}

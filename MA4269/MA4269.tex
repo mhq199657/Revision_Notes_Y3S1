@@ -1,0 +1,213 @@
+\PassOptionsToPackage{svgnames}{xcolor}
+\documentclass[12pt]{article}
+
+
+
+\usepackage[margin=1in]{geometry}  
+\usepackage{graphicx}             
+\usepackage{amsmath}              
+\usepackage{amsfonts}              
+\usepackage{framed}               
+\usepackage{amssymb} 
+\usepackage{array}
+\usepackage{amsthm}
+\usepackage[nottoc]{tocbibind}
+\usepackage{bm}
+\usepackage{enumitem}
+
+
+  \newcommand\norm[1]{\left\lVert#1\right\rVert}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0em}
+\newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{notation}{Notation}[section]
+\theoremstyle{definition}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arccsc}{arccsc}
+\DeclareMathOperator{\PV}{PV}
+\DeclareMathOperator{\TV}{TV}
+\DeclareMathOperator{\diff}{d}
+\DeclareMathOperator{\expec}{E}
+\DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\cov}{Cov}
+\DeclareMathOperator{\CE}{CE}
+\DeclareMathOperator{\RP}{RP}
+\newcommand\cf[1]{\mathbf{#1}}
+\setcounter{tocdepth}{1}
+\setcounter{section}{-1}
+\begin{document}
+
+\title{Revision notes - MA4269}
+\author{Ma Hongqiang}
+\maketitle
+\tableofcontents
+
+\clearpage
+%\twocolumn
+\section{Review}
+\subsection{Introduction}
+\begin{definition}[Zero-coupon Bond]
+\hfill\\\normalfont A contract to deliver $\$1$ on a future date $T$ is known as a \textbf{zero-coupon bond}.\\
+The price of the bond at time $t<T$ is denoted by $P(t,T)$, where $T$ is the maturity of the bond.
+\end{definition}
+\begin{definition}[Money Market Account]
+\hfill\\\normalfont The \textbf{money market account} is an asset created by the following procedure, called continuously compounded:
+\begin{itemize}
+  \item The initial amount equal to $\$1$ is invested at time $t=0$ in the bond with the shortest available maturity(i.e. the next infinitesimal instant).
+  \item The position is rolled over to the bond with the next shortest maturity once the first bond expires.
+\end{itemize}
+The price of the money market at time $t$ is denoted by $M_t$.
+\end{definition}
+\begin{theorem}
+\hfill\\\normalfont We have
+\[
+\diff M_t = r(t)M_t\diff t
+\]
+to describe the value of money market account, where $r(t)$ is a parameter known as the interest rate.\\
+Solving, we have
+\[
+M_t = \exp\left(\int_0^t r(u)\diff u\right)
+\]
+\end{theorem}
+\textbf{Remark}: The relationship between $M_t$ and $P(t,T)$ is non-trivial if $r(t)$ is stochastic. However, 
+\begin{theorem}
+\hfill\\\normalfont Suppose interest rate $r$ is constant. Then, 
+\[
+P(t,T)=\frac{M_t}{M_T} = e^r(T-t)
+\]
+It is obvious that $P(t,T)<1$ as long as $r>0$.
+\end{theorem}
+\begin{definition}[Value of Asset]
+\hfill\\\normalfont The \textbf{value} of an asset is the amount of dollars that an investor will pay to own that asset.\\
+The term \textbf{stock price} refers to the value (per unit) of the stock under consideration.
+\end{definition}
+\begin{definition}[Position]
+\hfill\\\normalfont A \textbf{position} in an asset is the equantity of an asset owned or owed by an investor.
+\begin{itemize}
+  \item \textbf{long position}: the investor \textit{owns} the asset.
+  \item \textbf{short position}: the investor \textit{sells} the asset that he does not own.
+\end{itemize}
+\end{definition}
+\begin{definition}[Portfolio]
+\hfill\\\normalfont A \textbf{portfolio} is a combination of various positions in financial assets.\\
+At any time $t$, the \textbf{value of the portfolio} $\Pi_t$ is just eh sum of the values of all the positions held in the portfolio at that particular time $t$:
+\[
+\Pi_t = a_t^{(1)}A_t^{(1)}+\cdots +a_t^{(n)}A_t^{(n)}
+\]
+where $a_t^{(i)}$ is the position where $A_t^{(i)}$ is the price of the asset at time $t$.\\
+Since the price of assets is not determined by us, therefore, $\Pi_t$ can be written as the vector 
+\[
+(a_t^{(1)}),\ldots, a_t^{(n)})
+\]
+\end{definition}
+\begin{definition}[Self-financing]
+\hfill\\\normalfont A portfolio $\Pi_t=(a_t^{(1)}),\ldots, a_t^{(n)})$ is \textbf{self-financing} over the time interval $[0,T]$ if there is \textit{no} exogeneous infusion or withdrawal of money, \textit{except} possibly at the initiation time $0$ or maturity date $T$:
+\[
+\diff\Pi_t = a_t^{(1)}dA_t^{(1)}+\cdots +a_t^{(n)}dA_t^{(n)}
+\]
+Roughly speaking, the differential equation says tha thte change in portfolio is completely due to the change in the underlying asset prices and nothing else.
+\end{definition}
+\begin{definition}[Direction of Cash Flow]
+\hfill\\\normalfont Suppose I am an investor
+\begin{itemize}
+  \item If cash flow is positive, it measn that someone pays me.
+  \item If cash flow is negative, it means that I pay someone.
+\end{itemize}
+\end{definition}
+Cash flow depends on
+\begin{enumerate}
+  \item the value of the underlying portfolio, and
+  \item whether or not the portfolio is entered into or liquidated.
+\end{enumerate}
+\subsection{Financial Market}
+\begin{definition}[Arbitrage]
+\hfill\\\normalfont An \textbf{arbitrage opportunity} is the existence of a self-financing portfolio $\Pi_t, 0\leq t\leq T$, having the following properties:
+\begin{enumerate}
+  \item $\Pi_0=0$
+  \item $\Pi_T\geq 0$ for \textbf{all possible} outcomes
+  \item There is a positive probability that $\Pi_T>0$.
+\end{enumerate}
+\end{definition}
+\begin{definition}[Equivalent Definition of Arbitrage]
+\hfill\\\normalfont An arbitrage opportunity is the existence of a self-financing portfolio $\Pi_t, 0\leq t\leq T$, having the following properties:
+\begin{enumerate}
+  \item $\Pi_T-\Pi_0e^{rT}\geq 0$ for \textbf{all possible} outcomes
+  \item There is a positive probability that $\Pi_T-\Pi_0e^{rT}>0$
+\end{enumerate}
+\end{definition}
+\begin{theorem}[Consequence of No Arbitrage]
+\hfill\\\normalfont Suppose there are two self-financing portfolios $\Pi_t^A$ and $\Pi_t^B$ over the time interval $[t,T]$ such that $\Pi_T^A\geq \Pi_T^B$. Then in the absence of arbitrage, we must have
+\[
+\Pi_t^A\geq \Pi_t^B
+\]
+\end{theorem}
+\begin{theorem}[Law of One Price]
+\hfill\\\normalfont Law of one price is a consequence of the above theorem.\\
+Suppose there are two self-financing portfolios $\Pi_t^A$ and $\Pi_t^B$ over the time interval $[t,T]$ such that $\Pi_T^A = \Pi_T^B$. Then, in the absence of arbitrage, we must have
+\[
+\Pi_t^A = \Pi_t^B
+\]
+\end{theorem}
+\begin{theorem}
+\hfill\\\normalfont All \textit{risk-free} portfolios must earn the same return, i.e., \textit{riskless interest rate}. Suppose $\Pi_t$ is teh valueo f a riskfree portfolio, and $\diff\Pi_t$ is the price increment during a small period of time interval $[t,t+\diff t]$. Then
+\[
+\diff \Pi_t = r\Pi_t\diff t
+\]
+where $r$ is the riskless interest rate.
+\end{theorem}
+\subsection{Forward Contracts \& Options}
+\begin{definition}[Forward Contract]
+\hfill\\\normalfont A \textbf{forward contract} is a contract that delivers one unit of the underlying asset on a known future date $T$ for a certain price $K$ agreed today.\\
+Here,
+\begin{itemize}
+  \item $K$ is the \textbf{delivery price}
+  \item $T$ is called the \textbf{delivery date}
+  \item the buyer of the contract is in the long position
+  \item the seller of the contract is in the short position
+  \item the delivery price $K$ is the amount the long sides pays the short side in exchange of one unit of the \textbf{udnerlying asset whose value} is $S_T$ on the delivery date $T$.
+\end{itemize}
+\end{definition}
+\begin{definition}[Forward Price]
+\hfill\\\normalfont The \textbf{forward price} at time $t$ is the delivery price of a forward contract which costs nothing to enter into at time $t$.
+We denote the forward price at time $t$ by
+\[
+F(S_t, t, T)
+\]
+\end{definition}
+\textbf{Remark}: The forward price $F(S,t,T)$ is \textit{not} the value of corresponding forward contract.
+\begin{definition}[Payoff, Profit]
+\hfill\\\normalfont The \textbf{payoff} to a position is the value of the position at the maturity date $T$.\\
+The \textbf{profit} to a position is the payoff to the position at maturity dat $T$, subtracted by the time-$T$ value of the initial investment in the position:
+\[
+\Pi_T-\Pi_te^{r(T-t)}
+\]
+\end{definition}
+\begin{theorem}[Payoff of Forward Contract]
+\hfill\\\normalfont It is obvious from the definition that 
+\begin{itemize}
+  \item the payoff to a long forward contract is $S_T-K$;
+  \item the payoff to a short forward contract is $K-S_T$
+\end{itemize}
+\end{theorem}
+Suppose it costs nothing to enter into a forward contract, then by using the forward price definition, 
+\begin{itemize}
+  \item the payoff and the profit to a long forward contract are the same:
+  \[
+S_T-F(S, t, T)
+  \]
+  \item the payoff and profit to a short forward contract are the same:
+  \[
+F(S,t,T) - S_T
+  \]
+\end{itemize}
+\begin{theorem}[Forward Price]
+\hfill\\\normalfont Suppose the underlying stock $S$ does not pay dividends. Then the forward price $F(S,t, T)$ of stock at time $t$ is given by
+\[
+F(S,t,T) = Se^{r(T-t)}
+\]
+where $S$ is the price of the stock at time $t$.
+\end{theorem}
+\end{document}
