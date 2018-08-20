@@ -1,0 +1,144 @@
+\PassOptionsToPackage{svgnames}{xcolor}
+\documentclass[12pt]{article}
+
+
+
+\usepackage[margin=1in]{geometry}  
+\usepackage{algorithm,algpseudocode}
+\newcommand{\vars}{\texttt}
+\newcommand{\func}{\textrm}
+\usepackage{graphicx}             
+\usepackage{amsmath}              
+\usepackage{amsfonts}
+\usepackage{framed}               
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{amsthm}
+\usepackage{multirow}
+\usepackage[nottoc]{tocbibind}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{pdfpages}
+\usepackage{tabularx}
+\algdef{SE}[SUBALG]{Indent}{EndIndent}{}{\algorithmicend\ }%
+\algtext*{Indent}
+\algtext*{EndIndent}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0em}
+\newcommand{\ind}{\hspace*{15pt}}
+\newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{notation}{Notation}[section]
+\theoremstyle{definition}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arccsc}{arccsc}
+\DeclareMathOperator{\spn}{Span}
+\setcounter{tocdepth}{1}
+\begin{document}
+\title{Revision notes - CS4246}
+\author{Ma Hongqiang}
+\maketitle
+\tableofcontents
+
+\clearpage
+%\twocolumnt
+\section{Deterministic Planning}
+\subsection{Problem Solving}
+\begin{definition}[Problem]
+\hfill\\\normalfont A \textbf{problem} is defined by 5 components:
+\begin{enumerate}
+	\item \textbf{Initial State}
+	\item Possible \textbf{Actions}. $\textsc{Action}(s)$ returns set of actions that can be executed in $s$.
+	\item \textbf{Transition model}. $\textsc{Result}(s,a)$ returns state that results from doing $a$ in $s$.\\ The sets of all states reachable from the initial state is called the state space. Transitional model forms a directed graph over all the states.
+	\item \textbf{Goal test}.
+	\item \textbf{Path Cost}. Often it is the sum of the step cost, $c(s,a,s')$.
+\end{enumerate}
+\end{definition}
+When the number of states is not too large, we can solve the optimal path by using the \textsc{Uniform-Cost-Search}. \\
+$A^\ast$ search is the same as \textsc{Uniform-Cost-Search} except that it uses $f(n):=g(n)+h(n)$ to sort the priority queue, where
+\begin{itemize}
+	\item $g(n)$ is the cost to reach node $n$
+	\item $h(n)$ is a \textbf{heuristic} that estimates the cheapest cost from $n$ to the goal state
+\end{itemize}
+\begin{theorem}[Optimality of {$A^\ast$}]
+\hfill\\\normalfont $A^\ast$ is optimal under tree search if $h(n)$ is admissble, i.e., $h$ never overestimates the cost to the goal.\\
+$A^\ast$ is optimal under graph search if $h(n)$ is consistent, i.e., 
+\[
+h(n)\leq c(n,a,n')+h(n')
+\]
+where $c(n,a,n')$ is the cost for going from $n$ to $n'$ using $a$.
+\end{theorem}
+Generally, admissible heuristics comes from a \textit{relaxed} problem, where there are fewer restrictions on the actions.
+\begin{definition}[Domination]
+\hfill\\\normalfont We say $h_2$ dominates $h_1$ if $h_2(n)\geq h_1(n)$ for all $n$ in state space.
+\end{definition}
+If $h_2$ dominates $h_1$, $h_2$ will \textit{always} explore fewer nodes with $A^\ast$.\\
+Generally, one useful property to identify the heuristic is as below: suppose $S\subseteq \Omega$, and there is $f:\Omega\to \mathbb{R}$. Then, we have
+\[
+\inf f(S) \geq f(\Omega)
+\]
+Here, $S$ is the state of the problem and $\Omega$ an relaxed problem, where $f$ is the function that maps states to heurstic's costs.\\
+
+However, when state space is defined in terms of state variables, i.e. \textbf{factored representation}, it is usually exponentially large with respect to the number of variables. Therefore, $A^\ast$ algorithm will run out of memory as it stores all states. In such cases, \textbf{depth first search} should be used, which only requires $O(m)$ memory, where $m$ is the depth of the search.\\
+Other variants of depth-first search includes \textbf{iterative deepening search} and \textbf{iterative deepening} $A^\ast$.
+\subsection{Classical Planning}
+Classical planning usually uses a language called \textbf{Planning Domain Definition Language}(PDDL), in which 
+\begin{itemize}
+	\item Initial state,
+	\item Actions available in a state,
+	\item Result of applying an action
+	\item Goal test
+\end{itemize}
+are defined.
+\begin{definition}[State]
+\hfill\\\normalfont A \textbf{state} is a conjunction of fluents.\\
+\textbf{Fluents} are state variables, representing variables that can change through time. In PDDL, fluents are \textbf{ground boolean variables}.\\
+A state is then a \textbf{conjunction of fluents}.
+\end{definition}
+In description of state, \textbf{database semantics} are used where
+\begin{itemize}
+	\item Fluents not mentioned are false, because of the closed world assumption.
+	\item Unique name assumption, which means variable of distinct names are distinct.
+\end{itemize}
+The state description forbids the below scenarios:
+\begin{itemize}
+	\item $\text{At}(x,y)$, as the boolean variable is not grounded
+	\item $\neg\text{Poor}$ because of the negation
+	\item $\text{At}(\text{Father}(\text{Fred}), \text{Sydney})$ because PDDL does \textit{not} allow functions.
+\end{itemize}
+\begin{definition}[Action Schema, Action]
+\hfill\\\normalfont A set of actions is specified by an \textbf{action schema}, which is a \textbf{lifted representation}, lifted from propositional logic to a restricted subset of \textit{first order} logic.\\
+A schema consists of 
+\begin{enumerate}
+\item an action name,
+\item a list of all variables
+\item a precondition
+\item an effect
+\end{enumerate} 
+By instantiating the variables, a schema can give \textbf{ground actions}.\\
+The precondition and effect are conjunctions of literals(positive or negative atmoic sentences). Here, precondition specifies states where the action can be executed: action $a$ is \textbf{applicable} in state $s$ if the preconditions are satisfied by $s$.
+\end{definition}
+\begin{definition}[Result]
+\hfill\\\normalfont The \textbf{result} of executing action $a$ in state $s$ is a state $s'$ which is a set of fluents formed as follows:
+\begin{itemize}
+	\item Start from $s$
+	\item Remove fluents that appears in teh action's effect as negative literals
+	\item Add fluents that appear in the action's effect as positive literals
+\end{itemize}
+\[
+\textsc{Result}(s,a) = (s-\textsc{Del}(a))\cup\textsc{Add}(a)
+\]
+\end{definition}
+
+
+
+
+
+
+
+\end{document}

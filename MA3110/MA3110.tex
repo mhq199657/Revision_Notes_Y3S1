@@ -86,5 +86,67 @@ Equivalently,
 \forall \epsilon>0, \exists \delta>0\text{ such that } \sup_{y\in[x-\delta, x+\delta]}|f(y)-f(x)|\leq \epsilon
 \]
 \end{definition}
+\section{Derivative}
+\begin{definition}[Derivative]
+\hfill\\\normalfont Let $I\subseteq \mathbb{R}$ be an interval, and let $c\in I$. A function $f:I\to \mathbb{R}$ is differentiable at $c$ if
+\[
+\lim_{x\to c}\frac{f(x)-f(c)}{x-c} = \lim_{h\to 0}\frac{f(c+h)-f(c)}{h} = L
+\]
+for some $L\in \mathbb{R}$.\\
+Equivalently, we need
+\[
+\forall \epsilon>0, \exists\delta>0,\text{ such that} \forall x\in I, 0<|x-c|<\delta \Rightarrow \lvert \frac{f(x)-f(c)}{x-c}-L\rvert \leq \epsilon
+\]
+Here, $L$ is called the \textbf{derivative} of $f$ at $c$, denoted by $f'(c)$, or $\frac{\diff f}{\diff x}\rvert_{x=c}$.
+\end{definition}
+If $f$ is differentiable at every $x\in S\subseteq I$, we say $f$ is differentiable on $S$.
+\begin{definition}[Equivalent Definition of Derivative]
+\hfill\\\normalfont $f$ is differentiable at $c$, if $f(x)$ can be approximated by the line $l(x):=f(c)+f'(c)(x-c)$ near $x=c$, i.e., 
+\[
+\forall \epsilon>0, \exists \delta>0, \text{such that } \forall x\in[c-\delta, c+\delta], |f(x)-l(x)|\leq \epsilon|x-c| 
+\] 
+\end{definition}
+\begin{theorem}[Differentiability infers Continuity]
+\hfill\\\normalfont If $f:I\to \mathbb{R}$ is differentiable at $c\in I$, then $f$ is continuous at $c$.
+\end{theorem}
+\begin{theorem}[Derivative Rules]
+\hfill\\\normalfont Suppose that $f,g: I\to\mathbb{R}$ are differentiable at $c\in I$, then
+\begin{itemize}
+	\item (Linearity) For any $a,b\in\mathbb{R}$, $af+bg$ is differentiable at $c$, and
+	\[
+(af+bg)'(c) = af'(c)+bg'(c)
+	\]
+	\item (Product Rule) $fg$ is differentiable at $c$ and
+	\[
+(fg)'(c) = f'(c)g(c)+f(c)g'(c)
+	\]
+	\item (Quotient Rule) If $g(c)\neq 0$, then $f/g$ is differentiable at $c$ and
+	\[
+(\frac{f}{g})'(c) = \frac{f'(c)g(c)-f(c)g'(c)}{g(c)^2}
+	\]
+\end{itemize}
+\end{theorem}
+\begin{theorem}[Caratheodory's Representation Lemma]
+\hfill\\\normalfont Let $f:I\to\mathbb{R}$ and let $c\in I$. The following conditions are equivalent:
+\begin{enumerate}
+	\item $f$ is differentiable at $c$.
+	\item There exists a function $\phi:I\to\mathbb{R}$ such that $\phi$ is continuous at $c$ and
+	\[
+f(x)-f(c)=\phi(x)(x-c)\;\;\;\forall x\in I
+	\]
+	In this case, $\phi(c) = f'(c)$.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[Chain Rule]
+\hfill\\\normalfont Let $I,J$ be intervals in $\mathbb{R}$. Let $g:I\to J$ and $f:J\to \mathbb{R}$. Suppose $g$ is differentiable at $c\in I$ and $f$ is differentiable at $g(c)\in J$, then $f\circ g$ is differentiable at $c$, with
+\[
+(f\circ g)'(c)=f'(g(c))g'(c)
+\]
+\end{theorem}
+
+
+
+
+
 \end{document}
 

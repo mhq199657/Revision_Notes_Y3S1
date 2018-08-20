@@ -14,6 +14,7 @@
 \usepackage[nottoc]{tocbibind}
 \usepackage{bm}
 \usepackage{enumitem}
+\usepackage{hyperref}
 
  \newcommand{\im}{\mathrm{i}}
   \newcommand{\diff}{\mathrm{d}}
@@ -29,6 +30,7 @@
   \newcommand{\betadis}{\mathrm{Beta}}
   \newcommand{\cauchy}{\mathrm{Cauchy}}
   \newcommand{\cov}{\mathrm{cov}}
+  \newcommand{\se}{\mathrm{se}}
 \setlength{\parindent}{0cm}
 \setlength{\parskip}{0em}
 \newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
@@ -126,5 +128,134 @@ Therefore, least square estimators are the best linear unbiased estimators.
 \end{enumerate}
 \end{theorem}
 \subsection{Esimtation of {$\sigma^2$}}
+\begin{definition}[Estimation of {$\sigma^2$}]
+\hfill\\\normalfont We define sum of squares of the residue, $SS_\text{Res}$ to be
+\[
+SS_\text{Res} := \sum_{i=1}^n e_i^2 = \sum_{i=1}^n (y_i-\hat{y}_i)^2
+\]
+Using $\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i$, we can arrive at\footnote{via $(y_i-\hat{y}_i)^2 = ((y_i-\bar{y}) - \hat{\beta}_1(x_i-\bar{x}))^2$}
+\[
+SS_\text{Res} = \sum_{i=1}^n y_i^2 - n\bar{y}^2-\hat{\beta}_1 S_xy
+\]
+Here, we define corrected sum of squares of response, $SS_\text{T}$ to be
+\[
+SS_T := \sum_{i=1}^n (y_i-\bar{y})^2 = \sum_{i=1}^n y_i^2 -n\bar{y}^2
+\]
+Therefore,
+\[
+SS_\text{Res} = SS_\text{T} -\hat{\beta}_1S_{xy}
+\]
+It is known \textit{from textbook} or \href{http://www.mas.ncl.ac.uk/~nag48/teaching/MAS2305/cribsheet2.pdf}{here} that the expected value of $SS_\text{Res}$ is
+\[
+E(SS_\text{Res}) = (n-2)\sigma^2
+\]
+Therefore, \textbf{residual mean square} $MS_\text{Res}$ 
+\[
+MS_\text{Res}:=\frac{SS_\text{Res}}{n-2}:=\hat{\sigma}^2
+\]
+is an \textbf{unbiased estimator} of $\sigma^2$. where as $\hat{\sigma}$ is called the \textbf{standard error of regression}.
+\end{definition}
+\textbf{Remark}: $\hat{\sigma}^2$ is model dependent due to the term $\hat{\beta}_1 S_{xy}$.
+\begin{definition}[Alternative Form of Simple Linear Regression]
+\hfill\\\normalfont Simple arithmetic gives that the original linear regression model is equivalent to
+\[
+y_i = \beta'_0+\beta_1(x_i-\bar{x})+\varepsilon_i
+\]
+where $\beta'_0 = \beta_0+\beta_1\bar{x} = \bar{y}$.\\
+The fitted model is
+\[
+\hat{y} = \bar{y}+\hat{\beta}_1(x-\bar{x})
+\]
+A nice property of this model is that 
+\[
+\cov(\hat{\beta}'_0, \hat{\beta}_1) = 0
+\]
+\end{definition}
+\subsection{Hypothesis Testing on Slope and Intercept}
+In this subsection, we further assume: errors are normally and independently distributed with mean $0$ and variance $\sigma^2$, i.e.,
+\[
+\varepsilon_i\sim N(0,\sigma^2)
+\]
+\begin{theorem}[Testing {$\hat{\beta}_1$}]
+\hfill\\\normalfont Here, we are testing null hypothesis
+\[
+H_0:\beta_1= \beta_{10}
+\]
+against alternative
+\[
+H_1: \beta_1\neq \beta_{10}
+\]
+where $y_i\sim NID(\beta_0 + \beta_1x_i, \sigma^2)$.\\
+Since $\hat{\beta}_1$ is a linear combination of $y_i$'s, $\hat{\beta}_1$ is also normally distributed with mean $\beta_1$ and variance $\frac{\beta^2}{S_{xx}}$.\\ After normalizing, $Z_0 = \frac{\hat{\beta}_1-\beta_{10}}{\sqrt{\frac{\sigma^2}{S_{xx}}}}\sim N(0,1)$ if \textbf{the null hypothesis} $H_0:\beta_1 = \beta_{10}$ is \textbf{true}.\\
 
+However, the exact $\sigma^2$ is not available. Therefore, we make use of $MS_\text{Res}$, which is an unbiased estimator of $\sigma^2$.\\
+It is known \textit{from textbook} that $\frac{(n-2)MS_\text{Res}}{\sigma^2}$ follows a $\xi_{n-2}^2$ distribution. Also, $MS_\text{Res}$ and $\beta_1$ are independent. Therefore,
+\[
+t_0=\frac{\hat{\beta}_1-\beta_{10}}{\sqrt{\frac{MS_\text{Res}}{S_{xx}}}}\sim t_{n-2}
+\]
+follows a $t_{n-2}$ distribution if the \textbf{null hypothesis} $H_0: \beta_1 = \beta_{10}$ is true.\\
+Here, the standard error of the slope is $\se(\hat{\beta}_1)=\sqrt{\frac{MS_\text{Res}}{S_{xx}}}$, so we can write $t_0 = \frac{\hat{\beta}_1-\beta_{10}}{\se(\hat{\beta}_1)}$.\\
+We should reject the null hypothesis if $|t_0|> t_{\frac{\alpha}{2}, n-2}$
+\end{theorem}
+\begin{theorem}[Testing of {$\hat{\beta}_0$}]
+\hfill\\\normalfont Here, we are testing null hypothesis 
+\[
+H_0: \beta_0 = \beta_{00}
+\]
+against alternative hypothesis
+\[
+H_1: \beta_0 \neq \beta_{00}
+\]
+Similarly, we can formulate the test statistics:
+\[
+t_0 = \frac{\hat{\beta}_0-\beta_{00}}{\sqrt{MS_\text{Res}(\frac{1}{n}+\frac{\bar{x}^2}{S_{xx}})}} = \frac{\hat{\beta}_0-\beta_{00}}{\se(\hat{\beta}_0)}
+\]
+where the stanard error of the intercept is $\se(\hat{\beta}_0) = \sqrt{MS_\text{Res}(\frac{1}{n}+\frac{\bar{x}^2}{S_{xx}})}$.\\
+We reject the null hypothesis $H_0$ if $|t_0|> t_{\frac{\alpha}{2}, n-2}$.
+\end{theorem}
+There is an important special case where $H_0: \beta_1 = 0$. Failing to reject this $H_0$ is equivalent to saying there is \textit{no} linear relationship between $y$ and $x$.
+\subsection{Analysis of Variance(ANOVA)}
+\begin{definition}[Model Sum of Squares {$SS_\text{R}$}]
+\hfill\\\normalfont We identify the corrected value of response $y_i-\bar{y} = (\hat{y}_i - \bar{y}) + (y_i-\hat{y}_i)$. Therefore,
+\[
+SS_\text{T} = \sum_{i=1}^n (y_i-\bar{y})^2 = \sum_{i=1}^n (\hat{y}_i - \bar{y})^2 +  \sum_{i=1}^n (y_i-\hat{y}_i)^2 +2\sum_{i=1}^n (\hat{y}_i - \bar{y}) (y_i-\hat{y}_i)
+\]
+Furthermore, the third term is $0$\footnote{by breaking down the first bracket into 2 terms and use existing result in Theorem 1.4}\\
+We arrive at
+\[
+\sum_{i=1}^n (y_i-\bar{y})^2 = \sum_{i=1}^n (\hat{y}_i - \bar{y})^2  +  \sum_{i=1}^n (y_i-\hat{y}_i)^2 
+\]
+which is
+\[
+SS_\text{T} = SS_\text{R}+SS_\text{Res}
+\]
+where $SS_\text{R} = \sum_{i=1}^n (\hat{y}_i - \bar{y})^2 $ is known as the \textbf{regression/model sum of squares}.\\
+From previous result, we have 
+\[
+SS_\text{R} = \hat{\beta}_1 S_{xy}
+\] 
+\end{definition}
+Furthermore, we have the following results
+\begin{theorem}
+\hfill\\\normalfont \begin{itemize}
+\item $SS_\text{Res} = (n-2) MS_\text{Res}$ follows a $\xi_{n-2}^2$ distribution.
+\item If the null hypothesis $H_0:\beta_1=0$ is true, then $\frac{SS_\text{R}}{\sigma^2}$ follows a $\xi_1^2$ distribution.
+\item $SS_\text{Res}$ and $SS_\text{R}$ are independent.
+\end{itemize}
+Therefore, under $H_0$, 
+\[
+F_0 = \frac{SS_\text{R}/df_\text{R}}{SS_\text{Res}/df_\text{Res}} = \frac{MS_\text{R}}{MS_\text{Res}}
+\]
+follows the $F_{1,n-2}$ distribution.
+Therefore, we reject $H_0$ if $F_0> F_{\alpha, 1, n-2}$.
+Furthermore, we have
+\[
+E(MS_\text{Res}) = \sigma^2
+\]
+and
+\[
+E(MS_\text{R}) = \sigma^2+\beta_1^2 S_{xx}
+\]
+So, suppose the $H_0$ is rejected, i.e., $\beta_1\neq 0$, $F_0$ will follow a noncentral $F$ distribution with $1$ and $n-2$ degress of freedom and a non-centrality parameter $\lambda=\frac{\beta_1^2 S_{xx}}{\sigma^2}$.
+\end{theorem}
 \end{document}

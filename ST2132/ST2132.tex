@@ -383,4 +383,156 @@ provided that the expectations on the right hand side exist.
 E(Y) = a+\sum_{i=1}^n b_iE(X_i)
 \]
 \end{theorem}
+\begin{definition}[Variance, Standard Deviation]
+\hfill\\\normalfont If $X$ is a random variable with expected value $E(X)$, the variance of $X$ is
+\[
+\var(X) = E\{[X-E(X)]^2\}
+\]
+provided that the expectation exist.\\
+The standard deviation of $X$ is the square root of the variance.\\
+We often use $\sigma^2$ to denote variance, and $\sigma$ for standard deviation.
+\end{definition}
+Therefore,
+\begin{itemize}
+  \item If $X$ is discrete, then $\var(X) = \sum_i (x_i-\mu)^2 p(x_i)$.
+  \item If $X$ is continuous, then $\var(X) = \int_{-\infty}^\infty (x-\mu)^2 f(x)\diff x$.
+\end{itemize}
+\begin{theorem}[Properties of Variance]
+\hfill\\\normalfont We have the following:
+\begin{enumerate}
+  \item If $\var(X)$ exist and $Y=a+bX$, then $\var(Y) = b^2\var(X)$.
+  \item The $\var(X)$, if exists, may also be calculated as follows:
+  \[
+\var(X) = E(X^2)-[E(X)]^2
+  \]
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[Chebyshev's Inequality]
+\hfill\\\normalfont Let $X$ be a random variable with mean $\mu$ and variance $\sigma^2$. Then for any $t>0$, we have
+\[
+P(|X-\mu|>t)\leq \frac{\sigma^2}{t^2}
+\]
+\end{theorem}
+\begin{definition}[Model for Measurement Error]
+\hfill\\\normalfont Suppose the true value of the quantity being measured is $x_0$, then teh measurement $X$ is modelled as
+\[
+X=x_0+\beta+\epsilon
+\]
+where $\beta$ is a constant error called \textbf{bias} and $\epsilon$ is the random component of the error.\\
+Here, $\epsilon$ is an random variable with $E(\epsilon)=0$ and $\var(\epsilon) = \sigma^2$. Hence, 
+\[
+E(X) = x_0+\beta\;\;\;\;\;\var(X)=\sigma^2
+\]
+A perfect measurement should have $\beta=\epsilon^2 = 0$.
+\end{definition}
+\begin{definition}[Mean Square Error]
+\hfill\\\normalfont The \textbf{mean square error} is defined as
+\[
+\text{MSE} = E([X-x_0]^2)
+\]
+\end{definition}
+It is clear that the mean square error for measurement is $\beta^2+\epsilon^2$.
+\begin{definition}[Convariance]
+\hfill\\\normalfont If $X$ and $Y$ are jointly distributed random variable with means $\mu_X$ and $\mu_Y$, respectively, the covariance of $X$ and $Y$ is
+\[
+\cov(X,Y) = E[(X-\mu_X)(Y-\mu_Y)]
+\]
+provided that the expectation exists.
+\end{definition}
+If $X$ and $Y$ is positively(resp. negatively) associated, the convariance will be positive(resp. negative).
+\begin{definition}[Correlation]
+\hfill\\\normalfont If $X$ and $Y$ are jointly distributed random variable and the variances of both $X$ and $Y$ exists and non-zero, then the \textbf{corelation} of $X$ and $Y$, denoted by $\rho$  is
+\[
+\rho = \frac{\cov(X,Y)}{\sqrt{\var(X)\var(Y)}}
+\]
+\end{definition}
+\begin{theorem}[Properties of Covariance]
+\hfill\\\normalfont $-1\leq \rho\leq 1$. \footnote{This can be shown by considering $\var(\frac{X}{\sigma_X}\pm \frac{Y}{\sigma_Y})$} Furthermore, $\rho = \pm 1$ if and only if $P(Y=a+bX)=1$ for some constant $a$ and $b$.
+\end{theorem}
+\begin{definition}[Conditional Expectation]
+\hfill\\\normalfont Suppose that $X$ and $Y$ are discrete random variable and the conditional frequency function of $Y$ given $X=x$ is $p_{Y\mid X}(y\mid x)$. The \textbf{conditional expectation} of $Y$ given $X=x$ is
+\[
+E(Y\mid X=x) = \sum_y y p_{Y\mid X}(y\mid x)
+\]
+If $X$, $Y$ are continuous, then
+\[
+E(h(Y)\mid X=x) = \int h(y) f_{Y\mid X}(y\mid x)\diff y
+\]
+\end{definition}
+\begin{theorem}[Expectation and Variance of Conditional Expectation]
+\hfill\\\normalfont We have
+\[
+E(Y) = E[E(Y\mid X)]
+\]
+and
+\[
+\var(Y) = \var[E(Y\mid X)] + E[\var(Y\mid X)]
+\]
+\end{theorem}
+\begin{definition}[Moment Generating Function]
+\hfill\\\normalfont The \textbf{moment generating function}(mgf) of a random variable $X$ is $M(t) = E(e^{tX})$ if the expectation is defined. Therefore,
+\begin{itemize}
+  \item In the discrete case, $M(t) = \sum_x e^{tx}p(x)$ and 
+  \item in the continuous case, $M(t) = \int_{-\infty}^\infty e^{tx}f(x)\diff x$
+\end{itemize}
+\end{definition}
+\begin{theorem}[Uniqueness of Moment Generating Function]
+\hfill\\\normalfont If the mgf exists for $t$ in an open interval containing $0$, it uniquely determines the probability distribution.
+\end{theorem}
+\begin{theorem}[Moment Generating Function generates Moment]
+\hfill\\\normalfont Let the $r$th moment of a random variable to be $E(X^r)$ if the expectation exists. If the mgf exists in an open interval containing $0$, then 
+\[
+M^{(r)}(0) = E(X^r)
+\]
+\end{theorem}
+\begin{theorem}[Properties of Moment Generating Function]
+\hfill\\\normalfont If $X$ has the mgf $M_X(t)$ and $Y=a+bX$, then $Y$ has the mgf $M_Y(t) = e^{at}M_X(bt)$.\\
+
+If $X$ and $Y$ are independent random variable with mgf's $M_X$ and $M_Y$ and $Z=X+Y$, then
+\[
+M_Z(t) = M_X(t)M_Y(t)
+\]
+on the common interval where both mgf's exist.
+\end{theorem}
+\subsection{Limit Theorems}
+\begin{theorem}[Law of Large Numbers]
+\hfill\\\normalfont Let $X_1,\ldots, X_i,\ldots$ be a sequence of independent random variables with $E(X_i)=\mu$ and $\var(X_i)=\sigma^2$. Let $\bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i$. Then for any $\epsilon>0$,
+\[
+P(|\bar{X}_n-\mu|>\epsilon)\to 0\;\;\;\text{ as }n\to \infty
+\]
+\end{theorem}
+\begin{definition}[Converge in Probability, Converge Almost Surely]
+\hfill\\\normalfont If a sequence of random variable $\{Z_n\}$ is such that $P(|Z_n-\alpha|>\epsilon)\to 0$ as $n\to \infty$, for any $\epsilon>0$ and where $\alpha$ is some scalar, then $Z_n$ is said to \textbf{converge in probability} to $\alpha$.\\
+
+$Z_n$ is said to \textbf{converge almost surely} to $\alpha$ if for every $\epsilon>0$, $|Z_n-\alpha|>\epsilon$ only a finite number of times with probability $1$.
+\end{definition}
+Here, converge almost surely is stronger than converge in probability
+\begin{definition}[Converge in Distribution]
+\hfill\\\normalfont Let $X_1,\ldots$ be a sequence of random variable with cdf $F_1,\ldots$ and let $X$ be a random variable with distribution function $F$. We say that $X_n$ converges in distribution to $X$ if
+\[
+\lim_{n\to \infty} F_n(x) = F(x)
+\]
+at every point at which $F$ is continuous.
+\end{definition}
+\begin{definition}[Continuity Theorem]
+\hfill\\\normalfont Let $F_n$ be a squence of cdf with the corresponding mgf $M_n$. Let $F$ be a cdf with the mgf $M$. If $M_n(t)\to M(t)$ for all $t$ in an open interval containing zero, then $F_n(x)\to F(x)$ at all continuity points of $F$.
+\end{definition}
+\begin{theorem}[Central Limit Theorem]
+\hfill\\\normalfont Let $X_1, X_2\ldots$ be a sequence of independent random variable having mean $0$ and variance $\sigma^2$ and the common distribution function $F$ and mgf $M$ defined in a neighbourhood of $0$. Let
+\[
+S_n = \sum_{i=1}^n X_i
+\]
+Then
+\[
+\lim_{n\to \infty} P(\frac{S_n}{\sigma \sqrt{n}}\leq x)=\Phi(x),\;\;\;-\infty<x<\infty
+\]
+\end{theorem}
+\clearpage
+
+
+
+
+
+
+
 \end{document}
