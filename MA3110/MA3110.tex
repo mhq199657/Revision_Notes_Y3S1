@@ -143,10 +143,769 @@ f(x)-f(c)=\phi(x)(x-c)\;\;\;\forall x\in I
 (f\circ g)'(c)=f'(g(c))g'(c)
 \]
 \end{theorem}
-
-
-
-
-
+\section{Mean Value Theorem}
+\begin{theorem}[Derivative of an Inverse Function]
+\hfill\\\normalfont Let $I$ be an interval, and $f:I\to\mathbb{R}$ be continuous and stricly monotone on $I$. Let $J:=f(I)$ be the \textbf{range} of $f$, and $g:J\to I$ be the inverse of $f$.\\
+If $f$ is differentiable at $c\in I$ and $f'(c)\neq 0$, then $g$ is differentiable at $f(c)\in J$, and
+\[
+g'(f(c)) = \frac{1}{f'(c)}
+\]
+\end{theorem}
+\begin{theorem}[Mean Value Theorem]
+\hfill\\\normalfont Let $f:[a,b]\to\mathbb{R}$ be continuous on $[a,b]$ and differentiable on $(a,b)$. Then there exists $c\in (a,b)$ such that
+\[
+f'(c)=\frac{f(b)-f(a)}{b-a}
+\]
+\end{theorem}
+A special case of Mean Value Theorem is Rolle's Theorem. 
+\begin{theorem}[Rolle's Theorem]
+\hfill\\\normalfont When $f(a)=f(b)$ in the Mean Value Theorem, we obtain the existence of a $c\in(a,b)$ with
+\[
+f'(c)=0
+\]
+\end{theorem}
+\begin{definition}[Relative Extremum]
+\hfill\\\normalfont Let $f:I\to \mathbb{R}$ for some subset $I\subseteq \mathbb{R}$ and let $c\in I$. Then
+\begin{enumerate}
+	\item $f$ has a \textbf{relative maximum} at $c$, if for some $\delta>0$,
+	\[
+f(c)\geq f(x)\forall x\in I\cap (c-\delta, c+\delta)
+	\]
+	\item \textbf{Relative minimum} of $f$ on I are defined analogously.
+\end{enumerate}
+Relative Extremum refers to either relative maximum or relative minimum.
+\end{definition}
+\begin{theorem}[Interior Extremum Theorem]
+\hfill\\\normalfont Let $f:I\to\mathbb{R}$, and let $c\in I$ be an interior point of $I$, i,e, $(c-\delta, c+\delta)\subseteq I$ for some $\delta>0$.\\
+If $f$ is differentiable at $c$ adn has a relative extremum at $c$, then $f'(c)=0$.
+\end{theorem}
+\begin{theorem}
+\hfill\\\normalfont Let $f:I\to\mathbb{R}$ and assume that $f'(c)$ exists for some $c\in I$.
+\begin{enumerate}
+	\item If $f'(c)>0$, then for some $\delta>0$, we have
+	\[
+f(x)<f(c)\;\;\;\forall x\in I\cap(c-\delta,c)
+	\]
+	and
+	\[
+f(x)>f(c)\;\;\;\forall x\in I\cap(c,c+\delta)
+	\]
+	\item If $f'(c)<0$, then the directions of the two inequalities above are reversed.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[Cauchy's Mean Value Theorem]
+\hfill\\\normalfont Let $f,g:[a,b]\to\mathbb{R}$ be continuous on $[a,b]$ and differentiable on $(a,b)$. Then there exists $c\in(a,b)$ such that
+\[
+(f(b)-f(a))g'(c)=(g(b)=g(a))f'(c)
+\]
+\end{theorem}
+\section{Application of Mean Value Theorem}
+\begin{theorem}[Monotonicity Properties]
+\hfill\\\normalfont Let $f:[a,b]\to\mathbb{R}$ be continuous on $[a,b]$ and differentiable on $(a,b)$. Then $f$ is increasing(resp. decreasing) on $[a,b]$ if and only if $f'(x)\geq 0$(resp. $f'(x)\leq 0$) for all $x\in(a,b)$.
+\end{theorem}
+If strict monotonicity is concerned, we will have $f'(x)>0\Rightarrow f(x)<f(y)$ for all $x<y$, but \textbf{not} the other direction.
+\begin{theorem}[Uniqueness of Anti-derivative Modulo Shift]
+\hfill\\\normalfont Let $f,g:[a,b]\to\mathbb{R}$ be continuous on $[a,b]$ and differentiable on $(a,b)$.\\Suppose that $f$ and $g$ have the same derivative, i.e., $f'(x)=g'(x)$ for all $x\in(a,b)$, then there exists a constant $C\in\mathbb{R}$ such that
+\[
+f(x) = g(x)+C\;\;\;\forall x\in[a,b]
+\]
+\end{theorem}
+\begin{theorem}[Intermediate Value Theorem for Derivatives]
+\hfill\\\normalfont Let $f:[a,b]\to\mathbb{R}$ be differentiable on $[a,b]$. Suppose that $f'(a)<f'(b)$, then for any $r\in(f'(a),f'(b))$, there exists some $c\in(a,b)$ with $f'(c)=r$.
+\end{theorem}
+\begin{theorem}[First Derivative Test]
+\hfill\\\normalfont Let $f$ be continuous on $(a,b)$. Let $c\in(a,b)$. Assume that $f'(x)$ exists for all $x\in(a,b)\setminus\{c\}$. Then
+\begin{enumerate}
+	\item If $f'(x)\geq 0$ for all $x\in(a,c)$ and $f'(x)\leq 0$ for all $x\in(c,b)$, then $f$ has a relative maximum at $c$.
+	\item If $f'(x)\leq 0$ for all $x\in(a,c)$ and $f'(x)\geq 0$ for all $x\in(c,b)$, then $f$ has a relative minimum at $c$.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[Second Derivative Test]
+\hfill\\\normalfont Let $f$ be differentiable on $[a,b]$ with derivative $f'$. Suppose $f'(c)=0$ at some $c\in(a,b)$, and $f'$ is differentiable at $c$ with derivative $f''(c)$. Then,
+\begin{enumerate}
+	\item If $f''(c)>0$, then $f$ has a relative minimum at $c$.
+	\item If $f''(c)<0$, then $f$ has a relative maximum at $c$.
+\end{enumerate}
+\end{theorem}
+\section{L'Hospital's Rule}
+\begin{theorem}[L'Hospital's Rule]
+\hfill\\\normalfont Let $-\infty\leq a<b\leq \infty$. Let $f$ and $g$ be differentiable on $(a,b)$. Assume that $g(x)\neq 0$ and $g'(x)\neq 0$ for all $x\in(a,b)$.\\
+\begin{itemize}
+	\item[(I)] If $\lim_{x\to a^{+}} f(x)=\lim_{x\to a^{+}} g(x)=0$, and $\lim_{x\to a^{+}} \frac{f'(x)}{g'(x)}=L$ for some $L\in[-\infty,\infty]$, then
+	\[
+\lim_{x\to a^{+}} \frac{f(x)}{g(x)}=L
+	\]
+	\item[(II)] If $\lim_{x\to a^{+}} g(x)=\infty$ and $\lim_{x\to a^{+}} \frac{f'(x)}{g'(x)}=L$ for some $L\in[-\infty, \infty]$, then
+	\[
+\lim_{x\to a^{+}} \frac{f(x)}{g(x)}=L
+	\]
+\end{itemize}
+\end{theorem}
+\textbf{Remark}: L'Hospital's rule also holds if we replace $x\to a^{+}$ above by $x\to b^{-}$. We can also replace $b$ be $a+\delta$ for some $\delta>0$. Also, note that we make no assumption on $f$ in (II).
+\begin{theorem}[Taylor Expansion]
+\hfill\\\normalfont Let $f$ be $n$ times differentiable on $[a,x]$, with $f^{(i)}$ denoting the $i$th derivative of $f$.\\
+Suppose that $f^{(n+1)}(x)$ exists on $(a,x)$. Then there exists $c\in(a,x)$ such that
+\[
+f(x)=\sum_{k=0}^n \frac{f^{(k)}(a)}{k!}(x-a)^k +\frac{1}{(n+1)!} f^{(n+1)}(c)(x-a)^{n+1}
+\]
+\end{theorem}
+\clearpage
+\section{More on Taylor}
+\begin{theorem}[Taylor Theorem]
+\hfill\\\normalfont Let $f$ be $n$ times differentiable on $[a,x]$ with $f^{(i)}$ denoting the $i$th derivative of $f$.\\Suppose that $f^{(n+1)}$ exists on $(a,x)$. Then there exists $c\in(a,x)$ such that
+\[
+f(x)=\sum_{k=0}^n \frac{f^{(k)}(a)}{k!}(x-a)^k + \frac{1}{(n+1)!}f^{(n+1)}(c)(x-a)^{n+1}
+\]
+\end{theorem}
+\begin{theorem}[Higher Order Derivative Tests]
+\hfill\\\normalfont Let $f:[a,b]\to \mathbb{R}$. Suppose that $f^{(1)}(x_0)=f^{(2)}(x_0)=\cdots=f^{(n-1)}(x_0)=0$ for some $x_0\in(a,b)$.\\
+Assume also that $f^{(n)}$ exists at $x_0$ with $f^{(n)}(x_0)\neq 0$. Then
+\begin{enumerate}
+	\item If $n$ is even
+	\begin{enumerate}
+		\item and $f^{(n)}(x_0)>0$, then $x_0$ is a relative minimum of $f$.
+		\item and $f^{(n)}(x_0)<0$, then $x_0$ is a relative maximum of $f$.
+	\end{enumerate}
+	\item If $n$ is odd, then $x_0$ is neither a relative maximum nor a relative minimum of $f$.
+\end{enumerate}
+\end{theorem}
+\clearpage
+\section{Riemann Integral}
+\begin{definition}[Partition]
+\hfill\\\normalfont Let $[a,b]$ be a bounded closed interval. A \textbf{partition} $P$ of $[a,b]$ is a finite collection of ordered points:
+\[
+P=\{a=x_0<x_1<\cdots<x_n=b\}
+\]
+The norm of $P$, denoted by $\|P\|:=\max_{1\leq i\leq n} \{x_i-x_{i-1}\}$.
+\end{definition}
+Partition can be then used to construct upper and lower bounds for any sensible definition of $\int_a^bf(x)\diff x$:\\
+Let $P$ be a partition of $[a,b]$ defined above. Let $f:[a,b]\to \mathbb{R}$. Define
+\[
+m_i:=\inf_{x_{i-1}\leq x\leq x_i}f(x)\text{ and }M_i:=\sup_{x_{i-1}\leq x\leq x_i}f(x)
+\]
+Then,
+\begin{definition}[Upper Sum and Lower Sum]
+\hfill\\\normalfont The upper sum and lower sum of $f$, with respect to $P$ is defined by
+\[
+U(f,P)=\sum_{i=1}^n M_i(x_i-x_{i-1})\text{ and }L(f,P)=\sum_{i=1}^n m_i(x_i-x_{i-1})
+\]
+\end{definition}
+It is clear, geometrically that any sensible definition of $\int_a^bf(x)\diff x$ should satisfy
+\[
+L(f,P)\leq \int_a^bf(x)\diff x\leq U(f,P)\text{ for any }P
+\]
+However, in this way, the definition of integral will be dependent on $P$. We hope to get rid of $P$.
+\begin{theorem}
+\hfill\\\normalfont Let $f:[a,b]\to \mathbb{R}$. For any partition $P$ of $[a,b]$, we have
+\[
+L(f,P)\leq U(f,P)
+\]
+\end{theorem}
+\begin{definition}[Refinement of Partition]
+\hfill\\\normalfont Let $P$ and $Q$ be two partitions of $[a,b]$. We say $Q$ is a refinement of $P$, or $Q$ is a finer partition than $P$, if $P\subset Q$.
+\end{definition}
+Essentially, some subintervals of $P$-partition are further divided into smaller subintervals under $Q$.
+\begin{theorem}
+\hfill\\\normalfont Let $f:[a,b]\to \mathbb{R}$. Let $Q$ be a finer parition of $[a,b]$ than $P$, then
+\[
+L(f,P)\leq L(f,Q)\leq U(f,Q)\leq U(f,P)
+\]
+\end{theorem}
+\begin{definition}[Upper and Lower Integrals]
+\hfill\\\normalfont Let $f:[a,b]\to\mathbb{R}$. The upper and lower integrals are defined by
+\[
+U(f):=\inf_P U(f,P)
+\]
+\[
+L(f):=\sup_P L(f,P)
+\]
+where $\inf$ and $\sup$ are taken over all partitions $P$ of $[a,b]$.
+\end{definition}
+\begin{theorem}$L(f)\leq U(f)$.\end{theorem}
+\begin{theorem}[Riemann Integral]
+\hfill\\\normalfont Let $f:[a,b]\to\mathbb{R}$. We say that $f$ is Riemann integrable on $[a,b]$ if $L(f)=\inf_P L(f,P)=\sup_P L(f,P)=U(f)$. In this case, we define
+\[
+\int_a^b f(x)\diff x:=L(f)=U(f)
+\]
+We also define $\int_b^a f:=-\int_a^b f$.
+\end{theorem}
+\section{Integrability}
+The Criteria 1 is by definition.
+\begin{theorem}
+\hfill\\\normalfont Let $(x_n)_{n\in\mathbb{N}}\in \mathbb{R}$. If we can find a sequence of partitions $P_n$ of $[a,b]$ such that $\lim_{n\to\infty}L(f,P_n)=\lim_{n\to\infty}Y(f,P_n)=:I\in\mathbb{R}$, then $f$ is Riemann integrable on $[a,b]$ with $\int_a^b f=I$.
+\end{theorem}
+\begin{theorem}[Riemann Integrability Criterion]
+\hfill\\\normalfont Let $f:[a,b]\to\mathbb{R}$. $f$ is Riemann integrable on $[a,b]$ \textit{if and only if} for all $\epsilon>0$, there exists a partition $P$ of $[a,b]$ such that
+\[
+U(f,P)-L(f,P)\leq \epsilon
+\]
+\end{theorem}
+\begin{theorem}[Bounded Monotone Function]
+\hfill\\\normalfont Let $f:[a,b]\to\mathbb{R}$ be \textbf{bounded and monotone}. Then $f$ is Riemann integrable on $[a,b]$.
+\end{theorem}
+\begin{theorem}[Bounded Continuous Function]
+\hfill\\\normalfont Let $f:[a,b]\to\mathbb{R}$ be \textbf{continuous} on $[a,b]$. Then $f$ is Riemann integrable on $[a,b]$.
+\end{theorem}
+\clearpage
+\section{Integral Properties}
+\begin{theorem}[Properties of the Riemann Integral]
+\hfill\\\normalfont Let $f$ and $g$ be Riemann integrable on $[a,b]$.
+\begin{enumerate}
+	\item For each $c\in\mathbb{R}$, $cf$ is integrable with $\int_a^b cf=c\int_a^bf$.
+	\item $f+g$ is integrable with $\int_a^b(f+g)=\int_a^bf+\int_a^bg$.
+	\item If $f(x)\leq g(x)$ for all $x\in[a,b]$, then $\int_a^bf\leq \int_a^bg$.
+	\item $|f|$ is integrable, and $|\int_a^bf|\leq \int_a^b|f|$.
+	\item $f\cdot g$ is integrable.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[Piecewise Integration]
+\hfill\\\normalfont Let $f:[a,b]\to\mathbb{R}$ and let $c\in(a,b)$.
+\begin{enumerate}
+	\item If $f$ is integrable on $[a,c]$ and $[c,b]$, then $f$ is integrable on $[a,b]$ with
+	\[
+\int_a^b f=\int_a^c f +\int_c^b f
+	\]
+	\item If $f$ is integrable on $[a,b]$, then $f$ is integrable on $[a,c]$ and $[c,b]$.
+\end{enumerate}
+\end{theorem}
+\textbf{Remark}: By induction, the theorem above can extend to the case when $[a,b]$ is partitioned into a finite number of intervals.
+\clearpage
+\section{Riemann Sum}
+\begin{definition}[Riemann Sum]
+\hfill\\\normalfont Let $P=\{x_0=a<\cdots <x_n=b\}$ and $f:[a,b]\to\mathbb{R}$. Let $\xi:=(\xi_1,\ldots, \xi_n)$ with $\xi\in[x_{i-1},x_i]$ for $1\leq i\leq n$. Then
+\[
+S(f,P,\xi):=\sum_{i=1}^n f(\xi_i)(x_i-x_{i-1})
+\]
+is called the \textbf{Riemann Sum} of $f$ wrt $P$ and $\xi$.
+\end{definition}
+\begin{theorem}[Convergence of Riemann Sums]
+\hfill\\\normalfont Let $f:[a,b]\to\mathbb{R}$ be Riemann integrable. Then uniformly in teh choice of sample point $\xi$, 
+\[
+\lim_{\|P\|\to 0}S(f,P,\xi)=\int_a^b f
+\]
+More precisely,
+\[
+\forall \varepsilon>0, \exists \delta>0 \text{s.t.} \forall P \text{ with }\|P\|\leq \delta\text{ and }\forall \xi, |S(f,P,\xi)-\int_a^b f|\leq \epsilon
+\]
+\end{theorem}
+\clearpage
+\section{Fundamental Theorem of Calculus}
+\begin{theorem}
+\hfill\\\normalfont Let $f$ be integrable on $[a,b]$. Let $F(x):=\int_a^x f$ for all $x\in[a,b]$, with $F(a):=0$. Then $F$ is \textbf{uniformly continuous} on $[a,b]$.
+\end{theorem}
+\begin{theorem}[Fundamental Theorem of Calculus(I)]
+\hfill\\\normalfont Let $f$ be integrable on $[a,b]$. Let $F(x):=\int_a^xf$ for $x\in[a,b]$, with $F(a):=0$. If $f$ is continuous at $x_0\in[a,b]$, then $F'(x_0)=f(x_0)$.
+\end{theorem}
+More generally, if $\lim_{h\to 0^{+}} f(x+h)=\alpha$ and $\lim_{h\to 0^{-}} f(x+h)=\beta$, then
+\[
+\lim_{h\to 0^{+}} \frac{F(x+h)-F(x)}{h}=\alpha\text{  and }\lim_{h\to 0^{-}} \frac{F(x+h)-F(x)}{h}=\beta
+\]
+\begin{theorem}[Fundamental Theorem of Calculus II]
+\hfill\\\normalfont Let $f$ be differentiable on $[a,x]$, and assume that $f'$ is integrable on $[a,x]$. Then 
+\[
+\int_a^x f' = f(x)-f(a)
+\]
+\end{theorem}
+\begin{theorem}[Integration by Parts]
+\hfill\\\normalfont Let $f,g:[a,b]\to\mathbb{R}$ have integrable derivatives $f', g'$ on $[a,b]$. Then
+\[
+\int_a^b fg' = f(b)g(b)-f(a)g(a)-\int_a^b f'g
+\]
+\end{theorem}
+\begin{theorem}[Integration by Substitution]
+\hfill\\\normalfont Let $\phi:[a,b]\to I$, where $I$ is an inteval. Suppose there is an integrable derivative $\phi'$ on $[a,b]$. Let $f:I\to\mathbb{R}$ be continuous on $I$. Then
+\[
+\int_a^b f(\phi(t))\phi'(t)\diff t = \int_{\phi(a)}^{\phi(b)} f(x)\diff x
+\]
+\end{theorem}
+\clearpage
+\section{Taylor And Improper Integral}
+\begin{theorem}[Integral Version of MVT]
+\hfill\\\normalfont Let $f$ be continuous on $[a,b]$. Then $\exists c\in(a,b)$ such that $\int_a^b = f(c)(b-a)$.
+\end{theorem}
+\begin{theorem}[Generalized Integral Version of MVT]
+\hfill\\\normalfont Let $f:[a,b]\to\mathbb{R}$ be continuous on $[a,b]$. Let $g:[a,b]\to\mathbb{R}$ be integrable on $[a,b]$ and assume that $g$ has a \textit{constant} sign on $[a,b]$. Then $\exists c\in(a,b)$ such that $\int_a^b fg=f(c)\int_a^b g$.
+\end{theorem}
+\begin{theorem}[Taylor Expansion in Integral Form]
+\hfill\\\normalfont Let $f:[a,b]\to\mathbb{R}$. Given $x\in(a,b)$, assume that $f^{(1)}, \ldots, f^{(n+1)}$ exists on $[a,x]$ and $f^{(n+1)}$ integrable on $[a,x]$. Then
+\[
+f(x)=\sum_{k=0}^n \frac{f^{(k)}(a)}{k!}(x-a)^k + \frac{1}{n!}\int_a^x f^{(n+1)}(t)(x-t)^n\diff t
+\]
+\end{theorem}
+\begin{definition}[Singularities]
+\hfill\\\normalfont $b\in[-\infty, \infty]$ is a singularity of $f$ if either $b=\pm\infty$ or $f$ is unbounded in every neighbourhood of $b$, which can be formulated as one of the following equivalent claims:
+\begin{itemize}
+	\item $\lim\sup_{x\to b}|f(x)|=\infty$
+	\item $\forall \delta>0, \sup_{x\in [b-\delta, b+\delta]} |f(x)|=\infty$
+	\item $\forall \delta>0, \forall N>0, \exists x\in[b-\delta, b+\delta]$ such that $|f(x)|>N$.
+	\item $\exists x_1,\ldots$ with $\lim_{x\to\infty} x_n=b$ such that $\lim_{n\to\infty}|f(x_n)|=\infty$.
+\end{itemize}
+\end{definition}
+\begin{definition}[Improper Integral]
+\hfill\\\normalfont Let $b$ be a singularity of $f$ and assume $\int_a^c f$ exists for all $c\in[a,b)$. Then the improper integral $\int_a^bf$ is defined by 
+\[
+\int_a^b f:=\lim_{c\to b^-}\int_a^c f
+\]
+if the limit exists.\\
+Similarly, if $a$ is a singularity of $f$, then
+\[
+\int_a^b f:=\lim_{c\to a^+}\int_c^b f
+\]
+if the limit exists.\\
+If $c\in(a,b)$ is the only singularity of $f$ on $[a,b]$, then
+\[
+\int_a^b f:=\int_a^c f+\int_c^bf
+\]
+if both improper integral limit exists.
+\end{definition}
+\begin{definition}[Cauchy Mean Value Theorem]
+\hfill\\\normalfont Suppose $c\in(a,b)$ is the only singularity of $f$ on $[a,b]$. Then
+\[
+\lim_{\varepsilon\to 0}(\int_a^{c-\varepsilon}f+\int_{c+\varepsilon}^b f)
+\]
+is the Cauchy Principle Value of $\int_a^b f$ if the limit exists.\\
+Similarly, if $a=-\infty$ and $b=\infty$ are only singularities of $f$, then Cauchy Principle Value is defined as
+\[
+\lim_{t\to\infty}\int_{-t}^t f
+\]
+\end{definition}
+\textbf{Remark}: Cauchy Principle Value may exists even improper integral does not exists.
+\clearpage
+\section{Pointwise and Uniform Convergence}
+In this section, we study the convergence of a sequence of functions.
+\begin{definition}[Pointwise Convergence]
+\hfill\\\normalfont Let $E\subset\mathbb{R}$. Let $f_n:E\to\mathbb{R}, n\in\mathbb{N}$, be a sequence of functions. We say that $f_n$ converges pointwise to a limiting function $f:E\to\mathbb{R}$, if $\forall x\in E$, we have
+\[
+f(x)=\lim_{n\to\infty}f_n(x)
+\]
+In other words,
+\[
+\forall x\in E, \forall \epsilon>0, \exists N_{x,\epsilon}\in\mathbb{N} \text{such that} \forall n>N_{x,\epsilon}, |f_n(x)-f(x)|\leq \epsilon
+\]
+In this case, we say $f_n$ converges to $f$, i.e., $f_n\to f$, pointwise on $E$.
+\end{definition}
+\textbf{Remark}: Suppose $f_n$ pointwise converges to $f$, 
+\begin{itemize}
+	\item $f_n$ continuous does \textit{not} imply $f$ continuous.
+	\item $f_n$ may have different integral value to $f$.
+	\item $f_n$ differentiable at $x$ does not imply $f'_n(x)\to f'(x)$ at any $x$.
+\end{itemize}
+\begin{definition}[Uniform Convergence]
+\hfill\\\normalfont A sequence of functions $f_n:E\to\mathbb{R}$ is said to be converge \textbf{uniformly} on $E$ to a limiting function $f:E\to\mathbb{R}$ if
+\[
+\forall \epsilon>0, \exists N_\epsilon\in\mathbb{N}, \text{ such that }\forall n\geq N_\epsilon \text{ and }\forall x\in E, |f_n(x)-f(x)|\leq \epsilon
+\]
+or equivalently,
+\[
+\forall \epsilon>0, \exists N_\epsilon\in\mathbb{N}, \text{ such that }\forall n\geq N_\epsilon, \sup|f_n(x)-f(x)|\leq \epsilon
+\]
+We say that $f_n$ converges to $f$, $f_n\to f$, uniformly on $E$.
+\end{definition}
+\begin{definition}[Sup Norm]
+\hfill\\\normalfont We define sup-norm of a function $f$ to be
+\[
+\|f\|:=\sup_{x\in E}|f(x)|
+\]
+Sup-norm $\|\cdot\|$ has the following properties:
+\begin{itemize}
+	\item $\|f\|=0$ if and only if $f=0$
+	\item for $c>0$, $\|cf\|=c\|f\|$
+	\item $\|f+g\|\leq\|f\|+\|g\|$ 
+\end{itemize}
+\end{definition}
+The condition for uniform convergence can be written as
+\[
+\lim_{n\to\infty}\|f_n-f\|=0
+\]
+\begin{theorem}\normalfont if $f_n\to f$ uniformly on $E$, then $f_n\to f$ pointwise on $E$.\end{theorem}
+\clearpage
+\section{Cauchy Criterion}
+In this section, we introduce another way to show uniform onvergence, apart from definition or sup-norm.
+\begin{theorem}[Cauchy Sequence]
+\hfill\\\normalfont $\lim_{x\to \infty}a_n$ exists in $\mathbb{R}$ \textit{if and only if} $(a_n)_{n\in \mathbb{N}}$ is a Cauchy sequence, i.e.,
+\[
+\forall \epsilon>0, \exists N(\epsilon), \text{ such that }\forall m,n\geq N(\epsilon), |a_m-a_n|\leq \epsilon
+\]
+\end{theorem}
+Cauchy sequence is useful in checking convergence if it is difficult to guess the limit.
+\begin{theorem}[Cauchy's Criterion for Pointwise/Uniform Convergence]
+\hfill\\\normalfont Let $f_n:E\to\mathbb{R}$, $n\in \mathbb{N}$, be a sequence of functions.
+\begin{itemize}
+	\item There exists an $f:E\to\mathbb{R}$ such that $f_n\to f$ pointwise on $E$, if and only if for all $x\in E$, $(f(x_n))_{n\in\mathbb{N}}$ is a Cauchy sequence, i.e.,
+	\[
+\forall x\in E, \forall \epsilon>0, \exists N_{x, \epsilon}\in \mathbb{N}, \text{ such that }\forall m,n\geq N_{x,\epsilon}, |f_m(x)-f_n(x)|\leq \epsilon
+	\]
+	\item There exists an $f:E\to\mathbb{R}$ such that $f_n\to f$ uniformly on $E$, if and only if $(f_n)$ is a Cauchy sequence with respect to supnorm $\|\cdot\|$, i,e,
+	\[
+\forall \epsilon>0, \exists N_{\epsilon}\in\mathbb{N},\text{ such that }\forall m,n\geq N_{\epsilon}, \|f_m-f_n\|\leq \epsilon
+	\]
+\end{itemize}
+\end{theorem}
+\begin{theorem}[Uniform Equivalent to Pointwise on Finite Set]
+\hfill\\\normalfont If $E$ finite set and $f_n,f:E\to \mathbb{R}$, then $f_n\to f$ pointwise is equivalent to $f_n\to f$ uniformly on $E$.
+\end{theorem}
+\clearpage
+\section{Property of Uniform Convergence}
+\begin{theorem}[Preservation of Continuity]
+\hfill\\\normalfont Let $f_n:[a,b]\to\mathbb{R}$, $n\in\mathbb{N}$ be a sequence of functions which converges \textbf{uniformly} on $[a,b]$ to a limit $f:[a,b]\to\mathbb{R}$. If $(f_n)_{n\in \mathbb{N}}$ are all \textbf{continuous} at a given $x_0\in[a,b]$ then $f$ is also \textbf{continuous} to $x_0$.\\
+If $(f_n)_{n\in\mathbb{N}}$ are all continuous on $[a,b]$, then $f$ is also continuous on $[a,b]$.
+\end{theorem}
+\begin{theorem}[Convergence of Integrals]
+\hfill\\\normalfont Let $f_n:[a,b]\to\mathbb{R}$, $n\in \mathbb{N}$, be a sequence of functions converging \textbf{uniformly} on $[a,b]$ to a limit $f:[a,b]\to\mathbb{R}$. Suppose that each $f_n$ is \textbf{integrable} on $[a,b]$, then $f$ is \textbf{integrable} on $[a,b]$, and for any $x_0\in[a,b]$, $F_n(x):=\int_{x_0}^x f_n$ converges \textbf{uniformly} to $F(x):=\int_{x_0}^xf$ on $[a,b]$.\\
+In particular, $\int_a^b f_n\to \int_a^b f$.
+\end{theorem} 
+\begin{theorem}[Interchanging Limits with differential operator]
+\hfill\\\normalfont Let $f_n:[a,b]\to\mathbb{R}$, $n\in \mathbb{N}$, be a sequence of functions. Suppose that
+\begin{itemize}
+	\item For some $x_0\in[a,b]$, we have $\lim_{n\to\infty} f_n(x_0)=L\in\mathbb{R}$ exists.
+	\item $f_n'$ exists on $[a,b]$ and $f_n'\to g$ uniformly on $[a,b]$ for some $g:[a,b]\to\mathbb{R}$.
+	\item Each $f_n'$ integrable.
+\end{itemize}
+Then $f_n\to f$ \textbf{uniformly} on $[a,b]$ for some $f:[a,b]\to\mathbb{R}$ with $f(x_0)=L$, and $f'$ exists on $[a,b]$ with $f'=g$ on $[a,b]$, i.e.
+\[
+\frac{\diff}{\diff x}\lim_{n\to\infty}f_n(x)=\lim_{n\to\infty}\frac{\diff}{\diff x}f_n(x)
+\]
+\end{theorem}
+\textbf{Remark:} In fact, condition $(3)$ can be removed.
+\clearpage
+\section{Functional Series}
+\begin{definition}[Infinite Series of Functions]
+\hfill\\\normalfont Let $f_n:E\to\mathbb{R}$, $n\in \mathbb{N}$, be a sequence of functions. We call $\sum_{n=1}^\infty f_n$ an \textbf{infinite series} of functions, which is to be interpreted as follow:
+\begin{enumerate}
+	\item We call $S_n:E\to\mathbb{R}$, defined by $S_n:=\sum_{i=1}^n f_i$, the $n$th partial sum of $\sum_{n=1}^\infty f_n$.
+	\item If $S_n$ converges pointwise (resp. uniformly) to a function $S$ defined on a subset $E_0\subset E$, then we say that the series $\sum_{n=1}^\infty f_n$ converges pointwise (resp. uniformly) on $E_0$, and we define $\sum_{n=1}^\infty f(x):=S(x)$ for all $x\in E_0$.\\
+	If for some $x\in E$, $\lim_{n\to \infty}S_n(x)$ does not exist, then $\sum_{n=1}^\infty f_n$ is undefined at $x$.
+\end{enumerate}
+\end{definition}
+\begin{theorem}[Cauchy's Criterion for Series of Functions]
+\hfill\\\normalfont \begin{enumerate}
+\item $\sum_{n=1}^\infty f_n$ converges pointwise on $E$ if and only if
+\[
+\forall \epsilon>0, \forall x\in E, exits N_{\epsilon, x}\in\mathbb{N}\text{ such that }\forall m\geq n\geq N_{\epsilon, x}, |\sum_{i=n}^m f_i(x)|<\epsilon
+\]
+i.e., $\forall x\in E$, $S_n(x)=\sum_{i=1}^n f_i(x)$ is a Cauchy sequence of reals.
+\item $\sum_{n=1}^\infty f_n$ converges uniformly on $E$ if and only if
+\[
+\forall \epsilon>0, \exists N_\epsilon\in\mathbb{N},\text{ such that }\forall m\geq n\geq N_{\epsilon}, \|\sum_{i=n}^m f_i\|\leq \epsilon
+\]
+i.e., $S_n(x)=\sum_{i=1}^n f_i(x)$ is a Cauchy sequence of functions with respec tto the sup-norm $\|\cdot\|$.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[A necessary condition for Uniform Convergence]
+\hfill\\\normalfont If $\sum_{n=1}^\infty f_n$ converges \textbf{uniformly} on $E$< then
+\[
+\|f_n\|=\sup_{x\in E}|f_n(x)|\to 0\text{ as }n\to \infty
+\]
+\end{theorem}
+\begin{theorem}[Weierstrass M-test]
+\hfill\\\normalfont Let $f_n:E\to\mathbb{R}$ for $n\geq 1$. Let $M_n:=\|f_n\|$. If $\sum_{n=1}^\infty M_n$ converges, then $\sum_{n=1}^\infty f_n$ converges uniformly on $E$. Furthermore, $\sum_{n=1}^\infty |f_n|$ also converges uniformly on $E$.
+\end{theorem}
+\begin{theorem}[Continuity of an Infinite Series of Continuous Functions]
+\hfill\\\normalfont If $\sum_{n}f_n$ converges uniformly to a function $S$ on $[a,b]$, and each $f_n$ is \textbf{continuous} at $x_0\in [a,b]$, then $S$ is also \textbf{continuous} at $x_0$.
+\end{theorem}
+\begin{theorem}[Interchanging Series with Integral]
+\hfill\\\normalfont If $\sum_{n}f_n$ converges uniformly to a function $S$ on $[a,b]$, and each $f_n$ is integrable on $[a,b]$, then $S$ is integrable on $[a,b]$, and for every $x\in[a,b]$,
+\[
+\int_a^xS(t)\diff t = \int_a^x \sum_{n=1}^\infty f_n(t)\diff t = \sum_{n=1}^\infty \int_a^x f_n(t)\diff t
+\]
+where the convergence on the right-hand-side is uniform on $[a,b]$.
+\end{theorem}
+\begin{theorem}[Interchanging Series with Derivative]
+\hfill\\\normalfont Let $(f_n)_{n\in\mathbb{N}}$ be a sequence of differentiable functions on $[a,b]$ such that
+\begin{enumerate}
+	\item $sum_{n=1}^\infty f_n(x_0)$ converges for some $x_0\in[a,b]$
+	\item $\sum_{n=1}^\infty f_n'$ converges uniformly on $[a,b]$
+\end{enumerate}
+Then $\sum_{n=1}^\infty f_n$ converges uniformly on $[a,b]$ to a differentiable function $S:[a,b]\to \mathbb{R}$, with
+\[
+S'(x)=\frac{\diff}{\diff x}(\sum_{n=1}^\infty f_n(x))=\sum_{n=1}^\infty f_n'(x)
+\]
+\end{theorem}
+This theorem provides an alternative to Weierstrass M-test for proving uniform convergence of a series of functions.
+\clearpage
+\section{Test of Convergence of Functional Series}
+\begin{definition}[Uniform Boundedness]
+\hfill\\\normalfont A sequence of functions $(f_n)_{n\in\mathbb{N}}: E\to\mathbb{R}$ is called \textbf{uniformly bounded} on $E$ if there exists a $K\in(0,\infty)$ such that $|f_n(x)|\leq K$ for all $x\in E$ and $n\in\mathbb{N}$, i.e.,
+\[
+\sup_{n\in\mathbb{N}}\|f_n\|\leq K
+\]
+\end{definition}
+\begin{theorem}[Dirichlet's Test]
+\hfill\\\normalfont Let $(f_n)_{n\in\mathbb{N}}$ and $(g_n)_{n\in\mathbb{N}}$ be two sequences of functions on $E$. Then $\sum_{n=1}^\infty f_n(x)g_n(x)$ is \textbf{uniformly convergent} on $E$ if the following conditions are satisfied:
+\begin{enumerate}
+	\item The partial sums of $\sum_{n}g_n$, $G_n:=\sum_{i=1}^n g_i$, are uniformly bounded(i.e., $sup_{n\in\mathbb{N}}\|G_n\|\leq \infty$)
+	\item $\lim_{n\to\infty}\|f_n\|=0$, i.e., $f_n$ converges to the constant function $0$ uniformly on $E$.
+	\item For each $x\in E$, the sequence of real numbers $(f_n(x))_{n\in\mathbb{N}}$ is \textbf{monotone}.
+\end{enumerate}
+\end{theorem}
+We have the following corollary from the above theorem:
+\begin{theorem}[Dirichlet's Test for Reals]
+\hfill\\\normalfont Let $(a_n)_{n\in\mathbb{N}}$ and $(b_n)_{n\in\mathbb{N}}$ be two sequences of real numbers. Then $\sum_{n=1}^\infty a_nb_n$ converges if
+\begin{enumerate}
+	\item $B_n:=\sum_{i=1}^n b_i, n\in\mathbb{N}$, are bounded(i.e., $sup_{n\in\mathbb{N}}|B_n|=K<\infty$)
+	\item $\lim_{n\to\infty}a_n=0$.
+	\item $a_n$ is \textbf{monotone} in $n$.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[Alternating Series Test]
+\hfill\\\normalfont Let $(f_n)_{n\in\mathbb{N}}$ be a sequence of functions on $E$ such that
+\begin{enumerate}
+	\item $f_n\to 0$ uniformly on $E$, i.e., $\lim_{n\to\infty}\|f_n\|=0$
+	\item $\forall x\in E$, $f_n(x)$ is \textbf{monotone} in $n$.
+\end{enumerate}
+Then the series $\sum_{n=1}^\infty (-1)^n f_n(x)$ is \textbf{uniformly convergent} on $E$.
+\end{theorem}
+\begin{theorem}[Abel's Test]
+\hfill\\\normalfont Let $(f_n)_{n\in\mathbb{N}}$ and $(g_n)_{n\in\mathbb{N}}$ be two sequences of functions on $E$. Then $\sum_{i=1}^\infty f_ng_n$ is uniformly convergent if
+\begin{enumerate}
+	\item $\sum_{n=1}^\infty g_n$ converges uniformly on $E$.
+	\item $(f_n)_{n\in\mathbb{N}}$ are \textbf{uniformly bounded} on $E$, i.e., $\sup_{n\in\mathbb{N}}\|f_n\|=K<\infty$.
+	\item For each $x\in E$, $f_n(x)$ is monotone in $n$.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[Abel's Test For Reals]
+\hfill\\\normalfont Let $(a_n)_{n\in\mathbb{N}}$ and $(b_n)_{n\in\mathbb{N}}$ be two sequences of real numbers on $E$. Then $\sum_{i=1}^\infty a_nb_n$ is uniformly convergent if
+\begin{enumerate}
+	\item $\sum_{n=1}^\infty b_n$ converges.
+	\item $\sup_{n\in\mathbb{N}}|a_n|=K<\infty$.
+	\item $a_n$ is monotone in $n$.
+\end{enumerate}
+\end{theorem}
+\clearpage
+\section{Dini Theorem and Power Series}
+Dini's Theorem is another test of uniform convergence.
+\begin{definition}[Monotone Sequence of Functions]
+\hfill\\\normalfont A sequence of functions $f_n:E\to\mathbb{R}, n\in\mathbb{N}$, is called \textbf{monotone} is it is either \textbf{increasing} ($\forall x\in E, f_1(x)\leq f_2(x)\leq \cdots$) or decreasing.
+\end{definition}
+\begin{theorem}[Dini's Theorem]
+\hfill\\\normalfont Let $(f_n)_{n\in\mathbb{N}}$ and $f$ be defined on $[a,b]$. Suppose that
+\begin{enumerate}
+	\item $f_n\to f$ pointwise on $[a,b]$.
+	\item $(f_n)_{n\in\mathbb{N}}$ and $f$ all continuous on $[a,b]$.
+	\item $(f_n)_{n\in\mathbb{N}}$ is monotone
+\end{enumerate}
+Then $f_n\to f$ uniformly on $[a,b]$.
+\end{theorem}
+\begin{definition}[Power Series]
+\hfill\\\normalfont A series of functions of the form
+\[
+f(x):=\sum_{n=0}^\infty a_n(x-x_0)^n
+\]
+where $(a_n)_{n\geq 0}$ are constants, is called a \textbf{power series} in $(x-x_0)$.
+\end{definition}
+\begin{definition}[Absolute Uniform Convergence]
+\hfill\\\normalfont A series of functions $\sum_{n=1}^\infty f_n$ converges \textbf{absolutely-uniformly on} $E$ if $\sum_{n=1}^\infty|f_n|$ converges uniformly on $E$.
+\end{definition}
+\begin{theorem}\normalfont Absolute uniform convergence of $\sum_n f_n$ implies uniform convergence.\end{theorem}
+\begin{theorem}[Radius of Convergence]
+\hfill\\\normalfont given a power series $\sum_{n=0}^\infty a_n(x-x_0)^n$. Let
+\[
+R:=\frac{1}{\lim\sup_{n\to\infty}|a_n|^{\frac{1}{n}}}\in[0,\infty]
+\]
+with $R:=0$(resp. $\infty$) if $\lim\sup_{n\to\infty}|a_n|^{\frac{1}{n}}=\infty$(resp. $0$). Then
+\begin{enumerate}
+	\item If $R\in(0,\infty)$, then for any fixed $r\in[0,R)$, then power series converges \textbf{absolutely uniformly} on $[x_0-r,x_0+r]$ and diverges for any $x$ with $|x-x_0|>R$.
+	\item If $R=0$, then the series converges at $x=x_0$ only.
+	\item If $R=\infty$, then for any fixed $r>0$, the series converges \textbf{absolutely uniformly} on $[x_0-r,x_0+r]$. In particular, it converges absolutely at each $x\in\mathbb{R}$.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}
+\hfill\\\normalfont If $\exists n_0\in\mathbb{N}$ such that $\forall n\geq n_0, a_n\neq 0$, and $\rho:=\lim_{n\to\infty}\frac{|a_{n+1}}{a_n}$ exists in $[0,\infty]$, then $R=\frac{1}{\rho}$.
+\end{theorem}
+\clearpage
+\section{Power Series Properties}
+Recall, the radius of convergence of a power series $\sum_{n=0}^{\infty}a_n(x-x_0)^n$ is given by
+\[
+R=\frac{1}{\lim\sup_{n\to\infty}|a_n|^{\frac{1}{n}}}\in[0,\infty]
+\]
+The power series converges pointwise on $(x_0-R,x_0+R)$, converges uniformly on any \textbf{bounded closed subinterval} of $(x_0-R,x_0+R)$, and diverges on $(-\infty,x_0-R)\cup(x_0+R,\infty)$. The convergence/divergence at $x_0\pm R$ depends o nthe concrete problem at hand. Also, the radius of convergence can be given by
+\[
+R=\frac{1}{\lim_{n\to\infty}\frac{|a_{n+1}|}{|a_n|}}
+\]
+if the limit exists, since $\lim_{n\to\infty}\frac{|a_{n+1}|}{|a_n|}$ is the geometric growth rate of $|a_n|$.
+\begin{definition}[Domain of a Power Series]
+\hfill\\\normalfont The domain of a power series $\sum_{n=0}^\infty a_n(x-x_0)^n$ is defined to be the set 
+\[
+\{x\in\mathbb{R}:\sum_{n=0}^\infty a_n(x-x_0)^n \text{ converges}\}
+\]
+\end{definition}
+\begin{theorem}[Derivatives of Power Series]
+\hfill\\\normalfont If $f(x):=\sum_{n=0}^\infty a_n(x-x_0)^n$ has radius of convergence $R>0$, then $f$ is \textbf{infinitely differentiable} on $(x_0-R,x_0+R)$, with
+\[
+f'(x)=\sum_{n=1}\infty na_n(x-x_0)^{n-1}\;\;\;\forall |x-x_0|<R
+\]
+and for all $k\in\mathbb{N}$, 
+\[
+f^{(k)}(x)=\sum_{n=k}^\infty a_nn(n-1)\cdots(n-k+1)(x-x_0)^{n-k}\;\;\;\forall|x-x_0|<R
+\]
+The radius of convergence of these power series all equal $R$.
+\end{theorem}
+\begin{theorem}[Facts]
+\begin{itemize}
+	\item Let $(u_n)_{n\in\mathbb{N}}$ and $(v_n)_{n\in\mathbb{N}}$ be two sequences such that $\lim_{n\to\infty} u_n:=U\in(0,\infty)$ exists. Then
+	\[
+\lim\sup_{n\to\infty} u_nv_n=U\lim\sup_{n\to\infty} v_n
+	\]
+	\item $\lim\sup_{n\to\infty}|a_n|^{\frac{1}{n-1}}=\lim\sup_{n\to\infty}|a_n|^{\frac{1}{n}}$.
+\end{itemize}
+\end{theorem}
+\clearpage
+\section{Properties of Power Series}
+\begin{theorem}[Power Series as Taylor Series]
+\hfill\\\normalfont Let $f(x):=\sum_{n=0}^\infty a_n(x-x_0)^n$ be convergent on $(x_0-r,x_0+r)$ for some $r>0$. Then
+\[
+a_k=\frac{f^{(k)}(x_0)}{k!}\;\;\;\forall k\in\{0\}\cup \mathbb{N}
+\]
+\end{theorem}
+Essentially, if $f$ can be represented as a power series in powers of $x-x_0$ in a neighbourhood of $x_0$, then this power series is in fact the Taylor series for $f$ expanded around $x_0$.
+\begin{theorem}[Uniqueness of Power Series]
+\hfill\\\normalfont If 
+\[
+f(x)=\sum_{n=0}^\infty a_n(x-x_0)^n=\sum_{n=0}^\infty b_n(x-x_0)^n
+\]
+on $(x_0-r,x_0+r)$ for some $r>0$, then $a_n=b_n$ for all $n\in\{0\}\cup\mathbb{N}$.
+\end{theorem}
+\begin{theorem}[Integrating a Power Series]
+\hfill\\\normalfont Let $f(x):=\sum_{n=0}^\infty a_n(x-x_0)^n$ be convergent on $(x_0-r,x_0+r)$ for some $r>0$. Then for all $x\in(x_0-r,x_0+r)$, $f$ is integrable on $[x_0,x]$ and
+\[
+F(x):=\int_{x_0}^x f(t)\diff t=\sum_{n=0}^\infty a_n(t-x_0)^n\diff t=\sum_{n=0}^\infty \frac{a_n}{n+1}(x-x_0)^{n+1}
+\]
+In particular, $f$ is integrable on any $[a,b]\subset (x_0-r,x_0+r)$, with
+\[
+\int_a^b f(x)\diff x=F(b)-F(a)=\sum_{n=0}^\infty \frac{a_n}{n+1}(b-x_0)^{n+1}-\sum_{n=0}^\infty \frac{a_n}{n+1}(a-x_0)^{n+1}
+\]
+\end{theorem}
+Abel theorem gives us teh ability to check for continuity of a power series at the boundary of its interval of convergence.
+\begin{theorem}[Abel's Theorem]
+\hfill\\\normalfont Let $f(x):=\sum_{n=0}^\infty a_n(x-x_0)^n$, which converges on $(x_0-R,x_0+R)$, and assume $R>0$ to be the radius of convergence.
+\begin{enumerate}
+	\item If the power series converges at $x=x_0+R$, i.e., $\sum_{n=0}^\infty a_nR^n$ converges, then
+	\[
+\lim_{x\to(x_0+R)^{-}}f(x)=\sum_{n=0}^\infty a_nR^n
+	\]
+	\item If the power series converges at $x=x_0-R$, i.e., $\sum_{n=0}^\infty a_n(-R)^n$ converges, then
+	\[
+\lim_{x\to(x_0-R)^{+}}f(x)=\sum_{n=0}^\infty a_n(-R)^n
+	\]
+\end{enumerate}
+In other words, if the power series converges at boundary points, then the power series must be continuous at that point(one-sided).
+\end{theorem}
+\clearpage
+\section{Taylor Series}
+\begin{definition}[Taylor, Maclaurin Series]
+\hfill\\\normalfont Suppose that $f$ is infinitely differentiable on $(x_0-r,x_0+r)$ for some $r>0$. Then the power series 
+\[
+\sum_{n=0}^\infty \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n
+\]
+is called the \textbf{Taylor series} of $f$ about $x_0$. When $x_0=0$, the series becomes 
+\[
+\sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!}x^n
+\]
+which is called the Maclaurin series of $f$.
+\end{definition}
+In general, $f(x)\neq\sum_{n=0}^\infty \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$ on interval of convergence of Taylor series, unless $f$ is defined via a power series:
+\begin{theorem}[Power Series as Taylor Series]
+\hfill\\\normalfont If $f(x):=\sum_{n=0}^\infty a_n(x-x_0)^n$ converges on $(x_0-r,x_0+r)$ for some $r>0$, then $\sum_{n}a_n(x-x_0)^n$ is the Taylor series of $f$ about $x_0$, i.e., $a_n=\frac{f^{(n)}(x_0)}{n!}$.
+\end{theorem}
+In genreall, we want to investage when function $f$ equals its Taylor Series. We first observe the following proven theorem:
+\begin{theorem}[Taylor Expansion with Remainder]
+\hfill\\\normalfont Suppose $f^{(n+1)}$ exists on $I:=(x_0-r,x_0+r)$. Then $\forall x\in I, \exists c_n$ between $x_0$ and $x$, which depends on $n,x,x_0$ such that
+\[
+f(x)=\sum_{k=0}^n \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k +\frac{f^{(n+1)}(c_n)}{(n+1)!}(x-x_0)^{n+1}
+\]
+\end{theorem}
+It follows immediately that
+\begin{theorem}[Equality Between a Function and Its Taylor Expansion]
+\hfill\\\normalfont Suppose that $f$ is \textit{infinitely differentiable} on $I=(x_0-r,x_0+r)$, then for each $x\in I$,
+\[
+f(x)=\sum_{n=0}^\infty \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n
+\]
+if and only if
+\[
+\lim_{n\to \infty}R_n(x):=\lim_{n\to\infty}\frac{f^{(n+1)}(c_n)}{(n+1)!}(x-x_0)^{n+1}=0
+\]
+The Taylor series of $f$ about $x_0$ converges uniformly to $f$ on $[a,b]\subset I$ if and only if $R_n\to 0$ uniformly on $[a.b]$.
+\end{theorem}
+\clearpage
+\section{Power Series Arithmetic}
+Let $f(x):=\sum_{n=0}6\infty a_nx^n$ and $g(x):=\sum_{n=0}^\infty b_nx^n$ be two power seires. Formal multiplication gives
+\[
+f(x)g(x)=\sum_{n=0}^\infty c_nx^n
+\]
+where $c_n:=\sum_{k=0}^n a_kb_{n-k}$.
+\begin{definition}[Cauchy Product] 
+\hfill\\\normalfont The Cauchy product of $\sum_{n=0}^\infty a_n$ and $\sum_{n=0}^\infty b_n$ is defined to be $\sum_{n=0}^\infty c_n$. Then $\sum_{n=0}^\infty c_nx^n$ is teh Cauchy product of $\sum_{n=0}^\infty a_nx^n$ and $\sum_{n=0}^\infty b_nx^n$.
+\end{definition}
+\begin{theorem}[Merten]
+\hfill\\\normalfont If $\sum_{n=0}^\infty a_n=A$ and $\sum_{n=0}^\infty b_n=B$, and if either $\sum a_n$ or $\sum b_n$ converges \textbf{absolutely}, then Cauchy product $\sum_{n=0}^\infty c_n=AB$.
+\end{theorem}
+\textbf{Remark}: $\sum_n c_n$ may not converge absolutely. 
+\begin{theorem}\normalfont If both $\sum_{n=0}^\infty a_n$ and $\sum_{n=0}^\infty b_n$ converge absolutely, then the Cauchy product $\sum_{n=0}^\infty c_n$ converge absolutely.\end{theorem}
+\begin{theorem}[Arithmetic Operations]
+\hfill\\\normalfont Let 
+\[
+f(x)=\sum_{n=0}^\infty a_n(x-x_0)^n, \;\;|x-x_0|<R_1
+\]
+and
+\[
+g(x)=\sum_{n=0}^\infty b_n(x-x_0)^n, \;\;|x-x_0|<R_2
+\]
+then for any $\alpha, \beta\in \mathbb{R}$,
+\[
+\alpha f(x)+\beta g(x)=\sum_{n=0}^\infty (\alpha a_n+\beta b_n)(x-x_0)^n, \;\;|x-x_0|\leq R_1\land R_2
+\]
+and
+\[
+f(x)g(x)=\sum_{n=0}^\infty c_n (x-x_0)^n \text{ with }c_n=\sum_{i=0}^n a_ib_{n-i},\;\;|x-x_0|\leq R_1\land R_2
+\]
+\end{theorem}
+\clearpage
+\section{Open and Closed Sets, Compactness}
+\begin{definition}[Neighbourhood]
+\hfill\\\normalfont A neighbourhood of a point $x\in\mathbb{R}$ is any set $V$ that contains a $\epsilon$-neighbourhood $V_\epsilon(x):=(x-\epsilon, x+\epsilon)$ of $x$ for some $\epsilon>0$. 
+\end{definition}
+\begin{definition}[Open/Closed Subset]
+\hfill\\\normalfont A subset $G$ of $\mathbb{R}$ is called open if for each $x\in G$ there exists a neighbourhood $V$ of $x$ such that $V\subset G$.\\
+A subset $F$ of $\mathbb{R}$ is called closed in $\mathbb{R}$ if the complement $\mathbb{R}\setminus F$ is open in $\mathbb{R}$.
+\end{definition}
+\textbf{Remark}: We can have a set that is neigher open nor closed, say $[0,1)$. Note, the empty set $\varnothing$ is open in $\mathbb{R}$.
+\begin{theorem}[Properties of Open Set]
+\hfill\\\normalfont \begin{itemize}
+\item THe union of an arbitrary collection of open subsets in $\mathbb{R}$ is open.
+\item The intersection of any finite collection of open sets in $\mathbb{R}$ is open.
+\end{itemize}
+\end{theorem}
+\begin{theorem}[Properties of Closed Set]
+\hfill\\\normalfont \begin{itemize}
+\item The intersecion of an arbitrary collection of closed subsets in $\mathbb{R}$ is closed.
+\item The union of any finite collection of closed sets in $\mathbb{R}$ is closed.
+\end{itemize}
+\end{theorem}
+\begin{theorem}[Characterisation of Open Sets]
+\hfill\\\normalfont A subset of $\mathbb{R}$ is open if and only if it is the union of countably many disjoint open intervals in $\mathbb{R}$.
+\end{theorem}
+\begin{theorem}[Characterisation of Closed Sets]
+\hfill\\\normalfont Let $F\subset \mathbb{R}$, then the following assertions are equivalent:
+\begin{enumerate}
+	\item $F$ is closed subset of $\mathbb{R}$.
+	\item If $X=(x_n)$ is any convergent sequence of elements in $F$, then $\lim X$ belongs to $F$.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}\normalfont A subset of $\mathbb{R}$ is closed if and only if it contains all of its limit points.\end{theorem}
+\begin{definition}[Open Cover]
+\hfill\\\normalfont Let $A$ be a subset of $\mathbb{R}$. An \textbf{open cover} of $A$ is a collection $\mathcal{G}=\{G_\alpha\}$ of open sets in $\mathbb{R}$ whose union contains $A$, that is
+\[
+A\subseteq \cup_{\alpha}G_{\alpha}
+\]
+If $\mathcal{G}'$ is a subcollection of sets from $\mathcal{G}$ such that the union of the sets in $\mathcal{G}'$ also contains $A$, then $\mathcal{G}'$ is called a \textbf{subcover} of $\mathcal{G}$. If $\mathcal{G}'$ consists of finitely many sets, then we call $\mathcal{G}'$ a finite subcover of $\mathcal{G}$.
+\end{definition}
+\begin{definition}[Compact Set]
+\hfill\\\normalfont A subset $K$ of $\mathbb{R}$ is said to be \textbf{compact} if every open cover of $K$ has a finite subcover.
+\end{definition}
+\begin{theorem}[Heine-Borel]
+\hfill\\\normalfont A subset $K$ of $\mathbb{R}$ is compact if and only if it is closed and bounded.
+\end{theorem}
+\begin{theorem}\normalfont A subset $K$ of $\mathbb{R}$ is compact if and only if every sequence in $K$ has a subsequence that converges to a point in $K$.
+\end{theorem}
 \end{document}
 

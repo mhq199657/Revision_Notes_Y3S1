@@ -1,9 +1,9 @@
 \PassOptionsToPackage{svgnames}{xcolor}
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 
 
 
-\usepackage[margin=1in]{geometry}  
+\usepackage[margin=0.1in]{geometry}  
 \usepackage{graphicx}             
 \usepackage{amsmath}              
 \usepackage{amsfonts}              
@@ -50,10 +50,11 @@
 \tableofcontents
 
 \clearpage
+\twocolumn
 \section{Simple Linear Regression}
 \subsection{Simple Linear Regression Model}
 \begin{definition}[Simple Linear Regression Model]
-\hfill\\\normalfont Suppose $x, y$ are two variables. The simple linear regression model makes the following assumption on the relation of $y$ with respect to $x$:
+\normalfont Suppose $x, y$ are two variables. The simple linear regression model makes the following assumption on the relation of $y$ with respect to $x$:
 \begin{enumerate}
   \item $y=\beta_0+\beta_1x+\varepsilon$
   \item $E(y\mid x) = \beta_0+\beta_1x$
@@ -93,13 +94,13 @@ S_{xy} = \sum_{i=1}^n x_iy_i - \frac{\left(\sum_{i=1}^n x_i\right)\left(\sum_{i=
 \]
 from which, $\hat{\beta_0}$ can be easily obtained.\\
 \begin{definition}[Residual]
-\hfill\\\normalfont The $i$th residual of the data $e_i$ is defined as
+\normalfont The $i$th residual of the data $e_i$ is defined as
 \[
 e_i = y_i-\hat{y_i} = y_i-(\hat{\beta_0}+\hat{\beta_1}x_i)
 \]
 \end{definition}
 \begin{theorem}[Unbiasness of {$\hat{\beta_0}$} and {$\hat{\beta_1}$}]
-\hfill\\\normalfont Both $\hat{\beta_0}$ and $\hat{\beta_1}$ are unbiased estimator.\\
+\normalfont Both $\hat{\beta_0}$ and $\hat{\beta_1}$ are unbiased estimator.\\
 This can be easily proven by writing $\hat{\beta_1} = \sum_{i=1}^n c_iy_i$ where $c_i=\frac{x_i-\bar{x}}{S_{xx}}$, and take expectation.\\
 The unbiasness of $\hat{\beta_0}$ follows immediately.\\
 Notably, some important intermediate results are
@@ -110,7 +111,7 @@ Notably, some important intermediate results are
 \end{theorem}
 Note, for any $\tilde{\beta_1}= \mathbf{c}\cdot\mathbf{y}$, as long as $\mathbf{c}\cdot \mathbf{1} = 0$ and $\mathbf{c}\cdot \mathbf{x} = 1$, we will have $\tilde{\beta_1}$ to be unbiased.
 \begin{theorem}[Variance of {$\hat{\beta_0}$} and {$\hat{\beta_1}$}]
-\hfill\\\normalfont 
+\normalfont 
 We have
 \begin{itemize}
   \item $\var(\hat{\beta_1}) = \frac{\sigma^2}{S_{xx}}$
@@ -118,11 +119,12 @@ We have
 \end{itemize}
 \end{theorem}
 \begin{theorem}[Gauss-Markov Theorem]
-\hfill\\\normalfont Gauss-Markov Theorem suggusts that for the simple linear regression model mentioned before, with assumption $E(\varepsilon) = 0$ and $\var(\varepsilon) = \sigma^2$ and uncorrelated errors, $\hat{\beta_0}$ and $\hat{\beta_1}$ are unbiased and have minimum variance whenm compared with all other unbiased estimators that are linear combinations of the $y_i$.
+\normalfont Gauss-Markov Theorem suggusts that for the simple linear regression model mentioned before, with assumption $E(\varepsilon) = 0$ and $\var(\varepsilon) = \sigma^2$ and uncorrelated errors, $\hat{\beta_0}$ and $\hat{\beta_1}$ are unbiased and have minimum variance whenm compared with all other unbiased estimators that are linear combinations of the $y_i$.
 \end{theorem}
 Therefore, least square estimators are the best linear unbiased estimators.
 \begin{theorem}[Properties of Least Square Fit]
-\hfill\\\normalfont \begin{enumerate}
+\hfill\\
+\normalfont \begin{enumerate}
 \item $\sum_{i=1}^n (y_i-\hat{y_i}) =\sum_{i=1}^n e_i = 0$ (from $\frac{\partial S}{\partial \beta_0}$)
 \item The least-square regression line always passes through the centroid, i.e., $(\bar{y}, \bar{x})$ of the data.
 \item $\sum_{i=1}^n x_ie_i = 0$ (from $\frac{\partial S}{\partial \beta_1}$)
@@ -131,7 +133,7 @@ Therefore, least square estimators are the best linear unbiased estimators.
 \end{theorem}
 \subsection{Esimtation of {$\sigma^2$}}
 \begin{definition}[Estimation of {$\sigma^2$}]
-\hfill\\\normalfont We define sum of squares of the residue, $SS_\text{Res}$ to be
+\normalfont We define sum of squares of the residue, $SS_\text{Res}$ to be
 \[
 SS_\text{Res} := \sum_{i=1}^n e_i^2 = \sum_{i=1}^n (y_i-\hat{y}_i)^2
 \]
@@ -159,7 +161,7 @@ is an \textbf{unbiased estimator} of $\sigma^2$. where as $\hat{\sigma}$ is call
 \end{definition}
 \textbf{Remark}: $\hat{\sigma}^2$ is model dependent due to the term $\hat{\beta}_1 S_{xy}$.
 \begin{definition}[Alternative Form of Simple Linear Regression]
-\hfill\\\normalfont Simple arithmetic gives that the original linear regression model is equivalent to
+\normalfont Simple arithmetic gives that the original linear regression model is equivalent to
 \[
 y_i = \beta'_0+\beta_1(x_i-\bar{x})+\varepsilon_i
 \]
@@ -179,7 +181,7 @@ In this subsection, we further assume: errors are normally and independently dis
 \varepsilon_i\sim N(0,\sigma^2)
 \]
 \begin{theorem}[Testing {$\hat{\beta}_1$}]
-\hfill\\\normalfont Here, we are testing null hypothesis
+\normalfont Here, we are testing null hypothesis
 \[
 H_0:\beta_1= \beta_{10}
 \]
@@ -200,7 +202,7 @@ Here, the standard error of the slope is $\se(\hat{\beta}_1)=\sqrt{\frac{MS_\tex
 We should reject the null hypothesis if $|t_0|> t_{\frac{\alpha}{2}, n-2}$
 \end{theorem}
 \begin{theorem}[Testing of {$\hat{\beta}_0$}]
-\hfill\\\normalfont Here, we are testing null hypothesis 
+\normalfont Here, we are testing null hypothesis 
 \[
 H_0: \beta_0 = \beta_{00}
 \]
@@ -212,13 +214,13 @@ Similarly, we can formulate the test statistics:
 \[
 t_0 = \frac{\hat{\beta}_0-\beta_{00}}{\sqrt{MS_\text{Res}(\frac{1}{n}+\frac{\bar{x}^2}{S_{xx}})}} = \frac{\hat{\beta}_0-\beta_{00}}{\se(\hat{\beta}_0)}
 \]
-where the stanard error of the intercept is $\se(\hat{\beta}_0) = \sqrt{MS_\text{Res}(\frac{1}{n}+\frac{\bar{x}^2}{S_{xx}})}$.\\
+where the stanard error of the intercept is\\ $\se(\hat{\beta}_0) = \sqrt{MS_\text{Res}(\frac{1}{n}+\frac{\bar{x}^2}{S_{xx}})}$.\\
 We reject the null hypothesis $H_0$ if $|t_0|> t_{\frac{\alpha}{2}, n-2}$.
 \end{theorem}
 There is an important special case where $H_0: \beta_1 = 0$. Failing to reject this $H_0$ is equivalent to saying there is \textit{no} linear relationship between $y$ and $x$.
 \subsection{Analysis of Variance(ANOVA)}
 \begin{definition}[Model Sum of Squares {$SS_\text{R}$}]
-\hfill\\\normalfont We identify the corrected value of response $y_i-\bar{y} = (\hat{y}_i - \bar{y}) + (y_i-\hat{y}_i)$. Therefore,
+\normalfont We identify the corrected value of response $y_i-\bar{y} = (\hat{y}_i - \bar{y}) + (y_i-\hat{y}_i)$. Therefore,
 \[
 SS_\text{T} = \sum_{i=1}^n (y_i-\bar{y})^2 = \sum_{i=1}^n (\hat{y}_i - \bar{y})^2 +  \sum_{i=1}^n (y_i-\hat{y}_i)^2 +2\sum_{i=1}^n (\hat{y}_i - \bar{y}) (y_i-\hat{y}_i)
 \]
@@ -239,7 +241,7 @@ SS_\text{R} = \hat{\beta}_1 S_{xy}
 \end{definition}
 Furthermore, we have the following results
 \begin{theorem}
-\hfill\\\normalfont \begin{itemize}
+\normalfont \begin{itemize}
 \item $SS_\text{Res} = (n-2) MS_\text{Res}$ follows a $\chi_{n-2}^2$ distribution.
 \item If the null hypothesis $H_0:\beta_1=0$ is true, then $\frac{SS_\text{R}}{\sigma^2}$ follows a $\chi_1^2$ distribution.
 \item $SS_\text{Res}$ and $SS_\text{R}$ are independent.
@@ -261,7 +263,7 @@ E(MS_\text{R}) = \sigma^2+\beta_1^2 S_{xx}
 So, suppose the $H_0$ is rejected, i.e., $\beta_1\neq 0$, $F_0$ will follow a noncentral $F$ distribution with $1$ and $n-2$ degress of freedom and a non-centrality parameter $\lambda=\frac{\beta_1^2 S_{xx}}{\sigma^2}$.
 \end{theorem}
 \begin{theorem}[Confidence Intervals on statistics]
-\hfill\\\normalfont $100(1-\alpha)$ percent confidence interval(CI) on the slope $\beta_1$
+\normalfont $100(1-\alpha)$ percent confidence interval(CI) on the slope $\beta_1$
 \[
 \hat{\beta_1} -t_{\frac{\alpha}{2}, n-2} \se(\hat{\beta_1})\leq\beta_1\leq \hat{\beta}_1 +t_{\frac{\alpha}{2}, n-2} \se(\hat{\beta_1})
 \]
@@ -275,7 +277,7 @@ $100(1-\alpha)$ percent CI on $\sigma^2$
 \]
 \end{theorem}
 \begin{theorem}[Interval Estimation of Mean Response {$E(y)$}]
-\hfill\\\normalfont We have
+\normalfont We have
 \[
 \hat{E(y\mid x_0)} := \hat{\mu}_{y\mid x_0} = \hat{\beta_0}+\hat{\beta}_1x_0
 \]
@@ -294,22 +296,22 @@ $100(1-\alpha)$ percent CI on the mean response at the point $x=x_0$ is
 \end{theorem}
 \subsection{Prediction of New Observations}
 \begin{theorem}[Prediction Interval for Future Observation {$y_0$}]
-\hfill\\\normalfont $\psi = y_0-\hat{y_0}$ is normally distributed with mean $0$ and variance
+\normalfont $\psi = y_0-\hat{y_0}$ is normally distributed with mean $0$ and variance
 \[
 \sigma^2[1+\frac{1}{n}+\frac{(x_0-\bar{x})^2}{S_{xx}}]
 \]
 And $100(1-\alpha)$ percent prediction interval on a future $y_0$ is
-\[
-\hat{\mu}_{y\mid x_0} - t_{\frac{\alpha}{2},n-2}\sqrt{MS_\text{Res}(1+\frac{1}{n}+\frac{(x_0-\bar{x})^2}{S_{xx}})} \leq E(y\mid x_0)\leq \hat{\mu}_{y\mid x_0} + t_{\frac{\alpha}{2},n-2}\sqrt{MS_\text{Res}(1+\frac{1}{n}+\frac{(x_0-\bar{x})^2}{S_{xx}})}
-\]
+\begin{align*}
+&\hat{\mu}_{y\mid x_0} - t_{\frac{\alpha}{2},n-2}\sqrt{MS_\text{Res}(1+\frac{1}{n}+\frac{(x_0-\bar{x})^2}{S_{xx}})} \leq E(y\mid x_0)\\&\leq \hat{\mu}_{y\mid x_0} + t_{\frac{\alpha}{2},n-2}\sqrt{MS_\text{Res}(1+\frac{1}{n}+\frac{(x_0-\bar{x})^2}{S_{xx}})}
+\end{align*}
 Furthermore, a $100(1-\alpha)$ percent prediction interval on the \textbf{mean} of $m$ future observations, $\bar{y}_0$ on the response at $x=x_0$ is
-\[
-\hat{\mu}_{y\mid x_0} - t_{\frac{\alpha}{2},n-2}\sqrt{MS_\text{Res}(\frac{1}{m}+\frac{1}{n}+\frac{(x_0-\bar{x})^2}{S_{xx}})} \leq E(y\mid x_0)\leq \hat{\mu}_{y\mid x_0} + t_{\frac{\alpha}{2},n-2}\sqrt{MS_\text{Res}(\frac{1}{m}+\frac{1}{n}+\frac{(x_0-\bar{x})^2}{S_{xx}})}
-\]
+\begin{align*}
+&\hat{\mu}_{y\mid x_0} - t_{\frac{\alpha}{2},n-2}\sqrt{MS_\text{Res}(\frac{1}{m}+\frac{1}{n}+\frac{(x_0-\bar{x})^2}{S_{xx}})} \leq E(y\mid x_0)\\&\leq \hat{\mu}_{y\mid x_0} + t_{\frac{\alpha}{2},n-2}\sqrt{MS_\text{Res}(\frac{1}{m}+\frac{1}{n}+\frac{(x_0-\bar{x})^2}{S_{xx}})}
+\end{align*}
 \end{theorem}
 \subsection{Coefficient of Determination}
 \begin{definition}[Coefficient of Determination]
-\hfill\\\normalfont The coefficient of determination $R^2$is defined as
+\normalfont The coefficient of determination $R^2$is defined as
 \[
 R^2 = \frac{SS_\text{R}}{SS_\text{T}} = 1-\frac{SS_\text{Res}}{SS_\text{T}}
 \]
@@ -411,7 +413,7 @@ and
 \hat{\beta}_1 = \frac{S_{xy}}{S_{xx}}
 \]
 \begin{definition}[Sample Correlation Coefficient]
-\hfill\\\normalfont We define the sample correlation coefficient
+\normalfont We define the sample correlation coefficient
 \[
 r = \frac{\sum_{i=1}^n y_i(x_i-\bar{x})}{[\sum_{i=1}^n (x_i-\bar{x})^2\sum_{i=1}^n (y_i-\bar{y})^2]^{\frac{1}{2}}} = \frac{S_{xy}}{\sqrt{S_{xx}SS_\text{T}}}
 \]
@@ -420,7 +422,7 @@ Note, $\hat{\beta}_1 = (\frac{SS_\text{T}}{S_{xx}})^{\frac{1}{2}}r$.\\
 
 A coincidence is that $r^2 = R^2$.\\
 \begin{theorem}[Testing of {$\rho$}]
-\hfill\\\normalfont 
+\normalfont 
 Suppose we want to test $H_0:\rho = 0$ against $H_1:\rho\neq 0$, the test statistic is
 \[
 t_0 = \frac{r\sqrt{n-2}}{\sqrt{1-r^2}}
@@ -430,7 +432,7 @@ We reject the null hypothesis $H_0$ if $|t_0|>t_{\frac{\alpha}{2}, n-2}$.\\
 
 More generally, suppose we want to test $H_0: \rho = \rho_0$, against $H_1:\rho\neq \rho_0$, then for \textit{moderately large examples}($n\geq 25$), test statistics
 \[
-Z_0 = \frac{\arctanh r- \arctanh \rho_0}(n-3)^{\frac{1}{2}} 
+Z_0 = \frac{\arctanh r- \arctanh \rho_0}{(n-3)^{\frac{1}{2}}}
 \]
 follows standard normal distribution. $H_0$ is rejected if $|Z_0|>Z_{\frac{\alpha}{2}}$.\\
 $100(1-\alpha)$ percent CI is
@@ -438,10 +440,10 @@ $100(1-\alpha)$ percent CI is
 \tanh(\arctanh r-\frac{Z_{\frac{\alpha}{2}}}{\sqrt{n-3}})\leq \rho\leq \tanh(\arctanh r+\frac{Z_{\frac{\alpha}{2}}}{\sqrt{n-3}})
 \]
 \end{theorem}
-\clearpage
+%\clearpage
 \section{Multi-linear Regression}
 \begin{definition}[Multiple Linear Regression Model]
-\hfill\\\normalfont The multiple linear regression model with $k$ regressor is of the form
+\normalfont The multiple linear regression model with $k$ regressor is of the form
 \[
 y=\beta_0+\beta_1x_1+\cdots+\beta_kx_k+\varepsilon
 \]
@@ -475,7 +477,7 @@ As a result, the residual vector $\bm{e}=\bm{y}-\bm{\hat{y}} = (\bm{I}-\bm{H})\b
 
 We can easily show that 
 \begin{theorem}[Unbiased Estimation of {$\hat{\beta}$}]
-\hfill\\\normalfont $E(\bm{\hat{\beta}})=\bm{\beta}$. 
+\normalfont $E(\bm{\hat{\beta}})=\bm{\beta}$. 
 \end{theorem}
 Therefore, $\bm{\hat{\beta}}$ is an \textbf{unbiased estimator} of $\bm{\beta}$ if the model is correct.\\
 Also, the covariance matrix of $\bm{\hat{\beta}}$, a $p\times p$ matrix, is
@@ -483,7 +485,7 @@ Also, the covariance matrix of $\bm{\hat{\beta}}$, a $p\times p$ matrix, is
 \cov(\bm{\hat{\beta}}) = \sigma^2(\bm{X}'\bm{X})^{-1}
 \]
 \begin{theorem}[Gauss-Markov Theorem]
-\hfill\\\normalfont $\bm{\hat{\beta}}$  is the best linear unbiased estimator of $\bm{\beta}$, and also the maximum likelihood estimator.
+\normalfont $\bm{\hat{\beta}}$  is the best linear unbiased estimator of $\bm{\beta}$, and also the maximum likelihood estimator.
 \end{theorem}
 \subsection{Esimation of {$\bar{\sigma}^2$}}
 For multiple linear regression, we have following formula for $SS_\text{Res}$:
@@ -511,7 +513,7 @@ Therefore, we want to minimise $(\bm{y}-\bm{X\beta})'(\bm{y}-\bm{X\beta})$, whic
 \subsection{Hypothesis Testing in Multiple Linear Regression}
 Here, we assume that our random errors to be independent and follow a normal distribution with mean $0$ and variance $\sigma^2$.
 \begin{theorem}[Test for Significance of Overall Regression]
-\hfill\\\normalfont Suppose we want to test the null hypothesis that the whole regression does not make sense:
+\normalfont Suppose we want to test the null hypothesis that the whole regression does not make sense:
 \[
 H_0:=\beta_1=\cdots\beta_k=0
 \]
@@ -538,12 +540,12 @@ where $\bm{\beta}^\ast=(\beta_1,\ldots, \beta_k)'$, a truncated $\bm{\beta}$ wit
 Therefore, if $F_0$ is large, it is likely that at least one $\beta_j\neq 0$. In this case, $F_0$ will follow a noncentral $F$ distribution with $k$ and $n-k-1$ degrees of freedom and noncentrality parameter of $\lambda = \frac{\bm{\beta}^{\ast\prime}\bm{X}_c'\bm{X}_c\bm{\beta}^\ast}{\sigma^2}$.\\
 In general, we have the following ANOVA table:
 \begin{theorem}[ANOVA for Significance of Regression in Multiple Regression]
-\hfill\\\normalfont 
+\normalfont 
 \begin{table}[h]
 \centering
 \begin{tabular}{|l|l|l|l|l|}
 \hline
-Source of Variation & Sum of Squares & Degrees of Freedom & Mean Square & $F_0$\\\hline
+Src & Sum Sq & DF & Mean Sq & $F_0$\\\hline
 Regression & $SS_\text{R}$ & $k$ & $MS_\text{R}$ & $\frac{MS_\text{R}}{MS_\text{Res}}$\\\hline
 Residual & $SS_\text{Res}$ & $n-k-1$ & $MS_\text{Res}$ & \\\hline
 Total & $SS_\text{T}$ & $n-1$ & & \\\hline
@@ -557,7 +559,7 @@ Here,
 \end{itemize}
 \end{theorem}
 \begin{definition}[Adjusted {$R^2$}]
-\hfill\\\normalfont In simple linear regression, we have
+\normalfont In simple linear regression, we have
 \[
 R^2=\frac{SS_\text{R}}{SS_\text{T}}=1-\frac{SS_\text{Res}}{SS_\text{T}}
 \]
@@ -569,7 +571,7 @@ It is worth noting the numerator is the residual mean square.
 \end{definition}
 \subsection{Test on Individual and Subset of Regression Coefficients}
 \begin{theorem}[Test on Individual Regression Coefficients]
-\hfill\\\normalfont Suppose we want to test the significance of one particular regressor $x_j$, we will have null hypothesis
+\normalfont Suppose we want to test the significance of one particular regressor $x_j$, we will have null hypothesis
 \[
 H_0:\beta_j=0
 \]
@@ -649,7 +651,7 @@ A $100(1-\alpha)$ percent prediction interval for this future observataion is
 \]
 \subsection{Hidden Extrapolation in Multiple Regression}
 \begin{definition}[Regressor Variable Hull(RVH)]
-\hfill\\\normalfont Regressor Variable Hull is the smallest convex set containing all of the original $n$ data points $x_{i1},\ldots, x_{ik}$, $i=1,2,\ldots, n$.
+\normalfont Regressor Variable Hull is the smallest convex set containing all of the original $n$ data points $x_{i1},\ldots, x_{ik}$, $i=1,2,\ldots, n$.
 \end{definition}
 If a point lies inside or on the boundary of the RVH, prediction or estimation involves interpolation, whereas point lying outside RVH requires extrapolation.\\
 Let $h_{\max} = \max{h_{ii}\mid \bm{X}=\bm{X}(\bm{X}'\bm{X})^{-1}\bm{X}'}$. Then the set of point $\bm{x}$ satisfying
@@ -712,7 +714,7 @@ The relationship between original and standardized regression coefficients are
 \subsection{Multicollinearity}
 Multicollinearity is the near-linear dependence among the regression variables.
 \begin{definition}[Variance Inflation Factors]
-\hfill\\\normalfont The main diagonal elements of the inverse of the $\bm{X}'\bm{X}$ matrix in correlation form are often called \textbf{variance inflation factors}.
+\normalfont The main diagonal elements of the inverse of the $\bm{X}'\bm{X}$ matrix in correlation form are often called \textbf{variance inflation factors}.
 \end{definition}
 Do note, $\text{VIF}_j=\frac{1}{1-R_j^2}$, where $R_j^2$ is the coefficient of multiple determination obtained from regressing $x_j$ on the other regressor variables.
 \subsection{Wrong Sign of Regression Coefficients}
@@ -723,7 +725,7 @@ The following problems are possible reasons:
   \item Multicollinearity is present.
   \item Computation Error
 \end{enumerate}
-\clearpage
+%\clearpage
 \section{Model Adequacy Checking}
 In this section, we assume
 \begin{itemize}
@@ -734,7 +736,7 @@ In this section, we assume
   \item Errors are normally distributed.
 \end{itemize}
 \begin{definition}[Raw Residuals]
-\hfill\\\normalfont Rar residuals is defined as
+\normalfont Rar residuals is defined as
 \[
 e_i=y_i-\hat{y}_i
 \]
@@ -747,11 +749,11 @@ Here, the residuals are not independent, since $n$ residuals only have $n-p$ deg
 With residual, we can make plots of them:
 \begin{figure}[h]
 \centering
-\includegraphics{1.png}
+\includegraphics[width=0.45\textwidth]{1.png}
 \end{figure}
 However, the scale of residuals are largely dependent on the unit of the response. Therefore, we need to scaling them.
 \begin{definition}[Standardized Residuals]
-\hfill\\\normalfont Standardized residuals $d_i$ are defined from $e_i$ by
+\normalfont Standardized residuals $d_i$ are defined from $e_i$ by
 \[
 d_i=\frac{e_i}{\sqrt{MS_\text{Res}}}
 \]
@@ -766,13 +768,13 @@ and covariance matrix of residuals
 \var(\bm{e})=\sigma^2(\bm{I}-\bm{H})
 \]
 \begin{definition}[Studentized Residuals]
-\hfill\\\normalfont Studentized residuals is defined as
+\normalfont Studentized residuals is defined as
 \[
 \frac{e_i}{\sqrt{MS_\text{Res}}(1-h_{ii})}
 \]
 \end{definition}
 \begin{definition}[PRESS Residual]
-\hfill\\\normalfont PRESS Residual $e_{(i)}$ is defined as
+\normalfont PRESS Residual $e_{(i)}$ is defined as
 \[
 e_{(i)}=y_i-\hat{y}_{(i)}
 \]
@@ -791,7 +793,7 @@ Therefore, we can also define standardized PRESS Residual as
 \]
 \end{definition}
 \begin{definition}[R-Student]
-\hfill\\\normalfont R-Student Residual $t_j$ is defined as
+\normalfont R-Student Residual $t_j$ is defined as
 \[
 t_i=\frac{e_i}{\sqrt{S^2_{(i)}(1-h_{ii})}}
 \]
@@ -835,7 +837,7 @@ The plot is expected to be linear if the data set comes from a normal distributi
 \subsection{PRESS Statistic}
 Recall that PRESS residuals $e_{(i)}=y_i-\hat{y}_{(i)}$, where $\hat{y}_{(i)}$ is the predicted value of the $i$th observed response based on a model fit to the remaining $n-1$ sample points.
 \begin{definition}[PRESS Statistics]
-\hfill\\\normalfont The PRESS statistics
+\normalfont The PRESS statistics
 \[
 \text{PRESS}=\sum_{i=1}^n [y_i-\hat{y}_{(i)}]^2 = \sum_{i=1}^n (\frac{e_i}{1-h_{ii}})^2
 \]
@@ -862,7 +864,7 @@ F_0=\frac{SS_\text{LOF}/(m-2)}{SS_\text{PE}/(n-m)}=\frac{MS_\text{LOF}}{MS_\text
 \]
 where $E(MS_\text{LOF})=\sigma^2+\frac{\sum_{i=1}^m n_i[E(y_i)-\beta_0-\beta_1x_i]^2}{m-2}$, which will be close to $\sigma^2$ if there is no lack of fit.\\
 We conclude that regression function is not linear if $F_0>F_{\alpha, m-2, n-m}$, and conclude there is no strong evidence of lack of fit otherwise. In the case of no lack of fit, both $MS_\text{PE}$ and $MS_\text{LOF}$ will be combined to estimate $\sigma^2$.
-\clearpage
+%\clearpage
 \section{Transformation and Weighting to Correct Model Inadequacies}
 In this section, we assume
 \begin{enumerate}
@@ -887,7 +889,7 @@ $\sigma^2\propto E(y)^4$ & $y'=y^{-1}$\\\hline
 Sometimes, the model itself is not linear, therefore, we can linearise the model so that $y'=\beta_0+\beta_1x'$ for some transformed $y$ and $x$.
 \subsection{Transformation on {$y$}: Box-Cox Method}
 \begin{theorem}[Box Cox Method]
-\hfill\\\normalfont We try to transform $\bm{y}=\bm{X\beta}+\bm{\epsilon}$ to $\bm{y}^{(\lambda)}=\bm{X\beta}+\bm{\epsilon}$ where
+\normalfont We try to transform $\bm{y}=\bm{X\beta}+\bm{\epsilon}$ to $\bm{y}^{(\lambda)}=\bm{X\beta}+\bm{\epsilon}$ where
 \[
 y^{(\lambda)}=\begin{cases}
 \frac{y^\lambda-1}{\lambda \bar{y}^{\lambda-1}}, & \lambda\neq 0\\
@@ -922,10 +924,10 @@ We have $\var{\hat{\bm{\beta}}}=\sigma^2(\bm{B}'\bm{B})^{-1}=\sigma^2(\bm{X}'\bm
 The ANOVA table is as followed
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.8\textwidth]{2.png}
+\includegraphics[width=0.45\textwidth]{2.png}
 \end{figure}
 \begin{theorem}[Weighted Least Square]
-\hfill\\\normalfont Weighted Least Square is the special case of generalized least square where
+\normalfont Weighted Least Square is the special case of generalized least square where
 \[
 \sigma^2 \bm{V}=\sigma^2\begin{pmatrix}\frac{1}{w_1}&&0\\&\ddots&\\0&&\frac{1}{w_n}\end{pmatrix}
 \]
@@ -934,10 +936,10 @@ So $\bm{W}=\bm{V}^{-1}$. Therefore, \[
 \]
 The transformed matrix $\bm{B}=\begin{pmatrix}1\sqrt{w_1} & x_{11}\sqrt{w_1}\cdots x_{1k}\sqrt{w_1}\\1\sqrt{w_2} & x_{21}\sqrt{w_2}\cdots x_{2k}\sqrt{w_2}\\\cdots&\cdots& \ddots&\cdots\\1\sqrt{w_n} & x_{n1}\sqrt{w_n}\cdots x_{nk}\sqrt{w_n}\end{pmatrix}$ and $\bm{Z}=\begin{pmatrix}y_1\sqrt{w_1}\\y_2\sqrt{w_2}\\\vdots\\y_n\sqrt{w_n}\end{pmatrix}$.
 \end{theorem}
-\clearpage
+%\clearpage
 \section{Diagonistics for Leverage and Influence}
 \begin{definition}
-\hfill\\\normalfont Leverage is a measure of the effect of an observation $i$ on the predicted value.\\
+\normalfont Leverage is a measure of the effect of an observation $i$ on the predicted value.\\
 The \textbf{leverage} of the observation $i$ is $h_{ii}$ where $h_{ii}=\bm{x}_i'(\bm{X}'\bm{X})^{-1}\bm{x}_i$ where $\bm{x}_i'$ is the $i$th row of the $\bm{X}$ matrix.\\
 Also, we note that $\bar{h}=\frac{1}{n}\sum_{i=1}^n h_{ii}=\frac{p}{n}$.\\
 Any observation $i$ for which $h_{ii}$ exceeds $2\bar{h}=2\frac{p}{n}$ is remote enough from the rest of the data and is considered a \textbf{leverage point}.
@@ -945,7 +947,7 @@ Any observation $i$ for which $h_{ii}$ exceeds $2\bar{h}=2\frac{p}{n}$ is remote
 \textbf{Remark}: Not all leverage points are going to be influential on regression coefficients. Usually, a point is influential if it deteriorates $MS_\text{Res}$ a lot.\\
 More precisely, we use Cook's Distance as a measure of \textbf{influence}.
 \begin{definition}[Cook's Distance]
-\hfill\\\normalfont Let $\hat{\bm{\beta}}$ be the estimate based on all $n$ points and $\hat{\bm{\beta}}_{(i)}$ be the estimate obtained by deleting the $i$th point. Then the Cook's distance for the $i$th point is defined to be
+\normalfont Let $\hat{\bm{\beta}}$ be the estimate based on all $n$ points and $\hat{\bm{\beta}}_{(i)}$ be the estimate obtained by deleting the $i$th point. Then the Cook's distance for the $i$th point is defined to be
 \[
 D_i=\frac{(\hat{\bm{\beta}}_{(i)}-\hat{\bm{\beta}})'\bm{X}'\bm{X}(\hat{\bm{\beta}}_{(i)}-\hat{\bm{\beta}})}{pMS_\text{Res}}
 \]
@@ -963,7 +965,7 @@ D_i=\frac{(\hat{\bm{y}}_{(i)}-\hat{\bm{y}})'(\hat{\bm{y}}_{(i)}-\hat{\bm{y}})}{p
 \]
 Measure of influence can also include DFFITS and DFBETAS.
 \begin{definition}[DFBETAS]
-\hfill\\\normalfont We define $DFBETAS_{j,i}$ on the $j$th regression coefficient with respect to $i$th observation.
+\normalfont We define $DFBETAS_{j,i}$ on the $j$th regression coefficient with respect to $i$th observation.
 \[
 DFBETAS_{j,i}=\frac{\hat{\beta}_j-\hat{\beta}_{j(i)}}{\sqrt{S_{(i)}^2C_{jj}}}
 \]
@@ -972,7 +974,7 @@ A large value of $DFBETAS_{j,i}$ indicates that observation $i$ has considerable
 \end{definition}
 Similarly, we define $DFFITS_i$.
 \begin{definition}[DFFITS]
-\hfill\\\normalfont We define $DFFITS_i$ on the $i$th predicted $y_i$.
+\normalfont We define $DFFITS_i$ on the $i$th predicted $y_i$.
 \[
 DFFITS_i=\frac{\hat{y}_i-\hat{y}_{(i)}}{\sqrt{S_{(i)}^2h_{ii}}}
 \]
@@ -992,7 +994,7 @@ The cutoff value suggested for $DFFBETAS_{j,i}$ and $DFFITS_i$ is
 \end{itemize}
 \subsection{A Measure of Model Performance}
 \begin{definition}[Generalised Variance]
-\hfill\\\normalfont The overall precision of estimation can be measured using \textbf{generalized variance} $GV$:
+\normalfont The overall precision of estimation can be measured using \textbf{generalized variance} $GV$:
 \[
 GV(\hat{\bm{\beta}})=|\var(\hat{\bm{\beta}})|=|\sigma^2(\bm{X}'\bm{X})^{-1}|
 \]
@@ -1003,7 +1005,7 @@ COVRATIO_i=\frac{|(\bm{X}_{(i)}'\bm{X}_{(i)})^{-1}S_{(i)}^2|}{(\bm{X}'\bm{X})^{-
 If $COVRATIO_i>1$, the $i$th observation improves the precision of estimation, whereas a less than 1 $COVRATIO_i$ suggesta that inclusion of $i$th point degrades precision.
 \end{definition}
 The suggested cutoff values for $COVRATIO_i$: if $COVRATIO_i>1+\frac{3p}{n}$ or if $COVRATIO_i<1-\frac{3p}{n}$, ten the $i$th point should be considered influential. The lower bound is appropriate if $n>3p$. These cutoffs are only recommended for large samples.
-\clearpage
+%\clearpage
 \section{Polynomial Regression Models}
 \subsection{Polynomial Models}
 $k$th order polynomial model in one variable is in the form of
@@ -1026,7 +1028,7 @@ There are a few important considerations when fitting a polynomial in one variab
 \subsection{Piecewise Polynomial Fitting(Splines)}
 Splines are piecewise polynomial of order $k$. The joint points of the pieces are called \textbf{knots}.
 \begin{definition}[Cubic Spline]
-\hfill\\\normalfont A cubic spline with $h$ knots, $t_1<\cdots<t_h$ with continuous first and second derivatives can be written as
+\normalfont A cubic spline with $h$ knots, $t_1<\cdots<t_h$ with continuous first and second derivatives can be written as
 \[
 S(x)=\sum_{j=0}^3\beta_{0j}x^j+\sum_{i=1}^h\beta_i(x-t_i)_{+}^3
 \]
@@ -1040,13 +1042,13 @@ where
 \end{definition}
 Generally, we require function values and $k-1$ derivatives to agree on the knots, so that the spline is a continous functin with $k-1$ continuous derivatives. To do this, we need to assume the position of the knots are known.\\
 \begin{definition}[Cubic Spline with No Continuity Restriction]
-\hfill\\\normalfont 
+\normalfont 
 \[
 S(x)=\sum_{j=0}^3 \beta_{0j}x^j+\sum_{i=1}^h\sum_{k=0}^3\beta_{ij}(x-t_i)_{+}^j
 \]
 \end{definition}
 \begin{theorem}[Hypothesis Testing of Cubic Spline]
-\hfill\\\normalfont 
+\normalfont 
 \begin{itemize}
   \item $H_0:\beta_0=0$ tests continuity of $S(x)$.
   \item $H_0:\beta_0=\beta_1=0$ tests continuity of $S(x)$ and $S'(x)$.
@@ -1059,7 +1061,7 @@ In general, we can have linear spline just by changing the formula's power, for 
 \subsection{Non-parametric Regression}
 In paramatric model, we have a proposed equation and we try to find the corresponding unknown coefficient(s). In Non-parametric model, we do not have a proposed equation.
 \begin{definition}[Kernel Regression]
-\hfill\\\normalfont We estimate the $i$th response in this way (called kernel smoother estimation)
+\normalfont We estimate the $i$th response in this way (called kernel smoother estimation)
 \[
 \tilde{y}_i=\sum_{j=1}^n w_{ij}y_j
 \] 
@@ -1134,7 +1136,7 @@ To test $H_0=\alpha_k=0$, we need
 F_0=\frac{SS_\text{R}(\alpha_k)}{SS_\text{Res}(k)/(n-k-1)}
 \]
 The orthogonal polynomials $P_j(x_i)$ can be easily constructed if the levels of $x$ are equally spaced. For explicit formula, look into lecture notes.
-\clearpage
+%\clearpage
 \section{Indicator Variables}
 There are two types of variables: quantitative variables and qualitative/categorical variables.\\
 A qualitative variable has no natural scale of measurement. \\
@@ -1212,10 +1214,10 @@ The ANOVA table obtained will be
 \centering
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-Degrees of Variation & Sum. Squares & Degrees of Freedom & Mean Square & $F_0$\\\hline
-Treatment & $n\sum_{i=1}^k(\bar{y}_{i\cdot}-\bar{y}_{\cdot\cdot})^2$ & $k-1$ & $\frac{SS_\text{Treatment}}{k-1}$ & $\frac{MS_\text{Treatments}}{MS_\text{Res}}$\\\hline
-Error & $\sum_{i=1}^k\sum_{j=1}^n (y_{ij}-\bar{y}_{i\cdot})^2$ & $k(n-1)$ & $\frac{SS_\text{Res}}{k(n-1)}$ & \\\hline
-Total & $\sum_{i=1}^k\sum_{j=1}^n (y_{ij}-\bar{y}_{\cdot\cdot})^2$ & $kn-1$ & & \\\hline
+ & Sum. Sqs & DF & Mn Sq & $F_0$\\\hline
+Treat & $\displaystyle n\sum_{i=1}^k(\bar{y}_{i\cdot}-\bar{y}_{\cdot\cdot})^2$ & $k-1$ & $\frac{SS_\text{Treat}}{k-1}$ & $\displaystyle\frac{MS_\text{Treat}}{MS_\text{Res}}$\\\hline
+Error & $\displaystyle\sum_{i=1}^k\sum_{j=1}^n (y_{ij}-\bar{y}_{i\cdot})^2$ & $k(n-1)$ & $\frac{SS_\text{Res}}{k(n-1)}$ & \\\hline
+Total & $\displaystyle\sum_{i=1}^k\sum_{j=1}^n (y_{ij}-\bar{y}_{\cdot\cdot})^2$ & $kn-1$ & & \\\hline
 \end{tabular}
 \end{table}
 We can use the regression model too, where we arrive at the same regressor and ANOVA.\\
@@ -1227,12 +1229,12 @@ The relationship between parameters of regression model and paramaters of Analys
 \[
 \beta_0=\mu_k, \beta_i=\mu_i-\mu_k, i = 1,\ldots, k-1
 \]
-\clearpage
+%\clearpage
 \section{Multicollinearity}
 If there is no linear relationship between regressors, they are said to be \textbf{orthogonal}. When there are \textbf{near-linear} dependencies among the regressors, the problem of \textbf{multicollinearity} is said to exist.
 To observe multicollinearity, we need to use unit-length scaling on $X$: $y\to \frac{y-\mu_y}{\sigma_y\sqrt{n-1}}$. We then compute the correlation coefficients via $\bm{X}'\bm{X}$.
 \begin{theorem}[Eigenvalue Decomposition]
-\hfill\\\normalfont We can decompose $A$ to be $A=T\Lambda T'$ where $T=(t_1,\ldots, t_p)$ are $p$ orthogonal eigenvectors of $A$, and $\Lambda = \text{diag}[\lambda_1,\ldots, \lambda_p]$ where $\lambda_1,\ldots, \lambda_p$ are $p$ \textit{positive} eignevalues of $A$.\\
+\normalfont We can decompose $A$ to be $A=T\Lambda T'$ where $T=(t_1,\ldots, t_p)$ are $p$ orthogonal eigenvectors of $A$, and $\Lambda = \text{diag}[\lambda_1,\ldots, \lambda_p]$ where $\lambda_1,\ldots, \lambda_p$ are $p$ \textit{positive} eignevalues of $A$.\\
 With this setup, we have 
 \begin{itemize}
   \item $\tr(A)=\sum_{i=1}^p \lambda_i$
@@ -1360,7 +1362,8 @@ The property of Ridge regression include:
   \]
   \item Mean square error of the ridge estimator is
   \begin{align*}
-  MSE(\hat{\bm{\beta}}_R)&=\sigma^2\tr[(\bm{X}'\bm{X}+k\bm{I})^{-1}\bm{X}'\bm{X}(\bm{X}'\bm{X}+k\bm{I})^{-1}]+k^2\bm{\beta}'(\bm{X}'\bm{X}-k\bm{I})^{-2}\bm{\beta}\\
+ &MSE(\hat{\bm{\beta}}_R)=\sigma^2\tr[(\bm{X}'\bm{X}+k\bm{I})^{-1}\bm{X}'\bm{X}(\bm{X}'\bm{X}+k\bm{I})^{-1}]
+ \\&+k^2\bm{\beta}'(\bm{X}'\bm{X}-k\bm{I})^{-2}\bm{\beta}\\
   &=\sigma^2\sum_{j=1}^p \frac{\lambda_j}{(\lambda_j+k)^2}+k^2\bm{\beta}'(\bm{X}'\bm{X}+k\bm{I})^{-2}\bm{\beta}
   \end{align*}
   where $\lambda_1,\ldots,\lambda_p$ are the eigenvalues of $\bm{X}'\bm{X}$.\\Note the first term is the variance of $\hat{\bm{\beta}}_R$ whereas the second term is bias in $\hat{\bm{\beta}}_R$. Their magnitude is inversely related via $k$.
@@ -1410,7 +1413,7 @@ Let's consider the regression $\bm{y}=\bm{Z\alpha}+\bm{\epsilon}$, where $\lambd
 \bm{y}=\underbrace{(\bm{Z}_1,\ldots, \bm{Z}_{p-s})}_{\bm{Z}_{pc}}\underbrace{(\alpha_1,\ldots, \alpha_{p-s})'+\bm{\epsilon}}_{\bm{\alpha}_{pc}}
 \]
 And the principal component regression coefficient $\hat{\beta}_{pc}=\bm{T}\hat{\bm{\alpha}}_{pc}$.
-\clearpage
+%\clearpage
 \section{Variable Selectino and Model Building}
 In most practical problems, the analyst has a rather large pool of possible \textbf{candidate regressors}, of which only a few are likely to be important. Therefore, we need to find an appropriate subset of regressor for the model, which is known as the \textit{variable selection problem}. None of the variable selection procedures are guaranteed to produce the best regression equation for a given data set.
 \subsection{Consequence of Model Misspecification}

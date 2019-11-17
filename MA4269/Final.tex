@@ -3,7 +3,7 @@
 
 
 
-\usepackage[margin=1in]{geometry}  
+\usepackage[margin=0.1in]{geometry}  
 \usepackage{graphicx}             
 \usepackage{amsmath}              
 \usepackage{amsfonts}              
@@ -45,8 +45,8 @@
 \maketitle
 \tableofcontents
 
-\clearpage
-%\twocolumn
+
+\twocolumn
 \section{Review}
 \subsection{Introduction}
 \begin{definition}[Zero-coupon Bond]
@@ -281,7 +281,7 @@ V_0 = e^{-rn\Delta t}\sum_{i=0}^n\binom{n}{i}p^i(1-p)^{n-i}V_n^i
 \]
 where $V_0$ is the price of the European style derivative given by the $n$ period binomial model.
 \end{definition}
-\clearpage
+
 \section{Brownian Motion}
 \subsection{Brownian Motion}
 \begin{definition}[Standard Brownian Motion]
@@ -410,7 +410,7 @@ and Ito integral
 \]
 is the mean-square limit of the sum $\sum_{i=1}^n b(X_{t_{i-1}}, t_{i-1})(W_{t_i}-W_{t_{i-1}})$.
 \end{definition}
-\clearpage
+
 \section{Black-Scholes Model}
 In Black-Scholes Model, we assume the following 2 conditions:
 \begin{enumerate}
@@ -570,7 +570,7 @@ The above process is called \textbf{Radon-Nikodym} derivative/likelihood process
 \expec^\mathbb{Q}[X_t\mid \mathcal{F}_s]=\frac{1}{L_s}\expec^\mathbb{P}[L_t\cdot X_t\mid \mathcal{F}_s]
 \]
 \end{theorem}
-\clearpage
+
 \section{Martingale \& Girsanov}
 \begin{definition}[Martingale]
 \hfill\\\normalfont Let $(\Omega, \{\mathcal{F}_t\}_{0\leq t\leq T}, \mathbb{P})$ be a filtered probability space. Consider an adapted stochastic process $I_t,0\leq t\leq T$. \\
@@ -709,9 +709,10 @@ Applying Ito on above equation, we can show that
 S_t=S_0e^{(r-q-\sigma^2/2)t+\sigma\tilde{W}_t}
 \]
 and now
-\[
-\expec^{\mathbb{Q}}[e^{-rT}(S_T-K)^{+}]=e^{-qT}\expec^{\mathbb{Q}}[e^{-(r-q)T}(S_T-K)^{+}] = e^{-qT}[S_0N(d_1)-\tilde{K}^{(q)}N(d_2)]
-\]
+\begin{align*}
+\expec^{\mathbb{Q}}[e^{-rT}(S_T-K)^{+}]&=e^{-qT}\expec^{\mathbb{Q}}[e^{-(r-q)T}(S_T-K)^{+}] \\
+&= e^{-qT}[S_0N(d_1)-\tilde{K}^{(q)}N(d_2)]
+\end{align*}
 where $d_{1,2}=\frac{1}{\sigma\sqrt{T}}p\ln(S_0/\tilde{K}^{(q)})\pm\frac{1}{2}\sigma^2T]$ and $\tilde{K}^{(q)}:=Ke^{-(r-q)T}$.
 \end{theorem}
 In general, we have in the case of dividend paying asset
@@ -725,7 +726,7 @@ p_t=Ke^{-r(T-t)}N(-d_2)-S_te^{-q(T-t)}N(-d_1)
 where \[
 d_{1,2}=\frac{1}{\sigma\sqrt{T-t}}[\ln(S_t/K)+(r-q\pm\frac{1}{2}\sigma^2)(T-t)]
 \]
-\clearpage
+
 \section{Change of Numeraire}
 \begin{theorem}[Change of Numeraire Formula]
 \hfill\\\normalfont Let $N_t$ be a numeraire. There exists a measure $\mathbb{Q}^N$ such that every European-style derivative maturing on the date $T$, we have the pricing formula
@@ -780,7 +781,7 @@ p(S,t)<P(S,t)
 \]
 This is proved by showing a strategy that give higher payoff. One particular strategy can be to exercise at time $\min\{u,T\}$ where $u=\min\{t\geq 0: S_t\leq K-Ke^{-r(T-t)}\}$ and look at the two cases where $u<T$ or $u\geq T$.
 \end{theorem}
-\clearpage
+
 \section{American Options}
 The key questions to answer for the pricing of American options are
 \begin{itemize}
@@ -891,9 +892,10 @@ We recognize $\tau_{opt}$ is the hitting time of the optimal exercise boundary $
   \item after hitting, $e^{-rt}P(S_t,t)$ is a supermartingale
 \end{itemize}
 This is because, by Ito's lemma twice,
-\[
-\diff (e^{-rt}P(S_t,t))=e^{-rt}(\frac{\partial P}{\partial t}+\frac{1}{2}\sigma^2 S_t^2\frac{\partial^2 P}{\partial S^2}+rS_t\frac{\partial P}{\partial S}-rP)\diff t+e^{-rt}\sigma S_t\frac{\partial P}{\partial S}\diff W_t
-\]
+\begin{align*}
+\diff (e^{-rt}P(S_t,t))&=e^{-rt}(\frac{\partial P}{\partial t}+\frac{1}{2}\sigma^2 S_t^2\frac{\partial^2 P}{\partial S^2}+rS_t\frac{\partial P}{\partial S}-rP)\diff t\\
+&+e^{-rt}\sigma S_t\frac{\partial P}{\partial S}\diff W_t
+\end{align*}
 \subsection{Perpetual American Put Options}
 Perpetual American put options works like usual American put options, except hat there is no maturity date. We recognize the price of perpetual American option $P_\infty(S)$, is indepedent of time $t$.
 \begin{theorem}[Price of Perpetual American Put]
@@ -909,7 +911,7 @@ To derive, use $\frac{\partial P}{\partial t}=0$ to turn BS PDE into 2nd order P
   \item $\frac{\partial P_{\infty}}{\partial S}(S_{\ast})=-1$
   \item $P_{\infty}(S)\to 0$ as $S\to \infty$.
 \end{itemize}
-\clearpage
+
 \section{Barrier Option}
 Barrier options has the payoff the European option subject to whether a prescribed barrier $B$ has been hit. There are two types of conditions:
 \begin{itemize}
@@ -989,7 +991,7 @@ Then $F=\{X_T\geq x, m_T>m\}$, and $X_t=\mu t+\sigma W_t\sim N(\mu t, \sigma^2t)
 For our case of down-and-out options, we have $m<0$, where $x$ can be larger or smaller than $m$.\\
 instead of computing $\mathbb{P}(F)$, we study the special case $\mathbb{P}(A)$, defined by
 \[
-A=\{W_T\geq x, m_T\leq m\}\text{ with restriction } \underbrace{m\leq 0}_{\text{automatically satisfied}}, \underbrace{m\leq x}_{\text{assumption}}
+A=\{W_T\geq x, m_T\leq m\}\text{ with restriction } \underbrace{m\leq 0}_{\text{auto. satisfied}}, \underbrace{m\leq x}_{\text{assumption}}
 \]
 first.
 By using the reflection principle 
@@ -1042,16 +1044,17 @@ To price the barrier option where $B<K$,
 \[
 c_{do}(S,B,K,T)=S_0\mathbb{Q}^S(F)-Ke^{-rT}\mathbb{Q}(F)
 \]
-where $S_0\mathbb{Q}^S(F)=S_0N(d_1)-S_0(\frac{B}{S_0})^{1+\frac{2r}{\sigma^2}}N(d_3)$, and $-Ke^{-rT}\mathbb{Q}(F)=-Ke^{-rT}N(d_2)+Ke^{-rT}(\frac{B}{S_0})^{\frac{2r}{\sigma^2}-1}N(d_4)$.\\Equivalently, 
+where $S_0\mathbb{Q}^S(F)=S_0N(d_1)-S_0(\frac{B}{S_0})^{1+\frac{2r}{\sigma^2}}N(d_3)$, and \\$-Ke^{-rT}\mathbb{Q}(F)=-Ke^{-rT}N(d_2)+Ke^{-rT}(\frac{B}{S_0})^{\frac{2r}{\sigma^2}-1}N(d_4)$.\\Equivalently, 
 \[
 c_{do}(S,B,K,T)=c(S,K,T)-(\frac{B}{S})^{\frac{2r}{\sigma^2}-1}c(\frac{B^2}{S},K,T)
 \]
 where $c(S,K,T)$ is teh price function of the usual European call option with strike $K$, spot price $S$ and time to maturity $T$.
 For case $B\geq K$,
-\[
-c_{do}(S,B,K,T)=SN(d_5)-Ke^{-rT}N(d_6)-(\frac{B}{S})^{1+\frac{2r}{\sigma^2}}SN(d_7)+(\frac{B}{S})^{\frac{2r}{\sigma^2}-1}Ke^{-rT}N(d_8)
-\]
-\clearpage
+\begin{align*}
+c_{do}(S,B,K,T)&=SN(d_5)-Ke^{-rT}N(d_6)-(\frac{B}{S})^{1+\frac{2r}{\sigma^2}}SN(d_7)\\
+&+(\frac{B}{S})^{\frac{2r}{\sigma^2}-1}Ke^{-rT}N(d_8)
+\end{align*}
+
 \section{Asian Options}
 Asian options are options whose payoff depends on some form of averaging of underlying asset price. The average will be taken over $[0,T]$. Here, we only consider \textbf{European style} options.
 The options can be 
@@ -1075,9 +1078,11 @@ Consider two Ito process evolving over time:
   \item $\rho=\text{Corr}[\diff W_t^X, \diff W_t^Y]$ where $\rho$ is the correlation between $\diff W^X$ and $\diff W^Y$.
 \end{itemize}
 Consider another stochastic process $V_t:=V(X_t,Y_t)$. Then we have
-\[
-\diff V_t = \frac{\partial V}{\partial X}(X_t,Y_t)\diff X_t+ \frac{\partial V}{\partial Y}(X_t,Y_t)\diff Y_t+\frac{1}{2}\frac{\partial^2 V}{\partial X^2}(X_t,Y_t)(\diff X_t)^2+\frac{1}{2}\frac{\partial^2 V}{\partial Y^2}(X_t,Y_t)(\diff Y_t)^2+\frac{\partial^2 V}{\partial X\partial Y}(X_t,Y_t)\diff X_t\diff Y_t
-\]
+\begin{align*}
+\diff V_t &= \frac{\partial V}{\partial X}(X_t,Y_t)\diff X_t+ \frac{\partial V}{\partial Y}(X_t,Y_t)\diff Y_t\\
+&+\frac{1}{2}\frac{\partial^2 V}{\partial X^2}(X_t,Y_t)(\diff X_t)^2+\frac{1}{2}\frac{\partial^2 V}{\partial Y^2}(X_t,Y_t)(\diff Y_t)^2\\
+&+\frac{\partial^2 V}{\partial X\partial Y}(X_t,Y_t)\diff X_t\diff Y_t
+\end{align*}
 Substituting $\diff X_t$ and $\diff Y_t$, we will have the multivariate Ito's lemma. When $V$ is also a function of $t$, then we need to add an extra then $\frac{\partial V}{\partial t}\diff t$ into the above equation.
 \subsection{General PDE Framework}
 The price function $V(S_t,I_t,t)$ for \textbf{parth-dependent} options depends on $S_t, I_t, t$, where $I_t$ is the \textbf{path-dependent variable}
@@ -1171,9 +1176,10 @@ However, there is no closed form analytic solution for $X>0$. One need to solve 
 with domain $t\in[0,T), x\in(0,\infty)$ and terminal condition $H(0,t)=\frac{1-e^{-r(T-t)}}{rT}$, $H(\infty, t)=0$ and $H(X,T)=-, X\in (0,\infty)$.
 \subsection{Put call Parity for Fixed Strike Arithmetic Asian Option}
 The put call parity is
-\[
-c_\text{fix}(S_t,I_t, T)-p_\text{fix}(S_t,I_t,T)=(\frac{I_t}{T}-K)e^{-r(T-t)}+\frac{1-e^{-r(T-t)}}{rT}S_t
-\]
+\begin{align*}
+c_\text{fix}(S_t,I_t, T)&-p_\text{fix}(S_t,I_t,T)\\
+&=(\frac{I_t}{T}-K)e^{-r(T-t)}+\frac{1-e^{-r(T-t)}}{rT}S_t
+\end{align*}
 \subsection{Geometric Asian option}
 Geometric Asian option in continuous manner has the running geometric $G_t=\exp(\frac{1}{t}\int_0^t \ln S_u\diff u)$. By Ito lemma,
 \[
@@ -1191,8 +1197,10 @@ c_\text{fix}(S,G,t)=e^{-r(T-t)}\expec_t^{\mathbb{Q}}[(G_T-K)^{+}]
 For $t\leq T$, define $X_t=\frac{1}{t}\int_0^t\ln S_u\diff u$. This gives $G_t=e^{X_t}$, and the payoff is $(e^{X_T}-K)^{+}$.\\
 By studying the distribution of $\ln S_u$, we have
 \begin{align*}
-X_T&=\frac{t}{T}X_t+\frac{1}{T}\int_t^T(\ln S_t+(r-\frac{\sigma^2}{2})(u-t)+\sigma(W_u-W_t))\diff u\\
-&=\frac{t}{T}X_t+\frac{T-t}{T}\ln S_t+(r-\sigma^2/2)\frac{(T-t)^2}{2T}+\frac{\sigma}{T}(\int_t^T (W_u-W_t)\diff u)
+&X_T\\
+&=\frac{t}{T}X_t+\frac{1}{T}\int_t^T(\ln S_t+(r-\frac{\sigma^2}{2})(u-t)+\sigma(W_u-W_t))\diff u\\
+&=\frac{t}{T}X_t+\frac{T-t}{T}\ln S_t\\
+&+(r-\sigma^2/2)\frac{(T-t)^2}{2T}+\frac{\sigma}{T}(\int_t^T (W_u-W_t)\diff u)
 \end{align*}
 Note, the last term is normally distributed with mean $0$ and variance $\frac{\sigma^2}{T^2}\frac{(T-t)^3}{3}$.\\
 By setting
@@ -1209,7 +1217,7 @@ Using normal calcualtion, we have
 c_\text{fix}(S,G,t)=e^{-r(T-t)}(G_t^{t/T}S_t^{(T-t)/T}e^{\bar{\mu}+\bar{\sigma}^2/2}N(d_1)-KN(d_2))
 \]
 where $d_2=\frac{1}{\bar{\sigma}}(\frac{t}{T}\ln G_t+\frac{T-t}{T}\ln S_t-\ln K+\bar{\mu})$ and $d_1=d_2+\bar{\sigma}$.
-\clearpage
+
 \section{Lookback Options \& Two Assets Options}
 \subsection{Lookback Option}
 Lookback options are path dependent options whose payoffs depends on the \textbf{maximum} or \textbf{minimum} of the underlying stock price attained over a certain period of time, known as \textbf{lookback period}. We set the lookback period to be $[0,T]$.\\
@@ -1252,7 +1260,7 @@ and
 Ito's Lemma gives
 \begin{align*}
 \diff V_t&=\frac{\partial V}{\partial t}\diff t+\frac{\partial V}{\partial S}\diff S + \frac{\partial V}{\partial M_n}\diff M_{n,t}+\frac{1}{2}\frac{\partial^2 V}{\partial S^2}(\diff S_t)^2\\
-&=(\frac{\partial V}{\partial t}+\frac{1}{2}\sigma^2S_t^2\frac{\partial^2 V}{\partial S^2}+\frac{1}{n}\frac{S_t^n}{M_{n,t}^{n-1}\frac{\partial V}{\partial M_n}})\diff t +\frac{\partial V}{\partial S}\diff S_t
+&=(\frac{\partial V}{\partial t}+\frac{1}{2}\sigma^2S_t^2\frac{\partial^2 V}{\partial S^2}+\frac{1}{n}\frac{S_t^n}{M_{n,t}^{n-1}}\frac{\partial V}{\partial M_n})\diff t +\frac{\partial V}{\partial S}\diff S_t
 \end{align*}
 Note, $(\diff(M_{n,t}))^2$ does not appear since $\diff(M_{n,t})$ is deterministic. Then by Delta hedging and self financing, we arrive at \[
 \diff \Pi_t=(\frac{\partial V}{\partial t}+\frac{1}{2}\sigma^2 S_t^2\frac{\partial^2 V}{\partial S^2})\diff t
@@ -1272,13 +1280,15 @@ Solution domain is $\{(S,M,t): 0<S<M, 0\leq t\leq T\}$.
 \subsection{Two Asset Options}
 Suppose $\diff X_t = \mu_X X_t\diff t + \sigma_XX_t\diff W_t^X$ and $\diff Y_t = \mu_Y Y_t\diff t + \sigma_YY_t\diff W_t^Y$ are two stocks with $\diff W_t^X\diff W_t^Y=\rho \diff t$. We can use Delta-hedging to derive the PDE. The key point is Multivariate Ito's Lemma which gives
 \begin{align*}
-\diff V_t &= (\frac{\partial V}{\partial t}+\frac{1}{2}\sigma_X^2 X_t^2\frac{\partial^2 V}{\partial X^2}+\frac{1}{2}\sigma_Y^2 Y_t^2\frac{\partial^2 V}{\partial Y^2}+\rho\sigma_X\sigma_Y X_tY_t\frac{\partial^2 V}{\partial X\partial Y})\diff t 
+\diff V_t &= (\frac{\partial V}{\partial t}+\frac{1}{2}\sigma_X^2 X_t^2\frac{\partial^2 V}{\partial X^2}+\frac{1}{2}\sigma_Y^2 Y_t^2\frac{\partial^2 V}{\partial Y^2}\\
+&+\rho\sigma_X\sigma_Y X_tY_t\frac{\partial^2 V}{\partial X\partial Y})\diff t \\
 &+\frac{\partial V}{\partial X}\diff X_t+ \frac{\partial V}{\partial Y}\diff Y_t
 \end{align*}
 Therefore, $\Pi_t=V_t-\frac{\partial V}{\partial X}X_t-\frac{\partial V}{\partial Y}Y_t$ in order to be riskless. Finally, we have
-\[
-\frac{\partial Y}{\partial t}+\frac{1}{2}\sigma_X^2 X^2\frac{\partial^2 V}{\partial X^2}+\frac{1}{2}\sigma_Y^2 Y^2\frac{\partial^2 V}{\partial Y^2}+\rho \sigma_X\sigma_Y XY\frac{\partial^2 V}{\partial X\partial Y}+rX\frac{\partial V}{\partial X}+rY\frac{\partial V}{\partial Y}-rV=0
-\]
+\begin{align*}
+&\frac{\partial Y}{\partial t}+\frac{1}{2}\sigma_X^2 X^2\frac{\partial^2 V}{\partial X^2}+\frac{1}{2}\sigma_Y^2 Y^2\frac{\partial^2 V}{\partial Y^2}+\rho \sigma_X\sigma_Y XY\frac{\partial^2 V}{\partial X\partial Y}\\
+&+rX\frac{\partial V}{\partial X}+rY\frac{\partial V}{\partial Y}-rV=0
+\end{align*}
 The solution domain is $\{X>0, Y>0, t\in[0,T)\}$, with terminal condition $V(X,Y,T)=f(X,Y)$.
 \subsection{Exchange Options}
 European Exchange Options that allows exchange of $Y_T$ for $X_T$ has the terminal payoff at maturity
@@ -1312,16 +1322,17 @@ Let $V(S,F,t)$ define the options value in domestic currency at time $t$. We use
 \]
 Let $r_f$ be forieng risk-free rate. This can be treated as dividend yield of foriegn currency.\\
 Self financing condition gives
-\[
-\diff \Pi_t=\diff V-\Delta_F\diff F-\underbrace{\Delta_F r_f F\diff t}_{\text{dividend}}-\Delta_S\underbrace{(S\diff F+ F\diff S+\rho\sigma_S\sigma_F SF\diff t)}_{\diff(SF)}
-\]
+\begin{align*}
+\diff \Pi_t&=\diff V-\Delta_F\diff F-\underbrace{\Delta_F r_f F\diff t}_{\text{dividend}}\\&-\Delta_S\underbrace{(S\diff F+ F\diff S+\rho\sigma_S\sigma_F SF\diff t)}_{\diff(SF)}
+\end{align*}
 where $\diff V$ is given by
-\[
-\diff V=(\frac{\partial V}{\partial t}+\frac{1}{2}\sigma_S^2S^2\frac{\partial^2 V}{\partial S^2}+\frac{1}{2}\sigma_F^2 F^2\frac{\partial^2 V}{\partial F^2}+\rho\sigma_S\sigma_F SF\frac{\partial^2 V}{\partial F\partial S})\diff t+\frac{\partial V}{\partial S}\diff S+\frac{\partial V}{\partial F}\diff F
-\]
+\begin{align*}
+\diff V&=(\frac{\partial V}{\partial t}+\frac{1}{2}\sigma_S^2S^2\frac{\partial^2 V}{\partial S^2}+\frac{1}{2}\sigma_F^2 F^2\frac{\partial^2 V}{\partial F^2}\\&+\rho\sigma_S\sigma_F SF\frac{\partial^2 V}{\partial F\partial S})\diff t\\
+&+\frac{\partial V}{\partial S}\diff S+\frac{\partial V}{\partial F}\diff F
+\end{align*}
 This gives $\Delta_S=\frac{1}{F}\frac{\partial V}{\partial S}$ and $\Delta_F=\frac{\partial V}{\partial F}-\frac{S}{F}\frac{\partial V}{\partial S}$. Furthermore, $\diff \Pi = r_d\Pi\diff t$. Simplification gives
-\[
-\frac{\partial V}{\partial t}+\frac{1}{2}\sigma_S^2S^2\frac{\partial^2 V}{\partial S^2}+\frac{1}{2}\sigma_F^2 F^2\frac{\partial^2 V}{\partial F^2}+\rho\sigma_S\sigma_F SF\frac{\partial^2 V}{\partial F\partial S}+(r_d-r_f)F\frac{\partial V}{\partial F}+(r_f-\rho\sigma_S\sigma_F)S\frac{\partial V}{\partial S}-r_dV=0
-\]
+\begin{align*}
+&\frac{\partial V}{\partial t}+\frac{1}{2}\sigma_S^2S^2\frac{\partial^2 V}{\partial S^2}+\frac{1}{2}\sigma_F^2 F^2\frac{\partial^2 V}{\partial F^2}\\&+\rho\sigma_S\sigma_F SF\frac{\partial^2 V}{\partial F\partial S}+(r_d-r_f)F\frac{\partial V}{\partial F}+(r_f-\rho\sigma_S\sigma_F)S\frac{\partial V}{\partial S}\\&-r_dV=0
+\end{align*}
 
 \end{document}

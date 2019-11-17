@@ -289,10 +289,728 @@ Exactly one of the following holds:
 	\item $\{y\in\mathbb{R}^m\mid A^\T y\geq 0, y^\T b<0\}\neq \varnothing$.
 \end{enumerate}
 \end{theorem}
+\subsection{Simplex Method Revisited}
+Please read \texttt{MA3252.pdf}.
+\clearpage
+\section{Total Unimodularity}
+\begin{definition}[Submatrix]
+\hfill\\\normalfont Let $A\subseteq \mathbb{R}^{m\times n}$, where $B\subseteq \{1,\ldots, m\}$ and $C\subseteq \{1,\ldots, n\}$. We can take submatrix $A_{(B,C)}$, where rows selected by \textit{ordered} set $B$ and columns by $C$.\\
 
+By convention, when we highlight rows $B\subseteq \{1,\ldots, m\}$, we use $A_B$ to denote the submatrix.\\
 
+Similarly, we use $A_J$ to denote the submatrix whose columns are selected by index set $J$.
+\end{definition}
+\subsection{Total Unimodularity}
+Consider the \textbf{integer} LP
+\begin{align*}
+\max & c^\T x\\
+(P) \st & Ax=b\\
+&x\geq 0,x\in \mathbb{Z}
+\end{align*}
+where $A\in\mathbb{Z}^{m\times n}$, $b\in\mathbb{Z}^m$ and $c\in\mathbb{Z}^n$ are all integral.
+\begin{definition}[Unimodular, Totally Unimodular]
+\hfill\\\normalfont A \textit{square, integer} matrix $B$ is \textbf{unimodular} if $|\det(B)|=1$.\\
 
+A \textit{square} matrix $A$ is \textbf{totally unimodular}(TU) if \textit{every square, nonsigular} submatrix of $A$ is unimodular.
+\end{definition}
+Hence, a TU matrix is a $\{0,\pm 1\}$-matrix. 
+\begin{theorem}
+\normalfont Suppose $A\in\mathbb{Z}^{n\times n}$ is unimodular and $b\in\mathbb{Z}^n$, then $x=A^{-1}b$ is integral.
+\end{theorem}
+\begin{theorem}\normalfont If $A\in\mathbb{Z}^{m\times n}$ where $m>n$, is TU, then every basic solution to $P:=\{x:Ax\geq b\}$, where $b\in\mathbb{Z}^m$, is integral.
+\end{theorem}
+We have the following proposition:
+\begin{theorem}
+\hfill\\\normalfont Suppose $A\in\mathbb{Z}^{m\times n}$ is TU. Then
+\begin{enumerate}
+  \item $-A$ and $A^\T$ are TU.
+  \item $\begin{pmatrix}A &e_i\end{pmatrix}$ is TU, where $e_i$ is the $i$th unit vector of $\mathbb{R}^m$.
+  \item $\begin{pmatrix}A &I\end{pmatrix}$ is TU, where $I\in\mathbb{R}^{m\times m}$ is the identity matrix.
+  \item $\begin{pmatrix}A\\I\end{pmatrix}$ is TU, where $I\in\mathbb{R}^{n\times n}$ is the identity matrix.
+\end{enumerate}
+\end{theorem}
+From the proposition we have
+\begin{theorem}\normalfont If $A\in\mathbb{Z}^{m\times n}$, where $m<n$ is TU, then every basic solutino to $P:=\{x:Ax=b,x\geq 0\}$, where $b\in\mathbb{Z}^m$, is integral.
+\end{theorem}
+We have the following equivalence on TU.
+\begin{theorem}
+\hfill\\\normalfont For any $A\in \mathbb{Z}^{m\times n}$, the following are equivalent:
+\begin{enumerate}
+  \item $A$ is TU.
+  \item For any integral $b$, the extreme points, if any, of $S(b):=\{x: Ax\leq b, x\geq 0\}$ are integral.
+  \item Every square nonsigular submatrix $A$ has integer inverse.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[A sufficient condition of TU]
+\hfill\\\normalfont An integer matrix $A$ with all $a_{ij}\in\{0,\pm 1\}$ is TU if
+\begin{enumerate}
+  \item At most two nonzero element appear in each column,
+  \item Rows of $A$ can be partitioned into 2 subsets $M_1$ and $M_2$, such that
+  \begin{enumerate}
+    \item if a column contains two nonzero elements with the same sign, one element is in each of teh subsets.
+    \item if a column contains two nonzero elements of opposite signs, both elements are in the same subset.
+  \end{enumerate}
+\end{enumerate}
+\end{theorem}
+\begin{theorem}
+\hfill\\\normalfont The vertex-edge incidence matrix of a \textbf{bipartite graph} is TU.\\
+The node-arc incidence matrix of a \textbf{digraph} is TU.
+\end{theorem}
+\subsection{Applications}
+\begin{definition}[Network, Minimum Cost Capacitated Problem]
+\hfill\\\normalfont We represent a \textbf{network} as a directed graph $G=(V,E)$. For each arc $(i,j)\in E$, associate it with the unknown flow $x_{ij}$ and (possibly) infinite capacity $d_{ij}$. Clearly, $0\leq x_{ij}\leq d_{ij}$.\\
+We partition the set $V$ into three sets:
+\begin{itemize}
+  \item $V_1$: set of sources or origins;
+  \item $V_2$: set of intermediate points;
+  \item $V_3$: set of destinations or sinks;
+\end{itemize}
+We define, for each $i\in V_1$, $a_i$ to be the \textbf{supply} of the commodity; for each $i\in V_3$, $b_i$ to be the \textbf{demand} of the commodity.\\
+Each $i\in V_2$ are intermediate nodes, which should have zero net flow.\\
 
+Additionally denote
+\begin{itemize}
+  \item $V_\text{out}(i) = \{j\mid (i,j)\in E\}$ to be the set of nodes connected by outgoing edges
+  \item $V_\text{in}(i) = \{j\mid (j,i)\in E\}$ to be the set of nodes connected by incoming edges
+\end{itemize}
 
+The \textbf{minimum cost capacitated problem} is
+\[
+v(P) = \min \sum_{(i,j)\in E}c_{ij}x_{ij}
+\]
+subject to
+\[
+\sum_{j\in V_\text{out}(i)} x_{ij} - \sum_{j\in V_\text{in}(i)} x_{ji}\begin{cases}
+\leq a_i,&i\in V_1\\
+=0, &i\in V_2\\
+\leq -b_i &i\in V_3
+\end{cases}
+\]
+and
+\[
+0\leq x_{ij}\leq d_{ij}, \;\;\; (i,j)\in E
+\]
+\end{definition}
+\begin{theorem}
+\hfill\\\normalfont The constraint matrix corresponding to the minimum cost capcitated problem is TU.
+\end{theorem}
+In fact, assignment problem can be a subset of MCCP, where $a_i=1$ for all $i$ and $b_j=1$ for all $j$, and $|V_1|=|V_3|$ and all constriants' equality holds exactly.\\
+Shortest path problem can also be formulated as MCCP, where $a_1=b_m=1$ and $V_1=\{1\}, V_3=\{m\}$.\\
+Maximum flow problem is with $a_1=b_m=\infty$ and the objective is to maximise flow out of $1$.
+For shortest path problem, we need to assume there is no uncapcitated negative cycles. This can be achieved by having
+\begin{itemize}
+  \item the sum of costs of arcs in the cycle is nonnegative, or
+  \item the minimal capacity of an arc in the cycle is bounded.
+\end{itemize}
+\begin{theorem}\hfill\\\normalfont
+A shortest path problem with $x\in\{0,1\}^{|V|}$ as constraint on $x$ is equivalent to the problem with $x\geq 0$ as constraint.
+\end{theorem}
+\clearpage
+\section{The Shortest Path}
+\subsection{Dijkstra's Algorithm}
+Dijkstra's algorithm solves the shortest path problem from a chosen point to \textbf{all other points}. In this subsection, we assume that $c_{ij}\geq 0$.\\
+Dijkstra's algorithm can be summarised as follows. Denote
+\begin{itemize}
+  \item $P$: permanently labeled nodes
+  \item $T$: temporarily labeled nodes
+\end{itemize}
+$P$ and $T$ is a partition of $V=\{1,\ldots, n\}$, i.e.,
+\[
+P\cap T=\varnothing\;\;\;P\cup T=V
+\]
+Label for node $j$ $[u_j,l_j]$, where
+\begin{itemize}
+  \item $u_j$: the length of the (may be temporary) shortest path from node $i$ to $j$
+  \item $l_j$: the preceding node in the path
+\end{itemize}
+The main steps, after the setup are
+\begin{itemize}
+  \item[Step 0] $P=\{1\}, u_1=0, l_1=0, T=V\setminus P$. Compute
+  \[
+u_j=\begin{cases}
+c_{1j}&\text{ if }(1,j)\in E\\
+\infty & \text{ if }(1,j)\not\in E
+\end{cases}
+  \]
 
+and
+\[
+l_j=\begin{cases}
+1&\text{ if }(1,j)\in E\\
+0 & \text{ if }(1,j)\not\in E
+\end{cases}
+\]
+\item[Step 1] Find $k\in T$ such that
+\[
+u_k = \min_{j\in T} \{u_j\}
+\]
+Let $P=P\cup \{k\}$ and $T=T\setminus\{k\}$. If $k=n$, stop.
+\item[Step 2] For $j\in T$, if $u_k+c_{kj}<u_j$, let $[u_j=u_k+c_{kj}, l_j=k]$ and go back to step 1.
+\end{itemize}
+The running time of Dijkstra's algoritm is $O(n^2)$.
+\subsection{Bellman's Equation}
+Let $c_{ij}$ be the length of arc $(i,j)$. Let $u_{ij}$ be the length of the shortest path from $i\to j$. Define
+\[
+u_{i} = u_{1i}
+\]
+We can use Bellman's equations to prove the correctness of Dijkstra.
+\begin{theorem}[Bellman's Equations]
+\hfill\\\normalfont The Bellman's Equations below hold
+\[
+\begin{cases}
+u_1=0\\
+u_i=\min_{k\neq i}\{u_k+c_{ki}\}
+\end{cases}
+\]
+\end{theorem}
+\subsection{PERT or CPM Network}
+A large project can be divided into many unit tasks, partially ordered.
+\begin{theorem}
+\hfill\\\normalfont A digraph is acyclic if and only if its nodes can be renumbered so that for all arcs $(i,j)$, $i<j$.
+\end{theorem}
+\begin{theorem}
+\hfill\\\normalfont For any acyclic graph,at least one node has indegree $0$.
+\end{theorem}
+\begin{theorem}[Bellman's Equation on Acyclic Graphs]
+\hfill\\\normalfont For reordered acyclic graphs, the bellman's equation becomes 
+\[
+\begin{cases}
+u_1=0\\
+u_i=\min_{k<i}\{u_k+c_{ki}\}
+\end{cases}
+\]
+\end{theorem}
+\begin{theorem}[Equivalence between Shortest and Longest Path]
+\hfill\\\normalfont They are equivalent since $\max c^\T x=-\min c^\T x$.
+\end{theorem}
+\subsection{Bellman-Ford Method}
+The Bellman-Ford method solves the shortest path problem from one starting node to all other nodes. Also, it allows $c_{ij}<0$ for some $(i,j)\in E$. \\
+Bellman-Ford also can detect presense of negative cycles.\\
+
+The algorithm is 
+\begin{itemize}
+  \item[Step 1] $u_1^{(1)} = 0, u_j^{(1)}=c_{1j}, j\neq 1$.
+  \item[Step {$k$}] For $k=2,\ldots, n$,
+  \[
+u_j^{(k)} = \min\{u_j^{(k-1)}, min\{u_i^{(k-1)}+c_{ij}\}\}\;\;\;\text{ for } j=1,\ldots, n
+  \]
+\end{itemize}
+The total computational cost is $O(n^3)$.
+\subsection{Primal Dual Method}
+Let $\tilde{A}$ be the incidence matrix of the digraph $G=(V,E)$ where $V=\{1.\ldots, m\}$.\\
+Each arc $(i,j)\in E$ has length $c_{ij}\geq 0$ and flow $x_{ij}\geq 0$. The shortest path problem can be formulated as
+
+\begin{align*}
+(\tilde{P}) &\min \sum_{(i,j)\in E} c_{i,j}x_{i,j}\\
+            &\st \tilde{A}x=\begin{pmatrix} +1\\0\\\vdots\\0\\-1\end{pmatrix}\\
+            &x\geq 0 
+\end{align*}
+
+Let $A$ be the remaining submatrix of $\tilde{A}$ by removing the last row of $\tilde{A}$. Then we have
+
+\begin{align*}
+(P) &\min \sum_{(i,j)\in E} c_{i,j}x_{i,j}\\
+            &\st \tilde{A}x=\begin{pmatrix} +1\\0\\\vdots\\0\end{pmatrix}\\
+            &x\geq 0 
+\end{align*}
+Next we establish the primal dual method for general LPs.\\
+For $A\in\mathbb{R}^{m\times n}, c\in \mathbb{R}^n, b\in \mathbb{R}_{+}^m$, consider the LP and its dual
+\begin{align*}
+(P) & \min_x c^\T x\\
+    & \st Ax=b\geq 0\\
+    & x\geq 0
+\end{align*}
+and 
+\begin{align*}
+(D) & \max_\pi \pi^\T b\\
+    & \st \pi^\T A\leq c^\T\\
+\end{align*}
+Suppose an LP arising from  a shortest path problem has $m\ll n$, strong duality shows that we can solve $(D)$ to solve $(P)$.\\
+
+One observation is that the starting feasible $\pi$ can be $\pi=0$ if $c\geq 0$.\\
+Suppose we have a $\pi$ feasible to dual $(D)$. Define $J\subseteq \{1,\ldots, n\}$, the set of admissible columns, by
+\[
+J=\{j:\pi^\T A_j=c_j\}
+\] 
+Then for any $j\not\in J$, we have $\pi^\T A_j< c_j$.\\
+Consider 
+\begin{align*}
+(DRP_J) & w_J^\ast = \max_{\bar{\pi}} \bar{\pi}^\T b\\
+\st &\bar{\pi}^\T A_j\leq 0, \;\;\; j\in J\\
+& \bar{\pi}_i\leq 1, i=1,\ldots, m
+\end{align*}
+$(DRP_J)$ searches for direction $\bar{\pi}$ to update $\pi$. Also, $(DRP_J)$ is the dual of $(RP_J)$, to be defined later. \\
+There are many parts behind the primal dual algorithm, so we can list down some important points here:
+\[
+(P)\leftarrow (RP_J)\rightarrow (DRP_J) \rightarrow (D)
+\]
+\begin{enumerate}
+  \item Solve $(D)$ by solving a sequence of $(DRP_J)$s.
+  \item Solve $(DRP_J)$ by solving $(RP_J)$.
+  \item Each $(RP_J)$ is easier to solve than $(P)$.
+  \item When $(RP_J)$ has objective $0$, then optimal solution to $(P)$ is found.
+\end{enumerate} 
+For step $1$, note that $(DRP_J)$ provides a feasible direction $\bar{\pi}$ to $(D)$, which can be used to improve $\pi$ to $\pi+\theta\bar{\pi}$ where $\theta\geq 0$.\\
+For step $2$, we first define $(RP_J)$. 
+\begin{definition}[Restricted Primal]
+\hfill\\\normalfont The restricted primal of $(P)$ is
+\begin{align*}
+(RP_J)\;\;\xi_J^\ast = \min_{x,x^a}& 0^\T x+\sum_{i=1}^m x_i^a\\
+\st&Ax+x^a =b\\
+&x_j\geq 0 \text{ for all }j\\
+&x_j=0\text{ for all }j\not\in J\\
+&x_i^a\geq 0, i=1,\ldots, m
+\end{align*}
+It can be simplified as
+\begin{align*}
+(RP_J)\;\;\xi_J^\ast = \min_{x_J,x^a}& 0^\T x+\sum_{i=1}^m x_i^a\\
+\st&A_Jx_J+x^a =b\\
+&x_J\geq 0, x^a\geq 0
+\end{align*}
+\end{definition}
+It can be shown that $(RP_J)$ is dual of $(DRP_J)$.\\
+From strong duality, we have $\xi_J^\ast = w_J^\ast$.\\
+To get $\bar{\pi}$, we have $\bar{\pi}^\T = c_B^\T A_B^{-1}$.\\
+With the definition of $(RP_J)$, we can establish the general primal dual algorithm:\\
+\begin{definition}[Primal Dual Method]
+\hfill\\\normalfont
+\begin{enumerate}
+  \item Start with $\pi$ feasible in $(D)$.
+  \item Loop
+  \begin{enumerate}
+    \item Set $J=\{j:\pi^\T A_j=c_j\}$. (Update $J$)
+    \item Solve $(RP_J)$ by simplex method to get $(\bar{x}, \bar{x}^a)$ and $\bar{pi}$. (This step essentially solves $(DRP_J)$ via $(RP_J)$ which is easier to solve.)
+    \item If $\xi_J^\ast=0$, then $\bar{x}$ is optimal for $(P)$.
+    \item Else if $\bar{\pi}^\T A_j\leq 0$ for all $j\not\in J$, $(P)$ infeasible.
+    \item Else, we let $\pi\leftarrow \pi+\theta_1\bar{\pi}$, where
+    \[
+\theta_1:=\max\{\theta:[\pi+\theta\bar{\pi}^\T A\leq c^\T\}=\min\{\frac{c_j-\pi^\T A_j}{\bar{\pi}^\T A_j}: j\not\in J \text{ and } \bar{\pi}^T A_j>0\}
+    \]
+    \item End if
+  \end{enumerate}
+  \item End Loop
+\end{enumerate}
+\end{definition}
+For step $3$, we claim that $(RP_J)$ is easier to solve than $(P)$. When solving $RP_J$, we will essentially remove some columns from $J_\text{old}$, which evolves $J$ as $J_\text{new}$. Furthermore, we have $\xi_\text{new}^\ast \leq \xi_\text{old}^\ast$.\\
+\begin{theorem}[Complementary Slackness]
+\hfill\\\normalfont Let $x$ and $\pi$ be feasible in $(P)$ and $D$ respectively. Let $\mathbf{a}_i$ be the $i$th row of $A$ and $\mathbf{A}_j$ be the $j$th column of $A$. Then $x$ and $\pi$ are optimal if and only if
+\[
+\pi_i(\mathbf{a}_i^\T x-b_i)=0\;\;\;\text{ for all }i
+\]
+\[
+(c_j-\pi^\T \mathbf{A}_j)x_j=0\;\;\;\text{ for all }j
+\]
+\end{theorem}
+With this theorem, we can proof the following:
+\begin{theorem}
+\hfill\\\normalfont \begin{enumerate}
+\item If $\xi_J^\ast = 0$, then $\bar{x}$ is optimal for $(P)$ and $\pi$ optimal for $(D)$.
+\item If $w_J^\ast = \xi_J^\ast>0$ and $\bar{\pi}^\T A_j\leq 0$ for all $j$, then $(P)$ is infeasible.
+\item Any BFS of $(RP_J)$ is a BFS of $(RP_{\{1,\ldots, n\}})$.
+\end{enumerate}
+\end{theorem}
+The following theorem establishes that primal dual algorithm ends in finitely many iterations.
+\begin{theorem}
+\hfill\\\normalfont Consider the primal dual algorithm,
+\begin{enumerate}
+  \item In line $3$, $J^\text{new}$ contains all elements in $J^\text{old}$ which are the basic indices of the optimal solution $x$ obtained from solving $(RP_{J^\text{old}})$.
+  \item If an anticycling rule is used in simplex method to solve $(RP_J)$, the primal dual algorithm ends in finite time.
+\end{enumerate}
+\end{theorem}
+\subsection{Primal Dual Method for Shortest Path Problem}
+Specific to shortest path problem, we have for $(i,j)$th column of $A$,
+\[
+\pi^\T A_{(i,j)}=\pi_i-\pi_j
+\]
+and the set $J$ now has a simpler expression:
+\[
+J=\{\text{arcs} (i,j): \pi_i-\pi_j=c_{ij}\}
+\]
+Furthermore, $(DRP_J)$ is also simpler:
+\begin{align*}
+(DRP_J) w_J^\ast = \max &\bar{\pi}_1\\
+\st & \bar{\pi}_i-\bar{\pi}_j\leq 0\;\;\;\text{ for all }(i,j)\in J\\
+&\bar{\pi}_i\leq 1\text{ for all }i=1,\ldots, m-1\\
+&\bar{\pi}_m=0
+\end{align*}
+It is easy to see that $w^\ast=0$ if there is a path from $1$ to $m$ along edges in $J$ and $1$ otherwise.\\
+Also, specific to shortest path, 
+\begin{align*}
+\theta_1&=\min\{\frac{c_{(i,j)}-(\pi_i-\pi_j)}{\bar{\pi}_i-\bar{\pi}_j}:(i,j)\not\in J, \bar{\pi}_i-\bar{\pi}_j>0\}\\&=\min\{c_{(i,j)}-(\pi_i-\pi_j):(i,j)\not\in J, \bar{\pi}_i-\bar{\pi}_j>0\}
+\end{align*}
+\begin{theorem}
+\hfill\\\normalfont If $c>0$, then every arc $(i,j)$ that becomes admissible stays admissible throughout the algorithm. Also, $pi_i,i\in W$ is the length of the shortest path from node $i$ to node $m$ and algorithm proceeds by adding to $W$, at each stage, the nodes not in $W$ next closest to node $m$.
+\end{theorem}
+\subsection{Floyd-Warshall Method}
+The Floyd Warshall method finds the shortest path between all pairs, and also detect negative cycles:
+\begin{itemize}
+  \item[Step 0] $u_{ij}^{(1)}=c_{ij}$, $i,j= 1,\ldots, n$
+  \item[Step $k$] For $k=1,\ldots, n$,
+  \[
+u_{ij}^{(k+1)} = \min\{u_{ij}^{(k)},u_{ik}^{(k)}+u_{kj}^{(k)}\}\;\;\;i,j=1,\ldots, n
+  \]
+\end{itemize}
+\clearpage
+\section{Greddy Algorithm and Computational Complexity}
+\subsection{Matriod}
+\begin{definition}[Independent System]
+\hfill\\\normalfont Suppose we have a finite ground set $S$, $|S|<\infty$, and a collection $\Xi$, of subsets of $S$.\\
+$H:=(S,\Xi)$ is an \textbf{independent system} if
+\begin{itemize}
+  \item $\varnothing\in\Xi$, and
+  \item $X\subseteq Y\in\Xi\Rightarrow X\in\Xi$.
+\end{itemize}
+We call elements in $\Xi$ independent sets, and subsets of $S$ not in $\Xi$ dependent sets.
+\end{definition}
+\begin{definition}[Matriod]
+\hfill\\\normalfont $H=(S,\Xi)$ is a matriod, if it is
+\begin{itemize}
+  \item an independent system, and
+  \item $X,Y\in\Xi$ with $|X|=|Y|+1$ implies $\exists e\in X\setminus Y$ such that $Y+e\in\Xi$.
+\end{itemize}
+\end{definition}
+\subsection{Greedy Algorithm}
+Suppose $H=(S,\Xi)$ is an independent system. Let $W:S\to\mathbb{R}_{+}$ be a weight function with $W(e)\geq 0$ for all $e\in S$.\\
+For any $X\subseteq S$, define the weight of the set as
+\[
+W(X):=\sum_{e\in X} W(e)
+\]
+The matriod problem is the following optimisation problem:
+\begin{align*}
+\max& W(X)\\
+\st & X\in\Xi
+\end{align*}
+\begin{theorem}[Greedy Algorithm]
+\hfill\\\normalfont Suppose we rearrange the elements such that $W(e_1)\geq W(e_2)\geq\cdots\geq W(e_n)$.
+\begin{itemize}
+  \item[Step 0] Let $X=\varnothing$.
+  \item[Step $k$] If $X+e_k\in\Xi$, let $X:=X+e_k$, where $k=1,\ldots, n$
+\end{itemize}
+\end{theorem}
+This greedy algorithm works for the matriod problem if and only if $H$ is a matriod.
+\begin{theorem}
+\hfill\\\normalfont Let $H=(S,\Xi)$ be an independent system. The following are equivalent:
+\begin{enumerate}
+  \item $H$ is a matriod, i.e., $X,Y\in\Xi,|X|=|Y|+1$ implies $\exists e\in X\setminus Y\st Y+e\in\Xi$.
+  \item Greedy algorithm solves problem for any $W:S\to\mathbb{R}_{+}$.
+  \item If $A\subseteq S$, and $X,Y$ are \textbf{maximal independent subsets} of $A$, then $|X|=|Y|$.\\
+  $X$ is a maximal independent subset of $A$ means $X\in\Xi$ and $X\subseteq A$, and there is no $X'\subsetneq X$ such that $X'\in\Xi$ and $X'\subseteq A$. 
+\end{enumerate}
+\end{theorem}
+The following lemma is introduced in proving the above theorem:
+\begin{theorem}
+\hfill\\\normalfont Suppose $H=(S,\Xi)$ and $W:S\to\mathbb{R}_{+}$.\\
+Suppose the greedy algorithm finds $X=\{x_1,\ldots, x_i\}$.
+Let $\bar{e}\in S$. Define $A=\{e\in S:W(e)\geq W(\bar{e})\}$.\\
+Let $m$ be such that $W(x_{m-1})\geq W(\bar{e})> W(x_m)$, where $m=i+1$ means $W(x_i)\geq W(\bar{e})$, then $\{x_1,\ldots, x_{m-1}\}$ is a maximal independent set of $A$.
+\end{theorem}
+\subsection{Introduction to Computational Complexity}
+\begin{definition}[Instance, Problem]
+\hfill\\\normalfont An \textbf{instance} of an optimization problem consists of a feasible set $F$ and a cost function $c:F\to\mathbb{R}$.\\
+An optimization \textbf{problem} is a collection of instances.\\
+The \textbf{size} of an instance is defined as the number of bits used to describe the instance, according to a prescribed format.
+\end{definition}
+Generally, we need $O(\log r)$ bits to encode an integer $r$.\\
+We need $O(V^2)$ to encode a graph using adjacency matrix and $O(E\log V)$ to encode a graph using edge list.
+\begin{definition}[{$P$} and {$NP$}]
+\hfill\\\normalfont An algorithm runs in \textbf{polynomial time} if there exists an integer $k$ such that $T(n)=O(n^k)$.\\
+A combinatorial optimization problem resides in class $\mathcal{P}$ if there is a polynomial time algorithm under bit model.\\
+A problem resides in class $\mathcal{NP}$ if for all YES instance, there exists a polynomial length certificate that verifies in polynomial time that the answer is indeed yes.
+\end{definition}
+\begin{theorem}[Numerical Problems]
+\hfill\\\normalfont Suppose a problem have numerical components, like $\mathbf{A},\mathbf{b},\mathbf{c}$ in LP, we require definition for instance to only involve integers and rational numbers so that we can represent the numbers in binary.\\
+Suppose that an algorithm is such that it takes polynomial time under the arithmetic model $+,-,\times,\div$, and on instances of size $n$, any integer produced in the course of execution has size bounded by a polynomial in $n$, then the algorithm runs in polynomial time under bit model.
+\end{theorem}
+\begin{theorem}
+\hfill\\\normalfont Problem of finding a minimizer of an LP with integer entries is in $\mathcal{NP}$.\\
+LP is in $\mathcal{P}$.
+\end{theorem}
+\begin{definition}[Polynomial Time Reduction]
+\hfill\\\normalfont Suppose there is an algorithm for a problem $A$ consisting of
+\begin{itemize}
+  \item A polynomial time computation, and
+  \item A polynomial number of subroutine calls to an algorithm for problem $B$.
+\end{itemize}
+Then problem $A$ \textbf{reduces} in polynomial time to problem $B$. We denote this reduction as $A\leq B$.
+\end{definition}
+In this definition, all references to polynomiality are with respect to the size of an instance of problem $A$.\\
+A consequence of such reduction is that if $A$ is known to be hard and $A\leq B$ then $B$ is also hard.
+\begin{theorem}\normalfont If $A\leq B$ and $B\in\mathcal{P}$, then $A\in\mathcal{P}$.
+\end{theorem}
+\subsection{Three Forms of a CO Problem}
+A CO problem is of the form of $F$ is the feasible set and $c:F\to\mathbb{R}$ the cost function, 
+\[
+\min c(f) \st f\in F
+\]
+The above CO problem has three versions:
+\begin{itemize}
+  \item \textbf{Optimization version}: find an optimal solution
+  \item \textbf{Evaluation version}: find optimal value
+  \item \textbf{Recognition version}: Given an integer $L$, is there a feasible solution $f\in F$ such that $c(F)\leq L$?
+\end{itemize}
+It is worth noting the algorithmic difficulty of these three versions are related.
+\begin{theorem}[Evaluation in {$P$} Implies Recognition in {$P$}]
+\hfill\\\normalfont If a polynomial time algorithm for the \textbf{evaluation} problem exists, then a polynomial time algorithm for the \textbf{recognition} problem exists. Equivalently,
+\[
+\text{Recognition}\leq \text{Evaluation}
+\]
+\end{theorem}
+\begin{theorem}[Optimization in {$P$} Implies Evaluation in {$P$}]
+\hfill\\\normalfont If a polynomial time algorithm for the \textbf{optimization} problem exists and the cost $c(f)$ of any feasible $f\in F$ can be computed in polynomial time, then a polynomial time algorithm for the evaluation problem exists.
+\end{theorem}
+For problems with finite $c(F)$ values, a polynomial time algorithm for recognition problem implies a polynomial time algorithm for evaluation problem, via binary search.\\
+Also, sometimes a polynomial time evluation algorithm gives polynomial time optimization algorithms for some problems.
+\subsection{co-NP and NPC}
+\begin{definition}[co-NP]
+\hfill\\\normalfont A combinatorial problem is in co-NP if for all ``No'' instances, there exists a polynomial length ``certificate'' that verifies in polynomial time that answer is indeed no. 
+\end{definition}
+Obviously, $P\subseteq co-NP$, but it remains open that whether $P$ equals co-$NP$.
+\begin{definition}[Transformation]
+\hfill\\\normalfont For YES/NO problems $A$ and $B$, we say that $A$ \textbf{transforms} to $B$ in polynomial time, if there exists a polynomial time algorithm which given an instance $l_1$ of problem $A$, outputs an instance $l_2$ of $B$, such that $l_1$ is YES instance of $A$ if and only if $l_2$ is a YES instance of $B$.
+\end{definition}
+\begin{definition}[NP Hard]
+\hfill\\\normalfont A problem $A$ is NP hard if for any problem $B\in NP$, $B\leq A$.
+\end{definition}
+\begin{theorem}\normalfont Suppose that a problem $C$ is NP-hard, and $C\leq D$, then $D$ is NP-hard.
+\end{theorem}
+\begin{definition}[SAT]
+\hfill\\\normalfont Define a set of boolean variables $\{x_1,\ldots, x_n\}$. To each $x_i$ we assign a label of true or false. We denote $x_i$ as true and $\bar{x}_i$ as false. We refer to $x_i$ and $\bar{x}_i$ as literals.\\
+Let symbol $\lor$ denote or and $\land$ denote and. Any Boolean expression has a conjunction normal form(CNF), which is a finite conjunction, each of a finite disjunction of literals. We denote the disjunctive grouping as a \textbf{clause}.\\
+Clearly, a clause is true if at least one of the literal is true. And a CNF expression is true if and only if all caluses are true.\\
+The satisfiability problem(SAT), in its decision version, asks, given an expression in CNF, can literals be assigned so that the expression is \texttt{true}?
+\end{definition}
+\begin{theorem}
+\hfill\\\normalfont For any problem $Q\in NP$, $Q\leq SAT$.\\
+This shows that SAT is NP hard.
+\end{theorem}
+\begin{definition}[NP Complete]
+\hfill\\\normalfont A YES/NO problem $A$ is in NPC if
+\begin{itemize}
+  \item $A\in NP$ and
+  \item for any problem $B\in NP$, $B\leq A$.
+  \end{itemize}
+  \end{definition}
+\subsection{LP is in NP}
+\begin{theorem}
+\hfill\\\normalfont Let $x$ be a BFS of the polyhedron $P=\{x\in\mathbb{R}^n : Ax=b, x\geq 0\}$. Then
+\[
+x=(\frac{p_1}{q},\ldots, \frac{p_n}{q})
+\]
+where $p_i\in\mathbb{N}$ and $0\leq p_i\leq 2^L$ for $i\in\{1,\ldots, n\}$, $q\in\mathbb{N}$ and $1\leq q\leq 2^L$ and $L\leq \text{size}(LP(A,b,c))$.
+\end{theorem}
+The $L$ is defined as below:
+\begin{definition}
+\hfill\\\normalfont For a triple $(A,b,c)$ of an LP, let
+\[
+L:=\text{size}(\det_{\max})+\text{size}(b_{\max})+\text{size}(c_{\max})+m+n-1
+\]
+where $\det_{\max}:=\max_{A'}(|\det(A'|)$, $b_{\max}=\max_{i}(|b_i|)$ and $c_{\max}:=\max_j(|c_j|)$.
+\end{definition}
+\begin{theorem}
+\begin{enumerate}
+  \item If $n\in \mathbb{Z}$, then $|n|\leq 2^{\text{size}(n)-1}-1$.
+  \item If $v\in \mathbb{Z}^n$, then $\|v\|\leq \|v\_1\|\leq 2^{\text{size}(v)-n}-1$
+  \item If $A\in\mathbb{Z}^{n\times n}$, then $|\det(A)|\leq 2^{\text{size}(A)-n^2}-1$.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}\normalfont $L<\text{size}(LP)$ for all $A,b,c$.
+\end{theorem}
+\begin{theorem}\normalfont $LP\in NP$.\end{theorem}
+\clearpage
+\section{Algorithms for NPC problem}
+Solving $NP$ problem cannot be expected to complete in polynomial. We can solve 
+\begin{itemize}
+  \item Exactly, by exact methods like \textbf{branch and bound}, \textbf{cutting plane}, \textbf{branch and cut}, \textbf{dynamic programming}
+  \item Approximately in polynomial time, by \textbf{approximation methods}
+  \item in reduced search space, via \textbf{local search}
+  \item by using heuristics, such as \textbf{genetic algorithm} and \textbf{simulated annealing}]
+  \item by limiting to special classes, or using other methods
+  \end{itemize}
+\subsection{Generic Cutting Plane Algorithm}
+The genetic cuttinng plane algorithm is used to solve \textbf{integer LP} problem:
+\begin{align*}
+\min & c^\T x\\
+\st  & Ax=b\\
+&x\geq 0, x \text{ integer}
+\end{align*}
+\begin{itemize}
+  \item[Step 1] Solve LP relaxation(i.e. with $x$ integer requirement removed). Let $x^\ast$ be an optimal solution/
+  \item[Step 2] If $x^\ast$ is integer, stop. $x^\ast$ is an optima solution to the ILP.
+  \item[Step 3] If not, add an inequality constraint $(\#)$ to LP relaxation that all integer solutions satisfy but not $x^\ast$. Go to Step 1.
+\end{itemize}
+Here, by Gomory cuts of integer programs, $(\#)$ is defined as
+\[
+[\sum_{j\in N}(\lfloor \bar{a}_{ij}\rfloor -\bar{a}_{ij})x_j]\leq \lfloor \bar{a}_{i0}\rfloor - \bar{a}_{i0}
+\]
+if the solution to $x_i$ in the optimal tableau $\bar{a}_{i0}:=(B^{-1}b)_i$ fractional, i.e. $x_i+\sum_{j\in N}\bar{a}_{ij}x_j=\bar{a}_{i0}$. $N$ is just the nonbasic set and $\bar{a}_{ij}=(B^{-1}A_j)_i$.\\
+We can add a slack variable $s$ on the left hand side and put it to the optimal tableau and continue to solve using dual simplex method.
+\subsection{Gomory's Mixed Integer Cutting-Plane Method}
+A general Mixed Integer LP model can be written as
+\begin{align*}
+\min  c_1^\T x_1 + c_2^\T x_2\\
+\st & A_1x_1+A_2x_2=b\\
+&x_1\geq 0\\
+&x_2\geq 0, \text{integer}
+\end{align*}
+where $A_1\in\mathbb{R}^{m\times n_1}$, $A_2\in\mathbb{R}^{m\times n_2}$ and $x_1\in\mathbb{R}^{n_1}$ and $x_2\in\mathbb{R}^{n_2}$.
+\begin{theorem}[Gomory cut for MILPs]
+\hfill\\\normalfont Let $x^\ast$ be an optimal BFS of an LP relaxation. Here $A,b,c$ not necessary to be integral. Consider an equality from \textit{optimal tableau}:
+\[
+x_k+\sum_{j\in N}\bar{a}_{kj}x_j=\bar{a}_{k0}
+\]
+where $x_k$ is to be integral and $\bar{a}_{k9}$ is fractional.\\
+Denote $J^{+}=\{j\in N\mid \bar{a}_{kj}\geq 0\}$ and $J^{-}=\{j\in N\mid \bar{a}_{kj}< 0\}$.\\
+Define
+\[
+\beta_k:=\bar{a}_{k0}-\lfloor \bar{a}_{k9}\rfloor >0
+\]
+Then a mixed cut constraint is
+\[
+-\sum_{j\in J^{+}}\bar{a}_{kj}x_j-\frac{\beta_k}{\beta_k-1}\sum_{j\in J^{-}}\bar{a}_{kj}x_j\leq -\beta_k
+\]
+\end{theorem}
+If we systematically add these cuts and use appropriate anti-cycling rules, this algorithm can terminate finitely for solving general integer LPs.
+\subsection{Branch and Bound}
+The idea of branch and bound is to divide the general LP problem
+\begin{align*}
+\min & c^\T x\\
+\st & x\in F
+\end{align*}
+to a finite collection of subproblems:
+\[
+\min c^\T x \st x\in F_i
+\]
+for $i = 1,\ldots, k$. where $F_i$ forms a partition of $F$.\\
+One way to divide is to use branching, which gives a tree of subproblems.\\
+In the case of solving MILP, we first start from the relaxed problem of general LP, then we do the branching by excluding the fractional solution by adding a constraint, either this component of $x$ no greater than the floor or no less than the ceiling.
+\begin{theorem}[Generic Branch and Bound Algorithm]
+\hfill\\\normalfont 
+\begin{itemize}
+	\item[Step 0] Initially, $U$ is set either to $\infty$ or to the cost of some feasible solution, if one happens to be available. 
+	\item[Step 1] Select an active subproblem $F_i$. Here, we select the subproblem with lowest lower bound.
+	\item[Step 2] If the subproblem is infeasible, delete it. Otherwise, update the lower bound $b(F_i)$ for the corresponding subproblem.
+	\item[Step 3] If $b(F_i)\geq U$, delete the subproblem.
+	\item[Step 4] If $b(F_i)<U$, either
+	\begin{itemize}
+	\item Obtain an optimal solution to the subproblem
+	\item Break the corresponding subproblem into further subproblems to add to the list of active subproblems.
+	\end{itemize}
+	\item[Step 5] Go to step 1.
+\end{itemize} 
+\end{theorem}
+\subsection{Dynamic Programming}
+Dynamic programming uses a recurrence relation to try to solve a problem at hand.\\
+Let us consider the travelling salesman problem on $G=(V,E)$ a directed graph with $n$ nodes and $c_{ij}$ be the cost of arc $(i,j)$. The TSP wants to choose a cycle visiting all nodes with lowest cost.\\
+The brute force algorithm requires the evaluation of all $n!$ cycles directly. Dynamic programming will run faster.\\
+In Dynamic programming, let $C(S,k)$ be the minimum cost over all paths that start at node $1$ and end at node $k$, and visit all nodes in the set $S$ exactly once. We call $(S,k)$ a state, and this state can be reached from states $(S\setminus\{k\},m)$ with $m\in S\setminus\{k\}$ at a transition cost $c_{mk}$.\\
+We have the recursion
+\[
+C(S,k)=\min_{m\in S\setminus\{k\}} (C(S\setminus\{k\}, m)+c_{mk}), k\in S
+\]
+and the base case $C(\{1\},1)$ = 0.\\
+Clearly, we have $O(n2^n)$ states and evaluating a state takes $O(n)$. Therefore, we can get teh optimal tour's cost by
+\[
+\min_k (C(\{1,\ldots, n\},k)+c_{k1})
+\]
+and get the actual route by looking at the $\arg\min$, within $O(n^22^n)$ time, which is faster than $O(n!)$.\\
+Another application is on $0-1$ knapsack problem, where we want to 
+\[
+\max c^\T x \st a^\T x\leq b, x_i\in\{0,1\}, i=1,\ldots, n
+\]
+with $a,b,c$ integral and $a,b,c>0$.\\
+Define $C_j(w)=\max c_1x_1+\cdots+c_jx_j \st a_1x_1+\cdots+a_jx_j\leq w, x_i\in\{0,1\}, i=1,\ldots, j$. Then note $C_n(b)$ gives the optimal solution of the $0-1$ knapsack problem. Furthermore, we have recursion
+\[
+C_{j+1}(w)=\max\{C_k(w), C_j(w-a_{j+1})+c_{j+1}\}
+\]
+and initial conditions $C_0(w)=0$ for all $w$, $C_j(0)=0$ for all $j$.\\
+This algorithm will run in polynomial time $O(nb)$.\\
+We can also recover which item to take easily.\\
+Note, the greedy solution, which takes maximum per-unit-weight value, on $0-1$ knapsack does not work optimally.
+\subsection{{$\epsilon$-approximation Algorithms}}
+Given a CO problem, with $A=\{F,c\}$, define optimal objective value $c(x^\ast)=\min c(x)\st x\in F$. An approximation algorithm finds $\bar{x}$ such that
+\[
+|\frac{c(\bar{x})-c(x^\ast)}{\max\{c(\bar{x}),c(x^\ast)\}}|\leq \epsilon
+\]
+then we call this algoorithm an $\epsilon$-approxiamtion algorithm.\\
+Specifically, the samller $\epsilon$ is , the better the algorithm.
+\begin{theorem}\normalfont If $P\neq NP$, then TSP has no polynomial-time $\epsilon$-approximation algorithm.\end{theorem}
+\begin{definition}[Triangle TSP]
+\hfill\\\normalfont Triangle TSP is the TSP with additional constraints:
+\begin{enumerate}
+  \item $d_ii=0$,
+  \item $d_{ij}=d_{ji}$.
+  \item $\forall i,j,l, d_{ij}+d_{jk}\geq d_{ik}$.
+\end{enumerate}
+\end{definition}
+\begin{theorem}\normalfont $\delta TSP\in NPC$.\end{theorem}
+\begin{theorem}[{$\frac{1}2{}$-Approximation Algorithm for $\delta$TSP}]
+\hfill\\\normalfont Consider the following algorithm:
+\begin{itemize}
+  \item[Step 0] $G(V,E$ and $D=(d_{ij})$.
+  \item[Step 1] Find MST $T^\ast$.
+  \item[Step 2] Duplicate $T^\ast$ to find a Eulerian walk.
+  \item[Step 3] Find an embedded TSP tour $\tau$ by skipping intermediate nodes that was already visited before.
+\end{itemize}
+The above algorithm is a $\frac{1}{2}$ approximation algorithm.
+\end{theorem}
+The $\epsilon=\frac{1}{2}$ is improved to $\frac{1}{3}$ using the algorithm below.
+\begin{definition}[Weighted Matching]
+\hfill\\\normalfont Suppose $G=(V,E)$ is an undirected graph such that there is an even number of nodes, and the graph is complete.\\
+Weighted matching problem is to find $\frac{|V|}{2}$ edges with minimal cost so that every node in $V$ is the endpoint of an edge.
+\end{definition}
+It is known there is a algorithm that runs in $O(n^4)$ times.
+\begin{theorem}[Christofides' Algorithm]
+\hfill\\\normalfont
+\begin{itemize}
+  \item[Step 0] $G=(V,E)$ adn $D=(d_{ij})$
+  \item[Step 1] Find a minimum spanning tree $T^\ast$ in $G$. \\Let $Q$ be the set of edges in the tree $T^\ast$.
+  \item[Step 2] Let $N$ be the set of nodes that have odd degree in $T^\ast$. For these nodes in $N$, find a set of edges $M\subset E$ solving the weighted matching problem.
+  \item Consider graph $G'=(V,Q\cup M)$. Use previous algorithm to find the embedded TSP tour $\tau$.
+\end{itemize}
+The above algorithm is a $\frac{1}{3}$-approximation algorithm.
+\end{theorem}
+\subsection{Local Search}
+The combinatorial optimization problem is of the form: given $F$, $c$, $\min c(f)\st f\in F$. \\
+Now we define, for any $f\in F$, define its neighbourhood $N(f)\subset F$.\\
+The local search algorithm is as follows:
+\begin{itemize}
+  \item[Step 0] $f=f_0$.
+  \item[Step 1] $c(f_{k+1})=\min c(f)\st f\in N(f_k)$
+\end{itemize}
+If $c(f_{k+1})=c(f_k)$, stop, otherwise repeat Step 1.\\
+This local search is guaranteed to find a local minimum, but not necessarily global minimum.\\
+\begin{definition}[Max Cut]
+\hfill\\\normalfont Given a graph $G=(V,E)$, partition $V$ into two sets $S$ and $T$ to maximize number of edges between $S$ and $T$.
+\end{definition}
+\begin{theorem}[Approximation Algorithm for Max Cut]
+We start from any partition of $V$: $(S,T)$ and perform local improvement steps below till it cannot be performed:
+\begin{itemize}
+  \item If the cut (edges between $S$ and $T$) can be increased by moving one node from $S$ to $T$, or $T$ to $S$, then we do so.
+\end{itemize}
+This algorithm is a $\frac{1}{2}$-approximation algorithm.
+\end{theorem}
+\subsection{FPTAS}
+NPC problems are equivalent under reduction, but behaviour can be different for approximation algorithms. \\
+For $0-1$ knapsack problem, we have a $\epsilon$-approximation algorithms for all $\epsilon$, and the time taken for an $\epsilon$ behaves well in $\epsilon$.
+\begin{definition}[Fully Polynomial Time Approximation Sheme]
+\hfill\\\normalfont An FPTAS is a family of algorithms $\{A_\epsilon\}_{\epsilon>0}$ such that
+\begin{itemize}
+  \item $A_\epsilon$ is an $\epsilon$-approximation for $P$.
+  \item Computation time is polynomial in $L$ and $\frac{1}{\epsilon}$
+\end{itemize}
+where $P$ is the problem and $L$ is the length of bit model of an instance of $P$.
+\end{definition}
+Recall knapsack problem. Suppose we transform the cost vector as such:
+\[
+c'=\lfloor\frac{c}{K}\rfloor
+\]
+and
+\[
+K=\frac{\epsilon c_max}{n}
+\]
+to get a integer instance for cost. We use the introduced algorithm for this modified instance and will we will have
+\[
+A_\epsilon\geq (1-\epsilon)OPT
+\]
+and computation time is polynomial in $n$ and $\frac{1}{n}$.
 \end{document}

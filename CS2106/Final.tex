@@ -3,7 +3,7 @@
 
 
 
-\usepackage[margin=1in]{geometry}  
+\usepackage[margin=0.1in]{geometry}  
 \usepackage{graphicx}             
 \usepackage{amsmath}              
 \usepackage{amsfonts}              
@@ -17,6 +17,8 @@
 \usepackage{enumitem}
 \usepackage{tikz}
 \usepackage{pdfpages}
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{0.5\baselineskip}{0.5\baselineskip}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 
@@ -40,23 +42,12 @@
 \maketitle
 \tableofcontents
 
-\clearpage
-%\twocolumn
+
+\twocolumn
 \section{Introduction to OS}
 \subsection{Operating System Basic Concepts}
-\begin{definition}[Operating System]
-\hfill\\\normalfont An \textbf{operating system}(OS) is a program that acts as an intermediary between a \textbf{computer user} and the \textbf{computer hardware}.
-\end{definition}
-The evolution of OS is as below
-\[
-\text{No OS}\to\text{Batch OS}\to\text{Time-sharing OS}\to\text{Personal OS}
-\]
 \begin{definition}[No OS]
 \hfill\\\normalfont There is no OS for the first computer where programmes \textit{directly} interact with hardware, and reprogramming is done through changing the \textbf{physical configuration} of the hardware.\\
-\begin{figure}[h]
-\centering
-\includegraphics[width = 0.4\textwidth]{1_1.png}
-\end{figure}
 \textbf{Advantage}:
 \begin{itemize}
   \item Minimal overhead
@@ -70,17 +61,13 @@ The evolution of OS is as below
 \begin{definition}[Batch OS]
 \hfill\\\normalfont Batch OS breaks down the workflow to Input, Compute and Output, which allows pipelining to occur.\\
 Programmes can be \textit{submitted in batch} to be \textit{executed one at a time}. \\
-\begin{figure}[h]
-\centering
-\includegraphics[width = 0.4\textwidth]{1_2.png}
-\end{figure}
 However, batch processing is still inefficient since the CPU will be idle when I/O. One solution is \textbf{multiprogramming}, where multiple jobs are loaded and other jobs are to be ran when I/O needs to be done.
 \end{definition}
 \begin{definition}[Time-sharing OS]
 \hfill\\\normalfont Time-sharing OS allows multiple users to interact with machine using terminals(\textbf{teletypes}). It provides user job scheduling which gives \textit{illusion} of concurrency. \\
 \begin{figure}[h]
 \centering
-\includegraphics[width = 0.6\textwidth]{1_3.png}
+\includegraphics[width = 0.4\textwidth]{1_3.png}
 \end{figure}
 It provides CPU time, memory and storage management; essentially, it provides \textbf{virtualisation of hardware}, where each program executes as if it has all the resources to itself.
 \end{definition}
@@ -127,14 +114,10 @@ Operating System structure needs to impart flexibility, robustness and maintaina
   \item Operating system is essentially a \textbf{software}, which has the privilege to run in \textbf{kernel mode}, i.e., has complete access to all hardware resources
   \item Other software executes only in \textbf{user mode}, with limited access to hardware resources
 \end{itemize}
-\begin{figure}[h]
-\centering
-\includegraphics[width = 0.6\textwidth]{1_4.png}
-\end{figure}
 However, one must realise the user programme can interact with hardware through OS or else. Following diagram gives you an overview:
 \begin{figure}[h]
 \centering
-\includegraphics[width = 0.6\textwidth]{1_5.png}
+\includegraphics[width = 0.4\textwidth]{1_5.png}
 \end{figure}
 \begin{itemize}
   \item $A$: OS executing machine instructions
@@ -170,7 +153,7 @@ In terms of implementation, there are few ways to structure an OS, most notably 
 \end{itemize}
 \begin{figure}[h]
 \centering
-\includegraphics[width = 0.6\textwidth]{1_6.png}
+\includegraphics[width = 0.4\textwidth]{1_6.png}
 \end{figure}
 Monolithic kernel has the advantage of
 \begin{itemize}
@@ -203,7 +186,7 @@ Higher level services like Process Management are
 \end{itemize}
 \begin{figure}[h]
 \centering
-\includegraphics[width = 0.6\textwidth]{1_7.png}
+\includegraphics[width = 0.4\textwidth]{1_7.png}
 \end{figure}
 Microkernel OS has the advantage of
 \begin{itemize}
@@ -223,20 +206,15 @@ Normal(primitive) operating systems can then run on top of the virtual machine.\
 There are two type of hypervisor:
 \begin{figure}[h]
 \centering
-\includegraphics[width = 0.7\textwidth]{1_8.png}
+\includegraphics[width = 0.4\textwidth]{1_8.png}
 \caption{Type 1 Hypervisor(left) and Type 2 Hypervisor(right)}
 \end{figure}
 \begin{itemize}
   \item Type 1: provides individual virtual machines to guest OSes
   \item Type 2: runs in host OS and only guest OS runs in Virtual Machine
 \end{itemize}
-\clearpage
+
 \section{Process Abstraction}
-As the OS, to be able to switch from running program $A$ to $B$ requires
-\begin{enumerate}
-  \item Information regarding the execution of program $A$ to be stored
-  \item Program $A$'s information is replaced with te information required to run $B$
-\end{enumerate}
 \begin{definition}[Process]
 \hfill\\\normalfont \textbf{Process}/task/job is a dynamic abstraction for executing program, where information required to describe a running program is contained. The information includes three components:
 \begin{itemize}
@@ -261,7 +239,7 @@ To handle function call, we require a new section called \textbf{Stack}.
 Since stack can be of variable size, the top of the stack region is logically indicated by \textbf{stack pointer}. Stack pointer usually is stored in a specialised register in the CPU.
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.6\textwidth]{2_1.png}
+\includegraphics[width=0.4\textwidth]{2_1.png}
 \end{figure}
 Usually, a stack farme contains the following items
 \begin{itemize}
@@ -308,7 +286,7 @@ Its nature will create scenario where heap memory are allocated and deallocated 
 The actual memory context contains the four regions described above, namely text, data, heap and stack.
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\textwidth]{2_2.png}
+\includegraphics[width=0.4\textwidth]{2_2.png}
 \end{figure}
 \subsection{Hardware Context}
 In correspondence to the memory context, the hardware context contains
@@ -326,7 +304,7 @@ Apart from Process ID, we also need a process state, to describe the state of th
 \begin{definition}[Generic 5-state Process Model]
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.7\textwidth]{2_3.png}
+\includegraphics[width=0.4\textwidth]{2_3.png}
 \end{figure}
 \hfill\\\normalfont The Generic 5-state Process Model contains 5 states:
 \begin{enumerate}
@@ -371,7 +349,7 @@ In CS2106, we admit a simplified view on CPU: there is only 1 CPU, which means t
 As there may be multiple processes ready for run, or awaiting resources, we use a queuing model to describe the 5-state transition.
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.7\textwidth]{2_4.png}
+\includegraphics[width=0.4\textwidth]{2_4.png}
 \end{figure}
 Note, here the ready queue and the blocked queue should be viewed as \textbf{set}, not queue.\\
 
@@ -384,7 +362,7 @@ Up to this point, the OS context contains
 The entire execution context for a process is stored in \textbf{Process Control Block}, maintained by the kernel. The process control block(PCB) contains memory, hardware and process context.\\
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\textwidth]{2_5.png}
+\includegraphics[width=0.4\textwidth]{2_5.png}
 \end{figure}
  A process Table contains process control blocks of all processes.
 \subsection{System Calls}
@@ -434,7 +412,7 @@ For the exception/interrupt handler, it is transferred control automatically to 
   \item Return from interrupt
 \end{enumerate}
 After the return from handler routine, program execution will resume, and the programme \textit{may} behave as if nothing happened.
-\clearpage
+
 \section{Process Abstraction in UNIX}
 \subsection{Identification}
 A process in UNIX is uniquely identified by Process ID(PID), which is integer-valued.
@@ -512,7 +490,7 @@ Other variant of \texttt{wait()} includes
 Therefore, we can summarise the process interaction in UNIX as follows:
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.6\textwidth]{3_1.png}
+\includegraphics[width=0.4\textwidth]{3_1.png}
 \end{figure}
 Therefore, one point to note is that, suppose the parent does not \texttt{wait}, the zombie process cannot be cleaned up by the parent. Therefore, to handle this scenario, there are two cases to consider:
 \begin{itemize}
@@ -527,7 +505,7 @@ Therefore, one point to note is that, suppose the parent does not \texttt{wait},
     \item Therefore, we need to reboot to clear the table on older UNIX implementations.
   \end{itemize}
 \end{itemize}
-\clearpage
+
 \section{Process Scheduling}
 We hope to achieve parallelism between processes, and therefore, \textbf{timeslicing} is used to share CPU time between processes, with OS occupying CPU between different processes to do the context switch.\\
 In this sense, CPU is a \textbf{scheduler} deployed with certain \textbf{scheduling algorithm}. The specific scheduling algorithm will be influenced by \textbf{process behaviour and process environment}, but it should achieve a few common criteria to ensure its performance.\\
@@ -652,7 +630,7 @@ The priority value is updated as below:
 \subsubsection{Lottery Scheduling}
 In \textbf{lottery scheduling}, OS gives out ``lottery tickets'' to processes for various system resources, and upon context switch, a lottery ticket is chosen randomly from all eligible tickets and winner is granted the resources.\\
 In the long run, a process holding $x$\% of the tickets will use the resources $x$\% of the time. 
-\clearpage
+
 \section{Process Alternative: Threads}
 Threads are used as an alternative to process. Process has the disadvantage of being
 \begin{itemize}
@@ -708,7 +686,7 @@ There are two ways of implementing threads, namely \textbf{user thread} and \tex
 A \textbf{user thread} is implemented as a \textbf{user library} and relevant operations are handled by the runtime system in the process. Kernel will not be aware of the existence of threads in the process.
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\textwidth]{4_1.png}
+\includegraphics[width=0.4\textwidth]{4_1.png}
 \end{figure}
 The advantages of user thread model are
 \begin{itemize}
@@ -727,7 +705,7 @@ However, the disadvantages are
 This makes thread-level scheduling possible, and kernel may make use of threads for its own execution.
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\textwidth]{4_2.png}
+\includegraphics[width=0.4\textwidth]{4_2.png}
 \end{figure}
 The advantages of kernel thread model are
 \begin{itemize}
@@ -750,7 +728,7 @@ To take advantage of both models, in actual system, we use a hybrid thread model
 \end{itemize}
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\textwidth]{4_3.png}
+\includegraphics[width=0.4\textwidth]{4_3.png}
 \end{figure}
 This offers great flexibility, as we can limit the concurrency of any process/user.\\
 Threads on a modern processor starts of a software mechanism and now become hardware native.
@@ -770,7 +748,7 @@ Here, \texttt{exitValue} is the value to be returned to whoever synchronize with
 Thread synchronizatin is done via
 \texttt{int pthread\_join(pthread\_t threadID, void \*\*status)}\\
 which waits for the termination of another pthread. It returns $0$ for success and nonzero for errors.
-\clearpage
+
 \section{Inter-Process Communication(IPC)}
 Since it is hard for cooperating process to share information, we need IPC mechanisms. There are two common IPC mechanisms, namely \textbf{shared memory} and \textbf{message passing}. There are two \textit{Unix-specific} IPC mechanisms, namely \textbf{pipe} and \textbf{signal}.
 \subsection{Shared Memory}
@@ -876,7 +854,7 @@ The recipient of the signal must handle the signal, by
   \item User supplied handler(only applicable to some signals)
 \end{itemize}
 The common signals in UNIX include kill, stop, continue, memory error, arithmetic error etc.
-\clearpage
+
 \section{Synchronization}
 The lack of synchronization will cause problem with \textbf{shared, modifiable resources} when concurrent processes access it in a interleaved fashion. This is known as \textbf{race condition}.\\
 To resolve this, we need to implement a \textbf{critical section} where only one process can enter at any time. Correct Critical Section requires the following properties to be satisfied:
@@ -960,21 +938,21 @@ With this invariance, we have $S_\text{current}+N_\text{CS}=1$ for binary semaph
 Suppose there is a shared bounded buffer of size $K$, where producer can produce item into the buffer if buffer is not full, and consumers can remove item from the buffer if buffer is not empty. There are multiple consumers and multiple producers.
 \begin{figure}[h]
 \centering
-\includegraphics{5_1.png}
+\includegraphics[width=0.4\textwidth]{5_1.png}
 \end{figure}
 is a blocking solution, if we initialize count, in , out to be $0$ and mutex has $S=1$, notFull has $S=K$ and notEmpty has $S=0$.
 \subsubsection{Reader Writer}
 Suppose there is a data structure $D$ where reader can retrieves information from $D$ and writer can modify information from $D$. Here we grant writer \textbf{exclusive access} to $D$, whereas multiple readers can access at the same time.
 \begin{figure}[h]
 \centering
-\includegraphics{5_2.png}
+\includegraphics[width=0.4\textwidth]{5_2.png}
 \end{figure}
 is a solution that favours reader.
 \subsubsection{Dining Philosophers}
 There are 5 philosophers seating around the table, either thinking, hungry or eating. There is one chopstick to the left and another to the right of each philosopher, in total 5. We aim to let some of the philosopher to dine by successfully taking up 2 chopsticks that is on its left and right.\\
 The code is detailed in the lecture notes.\\
 An alternative is to use limited eater, where will use a semaphore with $S=4$ to limit number of seats to 4. and we use a semaphore on each chopsticks.
-\clearpage
+
 \section{Memory Abstraction}
 Memory is an array of bytes, with a unique index for each byte, known as physical address. For process, there are 4 regions: text, data, heap and stack. Out of these 4, how text and data are layed outis decided by compiler in executable.\\
 There are two types of data in a process:
@@ -1054,7 +1032,7 @@ To deallocate a block $B$,
 \end{enumerate}
 \end{theorem}
 Note, two blocks are buddy of size $2^S$, if the $S$ bit of $B$ and $C$ is a complement and leading bits up to $S$th bit of $B$ and $C$ are the same.
-\clearpage
+
 \section{Disjoint Memory Schemes}
 In this section, process memory space can now be in \textbf{disjoint physical memory locations}. This can be done via paging or segmentation.
 \subsection{Paging}
@@ -1099,9 +1077,9 @@ However, segmentatino requires variable-size contiguous memory regions, which ca
 The idea is to page each segment.
 \begin{figure}[h]
 \centering
-\includegraphics{8_1.png}
+\includegraphics[width = 0.4\textwidth]{8_1.png}
 \end{figure}
-\clearpage
+
 \section{Virtual Memory Management}
 In virtual memory management, we allow logical memory space of a process tobe larger than physical memory. The logical address space can either reside in physical memory or in \textit{secondary} storage.\\
 We extend the paging scheme:
@@ -1114,7 +1092,7 @@ We use a \textbf{page table} to translate virtual address to physical address. I
 If CPU finds out a certain page is \textit{not} memory resident, it will trigger a \textbf{page fault}, which will be handled by OS, to bring the non-memory resident page into the physical memory. After this step, CPU will retry the instruction. 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.6\textwidth]{9_1.png}
+\includegraphics[width=0.4\textwidth]{9_1.png}
 \end{figure}
 It is usually unlikely that \textbf{thrashing}, the occurrence of page fault, will happen, because of \textbf{locality principle}, which includes temporal and spatial locality.\\
 \begin{itemize}
@@ -1132,7 +1110,7 @@ Each smaller page table should ideally be of the same size as the page size, to 
 To keep track of these smaller page tables, a single \textbf{page directory} is needed, which contains the $2^M$ indices to locate each of the smaller page table.
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.6\textwidth]{9_2.png}
+\includegraphics[width=0.4\textwidth]{9_2.png}
 \end{figure}
 \end{definition}
 It allows empty entries in the page directory, which means the corresponding smaller page table need not be allocated. This saves memory space.
@@ -1143,7 +1121,7 @@ The offset of the inverted page table entry will be the frame number of physical
 To make query faster, one should hash the inverted page table.
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.6\textwidth]{9_3.png}
+\includegraphics[width=0.4\textwidth]{9_3.png}
 \end{figure}
 \end{definition}
 \subsection{Page Replacement Algorithm}
@@ -1224,7 +1202,7 @@ If local replacement is used,
 \hfill\\\normalfont We define the working set Window $\delta$ as a interval of time. We denote $W(t,\delta)$ to be the active pages in interval at time $t$. We allocate enough frames for pages in $W(t,\delta)$ to reduce possibility of page fault.\\
 The accurancy of working set model is directly affected by the $\delta$ chosen.
 \end{definition}
-\clearpage
+
 \section{File Management Introduction}
 We want to introduce a file system on top of external storage to store \textbf{persistent} information, in contrast to physical memory storing \textbf{volatile} information.\\
 File system sdhould provide
@@ -1324,7 +1302,7 @@ These operations are provided by OS via \textbf{system calls}, which provides pr
 To keep track of these information, we need a system-wide open-file table and also some per-process open-file table. The system-wide table's entry corresponds to a unique file, whereas the per-process open-file table entry corresponds to a entry in a system-wide table.
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.6\textwidth]{10_1.png}
+\includegraphics[width=0.4\textwidth]{10_1.png}
 \end{figure}
 \subsection{Directory}
 Directory is used to
@@ -1347,7 +1325,7 @@ We can structure the directory as
   \item General Graph\\
   This is not desirable, since we may encounter infinite loop in traversal and it is hard to determine when to remove a file or directory.
 \end{itemize}
-\clearpage
+
 \section{File System Implementation}
 General disk structure can be treated as a 1D array of \textbf{logical block}, where the logical block is the smallest accessible unit.\\Logical block is mapped into \textbf{disk sectors}, whose layout is \textbf{hardware dependent}.\\
 The \textbf{Master Boot Record(MBR)} at sector $0$ with partition table, is followed by one or more partitions, where we 
@@ -1469,12 +1447,12 @@ A few algorithms include
   \item Shortest Seek First
   \item SCAN family, which can be bidirectional or unidirectional.
 \end{itemize}
-\clearpage
+
 \section{File System Case Study}
 \subsection{FAT File System}
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.7\textwidth]{12_1.png}
+\includegraphics[width=0.4\textwidth]{12_1.png}
 \end{figure}
 Above, the FAT is called File Allocation Table.\\
 File data are allocated to a number of data blocks, or data block cluster. The allocation info is kept as \textbf{linked list} and stored separately in the FAT.\\
@@ -1502,7 +1480,7 @@ Directory entry is a fixed-size 32-bytes per entry, which contains
 \end{itemize}
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.8\textwidth]{12_2.png}
+\includegraphics[width=0.4\textwidth]{12_2.png}
 \end{figure}
 \subsubsection{File Operations}
 For \textbf{File Deletion}, we \textit{delete} teh directory entry by settting the first letter in the filename to the special value \texttt{0xE5}. We then free data blocks by setting FAT entries to FREE. However, actual data blocks remain intact.\\
@@ -1514,7 +1492,7 @@ The $8+3$ short version is kept for backward compatibility.
 Disk space is split into Blocks, and blocks are grouped into block groups. Each file/directory is described by a \textbf{single} special structure known as I-node(index node). I-node will contain file metadata and data block addresses.
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.7\textwidth]{12_4.png}
+\includegraphics[width=0.4\textwidth]{12_4.png}
 \end{figure}
 \textbf{Superblock} descirbes the whole file system, for example total I-nodes number, I-node per group, total disk blocks, disk block sper group. This is duplicated in each block group for redundancy.\\
 \textbf{Group descriptors} describe each block group, for example number of free disk blocks, free I-nodes, and location of bitmaps. It is duplicated in each block group as well.\\
@@ -1523,7 +1501,7 @@ Disk space is split into Blocks, and blocks are grouped into block groups. Each 
 \textbf{I-Node table} is an array of I-nodes, so that each I-node can be access by an unique index, and contains only I-nodes of this block group.
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.7\textwidth]{12_3.png}
+\includegraphics[width=0.4\textwidth]{12_3.png}
 \end{figure}
 Above is the I-Node Structure, which has size of 128 bytes.\\
 For the data blocks of a directory, it stores a linked list of directory entries for file/subdirectories information within the directory. Each directory entry contains:

@@ -1,0 +1,687 @@
+\PassOptionsToPackage{svgnames}{xcolor}
+\documentclass[12pt]{article}
+
+
+
+\usepackage[margin=0.1in]{geometry}  
+\usepackage{graphicx}             
+\usepackage{amsmath}              
+\usepackage{amsfonts}              
+\usepackage{framed}               
+\usepackage{amssymb} 
+\usepackage{array}
+\usepackage{amsthm}
+\usepackage[nottoc]{tocbibind}
+\usepackage{bm}
+\usepackage{enumitem}
+
+
+  \newcommand\norm[1]{\left\lVert#1\right\rVert}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0em}
+\newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{notation}{Notation}[section]
+\theoremstyle{definition}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arccsc}{arccsc}
+\DeclareMathOperator{\PV}{PV}
+\DeclareMathOperator{\TV}{TV}
+\DeclareMathOperator{\diff}{d}
+\DeclareMathOperator{\expec}{E}
+\DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\cov}{Cov}
+\DeclareMathOperator{\CE}{CE}
+\DeclareMathOperator{\RP}{RP}
+\newcommand\cf[1]{\mathbf{#1}}
+\setcounter{tocdepth}{1}
+\setcounter{section}{-1}
+\begin{document}
+
+
+
+%\clearpage
+\twocolumn
+\section{Review}
+\subsection{Introduction}
+\begin{definition}[Zero-coupon Bond]
+\normalfont A contract to deliver $\$1$ on a future date $T$ is known as a \textbf{zero-coupon bond}.\\
+The price of the bond at time $t<T$ is denoted by $P(t,T)$, where $T$ is the maturity of the bond.
+\end{definition}
+\begin{definition}[Money Market Account]
+\normalfont The \textbf{money market account} is an asset created by the following procedure, called continuously compounded:
+\begin{itemize}
+  \item The initial amount equal to $\$1$ is invested at time $t=0$ in the bond with the shortest available maturity(i.e. the next infinitesimal instant).
+  \item The position is rolled over to the bond with the next shortest maturity once the first bond expires.
+\end{itemize}
+The price of the money market at time $t$ is denoted by $M_t$.
+\end{definition}
+\begin{theorem}
+\normalfont We have
+\[
+\diff M_t = r(t)M_t\diff t
+\]
+to describe the value of money market account, where $r(t)$ is a parameter known as the interest rate.\\
+Solving, we have
+\[
+M_t = \exp\left(\int_0^t r(u)\diff u\right)
+\]
+\end{theorem}
+\textbf{Remark}: The relationship between $M_t$ and $P(t,T)$ is non-trivial if $r(t)$ is stochastic. However, 
+\begin{theorem}
+\normalfont Suppose interest rate $r$ is constant. Then, 
+\[
+P(t,T)=\frac{M_t}{M_T} = e^r(T-t)
+\]
+It is obvious that $P(t,T)<1$ as long as $r>0$.
+\end{theorem}
+\begin{definition}[Value of Asset]
+\normalfont The \textbf{value} of an asset is the amount of dollars that an investor will pay to own that asset.\\
+The term \textbf{stock price} refers to the value (per unit) of the stock under consideration.
+\end{definition}
+\begin{definition}[Position]
+\normalfont A \textbf{position} in an asset is the equantity of an asset owned or owed by an investor.
+\begin{itemize}
+  \item \textbf{long position}: the investor \textit{owns} the asset.
+  \item \textbf{short position}: the investor \textit{sells} the asset that he does not own.
+\end{itemize}
+\end{definition}
+\begin{definition}[Portfolio]
+\normalfont A \textbf{portfolio} is a combination of various positions in financial assets.\\
+At any time $t$, the \textbf{value of the portfolio} $\Pi_t$ is just eh sum of the values of all the positions held in the portfolio at that particular time $t$:
+\[
+\Pi_t = a_t^{(1)}A_t^{(1)}+\cdots +a_t^{(n)}A_t^{(n)}
+\]
+where $a_t^{(i)}$ is the position where $A_t^{(i)}$ is the price of the asset at time $t$.\\
+Since the price of assets is not determined by us, therefore, $\Pi_t$ can be written as the vector 
+\[
+(a_t^{(1)}),\ldots, a_t^{(n)})
+\]
+\end{definition}
+\begin{definition}[Self-financing]
+\normalfont A portfolio $\Pi_t=(a_t^{(1)}),\ldots, a_t^{(n)})$ is \textbf{self-financing} over the time interval $[0,T]$ if there is \textit{no} exogeneous infusion or withdrawal of money, \textit{except} possibly at the initiation time $0$ or maturity date $T$:
+\[
+\diff\Pi_t = a_t^{(1)}dA_t^{(1)}+\cdots +a_t^{(n)}dA_t^{(n)}
+\]
+Roughly speaking, the differential equation says tha thte change in portfolio is completely due to the change in the underlying asset prices and nothing else.
+\end{definition}
+\begin{definition}[Direction of Cash Flow]
+\normalfont Suppose I am an investor
+\begin{itemize}
+  \item If cash flow is positive, it measn that someone pays me.
+  \item If cash flow is negative, it means that I pay someone.
+\end{itemize}
+\end{definition}
+Cash flow depends on
+\begin{enumerate}
+  \item the value of the underlying portfolio, and
+  \item whether or not the portfolio is entered into or liquidated.
+\end{enumerate}
+\subsection{Financial Market}
+\begin{definition}[Arbitrage]
+\normalfont An \textbf{arbitrage opportunity} is the existence of a self-financing portfolio $\Pi_t, 0\leq t\leq T$, having the following properties:
+\begin{enumerate}
+  \item $\Pi_0=0$
+  \item $\Pi_T\geq 0$ for \textbf{all possible} outcomes
+  \item There is a positive probability that $\Pi_T>0$.
+\end{enumerate}
+\end{definition}
+\begin{definition}[Equivalent Definition of Arbitrage]
+\normalfont An arbitrage opportunity is the existence of a self-financing portfolio $\Pi_t, 0\leq t\leq T$, having the following properties:
+\begin{enumerate}
+  \item $\Pi_T-\Pi_0e^{rT}\geq 0$ for \textbf{all possible} outcomes
+  \item There is a positive probability that $\Pi_T-\Pi_0e^{rT}>0$
+\end{enumerate}
+\end{definition}
+\begin{theorem}[Consequence of No Arbitrage]
+\normalfont Suppose there are two self-financing portfolios $\Pi_t^A$ and $\Pi_t^B$ over the time interval $[t,T]$ such that $\Pi_T^A\geq \Pi_T^B$. Then in the absence of arbitrage, we must have
+\[
+\Pi_t^A\geq \Pi_t^B
+\]
+\end{theorem}
+\begin{theorem}[Law of One Price]
+\normalfont Law of one price is a consequence of the above theorem.\\
+Suppose there are two self-financing portfolios $\Pi_t^A$ and $\Pi_t^B$ over the time interval $[t,T]$ such that $\Pi_T^A = \Pi_T^B$. Then, in the absence of arbitrage, we must have
+\[
+\Pi_t^A = \Pi_t^B
+\]
+\end{theorem}
+\begin{theorem}
+\normalfont All \textit{risk-free} portfolios must earn the same return, i.e., \textit{riskless interest rate}. Suppose $\Pi_t$ is teh valueo f a riskfree portfolio, and $\diff\Pi_t$ is the price increment during a small period of time interval $[t,t+\diff t]$. Then
+\[
+\diff \Pi_t = r\Pi_t\diff t
+\]
+where $r$ is the riskless interest rate.
+\end{theorem}
+\subsection{Forward Contracts \& Options}
+\begin{definition}[Forward Contract]
+\normalfont A \textbf{forward contract} is a contract that delivers one unit of the underlying asset on a known future date $T$ for a certain price $K$ agreed today.\\
+Here,
+\begin{itemize}
+  \item $K$ is the \textbf{delivery price}
+  \item $T$ is called the \textbf{delivery date}
+  \item the buyer of the contract is in the long position
+  \item the seller of the contract is in the short position
+  \item the delivery price $K$ is the amount the long sides pays the short side in exchange of one unit of the \textbf{udnerlying asset whose value} is $S_T$ on the delivery date $T$.
+\end{itemize}
+\end{definition}
+\begin{definition}[Forward Price]
+\normalfont The \textbf{forward price} at time $t$ is the delivery price of a forward contract which costs nothing to enter into at time $t$.
+We denote the forward price at time $t$ by
+\[
+F(S_t, t, T)
+\]
+\end{definition}
+\textbf{Remark}: The forward price $F(S,t,T)$ is \textit{not} the value of corresponding forward contract.
+\begin{definition}[Payoff, Profit]
+\normalfont The \textbf{payoff} to a position is the value of the position at the maturity date $T$.\\
+The \textbf{profit} to a position is the payoff to the position at maturity dat $T$, subtracted by the time-$T$ value of the initial investment in the position:
+\[
+\Pi_T-\Pi_te^{r(T-t)}
+\]
+\end{definition}
+\begin{theorem}[Payoff of Forward Contract]
+\normalfont It is obvious from the definition that 
+\begin{itemize}
+  \item the payoff to a long forward contract is $S_T-K$;
+  \item the payoff to a short forward contract is $K-S_T$
+\end{itemize}
+\end{theorem}
+Suppose it costs nothing to enter into a forward contract, then by using the forward price definition, 
+\begin{itemize}
+  \item the payoff and the profit to a long forward contract are the same:
+  \[
+S_T-F(S, t, T)
+  \]
+  \item the payoff and profit to a short forward contract are the same:
+  \[
+F(S,t,T) - S_T
+  \]
+\end{itemize}
+\begin{theorem}[Forward Price]
+\normalfont Suppose the underlying stock $S$ does not pay dividends. Then the forward price $F(S,t, T)$ of stock at time $t$ is given by
+\[
+F(S,t,T) = Se^{r(T-t)}
+\]
+where $S$ is the price of the stock at time $t$.
+\end{theorem}
+\begin{definition}[Call Option]
+\normalfont A \textbf{call option} is an agreement where the buyer has the \textit{right}, but not the obligation to buy the underlying asset, for a certain price $K$ agreed at the initiation of the contract. Here, $K$ is called the stike price, whereby $T$ is used to denote maturity, which is the darte by which option must be exercised or it becomes worthless. \\
+For now, we consider only European call option, where exercise of the contract occurs only at maturity $T$.\\
+The payoff to a long European call option with strike price $K$ and maturity $T$ is
+\[
+(S_T-K)^+=\max\{S_T-K,0\}
+\]
+where the payoff to a short European call option with same strike price and maturity is $-(S_T-K)^+$.
+\end{definition}
+\begin{definition}[Put Option]
+\normalfont A \textbf{put option} is an agreement where the buyer has the right to sell an asset, but not the obligation to sell, for a certain price $K$ agreed at the initiation of the contract.\\
+The payoff to a long European put option with strike price $K$ and expiration $T$ is
+\[
+(K-S_T)^+=\max\{K-S_T,0\}
+\]
+whereas the payoff to a short European put option with same strike price and expiration $T$ is $-(K-S_T)^+$.
+\end{definition}
+\begin{definition}[Moneyness]
+\normalfont Options are often described by their degree of moneyness. At any time $t$, an option is said to be 
+\begin{itemize}
+  \item \textbf{in-the-money} if payoff at time $t>0$.
+  \item \textbf{at-the-money} if payoff$=0$, i.e., $S_t=K$.
+  \item \textbf{out-of-the-money} if payoff$<0$.
+\end{itemize}
+\end{definition}
+\begin{theorem}[Put Call Parity]
+\normalfont We have the following relationship between call $c$ and put $p$ price, over the underlying asset at time $t$. Here $K$ is the strike price of the options and $F$ is the forward price at time $t$.
+\[
+c-p+(K-F)e^{-r(T-t)}=0
+\]
+\end{theorem}
+\subsection{Binomial Model}
+\begin{definition}[One-period Binomial Model]
+\normalfont Suppose the non-dividend paying stock price per share today is $S_0$. We assume that, at the end of the one period, the stock price is either $S_0u$ or $S_0d$ where $d$ and $u$ are positive real numbers such that $d<u$.\\
+We call $u$ the \textbf{up factor} and $d$ the \textbf{down factor}.\\
+Consider a derivative on the stock with time $T$ to maturity. Let $V_0$ be the price of derivative at time $0$.\\
+We can price $V_0$ by constructing $\Pi_0=V_0-\phi S_0$, and make it riskless, i.e. $\Pi_T = V_u-\phi S_0u=V_d-\phi S_0d$, by picking a suitable $\phi$. Since $\Pi_0$ is riskless, its payoff should be the same as any other riskless payoff, e.g. money market account,i.e., $\Pi_T = (V_0-\phi S_0)e^{rT}$.\\
+Solving, we have
+\[
+V_0 = e^{-rT}(pV_u+(1-p)V_d)
+\]
+where $p=\frac{e^{rT}-d}{u-d}$.
+\end{definition}
+We can interpret $p$ and $1-p$ as probabilities distribution on $S_T$, so that we can write
+\[
+V_0 = e^{-rT}E^\mathbb{Q}[V_T]
+\]
+The expectation of $S_T$ under $\mathbb{Q}$ is
+\[
+E^\mathbb{Q}[S_T] = S_0e^{rT}
+\]
+which matches our riskless argument.
+\begin{theorem}[Restriction on {$u$} and {$d$}]
+\normalfont In the one-period binomial model where the one period is $[0,T]$ and the corresponding up-factor and down-factor of a non-dividend paying stock are $u$ and $d$ respectively with $d<u$, we have
+\[
+d<e^{rT}<u
+\]
+\end{theorem}
+\begin{definition}[Multi-period Binomial Model]
+\normalfont At any time $j\Delta t$, there are $j+1$ possible stock prices:
+\[
+S_0d^j, S_0d^{j-1}u,\ldots, S_0u^j
+\]
+Without loss of generality, we can assume that $ud=1$.\\
+If $V_j^k$ is the price of the derivative at time $j\Delta t$ when the underlying stock price is $S_0d^{j-k}u^k$, i.e. there are $k$ period out of $j$ that the price goes up.\\
+We then have
+\[
+V_0 = e^{-rn\Delta t}\sum_{i=0}^n\binom{n}{i}p^i(1-p)^{n-i}V_n^i
+\]
+where $V_0$ is the price of the European style derivative given by the $n$ period binomial model.
+\end{definition}
+%\clearpage
+\section{Brownian Motion}
+\subsection{Brownian Motion}
+\begin{definition}[Standard Brownian Motion]
+\normalfont A \textbf{standard Brownian Motion} is a stochastic process $W_t, t\geq 0$ with the following defining characteristics:
+\begin{itemize}
+  \item[(W1)] $W_0=0$.
+  \item[(W2)] With probability $1$ (almost surely), the function $t\to W_t$ is continuous in $t$.
+  \item[(W3)] For every $0\leq t_1<t_2$, $W_{t_2}-W_{t_1}$ is normally distributed with mean $0$ and variance $t_2-t_1$.
+  \item[(W4)] $W_{t_3}-W_{t_2}$ is independent of $W_{t_1}-W_{t_0}$ for any $0\leq t_0\leq t_1\leq t_2\leq t_3$, i.e. non-overlapping increments are independently distributed.
+\end{itemize}
+\end{definition}
+Property (W3) implies that for any $\Delta t$, $W_{t+\Delta t}-W_t\sim N(0,\Delta t)$. This implies that $|W_t|\leq 1.96\sqrt{t}$ with 95\% probability.\\
+Property (W4) implies that $\cov (W_t, W_s) = E[W_tW_s] = \min\{t,s\}$.\footnote{We write $W_t=(W_t-W_s+W_s)$ if $t>s$.}
+\begin{theorem}[Binomial Approximation to Brownian Motion]
+\normalfont Let $\varepsilon_1,\ldots$ be a sequence of independent, identically distributed random variables with mean $0$ and variance $1$. For each $n\geq 1$, define a continuous time stochastic process $W_t^{(n)}$ by
+\[
+W_t^{(n)} = \frac{1}{\sqrt{n}} \sum_{1\leq i\leq [nt]} \varepsilon_i
+\]
+$W_t^{(n)}$ approaches a standard Brownian motion $N(0,t)$ as $n\to \infty$.
+\end{theorem}
+\begin{theorem}[Infinitesimal Brownian Increment]
+\normalfont We can approximate $\diff W_t$ is a very small time interval $\Delta t$:
+\[
+\Delta W_t:=W_{t+\Delta t} - W_t
+\]
+and then we have
+\[
+\Delta W_t = \phi \sqrt{\Delta t} \text{i.e., }\Delta W_t \sim N(0, \Delta t)
+\]
+where $\phi$ has a standard normal distribution.
+\end{theorem}
+\begin{definition}[Generalised Wiener Process]
+\normalfont A \textbf{generalised Wiener Process} for a variable $X$ can be defined in terms of $\diff W_t$ as
+\[
+\diff X_t = a\diff t + b\diff W_t
+\]
+where $a$ and $b$ are constants. The parameter $a$ is called the \textbf{drift rate} and $b^2$ is called the \textbf{variance rate} of the process.\\
+In a small time interval $\Delta t$, the change $\Delta X_t$ is given by
+\[
+\Delta X_t = a\Delta t + b\Delta W_t
+\]
+Therefore, $\Delta X_t$ has a normal distribution with mean $a\Delta t$ and variance $b^2\Delta t$.
+\end{definition}
+Here, we can safely write $X_t = X_0+at+bW_t$.
+\subsection{Quadratic Variation}
+\begin{definition}[Quadratic Variation]
+Any sequence of values $0=t_0<t_1<\cdots<t_n=T$ is called a partition $\Pi=\Pi(t_0,\ldots, t_n)$ of a fixed interval $[0,T]$. The discrete quadratic variation of a standard Brownian motion $W$ relative to the partition $\Pi$ is defined as
+\[
+Q(W,\Pi) = \sum_{i=1}^n (W_{t_i}-W_{t_{i-1}})^2
+\]
+For any partition $\Pi$, define
+\[
+\|\Pi\| = \max_{1\leq i\leq n}|t_i-t_{i-1}|
+\]
+\end{definition}
+\begin{theorem}[{$n$}th Moment of Standard Normal {$Z$}]
+\normalfont The $n$th moment of a random variable $X$ is defined to be $E[X^n]$. If $\phi\sim N(0,1)$, then
+\[
+E[\phi^n] = \begin{cases}
+0&\text{ if }n\text{ is odd}\\
+\frac{(2k)!}{2^kk!}&\text{ if }n=2k
+\end{cases}
+\]
+In particular, we have $E(\phi^2) = 1$ and $E(\phi^4) = 3$.
+\end{theorem}
+\begin{theorem}
+\normalfont Consider an arbitrary sequence of partitions $\Pi_n$, where $n = 1,2,\ldots$. Suppose $\lim_{n\to \infty} \|\Pi_n\|=0$, then
+\[
+\lim_{n\to \infty} E(Q(W,\Pi_n)-T)^2] = 0
+\]
+That is the standard Brownian motion has quadratic variation which is equal to $T$, in the mean square limit.
+\end{theorem}
+\begin{definition}
+\normalfont Define the integral $\int_0^T (\diff W)^2$ by
+\[
+\lim_{n\to infty} E[\sum_{i=1}^n (W_{t_i}-W_{t_{i-1}})^2 - \int_0^T(\diff W_t)^2]^2 = 0
+\]
+\end{definition}
+However, from quadrativ variation theorem, we have
+\[
+\lim_{n\to infty} E[\sum_{i=1}^n (W_{t_i}-W_{t_{i-1}})^2 - \int_0^T\diff t]^2 = 0
+\]
+Therefore,
+\[
+\int_0^T(\diff W_t)^2=\int_0^T\diff t
+\]
+In fact, we can write
+\[
+(\diff W_t)^2 = \diff t
+\]
+which gives
+\[
+(\Delta W)^2 \approx \Delta t
+\]
+in discrete time approximation.
+\subsection{It\^{o}'s lemma}
+\begin{definition}[It\^{o}'s Process]
+\normalfont The It\^{o}'s Process $\diff X_t$ is defined as 
+\[
+\diff X_t = a(X_t,t)\diff t + b(X_t,t)\diff W_t
+\]
+\end{definition}
+\begin{theorem}[It\^{o}'s Lemma]
+\normalfont Let $V(X_t,t)$ be a smooth function of $t$ and of the It\^{o}'s process $X_t$:
+\[
+\diff X_t = a\diff t + b\diff W_t
+\]
+for some $a=a(X_t,t)$ and $b=b(X_t,t)$. Then we have
+\[
+\diff V(X_t,t) = (a\frac{\partial V}{\partial X}+\frac{\partial V}{\partial t}+\frac{1}{2}b^2\frac{\partial^2 V}{\partial X^2})\diff t+b\frac{\partial V}{\partial X}\diff W_t
+\]
+\end{theorem}
+Another version of the Ito's Lemma where we do not have explicit form of $\diff X$ is
+\[
+\diff V_t = \diff V(X_t,t) = \frac{\partial V}{\partial t}\diff t+\frac{\partial V}{\partial X}\diff X_t + \frac{1}{2}\frac{\partial^2 V}{\partial X^2}(\diff X_t)^2 
+\]
+\begin{definition}[Ito Integral]
+\normalfont In order to have differential form of the SDE $\diff X_t = a(X_t,t)\diff t+b(X_t,t)\diff W_t$, we require $a(X_t,t)$ and $b(X_t,t)$ to be non-anticipative, which means that its value at $t$ can only be available at time $t$.\\
+With the above assumption, we can define
+\[
+\int_0^T a(X_t,t)\diff t = \lim_{n\to \infty}\sum_{i=1}^n a(X_{t_{i-1}}, t_{i-1})(t_i-t_{i-1})
+\]
+and Ito integral
+\[
+\int_0^T b(X_t,t)\diff W_t
+\]
+is the mean-square limit of the sum $\sum_{i=1}^n b(X_{t_{i-1}}, t_{i-1})(W_{t_i}-W_{t_{i-1}})$.
+\end{definition}
+%\clearpage
+\section{Black-Scholes Model}
+In Black-Scholes Model, we assume the following 2 conditions:
+\begin{enumerate}
+  \item The money market(riskless asset) $M_t$ is given by
+  \[
+\diff M_t = rM_t\diff t
+  \]
+  \item The stock price follows the Geometric Brownian motion:
+  \[
+\diff S_t = \mu S_t\diff t +\sigma S_t\diff W_t
+  \]
+  where $\mu$ and $\sigma$ are constants.\\
+  The explicit formula is $S_t=\exp((\mu-\frac{1}{2}\sigma^2)t+\sigma W_t)$.
+\end{enumerate}
+We can derive Black Scholes PED from either delta hedging, where we take $\Pi_t=V_t-\phi_tS_t, \;0\leq t\leq T$, such that $\phi_t$ is chosen to make $\Pi_t$ self-financing and riskless.\\
+Self financing condition gives
+\[
+\diff \Pi_t=\diff V_t - \phi_t\diff S_t
+\]
+Also, since $\phi_t$ is chosen so that $\Pi_t$ is riskless, we also need
+\[
+\diff \Pi_t = r\Pi_t\diff t
+\]
+Here, $\diff V_t$ can be calculated via Ito's lemma and $\diff S_t$ is given in assumption. Solving, we will have
+\[
+\phi_t = \frac{\partial V}{\partial S}
+\]
+and
+\[
+\frac{\partial V}{\partial t}+r\frac{\partial V}{\partial S}S_t +\frac{1}{2}\sigma^2S_t^2\frac{\partial^2 V}{\partial S^2}=rV
+\]
+Here, we call $\frac{\partial V}{\partial S}$ \textbf{delta} of the derivative.\\
+We can derive the Black Scholes PDE by \textit{replication} also, by considering an asset $\Pi_t=a_tS_t+b_tM_t$, which satisfies $\Pi_t=V_t$ for all $t\leq T$. The equality throughout $T$ gives $\diff \Pi_t=\diff V_t$.\\
+Similarly, self financing condition gives
+\[
+\diff \Pi_t=a_t\diff S_t+v_t\diff M_t
+\]
+where $\diff S_t$ and $\diff M_t$ are readily available.\\
+Also, we can conpute $\diff V_t$ via Ito's Lemma:
+\[
+\diff V_t = (\frac{\partial V}{\partial S}\mu S_t+\frac{\partial V}{\partial t}+\frac{1}{2}\frac{\partial^2V}{\partial S^2}\sigma^2S_t^2)\diff t+\frac{\partial V}{\partial S}\sigma S_t\diff W_t
+\]
+Then we compare coefficients of $\diff W_t$, arriving at
+\[
+a_t=\frac{\partial V}{\partial S}
+\]
+and therefore $b_t$ can be wriiten as
+\[
+b_t=\frac{1}{M_t}(V_t-\frac{\partial V}{\partial S}S_t)
+\]
+whereas comparing $\diff t$ and make necessary computation, we can arrive at
+\[
+\frac{\partial V}{\partial t}+r\frac{\partial V}{\partial S}S_t +\frac{1}{2}\sigma^2S_t^2\frac{\partial^2 V}{\partial S^2}-rV=0
+\]
+\textbf{Remark}:
+\begin{enumerate}
+  \item The drift parameter $\mu$ of the stock never enters into the PDE.
+  \item To uniquely determine the solution, we must prescribe
+  \begin{itemize}
+    \item Boundary conditions
+    \item Initial, or final conditions
+  \end{itemize}
+\end{enumerate}
+\begin{theorem}[Solution to Black Scholes PDE]
+\normalfont For a European call option with a call price $c(S_t,t)$, we can make the following observation:
+\begin{enumerate}
+  \item Final condition: $c(S_T,T)=\max\{S_T-K, 0\}$
+  \item Boundary condition 1: $S_0=0\Rightarrow c(0,t)=0\text{ for all }0\leq t\leq T$.
+  \item Boundary condition 2: With $S_t\gg K$, we have $c(S_t,t)\approx S_t$ for all $0\leq t\leq T$.
+\end{enumerate}
+With these observation, we have, for European call
+\[
+c_t= S_tN(d_{+})-Ke^{-r\tau}N(d_{-})
+\]
+For European put:
+\[
+p_t=Ke^{-r\tau}N(-d_{-})-S_tN(-d_+)
+\]
+where 
+\[
+d_{\pm}=\frac{\ln(S_t/K)+(r\pm \sigma^2/2)\tau}{\sigma\sqrt{\tau}}
+\]
+and
+\[
+\tau = T-t
+\]
+\end{theorem}
+\begin{theorem}[Black Scholes PDE with Presence of Dividends]
+\normalfont With presence of dividends,
+\[
+\diff \Pi_t = a_t\diff S_t+b_t\diff M_t+a_tqS_t\diff t
+\] 
+The black scholes PDE becomes
+\[
+\frac{\partial V}{\partial t}+(r-q)\frac{\partial V}{\partial S}S_t +\frac{1}{2}\sigma^2S_t^2\frac{\partial^2 V}{\partial S^2}-rV=0
+\]
+\end{theorem}
+\subsection{Preliminaries on Martingale Pricing}
+\begin{definition}[Equivalent Probability Measure]
+\normalfont Suppose there are two probability measures $\mathbb{P}$ and $\mathbb{Q}$ on space $(\Omega, \mathcal{F})$. We say that $\mathbb{P}$ and $\mathbb{Q}$ are \textbf{equivalent}, denoted by $\mathbb{P}\sim \mathbb{Q}$ if
+\[
+\mathbb{P}(A)>0\Leftrightarrow \mathbb{Q}(A)>0\text{  for all }A\in\mathcal{F}
+\]
+\end{definition}
+Essentially, two equivalent measures agree on \textbf{all} certain and impossible events.\\
+We hope to derive an equivalent probability measure $\mathbb{Q}$ from an existing one $\mathbb{P}$. To do this, we require a \textbf{positive} random variable $L$ with property $\expec^{\mathbb{P}}[L]=1$. These two conditions are two defining characteristic of a Radon-Nikodym Derivative $L$.\\
+Define $\mathbb{Q}$ by
+\[
+\mathbb{Q}(A)=\expec^{\mathbb{P}}[L\cdot \mathbf{1}_A]
+\]
+where $\mathbb{1}_A$ is the indicator random variable for the event $A$.
+\begin{theorem}[Radon Nikodym]
+\normalfont Consider two probability measures $\mathbb{P}$ and $\mathbb{Q}$ on $(\Omega, \mathcal{F})$. The following are equivalent:
+\begin{enumerate}
+  \item $\mathbb{P}\sim\mathbb{Q}$
+  \item There eixsts a positive random variable $L$ such that for every event $A\in\mathcal{F}$
+  \begin{itemize}
+    \item $\mathbb{Q}(A)=\expec^\mathbb{P}[L\cdot \mathbf{1}_A]$
+    \item $\mathbb{P}(A)=\expec^\mathbb{Q}[\frac{1}{L}\cdot \mathbf{1}_A]$.
+  \end{itemize}
+\end{enumerate}
+Here $L=\frac{\diff \mathbb{Q}}{\diff \mathbb{P}}$, as derived from theorem, is called the Radon Nikodym derivative of $\mathbb{Q}$ wrt $\mathbb{P}$.
+\end{theorem}
+\begin{theorem}
+\normalfont Let $X$ be a random variable. With above notations, we have
+\[
+\expec^\mathbb{Q}[X]=\expec^\mathbb{P}[L\cdot X]
+\]
+and
+\[
+\expec^\mathbb{P}[X]=\expec^\mathbb{Q}[\frac{1}{L}\cdot X]
+\]
+\end{theorem}
+\begin{definition}[Filtration]
+\normalfont Let $\{\mathcal{F}_t\}, 0\leq t\leq T$ be a filtration, where $\mathcal{F}_t$ is information available to us at time $t$.\\
+Trivially, we have $\mathcal{F}_s\subseteq \mathcal{F}_t$ for $s\leq t$.
+\end{definition}
+Suppose we now want to move from $(\Omega, \{\mathcal{F}_t\}, \mathbb{P})$ to $(\Omega, \{\mathcal{F}_t\}, \mathbb{Q})$, we require a random variable $L_T$ satisfying the following:
+\begin{itemize}
+  \item $L_T$ is $\mathcal{F}_T$ measurable, which means that $L_T$ will be known at time $T$.
+  \item $L_T$ is positive.
+  \item $\expec^\mathbb{P}[L_T]=1$.
+\end{itemize}
+Define a stochastic process $L_t$ as follows:
+\[
+L_t=\expec^\mathbb{P}[L_T\mid \mathcal{F}_t], 0\leq t\leq T
+\]
+The above process is called \textbf{Radon-Nikodym} derivative/likelihood process.
+\begin{theorem}
+\normalfont Suppose $X_t,0\leq t\leq T$, is an adapted process on $\Omega, \mathcal{F}_t$. We have
+\[
+\expec^\mathbb{Q}[X_t]=\expec^\mathbb{P}[L_t\cdot X_t], 0\leq t\leq T
+\]
+\end{theorem}
+\begin{theorem}[Bayes' Formula]
+\normalfont For $0\leq s\leq t\leq T$, we have
+\[
+\expec^\mathbb{Q}[X_t\mid \mathcal{F}_s]=\frac{1}{L_s}\expec^\mathbb{P}[L_t\cdot X_t\mid \mathcal{F}_s]
+\]
+\end{theorem}
+%\clearpage
+\section{Martingale \& Girsanov}
+\begin{definition}[Martingale]
+\normalfont Let $(\Omega, \{\mathcal{F}_t\}_{0\leq t\leq T}, \mathbb{P})$ be a filtered probability space. Consider an adapted stochastic process $I_t,0\leq t\leq T$. \\
+We say that $I_t$ is a $\mathbb{P}$-\textbf{martingale} if
+\[
+\expec^\mathbb{P}[I_t\mid \mathcal{F}_s]=I_s\text{  for all }0\leq s\leq t\leq T
+\]
+\end{definition}
+Heuristically, we have
+\[
+\expec_t[\diff I_t]=0
+\]
+\begin{theorem}
+\normalfont Suppose $X_t$ is an adapted process, and $W_t$ a Brownian motion under $\mathbb{P}$. Define
+\[
+I_t=\int_0^t X_u\diff W_u
+\]
+or equivalently,
+\[
+\diff I_t=X_t\diff W_t
+\]
+Then $I_t$ is a $\mathbb{P}$-martingale.
+\end{theorem}
+\begin{theorem}[Martingale Representation Theorem]
+\normalfont Suppose $I_t$ is a $\mathbb{P}$-martingale, and $W_t$ a Brownian motion under $\mathbb{P}$. Then there is an adapted process $X_t$ under $\mathbb{P}$, such that
+\[
+I_t=I_0+\int_0^t X_u\diff W_u
+\]
+i.e.,
+\[
+\diff I_t=X_t\diff W_t
+\]
+\end{theorem}
+\begin{theorem}[Girsanov]
+\normalfont Suppose $W_t$ is a Brownian motion under measure $\mathbb{P}$, and $\theta$ a constant. Define
+\[
+\tilde{W}_t=W_t+\theta t
+\]
+i.e.,
+\[
+\diff \tilde{W}_t=\diff W_t+\theta \diff t
+\]
+Then there exists a measure $\mathbb{Q}$, equivalent to $\mathbb{P}$, such that $\tilde{W}_t$ is a $\mathbb{Q}$-Brownian motion.\\
+Moreover, the probability $\mathbb{Q}$ is defined by
+\[
+L_T=\frac{\diff \mathbb{Q}}{\diff \mathbb{P}} = e^{-\frac{1}{2}\theta^2T-\theta W_T}
+\]
+\end{theorem}
+The Radon-Nikodym process $L_t$ in the Girsanov Theorem is given by
+\[
+L_t=\expec^\mathbb{P}[L_T\mid \mathcal{F}_t]=e^{-\frac{1}{2}\theta^2t-\theta W_t}
+\]
+By Ito's Lemma, $L_t$ has the following equivalent differential form:
+\[
+\diff L_t =-\theta L_t\diff W_t
+\]
+\begin{theorem}[Martinalizing Discounted Stock Price]
+\normalfont In $\mathbb{P}$, $\diff S_t = \mu S_t\diff t + \sigma S_t\diff W_t$. We denote $\frac{S_t}{M_t}$ the \textbf{discounted stock price}, where $M_t$ is the money market account. By Ito's Lemma,
+\[
+\diff(\frac{S_t}{M_t}=\sigma\frac{S_t}{M_t}(\frac{\mu-r}{\sigma}\diff t + \diff W_t)
+\]
+Therefore, we define
+\[
+\diff \tilde{W}_t=\frac{\mu-r}{\sigma}\diff t+\diff W_t
+\]
+to arrive at 
+\[
+\diff (\frac{S_t}{M_t})=\sigma\frac{S_t}{M_t}\diff \tilde{W}_t
+\]
+which makes $\frac{S_t}{M_t}$ a $\mathbb{Q}$-martingale for a equivalent probability measure $\mathbb{Q}\sim \mathbb{P}$.\\
+Girsanov Theorem ensures $\tilde{W}_t$ is a Brownian motion in $\mathbb{Q}$, given by the Radon-Nikodym process
+\[
+\diff L_t = -\theta L_t\diff W_t
+\]
+where $\theta=\frac{\mu-r}{\sigma}$ is the Sharpe ratio.\\
+The dynamic of $S_t$ in $\mathbb{Q}$ is
+\[
+\diff S_t = rS_t\diff t +\sigma S_t\diff \tilde{W}_t
+\]
+so
+\[
+S_t=S_0e^{(r-\frac{1}{2}\sigma^2)t+\sigma\tilde{W}_t}
+\]
+\end{theorem}
+\subsection{Risk Neutral Valuation}
+We often denote $\mathbb{Q}$ as the risk neutral measure.
+\begin{definition}[European Contingent Claim]
+\normalfont A \textbf{European contingent claim} or a $T$-claim is a financial instrument consisting of a payment $V_T$ at maturity date $T$. Here $V_T$ is non-negative random variable.
+\end{definition}
+\begin{theorem}[Risk-Neutral Valuation Formula]
+\normalfont \[
+\frac{V_t}{M_t}=\expec_t^\mathbb{Q}[\frac{V_T}{M_T}]
+\]
+\end{theorem}
+Below is an outline of derivation:
+\begin{enumerate}
+  \item Define $U_t:=\expec_t^\mathbb{Q}[\frac{V_T}{M_T}]$. Note $U_t$ is a $\mathbb{Q}$ martingale.
+  \item Martingale Representation Theorem suggests there exists some adapted process $\eta_t$ such that
+  \[
+\diff U_t=\eta_t\diff \tilde{W}_t
+  \]
+  \item We already have $\diff (\frac{S_t}{M_t})=\sigma\frac{S_t}{M_t}\diff \tilde{W}_t$. Therefore, $\diff U_t=\phi_t\diff(\frac{S_t}{M_t})$ where $\phi_t=\frac{\eta_t M_t}{\sigma S_t}$.
+  \item We define $\Pi_t=\phi_tS_t+\gamma_tM_t$ where $\gamma_t=U_t-\phi_t\frac{S_t}{M_t}$. Therefore, $\Pi_t=U_tM_t$ and $\Pi_T=U_TM_T=V_T$. We claim $U_tM_t$ is arbitrage-free price of derivative.
+  \item Since $\Pi$ is self financing, we can show $\diff \Pi_t=\diff(U_tM_t)=\diff(U_t e^{rt})$. Applying Ito's Lemma, $\diff \Pi_t = rU_tM_t\diff t + e^{rt}\phi_t\diff (\frac{S_t}{M_t})$. Applying Ito's Lemma one more time and we can arrive at $\Pi_t=\phi_t\diff S_t+r_t\diff M_t$, which is the definition of self-financing condition.
+  \item Then it follows $U_tM_t=V_t$, and theorem follows.
+\end{enumerate}
+Using this theorem, we can calculate the derivative price at time $t$ from its final payoff at time $T$, by taking expectation
+\[
+V_t=\expec^\mathbb{Q}[e^{-r(T-t)}V_T\mid \mathcal{F}_t]
+\]
+where one can write $V_T=V_t\cdot f(T-t)$ to get rid of conditional expectation, and take integral eventually after finding out the upper/lower bound of the integral.
+\section{Useful Properties}
+\begin{theorem}[Lognormal Distribution]
+Suppose $X$ follows lognormal distribution$(\mu, \sigma^2)$, then the mean is $\exp(\mu+\sigma^2/2)$ and variance is $(\exp(\sigma^2)-1)\exp(2\mu+\sigma^2)$.
+\end{theorem}
+\end{document}

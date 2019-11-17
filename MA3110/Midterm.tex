@@ -1,0 +1,476 @@
+\PassOptionsToPackage{svgnames}{xcolor}
+\documentclass[12pt]{article}
+
+
+
+\usepackage[margin=0.1in]{geometry}  
+\usepackage{graphicx}             
+\usepackage{amsmath}              
+\usepackage{amsfonts}              
+\usepackage{framed}               
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{amsthm}
+\usepackage[nottoc]{tocbibind}
+\usepackage{bm}
+\usepackage{enumitem}
+
+ \newcommand{\im}{\mathrm{i}}
+  \newcommand{\diff}{\mathrm{d}}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0em}
+\newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+\theoremstyle{definition}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arccsc}{arccsc}
+\setcounter{tocdepth}{1}
+\begin{document}
+%\twocolumn
+\section{Review}
+\begin{definition}[Limit of Sequence]
+\normalfont For a sequence $(x_n)_{n\in \mathbb{N}}$, we say $\lim_{n\to \infty} x_n = a$ if and only if
+\[
+\forall \epsilon >0, \exists n_0\in \mathbb{N} \text{ such that }\forall n\geq n_0, |x_n-a|\leq \epsilon
+\]
+\end{definition}
+Similarly, we define $\lim_{n\to \infty} x_n = \infty$ if and only if
+\[
+\forall M>0, \exists n_0\text{ depending on }M, \text{s.t. }\forall n\geq n_0, x_n\geq M
+\]
+\begin{definition}[Limit Point(Subsequential Limit in \texttt{MA2108} notes)]
+\normalfont A number $a\in[-\infty, \infty]$ is called a \textbf{limit point} of the sequence $(x_n)_{n\in \mathbb{N}}$, if there exists an increasing sequence of indices $n_1<n_2<n_3<\cdots$ such that $\lim_{i\to \infty} x_{n_i} = a$.
+\end{definition}
+\begin{theorem}
+\normalfont $\lim_{n\to \infty}x_n$ does not exist in $[-\infty, \infty]$ if and only if $(x_n)_{n\in \mathbb{N}}$ has more than 1 limit point in $[-\infty, \infty]$.
+\end{theorem}
+\begin{definition}[Supremum and Infimum]
+\normalfont Let $A\subset[-\infty, \infty]$. The \textbf{supremum} of $A$, denoted by $\sup A$, is defined to be the \textbf{least upper bound} of $A$.\\
+Essentially, $p = \sup A$ if and only if
+\begin{enumerate}
+  \item $x\leq p\forall x\in A$
+  \item if $x\leq u\forall x\in A$ for some $u\in [-\infty, \infty]$, then $p\leq u$.
+\end{enumerate}
+The infimum is defined in a similar fashion. For detailed definition, check MA2108 revision notes.
+\end{definition}
+\begin{definition}[Limit Supremum and Infimum]
+\normalfont Given a sequence of real numbers $(x_n)_{n\in \mathbb{N}}$,
+\[
+\lim\sup_{n\to\infty} x_n :=\lim_{n\to \infty}(\sup_{m\geq n} x_m)
+\]
+and 
+\[
+\lim\inf_{n\to\infty} x_n :=\lim_{n\to \infty}(\inf_{m\geq n} x_m)
+\]
+\end{definition}
+\begin{theorem}
+\normalfont $\lim\sup_{n\to \infty} x_n$ is a limit point and the \textbf{largest limit point} of the sequence $(x_n)_{n\in \mathbb{N}}$. $\lim\inf_{n\to \infty} x_n$ is the smallest limit point.
+\end{theorem}
+\begin{theorem}
+\normalfont $\lim_{n\to\infty} x_n$ exists in $[-\infty,\infty]$ if and only if $\lim\sup_{n\to\infty} x_n = \lim\inf_{n\to\infty} x_n$.
+\end{theorem}
+\begin{definition}[Continuity]
+\normalfont A function $f:\mathbb{R}\to\mathbb{R}$ is said to be \textbf{continuous} at $x$ if $\lim_{y\to x} f(y)$ exists and equals $f(x)$.\\
+Equivalently,
+\[
+\forall \epsilon>0, \exists \delta>0\text{ such that } \sup_{y\in[x-\delta, x+\delta]}|f(y)-f(x)|\leq \epsilon
+\]
+\end{definition}
+\section{Derivative}
+\begin{definition}[Derivative]
+\normalfont Let $I\subseteq \mathbb{R}$ be an interval, and let $c\in I$. A function $f:I\to \mathbb{R}$ is differentiable at $c$ if
+\[
+\lim_{x\to c}\frac{f(x)-f(c)}{x-c} = \lim_{h\to 0}\frac{f(c+h)-f(c)}{h} = L
+\]
+for some $L\in \mathbb{R}$.\\
+Equivalently, we need
+\[
+\forall \epsilon>0, \exists\delta>0,\text{ such that} \forall x\in I, 0<|x-c|<\delta \Rightarrow \lvert \frac{f(x)-f(c)}{x-c}-L\rvert \leq \epsilon
+\]
+Here, $L$ is called the \textbf{derivative} of $f$ at $c$, denoted by $f'(c)$, or $\frac{\diff f}{\diff x}\rvert_{x=c}$.
+\end{definition}
+If $f$ is differentiable at every $x\in S\subseteq I$, we say $f$ is differentiable on $S$.
+\begin{definition}[Equivalent Definition of Derivative]
+\normalfont $f$ is differentiable at $c$, if $f(x)$ can be approximated by the line $l(x):=f(c)+f'(c)(x-c)$ near $x=c$, i.e., 
+\[
+\forall \epsilon>0, \exists \delta>0, \text{such that } \forall x\in[c-\delta, c+\delta], |f(x)-l(x)|\leq \epsilon|x-c| 
+\] 
+\end{definition}
+\begin{theorem}[Differentiability infers Continuity]
+\normalfont If $f:I\to \mathbb{R}$ is differentiable at $c\in I$, then $f$ is continuous at $c$.
+\end{theorem}
+\begin{theorem}[Derivative Rules]
+\normalfont Suppose that $f,g: I\to\mathbb{R}$ are differentiable at $c\in I$, then
+\begin{itemize}
+	\item (Linearity) For any $a,b\in\mathbb{R}$, $af+bg$ is differentiable at $c$, and
+	\[
+(af+bg)'(c) = af'(c)+bg'(c)
+	\]
+	\item (Product Rule) $fg$ is differentiable at $c$ and
+	\[
+(fg)'(c) = f'(c)g(c)+f(c)g'(c)
+	\]
+	\item (Quotient Rule) If $g(c)\neq 0$, then $f/g$ is differentiable at $c$ and
+	\[
+(\frac{f}{g})'(c) = \frac{f'(c)g(c)-f(c)g'(c)}{g(c)^2}
+	\]
+\end{itemize}
+\end{theorem}
+\begin{theorem}[Caratheodory's Representation Lemma]
+\normalfont Let $f:I\to\mathbb{R}$ and let $c\in I$. The following conditions are equivalent:
+\begin{enumerate}
+	\item $f$ is differentiable at $c$.
+	\item There exists a function $\phi:I\to\mathbb{R}$ such that $\phi$ is continuous at $c$ and
+	\[
+f(x)-f(c)=\phi(x)(x-c)\;\;\;\forall x\in I
+	\]
+	In this case, $\phi(c) = f'(c)$.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[Chain Rule]
+\normalfont Let $I,J$ be intervals in $\mathbb{R}$. Let $g:I\to J$ and $f:J\to \mathbb{R}$. Suppose $g$ is differentiable at $c\in I$ and $f$ is differentiable at $g(c)\in J$, then $f\circ g$ is differentiable at $c$, with
+\[
+(f\circ g)'(c)=f'(g(c))g'(c)
+\]
+\end{theorem}
+\section{Mean Value Theorem}
+\begin{theorem}[Derivative of an Inverse Function]
+\normalfont Let $I$ be an interval, and $f:I\to\mathbb{R}$ be continuous and stricly monotone on $I$. Let $J:=f(I)$ be the \textbf{range} of $f$, and $g:J\to I$ be the inverse of $f$.\\
+If $f$ is differentiable at $c\in I$ and $f'(c)\neq 0$, then $g$ is differentiable at $f(c)\in J$, and
+\[
+g'(f(c)) = \frac{1}{f'(c)}
+\]
+\end{theorem}
+\begin{theorem}[Mean Value Theorem]
+\normalfont Let $f:[a,b]\to\mathbb{R}$ be continuous on $[a,b]$ and differentiable on $(a,b)$. Then there exists $c\in (a,b)$ such that
+\[
+f'(c)=\frac{f(b)-f(a)}{b-a}
+\]
+\end{theorem}
+A special case of Mean Value Theorem is Rolle's Theorem. 
+\begin{theorem}[Rolle's Theorem]
+\normalfont When $f(a)=f(b)$ in the Mean Value Theorem, we obtain the existence of a $c\in(a,b)$ with
+\[
+f'(c)=0
+\]
+\end{theorem}
+\begin{definition}[Relative Extremum]
+\normalfont Let $f:I\to \mathbb{R}$ for some subset $I\subseteq \mathbb{R}$ and let $c\in I$. Then
+\begin{enumerate}
+	\item $f$ has a \textbf{relative maximum} at $c$, if for some $\delta>0$,
+	\[
+f(c)\geq f(x)\forall x\in I\cap (c-\delta, c+\delta)
+	\]
+	\item \textbf{Relative minimum} of $f$ on I are defined analogously.
+\end{enumerate}
+Relative Extremum refers to either relative maximum or relative minimum.
+\end{definition}
+\begin{theorem}[Interior Extremum Theorem]
+\normalfont Let $f:I\to\mathbb{R}$, and let $c\in I$ be an interior point of $I$, i,e, $(c-\delta, c+\delta)\subseteq I$ for some $\delta>0$.\\
+If $f$ is differentiable at $c$ adn has a relative extremum at $c$, then $f'(c)=0$.
+\end{theorem}
+\begin{theorem}
+\normalfont Let $f:I\to\mathbb{R}$ and assume that $f'(c)$ exists for some $c\in I$.
+\begin{enumerate}
+	\item If $f'(c)>0$, then for some $\delta>0$, we have
+	\[
+f(x)<f(c)\;\;\;\forall x\in I\cap(c-\delta,c)
+	\]
+	and
+	\[
+f(x)>f(c)\;\;\;\forall x\in I\cap(c,c+\delta)
+	\]
+	\item If $f'(c)<0$, then the directions of the two inequalities above are reversed.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[Cauchy's Mean Value Theorem]
+\normalfont Let $f,g:[a,b]\to\mathbb{R}$ be continuous on $[a,b]$ and differentiable on $(a,b)$. Then there exists $c\in(a,b)$ such that
+\[
+(f(b)-f(a))g'(c)=(g(b)=g(a))f'(c)
+\]
+\end{theorem}
+\section{Application of Mean Value Theorem}
+\begin{theorem}[Monotonicity Properties]
+\normalfont Let $f:[a,b]\to\mathbb{R}$ be continuous on $[a,b]$ and differentiable on $(a,b)$. Then $f$ is increasing(resp. decreasing) on $[a,b]$ if and only if $f'(x)\geq 0$(resp. $f'(x)\leq 0$) for all $x\in(a,b)$.
+\end{theorem}
+If strict monotonicity is concerned, we will have $f'(x)>0\Rightarrow f(x)<f(y)$ for all $x<y$, but \textbf{not} the other direction.
+\begin{theorem}[Uniqueness of Anti-derivative Modulo Shift]
+\normalfont Let $f,g:[a,b]\to\mathbb{R}$ be continuous on $[a,b]$ and differentiable on $(a,b)$.\\Suppose that $f$ and $g$ have the same derivative, i.e., $f'(x)=g'(x)$ for all $x\in(a,b)$, then there exists a constant $C\in\mathbb{R}$ such that
+\[
+f(x) = g(x)+C\;\;\;\forall x\in[a,b]
+\]
+\end{theorem}
+\begin{theorem}[Intermediate Value Theorem for Derivatives]
+\normalfont Let $f:[a,b]\to\mathbb{R}$ be differentiable on $[a,b]$. Suppose that $f'(a)<f'(b)$, then for any $r\in(f'(a),f'(b))$, there exists some $c\in(a,b)$ with $f'(c)=r$.
+\end{theorem}
+\begin{theorem}[First Derivative Test]
+\normalfont Let $f$ be continuous on $(a,b)$. Let $c\in(a,b)$. Assume that $f'(x)$ exists for all $x\in(a,b)\setminus\{c\}$. Then
+\begin{enumerate}
+	\item If $f'(x)\geq 0$ for all $x\in(a,c)$ and $f'(x)\leq 0$ for all $x\in(c,b)$, then $f$ has a relative maximum at $c$.
+	\item If $f'(x)\leq 0$ for all $x\in(a,c)$ and $f'(x)\geq 0$ for all $x\in(c,b)$, then $f$ has a relative minimum at $c$.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[Second Derivative Test]
+\normalfont Let $f$ be differentiable on $[a,b]$ with derivative $f'$. Suppose $f'(c)=0$ at some $c\in(a,b)$, and $f'$ is differentiable at $c$ with derivative $f''(c)$. Then,
+\begin{enumerate}
+	\item If $f''(c)>0$, then $f$ has a relative minimum at $c$.
+	\item If $f''(c)<0$, then $f$ has a relative maximum at $c$.
+\end{enumerate}
+\end{theorem}
+\section{L'Hospital's Rule}
+\begin{theorem}[L'Hospital's Rule]
+\normalfont Let $-\infty\leq a<b\leq \infty$. Let $f$ and $g$ be differentiable on $(a,b)$. Assume that $g(x)\neq 0$ and $g'(x)\neq 0$ for all $x\in(a,b)$.\\
+\begin{itemize}
+	\item[(I)] If $\lim_{x\to a^{+}} f(x)=\lim_{x\to a^{+}} g(x)=0$, and $\lim_{x\to a^{+}} \frac{f'(x)}{g'(x)}=L$ for some $L\in[-\infty,\infty]$, then
+	\[
+\lim_{x\to a^{+}} \frac{f(x)}{g(x)}=L
+	\]
+	\item[(II)] If $\lim_{x\to a^{+}} g(x)=\infty$ and $\lim_{x\to a^{+}} \frac{f'(x)}{g'(x)}=L$ for some $L\in[-\infty, \infty]$, then
+	\[
+\lim_{x\to a^{+}} \frac{f(x)}{g(x)}=L
+	\]
+\end{itemize}
+\end{theorem}
+\textbf{Remark}: L'Hospital's rule also holds if we replace $x\to a^{+}$ above by $x\to b^{-}$. We can also replace $b$ be $a+\delta$ for some $\delta>0$. Also, note that we make no assumption on $f$ in (II).
+\begin{theorem}[Taylor Expansion]
+\normalfont Let $f$ be $n$ times differentiable on $[a,x]$, with $f^{(i)}$ denoting the $i$th derivative of $f$.\\
+Suppose that $f^{(n+1)}(x)$ exists on $(a,x)$. Then there exists $c\in(a,x)$ such that
+\[
+f(x)=\sum_{k=0}^n \frac{f^{(k)}(a)}{k!}(x-a)^k +\frac{1}{(n+1)!} f^{(n+1)}(c)(x-a)^{n+1}
+\]
+\end{theorem}
+%\clearpage
+\section{More on Taylor}
+\begin{theorem}[Taylor Theorem]
+\normalfont Let $f$ be $n$ times differentiable on $[a,x]$ with $f^{(i)}$ denoting the $i$th derivative of $f$.\\Suppose that $f^{(n+1)}$ exists on $(a,x)$. Then there exists $c\in(a,x)$ such that
+\[
+f(x)=\sum_{k=0}^n \frac{f^{(k)}(a)}{k!}(x-a)^k + \frac{1}{(n+1)!}f^{(n+1)}(c)(x-a)^{n+1}
+\]
+\end{theorem}
+\begin{theorem}[Higher Order Derivative Tests]
+\normalfont Let $f:[a,b]\to \mathbb{R}$. Suppose that $f^{(1)}(x_0)=f^{(2)}(x_0)=\cdots=f^{(n-1)}(x_0)=0$ for some $x_0\in(a,b)$.\\
+Assume also that $f^{(n)}$ exists at $x_0$ with $f^{(n)}(x_0)\neq 0$. Then
+\begin{enumerate}
+	\item If $n$ is even
+	\begin{enumerate}
+		\item and $f^{(n)}(x_0)>0$, then $x_0$ is a relative minimum of $f$.
+		\item and $f^{(n)}(x_0)<0$, then $x_0$ is a relative maximum of $f$.
+	\end{enumerate}
+	\item If $n$ is odd, then $x_0$ is neither a relative maximum nor a relative minimum of $f$.
+\end{enumerate}
+\end{theorem}
+%\clearpage
+\section{Riemann Integral}
+\begin{definition}[Partition]
+\normalfont Let $[a,b]$ be a bounded closed interval. A \textbf{partition} $P$ of $[a,b]$ is a finite collection of ordered points:
+\[
+P=\{a=x_0<x_1<\cdots<x_n=b\}
+\]
+The norm of $P$, denoted by $\|P\|:=\max_{1\leq i\leq n} \{x_i-x_{i-1}\}$.
+\end{definition}
+Partition can be then used to construct upper and lower bounds for any sensible definition of $\int_a^bf(x)\diff x$:\\
+Let $P$ be a partition of $[a,b]$ defined above. Let $f:[a,b]\to \mathbb{R}$. Define
+\[
+m_i:=\inf_{x_{i-1}\leq x\leq x_i}f(x)\text{ and }M_i:=\sup_{x_{i-1}\leq x\leq x_i}f(x)
+\]
+Then,
+\begin{definition}[Upper Sum and Lower Sum]
+\normalfont The upper sum and lower sum of $f$, with respect to $P$ is defined by
+\[
+U(f,P)=\sum_{i=1}^n M_i(x_i-x_{i-1})\text{ and }L(f,P)=\sum_{i=1}^n m_i(x_i-x_{i-1})
+\]
+\end{definition}
+It is clear, geometrically that any sensible definition of $\int_a^bf(x)\diff x$ should satisfy
+\[
+L(f,P)\leq \int_a^bf(x)\diff x\leq U(f,P)\text{ for any }P
+\]
+However, in this way, the definition of integral will be dependent on $P$. We hope to get rid of $P$.
+\begin{theorem}
+\normalfont Let $f:[a,b]\to \mathbb{R}$. For any partition $P$ of $[a,b]$, we have
+\[
+L(f,P)\leq U(f,P)
+\]
+\end{theorem}
+\begin{definition}[Refinement of Partition]
+\normalfont Let $P$ and $Q$ be two partitions of $[a,b]$. We say $Q$ is a refinement of $P$, or $Q$ is a finer partition than $P$, if $P\subset Q$.
+\end{definition}
+Essentially, some subintervals of $P$-partition are further divided into smaller subintervals under $Q$.
+\begin{theorem}
+\normalfont Let $f:[a,b]\to \mathbb{R}$. Let $Q$ be a finer parition of $[a,b]$ than $P$, then
+\[
+L(f,P)\leq L(f,Q)\leq U(f,Q)\leq U(f,P)
+\]
+\end{theorem}
+\begin{definition}[Upper and Lower Integrals]
+\normalfont Let $f:[a,b]\to\mathbb{R}$. The upper and lower integrals are defined by
+\[
+U(f):=\inf_P U(f,P)
+\]
+\[
+L(f):=\sup_P L(f,P)
+\]
+where $\inf$ and $\sup$ are taken over all partitions $P$ of $[a,b]$.
+\end{definition}
+\begin{theorem}$L(f)\leq U(f)$.\end{theorem}
+\begin{theorem}[Riemann Integral]
+\normalfont Let $f:[a,b]\to\mathbb{R}$. We say that $f$ is Riemann integrable on $[a,b]$ if $L(f)=\inf_P L(f,P)=\sup_P L(f,P)=U(f)$. In this case, we define
+\[
+\int_a^b f(x)\diff x:=L(f)=U(f)
+\]
+We also define $\int_b^a f:=-\int_a^b f$.
+\end{theorem}
+\section{Integrability}
+The Criteria 1 is by definition.
+\begin{theorem}
+\normalfont Let $(x_n)_{n\in\mathbb{N}}\in \mathbb{R}$. If we can find a sequence of partitions $P_n$ of $[a,b]$ such that $\lim_{n\to\infty}L(f,P_n)=\lim_{n\to\infty}Y(f,P_n)=:I\in\mathbb{R}$, then $f$ is Riemann integrable on $[a,b]$ with $\int_a^b f=I$.
+\end{theorem}
+\begin{theorem}[Riemann Integrability Criterion]
+\normalfont Let $f:[a,b]\to\mathbb{R}$. $f$ is Riemann integrable on $[a,b]$ \textit{if and only if} for all $\epsilon>0$, there exists a partition $P$ of $[a,b]$ such that
+\[
+U(f,P)-L(f,P)\leq \epsilon
+\]
+\end{theorem}
+\begin{theorem}[Bounded Monotone Function]
+\normalfont Let $f:[a,b]\to\mathbb{R}$ be \textbf{bounded and monotone}. Then $f$ is Riemann integrable on $[a,b]$.
+\end{theorem}
+\begin{theorem}[Bounded Continuous Function]
+\normalfont Let $f:[a,b]\to\mathbb{R}$ be \textbf{continuous} on $[a,b]$. Then $f$ is Riemann integrable on $[a,b]$.
+\end{theorem}
+%\clearpage
+\section{Integral Properties}
+\begin{theorem}[Properties of the Riemann Integral]
+\normalfont Let $f$ and $g$ be Riemann integrable on $[a,b]$.
+\begin{enumerate}
+	\item For each $c\in\mathbb{R}$, $cf$ is integrable with $\int_a^b cf=c\int_a^bf$.
+	\item $f+g$ is integrable with $\int_a^b(f+g)=\int_a^bf+\int_a^bg$.
+	\item If $f(x)\leq g(x)$ for all $x\in[a,b]$, then $\int_a^bf\leq \int_a^bg$.
+	\item $|f|$ is integrable, and $|\int_a^bf|\leq \int_a^b|f|$.
+	\item $f\cdot g$ is integrable.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[Piecewise Integration]
+\normalfont Let $f:[a,b]\to\mathbb{R}$ and let $c\in(a,b)$.
+\begin{enumerate}
+	\item If $f$ is integrable on $[a,c]$ and $[c,b]$, then $f$ is integrable on $[a,b]$ with
+	\[
+\int_a^b f=\int_a^c f +\int_c^b f
+	\]
+	\item If $f$ is integrable on $[a,b]$, then $f$ is integrable on $[a,c]$ and $[c,b]$.
+\end{enumerate}
+\end{theorem}
+\textbf{Remark}: By induction, the theorem above can extend to the case when $[a,b]$ is partitioned into a finite number of intervals.
+%\clearpage
+\section{Riemann Sum}
+\begin{definition}[Riemann Sum]
+\normalfont Let $P=\{x_0=a<\cdots <x_n=b\}$ and $f:[a,b]\to\mathbb{R}$. Let $\xi:=(\xi_1,\ldots, \xi_n)$ with $\xi\in[x_{i-1},x_i]$ for $1\leq i\leq n$. Then
+\[
+S(f,P,\xi):=\sum_{i=1}^n f(\xi_i)(x_i-x_{i-1})
+\]
+is called the \textbf{Riemann Sum} of $f$ wrt $P$ and $\xi$.
+\end{definition}
+\begin{theorem}[Convergence of Riemann Sums]
+\normalfont Let $f:[a,b]\to\mathbb{R}$ be Riemann integrable. Then uniformly in teh choice of sample point $\xi$, 
+\[
+\lim_{\|P\|\to 0}S(f,P,\xi)=\int_a^b f
+\]
+More precisely,
+\[
+\forall \varepsilon>0, \exists \delta>0 \text{s.t.} \forall P \text{ with }\|P\|\leq \delta\text{ and }\forall \xi, |S(f,P,\xi)-\int_a^b f|\leq \epsilon
+\]
+\end{theorem}
+%\clearpage
+\section{Fundamental Theorem of Calculus}
+\begin{theorem}
+\normalfont Let $f$ be integrable on $[a,b]$. Let $F(x):=\int_a^x f$ for all $x\in[a,b]$, with $F(a):=0$. Then $F$ is \textbf{uniformly continuous} on $[a,b]$.
+\end{theorem}
+\begin{theorem}[Fundamental Theorem of Calculus(I)]
+\normalfont Let $f$ be integrable on $[a,b]$. Let $F(x):=\int_a^xf$ for $x\in[a,b]$, with $F(a):=0$. If $f$ is continuous at $x_0\in[a,b]$, then $F'(x_0)=f(x_0)$.
+\end{theorem}
+More generally, if $\lim_{h\to 0^{+}} f(x+h)=\alpha$ and $\lim_{h\to 0^{-}} f(x+h)=\beta$, then
+\[
+\lim_{h\to 0^{+}} \frac{F(x+h)-F(x)}{h}=\alpha\text{  and }\lim_{h\to 0^{-}} \frac{F(x+h)-F(x)}{h}=\beta
+\]
+\begin{theorem}[Fundamental Theorem of Calculus II]
+\normalfont Let $f$ be differentiable on $[a,x]$, and assume that $f'$ is integrable on $[a,x]$. Then 
+\[
+\int_a^x f' = f(x)-f(a)
+\]
+\end{theorem}
+\begin{theorem}[Integration by Parts]
+\normalfont Let $f,g:[a,b]\to\mathbb{R}$ have integrable derivatives $f', g'$ on $[a,b]$. Then
+\[
+\int_a^b fg' = f(b)g(b)-f(a)g(a)-\int_a^b f'g
+\]
+\end{theorem}
+\begin{theorem}[Integration by Substitution]
+\normalfont Let $\phi:[a,b]\to I$, where $I$ is an inteval. Suppose there is an integrable derivative $\phi'$ on $[a,b]$. Let $f:I\to\mathbb{R}$ be continuous on $I$. Then
+\[
+\int_a^b f(\phi(t))\phi'(t)\diff t = \int_{\phi(a)}^{\phi(b)} f(x)\diff x
+\]
+\end{theorem}
+%\clearpage
+\section{Taylor And Improper Integral}
+\begin{theorem}[Integral Version of MVT]
+\normalfont Let $f$ be continuous on $[a,b]$. Then $\exists c\in(a,b)$ such that $\int_a^b = f(c)(b-a)$.
+\end{theorem}
+\begin{theorem}[Generalized Integral Version of MVT]
+\normalfont Let $f:[a,b]\to\mathbb{R}$ be continuous on $[a,b]$. Let $g:[a,b]\to\mathbb{R}$ be integrable on $[a,b]$ and assume that $g$ has a \textit{constant} sign on $[a,b]$. Then $\exists c\in(a,b)$ such that $\int_a^b fg=f(c)\int_a^b g$.
+\end{theorem}
+\begin{theorem}[Taylor Expansion in Integral Form]
+\normalfont Let $f:[a,b]\to\mathbb{R}$. Given $x\in(a,b)$, assume that $f^{(1)}, \ldots, f^{(n+1)}$ exists on $[a,x]$ and $f^{(n+1)}$ integrable on $[a,x]$. Then
+\[
+f(x)=\sum_{k=0}^n \frac{f^{(k)}(a)}{k!}(x-a)^k + \frac{1}{n!}\int_a^x f^{(n+1)}(t)(x-t)^n\diff t
+\]
+\end{theorem}
+\begin{definition}[Singularities]
+\normalfont $b\in[-\infty, \infty]$ is a singularity of $f$ if either $b=\pm\infty$ or $f$ is unbounded in every neighbourhood of $b$, which can be formulated as one of the following equivalent claims:
+\begin{itemize}
+	\item $\lim\sup_{x\to b}|f(x)|=\infty$
+	\item $\forall \delta>0, \sup_{x\in [b-\delta, b+\delta]} |f(x)|=\infty$
+	\item $\forall \delta>0, \forall N>0, \exists x\in[b-\delta, b+\delta]$ such that $|f(x)|>N$.
+	\item $\exists x_1,\ldots$ with $\lim_{x\to\infty} x_n=b$ such that $\lim_{n\to\infty}|f(x_n)|=\infty$.
+\end{itemize}
+\end{definition}
+\begin{definition}[Improper Integral]
+\normalfont Let $b$ be a singularity of $f$ and assume $\int_a^c f$ exists for all $c\in[a,b)$. Then the improper integral $\int_a^bf$ is defined by 
+\[
+\int_a^b f:=\lim_{c\to b^-}\int_a^c f
+\]
+if the limit exists.\\
+Similarly, if $a$ is a singularity of $f$, then
+\[
+\int_a^b f:=\lim_{c\to a^+}\int_c^b f
+\]
+if the limit exists.\\
+If $c\in(a,b)$ is the only singularity of $f$ on $[a,b]$, then
+\[
+\int_a^b f:=\int_a^c f+\int_c^bf
+\]
+if both improper integral limit exists.
+\end{definition}
+\begin{definition}[Cauchy Mean Value Theorem]
+\normalfont Suppose $c\in(a,b)$ is the only singularity of $f$ on $[a,b]$. Then
+\[
+\lim_{\varepsilon\to 0}(\int_a^{c-\varepsilon}f+\int_{c+\varepsilon}^b f)
+\]
+is the Cauchy Principle Value of $\int_a^b f$ if the limit exists.\\
+Similarly, if $a=-\infty$ and $b=\infty$ are only singularities of $f$, then Cauchy Principle Value is defined as
+\[
+\lim_{t\to\infty}\int_{-t}^t f
+\]
+\end{definition}
+\textbf{Remark}: Cauchy Principle Value may exists even improper integral does not exists.
+\section{Result from Tutorial}
+\begin{theorem}\normalfont Let $f:[a,b]\to\mathbb{R}$ be continuous on $[a,b]$ and differentiable on $(a,b)$. Show if $\lim_{x\to a}f'(x)=A$, then $f'(a)$ exists and equals $A$.
+\end{theorem}
+\begin{theorem}\normalfont Suppose $f''$ exists and bounded on $(0,\infty)$, and $f(x)\to 0$ as $x\to \infty$. Then $f'(x)\to 9$ as $x\to\infty$.\end{theorem}
+\begin{theorem}\normalfont Let $f:[a,b]\to\mathbb{R}$ be Riemann integrable on $[a,b]$. Suppose $g$ differs from $f$ at a finite number of points, then $g$ is integrable also on $[a,b]$ and $\int g = \int f$.
+\end{theorem}
+\begin{theorem}\normalfont If $f:[a,b]\to\mathbb{R}$ integrable on $[a,b]$ and $\phi:\mathbb{R}\to\mathbb{R}$ continuous. Then $\phi\circ f$ is integrable on $[a,b]$.
+\end{theorem}
+\end{document}
+

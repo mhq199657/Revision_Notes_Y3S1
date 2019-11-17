@@ -3,7 +3,7 @@
 
 
 
-\usepackage[margin=1in]{geometry}  
+\usepackage[margin=0.1in]{geometry}  
 \usepackage{graphicx}             
 \usepackage{amsmath}              
 \usepackage{amsfonts}              
@@ -39,6 +39,8 @@
 \DeclareMathOperator{\arcsec}{arcsec}
 \DeclareMathOperator{\arccot}{arccot}
 \DeclareMathOperator{\arccsc}{arccsc}
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{0.5\baselineskip}{0.5\baselineskip}
 \setcounter{tocdepth}{1}
 \begin{document}
 \title{Revision notes - ST2132}
@@ -46,7 +48,8 @@
 \maketitle
 \tableofcontents
 
-\clearpage
+
+\twocolumn
 \section{Review}
 \subsection{Probability}
 Suppose we have a sample space $\Omega$. Then, 
@@ -56,20 +59,20 @@ Suppose we have a sample space $\Omega$. Then,
 \end{itemize}
 \begin{definition}[Probability Measure]
 \hfill\\\normalfont \textbf{Probability measure} on $\Omega$ is a function $P$ from subsets of $\Omega$ to the real numbers
-\[
+$
 P:\Omega \supseteq S \mapsto \mathbb{R}
-\]
+$
 that satisfies the axioms:
 \begin{itemize}
   \item $P(\Omega) = 1$.
   \item If $A\subseteq \Omega$, then $P(A)\geq 0$.
-  \item If $A_1, A_2, \ldots, A_n,\ldots$ are mutually disjoint, then $P\left(\bigcup_{i=1}^\infty A_i\right) = \sum_{i=1}^\infty P(A_i)$.
+  \item If $A_1, A_2, \ldots, A_n,\ldots$ are mutually disjoint, then \\$P\left(\bigcup_{i=1}^\infty A_i\right) = \sum_{i=1}^\infty P(A_i)$.
 \end{itemize}
 \end{definition}
 More generally, we have the addition law
-\[
+$
 P(A\cup B) = P(A)+P(B)-P(A\cap B)
-\]
+$
 to hold true in all cases.
 \begin{theorem}[Multiplication Principle]
 \hfill\\\normalfont If there are $p$ experiments and the $i$th experiment has $n_i$ possible outcomes. Then there are a total of $n_1\times n_2\times \cdots\times n_p$ possible outcomes for the $p$ experiments.
@@ -81,42 +84,42 @@ When we calculate permutation, which is sampling $r$ items from $n$ items and li
 \end{itemize}
 When we calculate combination, which is sampling without replcement $r$ items from $n$ items un-orderly,
 there are
-\[
+$
 \frac{n(n-1)\cdots(n-r+1)}{r!}=\binom{n}{r}
-\]
+$
 ways.
 \begin{theorem}[Multinomial Coefficient]
 \hfill\\\normalfont The number of ways that $n$ objects can be grouped into $r$ classes with $n_i$ in the $i$-th class, $i=1,\ldots, r$, and $\sum_{i=1}^r n_i=n$ is
-\[
+$
 \binom{n}{n_1,n_2,\ldots, n_r} = \frac{n!}{n_1!n_2!\cdots n_r!}
-\]
+$
 \end{theorem}
 \begin{definition}[Conditional Probability]
 \hfill\\\normalfont Suppose there are two events $A$ and $B$ without a sample space $\Omega$ with $P(B)>0$. The \textbf{conditional probability} of $A$ given $B$ is defined to be
-\[
+$
 P(A\mid B) = \frac{P(A\cap B)}{P(B)}
-\]
+$
 \end{definition}
 \begin{definition}[Independence]
 \hfill\\\normalfont Two events $A$ and $B$ are said to be independent events if $P(A\cap B)=P(A)P(B)$.
 \end{definition}
 \begin{theorem}[Law of Total Probability]
 \hfill\\\normalfont Let $B_1, B_2, \ldots, B_n$ are a partition of $\Omega$, i.e., $\bigcup_{i=1}^n B_i=\Omega$ and $B_i\cap B_j=\varnothing$ for $i\neq j$ with $P(B_i)>0$ for all $i$. Then for any event $A$, we have
-\[
+$
 P(A)=\sum_{i=1}^n P(A\cap B_i)
-\]
+$
 \end{theorem}
 \begin{theorem}[Bayes' Rule]
 \hfill\\\normalfont Suppose once more that $B_1, B_2,\ldots, B_n$ are a partition of $\Omega$. Then for any event $A$, we have
-\[
+$
 P(B_j\mid A) = \frac{P(A\mid B_j)P(B_j)}{\sum_{i=1}^n P(A\mid B_i)P(B_i)}
-\]
+$
 \end{theorem}
 \subsection{Random Variable}
 Random variable is a function from $\Omega$ to the real numbers:
-\[
+$
 X: \Omega \to \mathbb{R}
-\]
+$
 \begin{definition}[Probability Distribution]
 \hfill\\\normalfont The probability distribution of probability measure on $\Omega$ which determines the probabilities of the various values of $X$: $x_1, x_2,\ldots$, with the following properties
 \begin{itemize}
@@ -125,14 +128,14 @@ X: \Omega \to \mathbb{R}
 \end{itemize}
 It is called \textbf{probability mass function}(pmf) of the random variable $X$.\\
 \textbf{Cumulative distribution function}(cdf) $F(x)$ is defined as 
-\[
+$
 F(x) = P(X\leq x), \;\;\;-\infty<x<\infty
-\]
+$
 \end{definition}
 The cdf is \textit{non-decreasing} and satisfies
-\[
+$
 \lim_{x\to -\infty} F(x)=0\text{   and   }\lim_{x\to \infty} F(x)=1
-\]
+$
 \begin{definition}[Discrete and Continuous Random Variables]
 \hfill\\\normalfont A \textbf{discrete} random variable is a random variable that can take on only finite or at most a countably infinite number of values.\\
 A \textbf{continuous} random variable is a random variable that can take on a continuum of values.
@@ -153,9 +156,9 @@ For a continuous random variable $X$, for any $a<b$, $P(a<X<b)=\int_a^b f(x)\dif
 \end{itemize}
 The binomial random variable $X\sim \bin(n,p)$ is the total number of successes in the $n$ trials. \\
 The probability distribution is
-\[
+$
 P(X=k)=\binom{n}{k} p^k(1-p)^{n-k},\;\;\;k=0,1,\ldots, n
-\]
+$
 \end{definition}
 The Bernoulli distribution is the special case of binomial distribution when $n=1$.
 \begin{definition}[Geometric Distribution]
@@ -167,9 +170,9 @@ The Bernoulli distribution is the special case of binomial distribution when $n=
 \end{itemize}
 Let $X$ be the \textbf{total number of trials up to and including the first success}, then $X\sim\geom(p)$ has geometric distribution.\\
 The proability distribution is
-\[
+$
 p(k) = P(X=k)=(1-p)^{k-1}p, \;\;\; k=0,1,\ldots
-\]
+$
 \end{definition}
 \begin{definition}[Negative Binomial Distribution]
 \hfill\\\normalfont Suppose we have
@@ -180,70 +183,70 @@ p(k) = P(X=k)=(1-p)^{k-1}p, \;\;\; k=0,1,\ldots
 \end{itemize}
 Let $X$ be the total number of trials, then $X\sim \nb(r,p)$ has negative binomial distribution.\\
 The probability distribution is
-\[
+$
 P(X=k) = \binom{k-1}{r-1}p^r(1-p)^{k-r}
-\]
+$
 \end{definition}
 The negative binomial distribution is a generalisation of the geometric distribution.
 \begin{definition}[Poisson Distribution]
 \hfill\\\normalfont Random variable $X\sim\Poi(\lambda)$ follows \textbf{Poisson distribution} with parameter $\lambda>0$ if
-\[
+$
 P(X=k) = \frac{\lambda^k}{k!}e^{-\lambda}
-\]
+$
 \end{definition}
 \begin{theorem}[Approximation of Binomial using Poisson]
 \hfill\\\normalfont $\Poi(\lambda :=np)$ can be derived as the limit of a binomial distribution $\bin(n,p)$ when $n$ approaches infinity, $p$ approaches $0$ with $np = \lambda$.
 \end{theorem}
 \begin{definition}[Uniform Distribution]
 \hfill\\\normalfont Let $X$ be a random variable between $a$ and $b$ where $b>a$. $X\sim U(a,b)$ follows a uniform distribution if the density function of $X$ is
-\[
+$
 f(x)=\begin{cases}
 \frac{1}{b-a},&\text{if } a\leq x\leq b\\
 0,\;\;\;      &\text{if } x<a\text{ or }x>b
 \end{cases}
-\]
+$
 Therefore, $F(x) = (x-a)/(b-a) $ on $[a,b]$, 0 on the left of $a$ and $1$ on the right of $b$.
 \end{definition}
 \begin{definition}[Exponential Distribution]
 \hfill\\\normalfont A random variable $X\sim\expo(\lambda)$ follows an exponential distribution if its density function follows
-\[
+$
 f(x)=\begin{cases}
 \lambda e^{-\lambda x}, &x\geq 0\\
 0 &x<0
 \end{cases}
-\]
+$
 where $\lambda>0$.\\
 The cdf of $X$ is
-\[
+$
 F(x) = \begin{cases}
 1-e^{-\lambda x} & x\geq 0\\
 0 & x<0
 \end{cases}
-\]
+$
 \end{definition}
 Exponential distribution is a special case of gamma distribution.
 \begin{definition}[Gamma Distribution]
 \hfill\\\normalfont A random variable $X\sim\Gamma(\alpha, \lambda)$ follows an gamma distribution if its density function follows
-\[
+$
 f(x) = \begin{cases} \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha-1}e^{-\lambda x}, &x\geq 0\\
 0 & x<0
 \end{cases}
-\]
+$
 where $\Gamma(x) = \int_0^\infty u^{x-1}e^{-u}\diff u$ for $x>0$.
 Here, we denote $\alpha$ as the \textbf{shape parameter} and $\lambda$ as the \textbf{scale parameter}.
 \end{definition}
 \begin{definition}[Normal Distribution]
 \hfill\\\normalfont A random variable $X\sim N(\mu, \gamma^2)$ follows a normal distribution if the density function follows
-\[
+$
 f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-(x-\mu)^2/2\sigma^2}
-\]
+$
 Obviously, we have $f(\mu-x) = f(\mu+x)$.
 \end{definition}
 \begin{theorem}[Distribution of a Function of Variable]
-\hfill Suppose $Y\sim g(X)$ where $X$ admits $f_X, F_X$ as pdf and cdf respectively. To calculate $f_Y$, we first compute
-\[
-F_Y(y) = P(Y\leq y) = P(g(X)\leq y) = P(X in I) 
-\]
+\hfill \normalfont Suppose $Y\sim g(X)$ where $X$ admits $f_X, F_X$ as pdf and cdf respectively. To calculate $f_Y$, we first compute
+$
+F_Y(y) = P(Y\leq y) = P(g(X)\leq y) = P(X \in I) 
+$
 where $I$ is a subset of $\mathbb{R}$. Then take differentiation.
 \end{theorem}
 We can easily derive the following result:
@@ -253,9 +256,9 @@ We can easily derive the following result:
 If the function $g$ admits nicer properties, we can have the following theorem
 \begin{theorem}
 \hfill\\\normalfont Let $X$ be a continuous rv with density $f(x)$ annd let $Y = g(X)$ where $g$ is a \textbf{differentiable, strictly monotonic} function on some interval $I$. Suppose that $f(x) = 0$ if $X$ is not in $I$. Then $Y$ has the density function
-\[
+$
 f_Y(y) = f_X(g^{-1}(y))\lvert\frac{\diff}{\diff y} g^{-1}(y)\rvert
-\]
+$
 for $y$ such that $y=g(x)$ for some $x$ and $f_Y(y) = 0$ for $y\neq g(x)$ for any $x$ in $I$. 
 \end{theorem}
 From the theorem, we have the following results:
@@ -267,27 +270,27 @@ From the theorem, we have the following results:
 \end{theorem}
 \subsection{Joint Distributions}
 The joint behaviour of 2 random variable $X$ and $Y$ is determined by the cdf
-\[
+$
 F(x,y) = P(X\leq x, Y\leq y)
-\]
+$
 \begin{theorem}
-\[
+$
 P(x_1<X\leq x_2, y_1<Y\leq y_2) = F(x_2, y_2)-F(x_2, y_1)-F(x_1, y_2)+F(x_1, y_1)
-\]
+$
 \end{theorem}
 Generally, if $X_1,\ldots, X_n$ are jointly distributed random variable, their joint cdf is
-\[
+$
 F(x_1, \ldots, x_n) = P(X_1\leq x_1, \ldots, X_n\leq x_n)
-\]
+$
 \begin{definition}[Joint Distribution of Discrete Random Variable]
 \hfill\\\normalfont Suppose $X_1,\ldots, X_m$ are discrete random variable defined on same sample space $\Omega$, their joint frequency function $p(x,y)$ is
-\[
+$
 p(x_1, \ldots, x_m) = P(X=x_1,\ldots,  X_m=x_m)
-\]
+$
 The marginal frequency function of $X_1$ is
-\[
+$
 p_{X_1}(x_1) = \sum\cdots\sum_{x_2,\ldots,x_m} p(x_1, \ldots, x_m)
-\]
+$
 Higher dimensional marginal frequency function of $X_1$ and $X_2$ can be defined in a similar fashion.
 \end{definition}
 \begin{definition}[Joint Distribution of Continuous Random Variables]
@@ -295,74 +298,74 @@ Higher dimensional marginal frequency function of $X_1$ and $X_2$ can be defined
 \end{definition}
 \begin{definition}[Independent Random Variables]
 \hfill\\\normalfont Random variables $X_1, \ldots, X_n$ are said to be independent if their joint cdf factors into the product of their marginal cdf's:
-\[
+$
 F(x_1, \ldots, x_n) = F_{X_1}{x_1}\cdots F_{X_n}{x_n}
-\]
+$
 for all $x_1,\ldots, x_n$.
 \end{definition}
 This definition holds for both continuous and discrete random variables.
 \begin{definition}[Discrete Case]
 \hfill\\\normalfont $X$ and $Y$ are discrete random variable jointly distributed, If $p_Y(y_j)>0$, the conditional probability that $X=x_i$, given 
  $Y=y_j$ is
- \[
+ $
 p_{X\mid Y}(x\mid y) := P(X=x_i\mid Y=y_j) = \frac{P(X=x_i, Y=y_j)}{P(Y=y_j)} = \frac{p_XY(x_i, y_j)}{p_Y(y_j)}
- \]
+ $
 \textbf{Remark}: This probability is defined to be zero if $p_Y(y_j) = 0$.\\
 \end{definition}
 \begin{theorem}
 \hfill\\\normalfont $p_{X\mid Y}(x\mid y) = p_X(x)$ if $X$ and $Y$ are independent.
 \end{theorem}
 Similarly, we define, in the continuous case
-\[
+$
 f_{Y\mid X}(y\mid x) = \begin{cases}
 \frac{f_{XY}(x,y)}{f_X(x)} & \text{if } 0<f_X(x)<\infty\\
 0 & \text{otherwise}
 \end{cases}
-\]
+$
 \begin{definition}[Extrema Statistics]
 \hfill\\\normalfont Assumer $X_1, \ldots, X_n$ are independent random variable with common cdf $F$ and density $f$.\\
 Let $U$ be maximum of $X_i$ and $V$ the minimum.\\
 The cdf of $U$ is 
-\[
+$
 F_U(u) = [F(u)]^n
-\]
+$
 and density of $U$ is
-\[
+$
 f_U(u) = nf(u)[F(u)]^{n-1}
-\]
+$
 Similarly,
-\[
+$
 F_V(v) = 1-[1-F(v)]^n
-\]
+$
 and density of $V$ is
-\[
+$
 f_V(v) = nf(v)[1-F(v)]^{n-1}
-\]
+$
 \end{definition}
 \begin{theorem}[Order Statistics]
 \hfill\\\normalfont Let $X_{(1)}<X_{(2)}<\ldots<X_{(n)}$. The density of $X_{(k)}$ is
-\[
+$
 f_k(x) = \frac{n!}{(k-1)!(n-k)!} f(x) F^{k-1}(x)[1-F(x)]^{n-k}
-\]
+$
 \end{theorem}
 \subsection{Expected Values}
 \begin{definition}[Expected Value]
 \hfill\\\normalfont If $X$ is a discrete random variable with frequency function $p(x)$, the expected value of $X$, denoted by $E(X)$ is
-\[
+$
 E(X) = \sum_i x_ip(x_i)
-\]
+$
 provided that $\sum_i |x_i|p(x_i)<\infty$. If the sum diverges, the expected is undefined.\\
 Similarly, if $X$ is a continuous random variable with density $f(x)$, then
-\[
+$
 E(X) = \int_{-\infty}^\infty xf(x)\diff x
-\]
+$
 provided that $\int |x|f(x)\diff x<\infty$. If the integral diverges, the expectation is undefined.
 \end{definition}
 \begin{theorem}[Markov Inequality]
 \hfill\\\normalfont If $X$ is a random variable with $P(X\geq 0)=1$, and for which $E(X)$ exists, then 
-\[
+$
 P(X\geq t) \leq \frac{E(X)}{t}
-\]
+$
 \end{theorem}
 \begin{theorem}[Expectation of Function of Variable]
 \hfill\\\normalfont Suppose that $Y=g(X)$,
@@ -373,22 +376,22 @@ P(X\geq t) \leq \frac{E(X)}{t}
 \end{theorem}
 \begin{theorem}[Expectation of Independent Random Variables]
 \hfill\\\normalfont If $X$ and $Y$ are independent random variable and $g$ and $h$ are fixed functions, then 
-\[
+$
 E[g(X)h(Y)] = E[g(X)]E[h(Y)]
-\]
+$
 provided that the expectations on the right hand side exist.
 \end{theorem}
 \begin{theorem}[Expectation is Linear]
 \hfill\\\normalfont If $X_1,\ldots,X_n$ are jointly distributed random variable with expectation $E(X_i)$ and $Y$ is a linear function of $X_i$, i.e., $Y=a+\sum_{i=1}^n b_iX_i$, then
-\[
+$
 E(Y) = a+\sum_{i=1}^n b_iE(X_i)
-\]
+$
 \end{theorem}
 \begin{definition}[Variance, Standard Deviation]
 \hfill\\\normalfont If $X$ is a random variable with expected value $E(X)$, the variance of $X$ is
-\[
+$
 \var(X) = E\{[X-E(X)]^2\}
-\]
+$
 provided that the expectation exist.\\
 The standard deviation of $X$ is the square root of the variance.\\
 We often use $\sigma^2$ to denote variance, and $\sigma$ for standard deviation.
@@ -403,72 +406,72 @@ Therefore,
 \begin{enumerate}
   \item If $\var(X)$ exist and $Y=a+bX$, then $\var(Y) = b^2\var(X)$.
   \item The $\var(X)$, if exists, may also be calculated as follows:
-  \[
+  $
 \var(X) = E(X^2)-[E(X)]^2
-  \]
+  $
 \end{enumerate}
 \end{theorem}
 \begin{theorem}[Chebyshev's Inequality]
 \hfill\\\normalfont Let $X$ be a random variable with mean $\mu$ and variance $\sigma^2$. Then for any $t>0$, we have
-\[
+$
 P(|X-\mu|>t)\leq \frac{\sigma^2}{t^2}
-\]
+$
 \end{theorem}
 \begin{definition}[Model for Measurement Error]
 \hfill\\\normalfont Suppose the true value of the quantity being measured is $x_0$, then teh measurement $X$ is modelled as
-\[
+$
 X=x_0+\beta+\epsilon
-\]
+$
 where $\beta$ is a constant error called \textbf{bias} and $\epsilon$ is the random component of the error.\\
 Here, $\epsilon$ is an random variable with $E(\epsilon)=0$ and $\var(\epsilon) = \sigma^2$. Hence, 
-\[
+$
 E(X) = x_0+\beta\;\;\;\;\;\var(X)=\sigma^2
-\]
+$
 A perfect measurement should have $\beta=\epsilon^2 = 0$.
 \end{definition}
 \begin{definition}[Mean Square Error]
 \hfill\\\normalfont The \textbf{mean square error} is defined as
-\[
+$
 \text{MSE} = E([X-x_0]^2)
-\]
+$
 \end{definition}
 It is clear that the mean square error for measurement is $\beta^2+\epsilon^2$.
 \begin{definition}[Convariance]
 \hfill\\\normalfont If $X$ and $Y$ are jointly distributed random variable with means $\mu_X$ and $\mu_Y$, respectively, the covariance of $X$ and $Y$ is
-\[
+$
 \cov(X,Y) = E[(X-\mu_X)(Y-\mu_Y)]
-\]
+$
 provided that the expectation exists.
 \end{definition}
 If $X$ and $Y$ is positively(resp. negatively) associated, the convariance will be positive(resp. negative).
 \begin{definition}[Correlation]
 \hfill\\\normalfont If $X$ and $Y$ are jointly distributed random variable and the variances of both $X$ and $Y$ exists and non-zero, then the \textbf{corelation} of $X$ and $Y$, denoted by $\rho$  is
-\[
+$
 \rho = \frac{\cov(X,Y)}{\sqrt{\var(X)\var(Y)}}
-\]
+$
 \end{definition}
 \begin{theorem}[Properties of Covariance]
-\hfill\\\normalfont $-1\leq \rho\leq 1$. \footnote{This can be shown by considering $\var(\frac{X}{\sigma_X}\pm \frac{Y}{\sigma_Y})$} Furthermore, $\rho = \pm 1$ if and only if $P(Y=a+bX)=1$ for some constant $a$ and $b$.
+\hfill\\\normalfont $-1\leq \rho\leq 1$. Furthermore, $\rho = \pm 1$ if and only if $P(Y=a+bX)=1$ for some constant $a$ and $b$.
 \end{theorem}
 \begin{definition}[Conditional Expectation]
 \hfill\\\normalfont Suppose that $X$ and $Y$ are discrete random variable and the conditional frequency function of $Y$ given $X=x$ is $p_{Y\mid X}(y\mid x)$. The \textbf{conditional expectation} of $Y$ given $X=x$ is
-\[
+$
 E(Y\mid X=x) = \sum_y y p_{Y\mid X}(y\mid x)
-\]
+$
 If $X$, $Y$ are continuous, then
-\[
+$
 E(h(Y)\mid X=x) = \int h(y) f_{Y\mid X}(y\mid x)\diff y
-\]
+$
 \end{definition}
 \begin{theorem}[Expectation and Variance of Conditional Expectation]
 \hfill\\\normalfont We have
-\[
+$
 E(Y) = E[E(Y\mid X)]
-\]
+$
 and
-\[
+$
 \var(Y) = \var[E(Y\mid X)] + E[\var(Y\mid X)]
-\]
+$
 \end{theorem}
 \begin{definition}[Moment Generating Function]
 \hfill\\\normalfont The \textbf{moment generating function}(mgf) of a random variable $X$ is $M(t) = E(e^{tX})$ if the expectation is defined. Therefore,
@@ -482,25 +485,25 @@ and
 \end{theorem}
 \begin{theorem}[Moment Generating Function generates Moment]
 \hfill\\\normalfont Let the $r$th moment of a random variable to be $E(X^r)$ if the expectation exists. If the mgf exists in an open interval containing $0$, then 
-\[
+$
 M^{(r)}(0) = E(X^r)
-\]
+$
 \end{theorem}
 \begin{theorem}[Properties of Moment Generating Function]
 \hfill\\\normalfont If $X$ has the mgf $M_X(t)$ and $Y=a+bX$, then $Y$ has the mgf $M_Y(t) = e^{at}M_X(bt)$.\\
 
 If $X$ and $Y$ are independent random variable with mgf's $M_X$ and $M_Y$ and $Z=X+Y$, then
-\[
+$
 M_Z(t) = M_X(t)M_Y(t)
-\]
+$
 on the common interval where both mgf's exist.
 \end{theorem}
 \subsection{Limit Theorems}
 \begin{theorem}[Law of Large Numbers]
 \hfill\\\normalfont Let $X_1,\ldots, X_i,\ldots$ be a sequence of independent random variables with $E(X_i)=\mu$ and $\var(X_i)=\sigma^2$. Let $\bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i$. Then for any $\epsilon>0$,
-\[
+$
 P(|\bar{X}_n-\mu|>\epsilon)\to 0\;\;\;\text{ as }n\to \infty
-\]
+$
 \end{theorem}
 \begin{definition}[Converge in Probability, Converge Almost Surely]
 \hfill\\\normalfont If a sequence of random variable $\{Z_n\}$ is such that $P(|Z_n-\alpha|>\epsilon)\to 0$ as $n\to \infty$, for any $\epsilon>0$ and where $\alpha$ is some scalar, then $Z_n$ is said to \textbf{converge in probability} to $\alpha$.\\
@@ -510,9 +513,9 @@ $Z_n$ is said to \textbf{converge almost surely} to $\alpha$ if for every $\epsi
 Here, converge almost surely is stronger than converge in probability
 \begin{definition}[Converge in Distribution]
 \hfill\\\normalfont Let $X_1,\ldots$ be a sequence of random variable with cdf $F_1,\ldots$ and let $X$ be a random variable with distribution function $F$. We say that $X_n$ converges in distribution to $X$ if
-\[
+$
 \lim_{n\to \infty} F_n(x) = F(x)
-\]
+$
 at every point at which $F$ is continuous.
 \end{definition}
 \begin{definition}[Continuity Theorem]
@@ -520,22 +523,22 @@ at every point at which $F$ is continuous.
 \end{definition}
 \begin{theorem}[Central Limit Theorem]
 \hfill\\\normalfont Let $X_1, X_2\ldots$ be a sequence of independent random variable having mean $0$ and variance $\sigma^2$ and the common distribution function $F$ and mgf $M$ defined in a neighbourhood of $0$. Let
-\[
+$
 S_n = \sum_{i=1}^n X_i
-\]
+$
 Then
-\[
+$
 \lim_{n\to \infty} P(\frac{S_n}{\sigma \sqrt{n}}\leq x)=\Phi(x),\;\;\;-\infty<x<\infty
-\]
+$
 \end{theorem}
-\clearpage
+
 \section{Normal Distribution and Some Related Distributions}
 Normal distribution is introduced in section 1. 
 \begin{theorem}[Moment Generating Function of Normal Distribution]
 \hfill\\\normalfont Suppose $X\sim N(\mu, \sigma^2)$, then
-\[
+$
 M_X(t) = e^{\sigma^2t^2+\mu t}
-\]
+$
 \end{theorem}
 \begin{theorem}[Symmetry of Normal Distribution]
 \hfill\\\normalfont Suppose the highest point of the Normal Distribution curve is at $x=\mu$, the normal distribution is symmetric about $\mu$. This implies
@@ -553,21 +556,21 @@ An empiricial guide to normal distribution is that
 We have the following results when concerning linear combination of normal random variables;
 \begin{theorem}[Mean of Normal Random Variables]
 \hfill\\\normalfont If $X_1,\ldots, X_n$ are independent normal random variable with $X_i\sim N(\mu, \sigma^2)$, then
-\[
+$
 \bar{X} = \frac{X_1+\cdots+X_n}{n} \sim N(\mu, \frac{\sigma^2}{n})
-\]
+$
 \end{theorem}
 \begin{theorem}[Linear Combination of Two Normal Random Variable]
 \hfill\\\normalfont For any real number $a$ and $b$, if$X\sim N(\mu_X, \sigma_X^2)$ and $Y\sim N(\mu_Y, \sigma_Y^2)$ then
-\[
+$
 aX+bY\sim N(a\mu_X+b\mu_Y, a^2\sigma_X^2+b^2\sigma_Y^2)
-\]
+$
 \end{theorem}
 This result can be easily shown using moment generating function.\\
 $Z\sim N(0,1)$ is called standard normal variable, whose cdf is denoted by $\Phi$ and density by $\phi$. If $X\sim N(\mu, \sigma^2)$, then we can normalise
-\[
+$
 Z=\frac{X-\mu}{\sigma}
-\]
+$
 \subsection{{$\chi^2$} Distribution}
 \begin{definition}[{$\chi^2_1$} Distribution]
 \hfill\\\normalfont If $Z$ is a standard normal random variable, the distribution of $U=Z^2\sim \chi^2_1$ is called the chi-square distribution with $1$ degree of freedom.
@@ -577,40 +580,40 @@ More generally,
 \hfill\\\normalfont If $U_1,\ldots, U_n$ are independent chi-square random variable with $1$ degree of freedom, he distribution of $V=U_1+\cdots+U_n \sim \chi_n^2$ is called the chi-square distribution with $n$ degree of freedom.\\
 $\chi_n^2$ is a gamma distribution with $\alpha=\frac{n}{2}$ and $\lambda=\frac{1}{2}$.\\
 Therefore, density of $\chi_n^2$ is
-\[
+$
 f(v) = \frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}v^{\frac{n}{2}-1}e^{-\frac{v}{2}},\;\;\;\;\;v\geq 0
-\]
+$
 And its moment generating function 
-\[
+$
 M(t) = (1-2t)^{-\frac{n}{2}}
-\]
+$
 From the moment generating function, we can derive that, if $V\sim \chi_n^2$, then
-\[
+$
 E(V)=n\;\;\;\;\; \var(V) = 2n
-\]
+$
 \end{definition}
 From definition, if $U$ and $V$ are independent and $U\sim \chi_n^2$ and $V\sim\chi_m^2$, then $U+V\sim\chi_{m+n}^2$.
 \subsection{{$t$} distribution}
 \begin{definition}[{$t$} Distribution]
 \hfill\\\normalfont If $Z\sim N(0,1)$ and $U\sim \chi_n^2$ and $Z$ and $U$ are independent, then the distribution of $\frac{Z}{\sqrt{\frac{U}{n}}}$ is called the $t$ distribution with $n$ degrees of freedom.\\
 The density function of the $t$ distribution with $n$ degrees of freedom is
-\[
+$
 f(t) = \frac{\Gamma(\frac{n+1}{2})}{\sqrt{n\pi}\Gamma(\frac{n}{2})}(1+\frac{t^2}{n})^{-\frac{n+1}{2}}
-\]
+$
 From the density, we have $f(t) = f(-t)$, i.e., the $t$ distribution is symmetric about $0$.
 \end{definition}
 When the degree of freedom $n$ tends to infinity, the $t$ distribution tends to the standard normal distribution.
 \subsection{{$F$} distribution}
 \begin{definition}[{$F$} distribution]
 \hfill\\\normalfont Let $U$ and $V$ be independent chi-square random variable with $m$ and $n$ df, respectively. The distribution of
-\[
+$
 W=\frac{U/m}{V/n}
-\]
+$
 is called the $F$ distribution with $m$ and $n$ degree of freedom and is denoted by $F_{m,n}$.\\
-The density function of $W$ is given by
-\[
+The density function of $W$ is given by\\
+$
 f(w) = \frac{\Gamma(\frac{m+n}{2})}{\Gamma(\frac{m}{2})\Gamma(\frac{n}{2})}(\frac{m}{n})^{\frac{m}{2}-1}(1+\frac{m}{n}w)^{-\frac{m+n}{2}}
-\]
+$\\
 For $n>2$, $E(W)$ exists and equals $\frac{n}{n-2}$.
 \end{definition}
 Let $T\sim t_n$, then $T^2\sim F_{1,n}$.
@@ -636,11 +639,11 @@ From the above theorem, we can show that
 \hfill\\\normalfont The distribution of $\frac{(n-1)S^2}{\sigma^2}$ is the chi-square distribution with $n-1$ df. \\This can be proven by considering $\sum(X_i-\mu)^2 = \sum(X_i-\bar{X}+\bar{X}-\mu)^2$.
 \end{theorem}
 \begin{theorem}
-\[
+$
 \frac{\bar{X}-\mu}{S/\sqrt{n}}\sim t_{n-1}
-\]
+$
 \end{theorem}
-\clearpage
+
 \section{Survey Sampling}
 \subsection{Population Parameters}
 \begin{definition}[Parameter, Statistic]
@@ -672,61 +675,61 @@ Here $\bar{X}$ is a random variable too, whose distribution is called sampling d
 \end{definition}
 \begin{theorem}[Expectation and Variance of {$X_i$}]
 \hfill\\\normalfont Denote the distinct values assumed by the population members by $\zeta_1,\ldots,\zeta_m$ and denote the number of population members that have the value $\zeta_j$ by $n_j$ where $j=1,\ldots, m$. Then $X_i$ is a discrete random variable with probability mass function 
-\[
+$
 P(X_i=\zeta_j) = \frac{n_j}{N}
-\]
-Also,\footnote{Proven by calculating expectation and variance using the $\zeta$ construction.}
-\[
+$
+Also,
+$
 E(X_i) = \mu
-\]
-\[
+$
+$
 \var(X_i)=\sigma^2
-\]
+$
 \end{theorem}
 \begin{theorem}[Unbaised Estimator of {$\mu$}]
 \hfill\\\normalfont With sample random sampling, $E(\bar{X})=\mu$.
 \end{theorem}
 Therefore, with simple random sampling, $E(T)=\tau$, where $T=N\bar{X}$.
 \begin{theorem}
-\hfill\\\normalfont For simple random sampling without replacement,\footnote{This is proven by considering $E(X_iX_j)$ conditional on $X_i$ value.}
-\[
+\hfill\\\normalfont For simple random sampling without replacement,\\
+$
 \cov(X_i,X_j) = -\frac{\sigma^2}{N-1}\;\;\;\text{ if }i\neq j
-\]
+$
 \end{theorem}
 \begin{theorem}[Variance of {$\bar{X}$}]
 \hfill\\\normalfont With simple random sampling,
-\[
+$
 \var(\bar{X}) = \frac{\sigma^2}{n}(\frac{N-n}{N-1}) = \frac{\sigma^2}{n}(1-\frac{n-1}{N-1})
-\]
+$
 For comparison, $\var{\bar{X}} = \frac{\sigma^2}{n}$ when sampling is done \textit{with} replacement.\\
 Therefore, we call factor $(1-\frac{n-1}{N-1})$ \textbf{finite population correction}; we call $\frac{n}{N}$ the \textbf{sampling fraction}.
 \end{theorem}
-Therefore, with simple random sampling,
-\[
+Therefore, with simple random sampling,\\
+$
 \var(T) = N^2\frac{\sigma^2}{n}\frac{N-n}{N-1}
-\]
+$
 \subsection{Estimation of {$\sigma^2$}}
 Within the variance formula of $\bar{X}$, there is one unknown, namely $\sigma^2$. Therefore, we would like to estimate $\sigma^2:=\frac{1}{N} \sum_{i=1}^N (x_i-\mu)^2$ with a function of its sample counterpart $\hat{\sigma}^2:=\frac{1}{n}\sum_{i=1}^n (X_i-\bar{X})^2$.
 \begin{theorem}
-\hfill\\\normalfont With simple random sampling, \footnote{This can be proven by considering $\hat{\sigma}^2 = \frac{1}{n}\sum X_i^2 - \bar{X}^2$ and use variance formula on each term.}
-\[
+\hfill\\\normalfont With simple random sampling, 
+$
 E(\hat{\sigma}^2) = \sigma^2(\frac{n-1}{n})\frac{N}{N-1}
-\]
+$
 \end{theorem}
 Therefore, an \textbf{unbiased estimate} of $\sigma^2$ is $\frac{N-1}{(n-1)N}\sum_{i=1}^n (X_i-\bar{X})^2$.\\
 
 Combining, we will have
 \begin{theorem}[Unbiased Estimator of {$\var(\bar{X})$}]
 \hfill\\\normalfont An unbiased estimate of $\var(\bar{X})$ is
-\[
+$
 s_{\bar{X}}^2 = \frac{s^2}{n}(1-\frac{n}{N})
-\]
+$
 where $s^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X})^2$.
 \end{theorem}
 Similarly, an unbiased estimate of $\var(T)$ is
-\[
+$
 s_T^2 = N^2 s^2_{\bar{X}}
-\]
+$
 \subsubsection{Dichotomous Case}
 In particular, if $x_j$ in the population can only take $1$, presence or $0$, absence, then we have the special case:
 \begin{itemize}
@@ -736,18 +739,17 @@ In particular, if $x_j$ in the population can only take $1$, presence or $0$, ab
   \item $E(\hat{p}) = p$. Therefore, $\hat{p}:=\frac{1}{n}\sum_{i=1}^n X_i$ is a unbiased estimate of $p$. 
   \item $\var(\hat{p}) = \frac{p(1-p)}{n}(1-\frac{n-1}{N-1})$.
   \item An unbiased estimate of $\var(\hat{p})$ is
-  \[
+  $
 s_{\hat{p}}^2 = \frac{\hat{p}(1-\hat{p})}{n-1}(1-\frac{n}{N})
-  \]
+  $
 \end{itemize}
 \textbf{Remark}: $s_{\bar{X}}, s_T, s_{\hat{p}}$ are called \textbf{estimated standard errors}.
 \subsection{Summary}
 \begin{table}[h]
-\centering
 \begin{tabular}{|c|c|c|c|}
 \hline
-Population Parameter & Estimate & Variance of Estimate & Estimated Variance \\\hline
-$\mu$                & $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$ & $\sigma^2_{\bar{X}} = \frac{\sigma^2}{n}(\frac{N-n}{N-1})$ & $s_{\bar{X}}^2 = \frac{s^2}{n}(1-\frac{n}{N})$\\\hline
+ & Est. & Var. Est.& Est Var. \\\hline
+$\mu$                & $\bar{X} = \frac{1}{n}\sum X_i$ & $\sigma^2_{\bar{X}} = \frac{\sigma^2}{n}(\frac{N-n}{N-1})$ & $s_{\bar{X}}^2 = \frac{s^2}{n}(1-\frac{n}{N})$\\\hline
 $p$                  & $\hat{p}$                               & $\sigma^2_{\hat{p}} = \frac{p(1-p)}{n}(\frac{N-n}{N-1})$     & $s_{\hat{p}}^2 = \frac{\hat{p}(1-\hat{p})}{n-1}(1-\frac{n}{N})$ \\\hline
 $\tau$               & $T=N\bar{X}$                            & $\sigma_T^2 = N^2\sigma_{\bar{X}}^2$                         & $s_T^2 = N^2s^2_{\bar{X}}$\\\hline
 $\sigma^2$           & $(1-\frac{1}{N})s^2$\\\hline
@@ -758,107 +760,33 @@ $\sigma^2$           & $(1-\frac{1}{N})s^2$\\\hline
 \hfill\\\normalfont A CI for a parameter $\theta$ is a random interval, obtained from the sample, that contain $\theta$ with some specified probability.
 \end{definition}
 For example, a $100(1-\alpha)$\% CI for $Z\sim N(0,1)$ is between $(-z(\alpha/2), z(\alpha/2))$ where $z$ is the quantile function.
-\subsection{Ratio Estimate}
-\begin{definition}[Population Ratio]
-\hfill\\\normalfont We define the population ratio as 
-\[
-r:=\frac{\mu_y}{\mu_x}
-\]
-\end{definition}
-The natural estimate of $r$ is $R:=\frac{\bar{Y}}{\bar{X}}$. To estimate $r$, we introduce $\delta$ method.
-\begin{theorem}[{$\delta$} method]
-\hfill\\\normalfont Given random variable $X$ with first and second moment known, and $Y=g(X)$ where $g$ non-linear. We will have
-\[
-Y=g(X)\approx g(\mu_X)+(X-\mu_X)g'(\mu_X)
-\] 
-Therefore,
-\[
-\mu_Y\approx g(\mu_X)
-\]
-and
-\[
-\sigma_Y^2 \approx \sigma_X^2[g'(\mu_X)]^2
-\]
-up to first order Taylor series expansion around $\mu_X$.\\
-The expansion up to second order
-\[
-Y=g(X)\approx g(X)\approx g(\mu_X)+(X-\mu_X)g'(\mu_X) + \frac{1}{2}(X-\mu_X)^2g''(\mu_X)
-\]
-gives an improvement of $E(Y)$ to 
-\[
-E(Y)\approx g(\mu_X)+\frac{1}{2}\sigma_X^2g''(\mu_X)
-\]
-\end{theorem}
-\begin{theorem}[{$\delta$} method of 2 variables]
-\hfill\\\normalfont Now suppose $Z=g(X,Y)$ and let $\mu:=(\mu_X,\mu_Y)$. With Taylor series expansion to the first order
-\[
-Z=g(X,Y)\approx g(\mu)+(X-\mu_X)\frac{\partial g(\mu)}{\partial x}+(Y-\mu_Y)\frac{\partial g(\mu)}{\partial y}
-\]
-so
-\[
-E(Z)\approx g(\mu)
-\]
-and
-\[
-\var(Z)\approx \sigma_X^2(\frac{\partial g(\mu)}{\partial x})^2+\sigma_Y^2(\frac{\partial g(\mu)}{\partial y})^2 + 2\sigma_{XY} (\frac{\partial g(\mu)}{\partial x})(\frac{\partial g(\mu)}{\partial y})
-\]
-whereas Taylor expansion to the second order gives the improved $E(Z)$
-\[
-E(Z)\approx g(\mu)+\frac{1}{2}\sigma_X^2\frac{\partial^2 g(\mu)}{\partial x^2}+\frac{1}{2}\sigma_Y^2 \frac{\sigma^2 g(\mu)}{\sigma y^2}+\sigma_{XY}\frac{\partial^2 g(\mu)}{\partial x\partial y}
-\]
-\end{theorem}
-Therefore, using the above theorem, we can consider $g(x,y)= \frac{y}{x}$ to approximate $Z=\frac{Y}{X}$. If $\mu_X\neq 0$, we have
-\[
-E(Z)\approx \frac{\mu_Y}{\mu_X}+\sigma_X^2\frac{\mu_Y}{\mu_X^3}-\frac{\sigma_{XY}}{\mu_X^2} = \frac{\mu_Y}{\mu_X}+\frac{1}{\mu_X^2}(\sigma^2_X\frac{\mu_Y}{\mu_X}-\rho\sigma_X\sigma_Y)
-\]
-and
-\[
-\var(Z)\approx \sigma_X^2\frac{\mu_Y^2}{\mu_X^4}+\frac{\sigma_Y^2}{\mu_X^2}-2\sigma_{XY}\frac{\mu_Y}{\mu_X^3} = \frac{1}{\mu_X^2}(\sigma_X^2\frac{\mu_Y^2}{\mu_X^2}+\sigma_Y^2-2\rho\sigma_X\sigma_Y\frac{\mu_Y}{\mu_X})
-\]
-\begin{theorem}[Variance of Ratio]
-\hfill\\\normalfont With simple random sampling, the approximate variance of $R=\frac{\bar{Y}}{\bar{X}}$ is
-\[
-\var(R)\approx \frac{1}{\mu_x^2}(r^2\sigma_{\bar{X}}^2+\sigma_{\bar{Y}}^2-2r\sigma_{\bar{X}\bar{Y}})=\frac{1}{n}(1-\frac{n-1}{N-1})\frac{1}{\mu_x^2}(r^2\sigma_x^2+\sigma_y^2-2r\sigma_{xy})
-\]
-\end{theorem}
-\begin{theorem}
-\hfill\\\normalfont With simple random sampling, the expectation of $R$ is given approximately by
-\[
-E(R)\approx r+\frac{1}{n}(1-\frac{n-1}{N-1})\frac{1}{\mu_x^2}(r\sigma_x^2-\rho\sigma_x\sigma_y)
-\]
-\end{theorem}
-Using CLT, it can be shown that $R$ is approximately normally distributed. The estimated variance of $R$ is 
-\[
-s_R^2 = \frac{1}{n}(1-\frac{n-1}{N-1})\frac{1}{\bar{X}^2}(R^2s_x^2+s_y^2-2Rs_{xy})
-\]
-An approximate $100(1-\alpha)\%$ CI for $r$ is $R\pm z(\frac{\alpha}{2})s_R$.
 \section{Parameter Estimate}
 There are two main methods to get parameter estimates, namely methods of moments and method of maximum likelihood.
 \subsection{Method of Moments}
 \begin{definition}[{$k$}th moment]
 \hfill\\\normalfont The $k$th moment of a probability law is defined as 
-\[
+$
 \mu_k = E(X^k)
-\]
+$
 \end{definition}
 \begin{theorem}[Natural Estimate of {$\mu_k$}]
 \hfill\\\normalfont If $X_1,\ldots, X_n$ are IID, then the $k$th sample moment is defined as
-\[
+$
 \hat{\mu}_k=\frac{1}{n}\sum_{i=1}^n X_i^k
-\]
+$
 \end{theorem}
 \begin{theorem}[Method of Moments]
 \hfill\\\normalfont Suppose random variable $X_1,\ldots, X_n$ has joint distribution $f(x\mid \theta)$ dependent on unknown parameter vector $\theta$. We will use the realisation $x_1,\ldots, x_n$ to estimate $\theta$. We define the \textbf{bias} to be $E(\hat{\theta})-\theta$ and \textbf{standard error} to be $\sigma_{\hat{\theta}}$.\\
 In method of moments, suppose $\theta = (f_1(\mu_1,\ldots, \mu_m),\ldots, f_k(\mu_1,\ldots, \mu_m))$, then the method of moments estimates of $\theta$ is
-\[
+$
 \hat{\theta}=(f_1(\hat{\mu}_1,\ldots, \hat{\mu}_m),\ldots, f_k(\hat{\mu}_1,\ldots, \hat{\mu}_m))
-\]
+$
 \end{theorem}
 \begin{definition}[Consistency]
 \hfill\\\normalfont Let $\hat{\theta}_n$ be an estimate of a parameter $\theta$ based on a sample of size $n$. Then $\hat{\beta}_n$ is said to be \textbf{consistent} if $\hat{\theta}_n$ converges in probability to $\theta$ as $n$ approaches to infinity. That is, for any $\epsilon>0$,
-\[
+$
 P(|\hat{\theta}_n-\theta|>\epsilon)\to 0\text{ as }n\to\infty
-\]
+$
 \end{definition}
 Since the weak law of large number implies the $k$th sample moment $\hat{\mu_k}$ converges, in probability to the $k$th population moment $\mu_k$ as sample size $n\to\infty$.
 \begin{theorem}[Consistency of MOM Estimator]
@@ -867,9 +795,9 @@ Since the weak law of large number implies the $k$th sample moment $\hat{\mu_k}$
 \textbf{Remark}: Some MOM estimators are unbiased while other biased.
 \subsection{Method of Maximum Likelihood}
 Let $\{f(\cdot\mid \theta): \theta\in\Theta\}$ be an identifiable parametric family, i.e. there are not $\theta_1\neq \theta_2$ such that $f(\cdot\mid \theta_1)=f(\cdot\mid \theta_2)$. Suppose $X_1,\ldots, X_n$ are IID random variable with density $f(\cdot\mid \theta_0)$ where $\theta_0\in\Theta$ is an unknown constant, and $x_1,\ldots, x_n$ realizations of $X_1,\ldots, X_n$. We define \textbf{likelihood function} to be
-\[
-\theta\to L(\theta)=\coprod_{i=1}^n f(x_i\mid \theta)
-\]
+$
+\theta\to L(\theta)=\prod_{i=1}^n f(x_i\mid \theta)
+$
 Then we define the \textbf{maximum likelihood estimate} of $\theta_0$ to be the value that maximizes the likelihood over $\Theta$, and is denoted as $\hat{\theta}_0$.\\
 We define 
 \begin{itemize}
@@ -894,14 +822,14 @@ Normal & $\mu$ & $\mu_1$ & $\bar{X}$ & $\sigma^2$ & $\mu_2-\mu_1^2$ & $\frac{1}{
 \hfill\\\normalfont Suppose an experiment has $m$ possible outcomes $E_1,\ldots, E_m$ with probabilities $p_1,\ldots, p_m$. Let $X_i$ be the number of times $E_i$ occurs in total $n$ independent runs of the experiment.
 We say $X_1,\ldots, X_m$ follows a multinomial distribution with total cell count $n$ and cell probabilities $p_1,\ldots, p_m$.\\
 The joint pmf function of $X_1,\ldots, X_m$ is
-\[
+$
 f(x_1,\ldots, x_m\mid p_1,\ldots, p_m) = \frac{n!}{\sum_{i=1}^m x_i!}\sum_{i=1}^m p_i^{x_i}
-\]
+$
 Marginally, each $X_i\sim \bin(n,p_i)$. However, $\cov(X_i,X_j)=-np_ip_j$, as $X_i$ are not independent.\\
 The MLE of $p_j$ is
-\[
+$
 \hat{p}_j=\frac{x_j}{n}
-\]
+$
 \end{theorem}
 \subsection{Large Sample Theory for MLE}
 Here, we denote the true value of $\theta$ by $\theta_0$.
@@ -910,88 +838,69 @@ Here, we denote the true value of $\theta$ by $\theta_0$.
 \end{theorem}
 \begin{theorem}[Fisher Information]
 \hfill\\\normalfont Define $I(\theta)$ by
-\[
+$
 I(\theta) = \expec\{[\frac{\partial}{\partial \theta} \log f(X\mid \theta)]^2\}
-\]
+$
 Under appropriate smoothness conditions on $f$, $I(\theta)$ may also be expressed as
-\[
+$
 I(\theta) = -\expec[\frac{\partial^2}{\partial \theta^2}\log f(X\mid \theta)]
-\]
+$
 \end{theorem}
 \begin{theorem}[MLE Asymptotically Unbiased]
 \hfill\\\normalfont Let $\hat{\theta}$ be MLE of $\theta_0$. Under smoothness conditions on $f$, the probability distribution of 
-\[
+$
 \sqrt{nI(\theta_0)}(\hat{\theta}-\theta_0)
-\]
+$
 tends to a \textbf{standard normal distribution} $Z(0,1)$.
 \end{theorem}
 Furthermore, for an IID sample, the asymptotic variance of MLE is $\frac{1}{nI(\theta)}$.
-\begin{theorem}[Confidence Interval for Normal Distribution]
+\begin{theorem}[Confidence Interval for Normal Distribution]\normalfont 
 The MLE of $\mu$ and $\sigma^2$ from an IID Normal sample are
-\[
+$
 \hat{\mu}=\bar{X}\text{  and  }\hat{\sigma}^2=\frac{1}{n}\sum_{i=1}^n (X_i-\bar{X})^2
-\]
+$\\
 Since $\frac{\sqrt{n}(\bar{X}-\mu)}{S}\sim t_{n-1}$, where $t_{n-1}$ denotes the $t$ distribution with $n-1$ degrees of freedom and $S^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X})^2$, if we use $t_{n-1}(\alpha/2)$ to denote the point beyond which the $t_{n-1}$ distribution has probability $\frac{\alpha}{2}$, then
-\[
+$
 P(-t_{n-1}(\alpha/2)\leq \frac{\sqrt{n}(\bar{X}-\mu)}{S}\leq t_{n-1}(\alpha/2))=1-\alpha
-\]
+$\\
 Therefore, the $100(1-\alpha)$\% CI for $\mu$ is
-\[
+$
 [\bar{X}-\frac{S}{\sqrt{n}}t_{n-1}(\alpha/2), \bar{X}+\frac{S}{\sqrt{n}}t_{n-1}(\alpha/2)]
-\]
+$\\
 For $\hat{\sigma}^2$, we have $\frac{n\hat{\sigma}^2}{\sigma^2}\sim \chi_{n-1}^2$. Let $\chi_{n-1}^2(\alpha)$ denote the point beyond which the $\chi_{n-1}^2$ distribution has probability $\alpha$, then
-\[
+$
 P(\chi_{n-1}^2(1-\frac{\alpha}{2})\leq \frac{n\hat{\sigma}^2}{\sigma^2} \leq \chi_{n-1}^2(\frac{\alpha}{2}))=1-\alpha
-\]
+$\\
 Thus, an exact $100(1-\alpha)$\% CI for $\sigma^2$ is
-\[
+$
 (\frac{n\hat{\sigma}^2}{\chi_{n-1}^2(\alpha/2)}, \frac{n\hat{\sigma}^2}{\chi_{n-1}^2(1-\alpha/2)})
-\]
+$
 \end{theorem}
 \begin{theorem}[Approximate CI Using Large Sample Theorem]
 \hfill\\\normalfont Since $\sqrt{nI(\hat{\theta})}(\hat{\theta}-\theta_0)\to N(0,1)$ as $n\to\infty$, we have
-\[
+$
 P(-z(\alpha/2)\leq \sqrt{nI(\hat{\theta})}(\hat{\theta}-\theta_0)\leq z(\alpha/2))\approx 1-\alpha
-\]
+$
 Thus, an \textit{approximate} $100(1-\alpha)$\% CI for $\theta_0$ is given by
-\[
+$
 \hat{\theta}\pm z(\alpha/2)\frac{1}{\sqrt{nI(\hat{\theta})}}
-\]
-\subsection{Posterior Distribution}
-For a given value $\Theta=\theta$, the sample $X$ have probability density $f_{X\mid\Theta}(x\mid \theta)$. The joint distribution of $X$ and $\Theta$ is
-\[
-f_{X, \Theta}(x,\Theta)=f_{X\mid\Theta}(x\mid \theta)f_{\Theta}(\theta)
-\]
-The marginal distribution of $X$ is $\int f_{X\mid \Theta}(x\mid \theta)f_{\Theta}(\theta)$. So the posterior distribution of $\Theta$ given data $X$ is
-\[
-f_{\Theta\mid X}(\theta\mid x)=\frac{f_{X\mid \Theta}(x\mid \theta)f_{\Theta}(\theta)}{\int f_{X\mid \Theta}(x\mid \theta)f_{\Theta}(\theta\diff \theta)}
-\]
-The \textbf{posterior mean} is defined to be the mean of the posterior distribution. \\
-The \textbf{posterior mode} is the mode of posterior distribution, which is the most probable value of $\Theta$ given $X$.\\
-A Bayesian analogue of $90\%$ CI for $\theta$ is the interval from $5$th percentile to $95$th percentile of posterior distribution.
+$
 \end{theorem}
-\begin{theorem}[Large Sample Normal Approximation to Posterior]
-\hfill\\\normalfont Under Weak Conditions, the posterior distribution is approximately normal with mean equal to MLE and posterior variance close to asymptotic variance of MLE if sample size $n$ is large:
-\[
-f_{\Theta\mid X}(\theta\mid x)\propto \exp(\frac{1}{2}(\theta-\hat{\theta})^2l''(\hat{\theta}))
-\]
-where the last term is proportional to $N(\hat{\theta}, -\frac{1}{l''(\hat{\theta})})$ density.
-\end{theorem}
-\clearpage
+
 \section{Efficiency and Sufficiency}
 The mean square error of an estimator $MSE(\hat{\theta})=E(\hat{\theta}-\theta_0)^2=\var(\hat{\theta})+[E(\hat{\theta})-\theta_0]^2$. If $\hat{\theta}$ is unbiased, then the last term diminishes.
 \begin{definition}[Efficiency]
 \hfill\\\normalfont Given 2 estimators $\hat{\theta}$ and $\tilde{\theta}$, the \textbf{efficiency} of $\hat{\theta}$ relative to $\tilde{\theta}$ is
-\[
+$
 \text{eff}(\hat{\theta},\tilde{\theta})=\frac{\var(\tilde{\theta})}{\var(\hat{\theta})}
-\]
+$
 If variance cannot be computed exactly, one should use asympototic variance and this efficency is called asymptotic relative efficiency.
 \end{definition}
 \begin{theorem}[Cramer-Rao Inequality]
 \hfill\\\normalfont Let $X_1,\ldots, X_n$ be IID with density function $f(x\mid \theta)$. Let $T=t(X_1,\ldots, X_n)$ be an unbiased estimate of $\theta$. Then under smoothness assumption on $f(x\mid \theta)$,
-\[
+$
 \var(T)\geq \frac{1}{nI(\theta)}
-\]
+$
 \end{theorem}
 An unbiased estimate whose variance achieves the lower bound is said to be \textbf{efficient}. We say MLE is asymptotically efficient.
 \begin{definition}[Sufficiency]
@@ -999,20 +908,20 @@ An unbiased estimate whose variance achieves the lower bound is said to be \text
 \end{definition}
 \begin{theorem}[Factorization Theorem]
 \hfill\\\normalfont A necessary and sufficient condition for the statistic $T(X_1,\ldots, X_n)$ to be sufficient for a parameter $\theta$ is that the joint probability function factors in the form
-\[
+$
 f(x_1,\ldots, x_n\mid \theta)=g[T(x_1,\ldots, x_n),\theta]h(x_1,\ldots, x_n)
-\]
+$
 \end{theorem}
 \begin{theorem}\normalfont If $T$ is sufficient for $\theta$, the MLE of $\theta$ is a function only of $T$.
 \end{theorem}
 \begin{definition}[1-parameter Member of Exponential Family]
 \hfill\\\normalfont 1-parameter members of the exponential family have pdf's or pmf's of the form
-\[
+$
 f(x\mid \theta)=\begin{cases}
-e^{c(\theta)T(x)+d(\theta)+S(x)},&\text{ if }x\in A,\\
+e^{c(\theta)T(x)+d(\theta)+S(x)},&x\in A,\\
 0, &\text{ otherwise} 
 \end{cases}
-\]
+$
 where the set $A$ does not depend on $\theta$.\\
 The 1-parameter exponential family contains many common probability distribution like
 \begin{itemize}
@@ -1024,12 +933,12 @@ The 1-parameter exponential family contains many common probability distribution
 \end{definition}
 \begin{theorem}[Rao-Blackwell Theorem]
 \hfill\\\normalfont Let $\hat{\theta}$ be an estimator of $\theta$ with finite second moment $E(\hat{\theta}^2)<\infty$ for all $\theta$. Suppose that $T$ is sufficient for $\theta$, and let $\tilde{\theta} = E(\hat{\theta}\mid T)$. Then for all $\theta$
-\[
+$
 E(\tilde{\theta}-\theta)^2\leq E(\hat{\theta}-\theta)^2.
-\]
+$
 And the inequality is strict unless $\hat{\theta}=\tilde{\theta}$.
 \end{theorem}
-\clearpage
+
 \section{Hypothesis Testing}  
 In hypothesis testing, we have two hypotheses:
 \begin{itemize}
@@ -1048,22 +957,22 @@ The probability of type I error is the \textbf{significance level} of the test a
 \end{definition}
 \begin{definition}[Type II Error]
 \hfill\\\normalfont Accepting $H_0$ when it is false is called \textbf{type II error}.\\
-The probability of type II error is usually denoted by $\beta$.
+The probability of type II error is usually denoted by $\beta$. \\\textbf{Power} is $1-\beta$.
 \end{definition}
 The decision rule is based on a \textbf{test statistic}. The set of values of a test statistics that leads to the rejection of $H_0$ is called the \textbf{rejection region}. The set of values that leads to acceptance of $H_0$ is called the \textbf{acceptance region}.\\
 The probability distribution of the test statistic when $H_0$ is true is called the \textbf{null distribution}.
 \begin{definition}[Likelihood Ratio]
 \hfill\\\normalfont The likelihood ratio is defined to be the ratio of the two likelihood, one under $H_0$ and the other under $H_1$.\\
 Let $f_0(x)$ be pmf of $X$ under $H_0$ and $f_1(x)$ be pmf of $X$ under $H_1$. Then the likelihood ratio is given by
-\[
+$
 \frac{f_0(x)}{f_1(x)}
-\]
+$
 \end{definition}
 Given $X_1,\ldots, X_n$ IID with density $f(x\mid \theta)$ and density of $X$ under $H_0$ is $f_0$ and under $H_1$ $f_1$.\\
 The likelihood ratio of $H_0$ to $H_1$ based on $X_1, \ldots, X_n$ is calculated by
-\[
+$
 \Lambda(\mathbf{x})=\frac{f_0(x_1)\cdots f_0(x_n)}{f_1(x_1)\cdots f_1(x_n)}
-\]
+$
 Note that the smaller ratio means we have more evidence against $H_0$. Therefore critical region should contain $x$ with smaller ratio.
 \begin{theorem}[Neyman-Pearson Lemma]
 \hfill\\\normalfont Suppose that $H_0$ and $H_1$ are simple hypotheses and that the test rejects $H_0$ when the likelihood ratio is less than $c$ and the significance level $\alpha$. Then \textbf{any other} test for which the significance level is less than or equal to $\alpha$ has power less than or equal to that of the likelihood ratio test.
@@ -1083,88 +992,88 @@ However, the likelihood ratio test is not uniformly most powerful when $H_1:\mu\
 \begin{theorem}
 \hfill\\\normalfont Suppose that for every value $\theta_0$ in $\Theta$ there is a test at level $\alpha$ of the hypothesis $H_0:\theta=\theta_0$. \\
 Denote the acceptance region of the test by $A(\theta_0)$. The the set
-\[
+$
 C(\bm{X}):=\{\theta:\bm{X}\in A(\theta)\}
-\]
+$
 us a $100(1-\alpha)\%$ confidence region for $\theta$.
 \end{theorem}
 \begin{theorem}
 \hfill\\\normalfont Suppose that $C(\bm{X})$ is a $100(1-\alpha)\%$ confidence region for $\theta$.\\
 Then an acceptance region for a test at level $\alpha$ of the hypothesis $H_0:\theta=\theta_0$ is
-\[
+$
 A(\theta_0)=\{\bm{X}\mid \theta_0\in C(\bm{X})\}
-\]
+$
 \end{theorem}
 \subsection{Generalized Likelihood Ratio Test}
 Suppose that observations $X=(X_1,\ldots, X_n)$ have a joint density $f(\bm{x}\mid \theta)$.\\
 Let $\Omega$ be the set of all possible values of $\theta$.\\
 Let $\omega_0$ and $\omega_1$ be the subsets of $\Omega$ such that they form a partition.\\
 The test is of the form:
-\[
+$
 H_0:\theta\in\omega_0\text{ vs }H_1:\theta\in\omega_1
-\]
+$
 We define the generalized likelihood ratio test statistic to be
-\[
+$
 \Lambda^\ast = \frac{\max_{\theta\in \omega_0}[\text{lik}(\theta)]}{\max_{\theta\in \omega_1}[\text{lik}(\theta)]}
-\]
+$
 and small values of $\Lambda^\ast$ tend to discredit $H_0$.\\
 We define
-\[
+$
 \Lambda= \frac{\max_{\theta\in \omega_0}[\text{lik}(\theta)]}{\max_{\theta\in \Omega}[\text{lik}(\theta)]}=\min\{\Lambda^\ast, 1\}
-\]
+$
 The generalized likelihood ratio test will reject $H_0$ if
-\[
+$
 \Lambda\leq \lambda_0
-\]
+$
 where $\lambda_0$ is a constant determined by
-\[
+$
 P(\Lambda\leq \lambda_0\mid H_0)=\alpha
-\]
+$
 \begin{theorem}
 \hfill\\\normalfont Under smoothness conditions on the probability densities or frequency functions involved, the null distribution of $-2\log \Lambda$ tends to a \textbf{chi-square} distribution with degree of freedom equal to 
-\[
+$
 \dim \Omega - \dim \omega_0
-\]
+$
 as sample size $n$ tends to infinity.
 \end{theorem}
 We now study LRT for Multinomial distribution. Suppose an experiment can obtain $m$ possible outcomes $E_1,\ldots, E_m$ with probabilities $p_1, \ldots, p_m$. Let $X_i$ be number of numbers $E_i$ occurs in total $n$ independent runs of the experiemnt. Then $X_1,\ldots, X_m$ follow a multinomial distribution with total cell count $n$ and cell probabilities $p_1,\ldots, p_m$.\\
-Claerly, joint pmf reads
-\[
+Claerly, joint pmf reads\\
+$
 f(x_1,\ldots, x_m\mid p_1,\ldots, p_m) = \frac{n!}{\prod_{i=1}^m x_i!}\prod_{i=1}^m p_i^{x_i}
-\]
+$\\
 Let us write $\bm{p}=(p_1,\ldots, p_m)$, and we are interested in testing 
-\[
+$
 H_0:p=p(\theta), \theta\in \omega_0
-\]
+$
 where $\theta$ is an unknown parameter, against $H_1$ for any other value of $p$ other than those in $H_0$.\\
-The numerator of the likelihood ratio is
-\[
+The numerator of the likelihood ratio is\\
+$
 \max_{p\in\omega_0}(\frac{n!}{x_1!\cdots x_m!}p_1(\theta)^{x_1}\cdots p_m(\theta)^{x_m})
-\]
+$\\
 where $x_i$ are the observed cell counts in the $m$ cells. This likelihood is maximized by MLE $\hat{\theta}$.\\
 In the denominator, the probabilities are restricted under $\Omega$, so it is maximized by global MLE $\hat{p_i}=\frac{x_i}{n}$.\\
-Therefore, we have
-\[
+Therefore, we have\\
+$
 \Lambda = \prod_{i=1}^m[\frac{p_i(\hat{\theta})}{\hat{p}_i}]^{x_i}
-\]
+$
 and
-\[
+$
 -2\log \Lambda = 2\sum_{i=1}^m O_i\log(\frac{O_i}{E_i})
-\]
+$
 where $O_i=n\hat{p}_i, E_i=np_i(\hat{\theta})$ the observed and expected cell counts respectively.\\
 Also, the degree of freedom $df=m-1-k$, where $k$ is the degree of freedom in $\theta$.\\
 The generalized LRT rejects the null hypothesis if
-\[
+$
 -2\log \Lambda>\chi^2_{m-k-1}(\alpha)
-\]
+$
 \begin{theorem}[Pearson Chi-square Test]
 \hfill\\\normalfont Another test for multinomial distribution is Pearson Chi-square test, where the test statistic is
-\[
-X^2=\sum_{i=1}^m \frac{[x_i-np_i(\hat{\theta})]^2}{np_i(\hat{\theta})}
-\]
+$
+X^2=\sum_{i=1}^m \frac{(O_i-E_i)^2}{E_i}= \sum_{i=1}^m \frac{[x_i-np_i(\hat{\theta})]^2}{np_i(\hat{\theta})}
+$
 The test statistics follows $X^2\sim \chi^2_{m-k-1}$ under $H_0$.
 \end{theorem}
-\clearpage
+
 \section{Comparing Two Samples}
 In many experiemets, we have two groups, one as treatment group and one as control group.
 \subsection{Two Normally Distributed Indepedent Sample}
@@ -1172,46 +1081,46 @@ Here, we assume observation from control group are independent random variable w
 Observation from treatment group are indepedent of each other and of the controls and have a common distribution $G$.\\
 We further assume, $X_1,\ldots, X_n$ are IID $N(\mu_X, \sigma^2)$ and $Y_1,\ldots, Y_m$ are IID $N(\mu_Y, \sigma^2)$.\\
 We want to \textbf{test}
-\[
+$
 H_0:\mu_X=\mu_Y\text{ vs }H_1:\mu_X\neq \mu_Y
-\]
+$
 We can think of $\mu_X-\mu_Y$ as the \textit{effect of treatment}.\\
 \begin{theorem}[Fact]
 \hfill\\\normalfont A \textit{natural estimate} of $\mu_X-\mu_Y$ is $\bar{X}-\bar{Y}$, and indeed it is the MLE of $\mu_X-\mu_Y$.\\
-If $\bar{X}$ independent of $\bar{Y}$, so
-\[
+If $\bar{X}$ independent of $\bar{Y}$, so\\
+$
 \bar{X}-\bar{Y}\sim N(\mu_X,\mu_Y, \sigma^2(\frac{1}{n}+\frac{1}{m}))
-\]
-If $\sigma^2$ is known, then we have the test statistics
-\[
+$\\
+If $\sigma^2$ is known, then we have the test statistics\\
+$
 Z=\frac{(\bar{X}-\bar{Y})-(\mu_X-\mu_Y)}{\sigma\sqrt{\frac{1}{n}+\frac{1}{m}}}\sim N(0,1)
-\]
-The $100(1-\alpha)\%$ CI for $\mu_X-\mu_Y$ will be
-\[
+$\\
+The $100(1-\alpha)\%$ CI for $\mu_X-\mu_Y$ will be\\
+$
 (\bar{X}-\bar{Y})\pm z(\frac{\alpha}{2})\sigma\sqrt{\frac{1}{n}+\frac{1}{m}}
-\]
-However, if $\sigma^2$ unknonw, we need to estimate it via \textbf{pooled sample variance} $s_p^2$:
-\[
+$\\
+However, if $\sigma^2$ unknown, we need to estimate it via \textbf{pooled sample variance} $s_p^2$:\\
+$
 s_p^2=\frac{(n-1)S_X^2+(m-1)S_Y^2}{m+n-2}
-\]
+$\\
 where $S_X^2=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2$ and $S_Y^2=\frac{1}{m-1}\sum_{i=1}^m(Y_i-\bar{Y})^2$.\\
 The estimate standard error of $\bar{X}-\bar{Y}$ is then
-\[
+$
 s_{\bar{X}-\bar{Y}}=s_p\sqrt{\frac{1}{n}+\frac{1}{m}}
-\]
+$
 \end{theorem}
 \begin{theorem}[Theorem A]
 \hfill\\\normalfont Suppose that $X_1,\ldots, X_n$ are IID $N(\mu_X,\sigma^2)$ and $Y_1,\ldots, Y_m$ are IID $N(\mu_Y,\sigma^2)$ is another independent sample.\\
 The statistic
-\[
+$
 t=\frac{(\bar{X}-\bar{Y})-(\mu_X-\mu_Y)}{s_{\bar{X}-\bar{Y}}}
-\]
+$
 follows a $t$ distribution with $df=m+n-2$.
 \end{theorem}
 Therefore, under the asuumptions of Theorem $A$, a $100(1-\alpha)\%$ cI for $\mu_X-\mu_Y$ is
-\[
+$
 (\bar{X}-\bar{Y})\pm t_{m+n-2}(\frac{\alpha}{2})\times s_{\bar{X}-\bar{Y}}
-\]
+$
 \begin{theorem}[Rejection Region]
 \hfill\\\normalfont Consider the following alternative hypothesis:
 \begin{itemize}
@@ -1224,88 +1133,88 @@ The rejection region for the 3 alternatives are:
 \begin{itemize}
   \item $H_1:|t|>t_{m+n-2}(\frac{\alpha}{2})$
   \item $H_2:t>t_{m+n-2}(\alpha)$
-  \item $H_3:t<t-{m+n-2}(\alpha)$.
+  \item $H_3:t<t_{m+n-2}(\alpha)$.
 \end{itemize}
 \end{theorem}
 Alternatively, the test of $H_0$ against $H_1$ can be derived as a likelihood ratio test. The unknown parameters are $\theta=(\mu_X,\mu_Y,\sigma)$.\\
 Under $H_0$, $\theta\in w_0=\{\mu_X=\mu_Y,0<\sigma>\infty\}$ where as under $\Omega$, we have $\mu_X, \mu_Y\in \mathbb{R}$, $\sigma\in\mathbb{R}^{+}$. \\
-The likelihood for the two sample is
-\[
+The likelihood for the two sample is\\
+$
 \text{lik}=\prod_{i=1}^n\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(X_i-\mu_X)^2}{2\sigma^2}}\times \prod_{j=1}^m\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(Y_j-\mu_Y)^2}{2\sigma^2}}
-\]
-and log-likelihood is
-\[
+$
+and log-likelihood is\\
+$
 l(\mu_X,\mu_Y,\sigma^2)=-\frac{m+n}{2}\log \sigma^2-\frac{1}{2\sigma^2}[\sum_{i=1}^n (X_i-\mu_X)^2+\sum_{j=1}^m(Y_j-\mu_Y)^2]
-\]
-Under $\omega_0$, we have sample of size $m+n$ from a $N(\mu_0,\sigma^2)$ distribution, so MLE of $\mu_0$ and $\sigma_0^2$ are 
-\[
+$\\
+Under $\omega_0$, we have sample of size $m+n$ from a $N(\mu_0,\sigma^2)$ distribution, so MLE of $\mu_0$ and $\sigma_0^2$ are \\
+$
 \hat{\mu}_0=\frac{1}{m+n}[\sum_{i=1}^n X_i+\sum_{j=1}^m Y_j]
-\]
+$\\
 and 
-\[
+$
 \hat{\sigma}_0^2 = \frac{1}{m+n}[\sum_{i=1}^n (X_i-\hat{\mu}_0)^2+\sum_{j=1}^m (Y_j-\hat{\mu}_0)^2]
-\]
+$\\
 so the maximized log-likelihood is
-\[
+$
 l(\hat{\mu}_0, \hat{\sigma}_0^2)=-\frac{m+n}{2}\log \hat{\sigma}_0^2-\frac{m+n}{2}
-\]
+$\\
 Under $\Omega$, the MLE is then
-\[
+$
 \hat{\mu}_X=\bar{X}, \hat{\mu}_Y=\bar{Y}
-\]
+$\\
 and 
-\[
+$
 \hat{\sigma}_1^2 = \frac{1}{m+n}[\sum_{i=1}^n (X_i-\hat{\mu}_X)^2+\sum_{j=1}^m (Y_j-\hat{\mu}_Y)^2]
-\]
-and maximized log-likelihood is
-\[
+$\\
+and maximized log-likelihood is\\
+$
 l(\hat{\mu}_X, \hat{\mu}_Y, \hat{\sigma}_1^2)=-\frac{m+n}{2}\log \hat{\sigma}_1^2-\frac{m+n}{2}
-\]
-and the log of likelihood ratio is thus
-\[
+$\\
+and the log of likelihood ratio is thus\\
+$
 \log \Lambda = \frac{m+n}{2}\log (\frac{\hat{\sigma}_1^2}{\hat{\sigma}_0^2})
-\]
-The likelihood ratio test rejects for large value of $\log \Lambda$, so then reject for large values of 
-\[
+$\\
+The likelihood ratio test rejects for large value of $\log \Lambda$, so then reject for large values of \\
+$
 \frac{\hat{\sigma}_1^2}{\hat{\sigma}_0^2} = \frac{\sum_{i=1}^n (X_i-\hat{\mu}_0)^2+\sum_{j=1}^m(Y_j-\hat{\mu}_0)^2}{\sum_{i=1}^n (X_i-\bar{X})^2+\sum_{j=1}^m(Y_j-\bar{Y})^2}
-\]
-We, by using $\sum_{i=1}^n (X_i-\hat{\mu}_0)^2 = \sum_{i=1}^n (X_i-\bar{X})^2+n(\bar{X}-\hat{\mu}_0)^2$, obtain
-\[
+$\\
+We, by using $\sum_{i=1}^n (X_i-\hat{\mu}_0)^2 = \sum_{i=1}^n (X_i-\bar{X})^2+n(\bar{X}-\hat{\mu}_0)^2$, obtain\\
+$
 \bar{X}-\hat{\mu}_0=\frac{m}{m+n}(\bar{X}-\bar{Y}), \;\;\;\;\bar{Y}-\hat{\mu}_0=\frac{n}{m+n}(\bar{Y}-\bar{X})
-\]
-SO the alternative expression for numerator of ratio is then
-\[
+$\\
+So the alternative expression for numerator of ratio is then\\
+$
 \sum_{i=1}^n(X_i-\bar{X})^2+\sum_{j=1}^m (Y_j-\bar{Y})^2+\frac{mn}{m+n}(\bar{X}-\bar{Y})^2
-\]
-Hence the test reejects for large values of
-\[
+$\\
+Hence the test rejects for large values of\\
+$
 1+\frac{mn}{m+n}\times \frac{(\bar{X}-\bar{Y})^2}{\sum_{i=1}^n(X_i-\bar{X})^2+\sum_{j=1}^m (Y_j-\bar{Y})^2}
-\]
-or equivalently, the large values of 
-\[
+$\\
+or equivalently, the large values of \\
+$
 \frac{|\bar{X}-\bar{Y}|}{\sqrt{\sum_{i=1}^n(X_i-\bar{X})^2+\sum_{j=1}^m (Y_j-\bar{Y})^2}}
-\]
+$\\
 which is $|t|$. Then the likelihood ratio test is equivalent to $t$ test.
 \subsubsection{Unequal Variance}
 In the case of unequal variance, then a natural estimate of $\var(\bar{X}-\bar{Y})$ is
-\[
+$
 \frac{S_X^2}{n}+\frac{S_Y^2}{m}
-\]
-the appropriate test statistic is then
-\[
+$\\
+the appropriate test statistic is then\\
+$
 \frac{\bar{X}-\bar{Y}}{\sqrt{\frac{S_X^2}{n}+\frac{S_Y^2}{m}}}
-\]
-The null distribution of this statistic can be closely approxiated by the $t$ distribution with 
-\[
+$\\
+The null distribution of this statistic can be closely approxiated by the $t$ distribution with \\
+$
 df=\frac{(\frac{S_X^2}{n}+\frac{S_Y^2}{m})^2}{\frac{(S_X^2/n)^2}{n-1}+\frac{(S_Y^2/m)^2}{m-1}}
-\]
+$\\
 \textbf{Remark}: If the underlying distribution \textbf{are not normal} and sample size are large, the use of $t$ distribution or normal distribution is justified by CLT. The probability levels of confidence intervals and hypothesis tests are approximately valid.\\
 However, if sample size small and distribution not normal, the conclusion may be invalid.
 \subsection{Power}
 Calculation of power are important because it determines how large sample size should be. Note that
-\[
-\text{power}=P(\text{reject }H_9\mid H_0\text{ is false})
-\]
+$
+\text{power}=P(\text{reject }H_0\mid H_0\text{ is false})
+$
 The power of a two-sample $t$ test depends on four factors:
 \begin{enumerate}
   \item The larger the real difference $\delta = \mu_X-\mu_Y$, the greater the power,
@@ -1314,54 +1223,54 @@ The power of a two-sample $t$ test depends on four factors:
   \item The larger the sample size $n$ and $m$, the greater the power.
 \end{enumerate}
 The exact power calculation for $t$ test against alternative hypothesis $H_1:\mu_X-\mu_Y=\delta$ requirees noncentral $t$. However, one can perform \textit{approximate calculation} based on normal if sample sizes are reasonably large.\\
-Suppose $\delta, \alpha, \sigma$ are iven and sample size $n=m$, then we have
-\[
+Suppose $\delta, \alpha, \sigma$ are given and sample size $n=m$, then we have\\
+$
 \var(\bar{X}-\bar{Y})=2\frac{\sigma^2}{n}
-\]
-The test at level $\alpha$ of $H_0:\mu_X=\mu_Y$ versus $H_1:\mu_X\neq \mu_Y$ is based on test statistic
-\[
+$\\
+The test at level $\alpha$ of $H_0:\mu_X=\mu_Y$ versus $H_1:\mu_X\neq \mu_Y$ is based on test statistic\\
+$
 Z=\frac{\bar{X}-\bar{Y}}{\sigma\sqrt{2/n}}
-\]
+$\\
 and the rejection region for the test is $|Z|>z(\alpha/2)$, or $|\bar{X}-\bar{Y}|>z(\alpha/2)\sigma\sqrt{2/n}$.\\
-Otherwise, if $\mu_X-\mu_Y=\delta$, ten
-\[
+Otherwise, if $\mu_X-\mu_Y=\delta$, then\\
+$
 \frac{\bar{X}-\bar{Y}-\delta}{\sigma\sqrt{2/n}}\sim N(0,1)
-\]
+$\\
 therefore, 
 
 \begin{align*}
 \text{power}&=P[|\bar{X}-\bar{Y}|>z(\alpha/2)\sigma\sqrt{2/n}\mid \mu_X-\mu_Y=\delta]\\
 &=1-\Phi(z(\alpha/2)-\frac{\delta}{\sigma}\sqrt{n/2})+\Phi(-z(\alpha/2)-\frac{\delta}{\sigma}\sqrt{n/2})
 \end{align*}
-
-Typically, as $\delta$ moves away from ero, one of these terms dominate.
+\\
+Typically, as $\delta$ moves away from zero, one of these terms dominate.
 
 
 
 \subsection{Paired Samples}
 In experiments sample can be paired, which casues sample to be dependent. Denote the pairs as $(X_i,Y_i), i=1, \ldots, n$. Let $X,Y$ have mean $\mu_X,\mu_Y$ and variance $\sigma_X^2$ adn $\sigma_Y^2$. Therefore, $\cov(X_i,Y_i)=\rho\sigma_X\sigma_Y$ where $\rho$ is the correlation coefficient.\\
 We assume that \textit{different pairs} are independently distributed.\\
-The differences $D_i=X_i-Y_i$ are independent with mean
-\[
+The differences $D_i=X_i-Y_i$ are independent with mean\\
+$
 E(D_i)=\mu_X-\mu_Y
-\]
-and variance
-\[
+$\\
+and variance\\
+$
 \var(D_i)=\sigma_X^2+\sigma_Y^2-2\rho\sigma_X\sigma_Y
-\]
-If we estimate $\mu_X-\mu_Y$ by $\bar{D}=\bar{X}-\bar{Y}$, then
-\[
+$\\
+If we estimate $\mu_X-\mu_Y$ by $\bar{D}=\bar{X}-\bar{Y}$, then\\
+$
 E(\bar{D})=\mu_X-\mu_Y
-\]
-and
-\[
+$\\
+and\\
+$
 \var(\bar{D})=\frac{\sigma_X^2+\sigma_Y^2-2\rho\sigma_X\sigma_Y}{n}
-\]
+$\\
 The variance will be smaller then independent samples, if $\rho>0$.\\
 With the additional assumption that the differences are a sample from normal distribution with $E(D_i)=\mu_D$ and $\var(D_i)=\sigma_D^2$, and if $\sigma_D$ is unknown, inferences will be based on 
-\[
+$
 t=\frac{\bar{D}-\mu_D}{s_{\bar{D}}}\sim t_{n-1}
-\]
+$
 Therefore, teh $100(1-\alpha)\%$ CI for $\mu_D$ is $\bar{D}\pm t_{n-1}(\alpha/2)s_{\bar{D}}$
 \subsection{Nonparametric Method}
 \subsubsection{Nonparametric Statistical Methods}
@@ -1374,27 +1283,27 @@ Consider null hypothesis: $H_0:F=G$. We are interested whether $X$ are on the wh
 \hfill\\\normalfont A test statistic is calculated in the following way:
 \begin{itemize}
   \item All $(n+m)$ observation are grouped together $Z_1,\ldots, Z_{n+m}$ as pooled sample and we assume the values are distinct. We define 
-  \[
+  $
 \text{Rank}(Z)=i
-  \]
+  $
 if $Z$ is the $i$th \textbf{smallest} value within the pooled sample.
 \item Define rank sum scores
-\[
+$
 R_X=\sum_{i=1}^n \text{Rank}(X_i), R_Y=\sum_{i=1}^m\text{Rank}(Y_i)
-\]
+$
 \end{itemize}
 It is obvious that $R_X+R_Y=\frac{1}{2}(m+n)(m+n+1)$ is fixed. So we should reject either $R_X$ or $R_Y$ is too small or large. \\
 We take the smaller sample, suppose of size $n=\min(n,m)$, and compute the sum ranks $R$ from that sample.\\
 Let $R'=n(m+n+1)-R$. The Mann-Whitney test statistic is
-\[
+$
 R^\ast = \min(R,R')
-\]
+$
 and reject $H_0$ if $R^\ast$ too small.
 \subsubsection{Signed Rank Test}
 We define 
-\[
+$
 \text{Rank}(D)=i
-\]
+$
 if $D$ has the $i$th smallest absolute value within the sample.\\
 Define $W_{+}$ to be the sum of ranks among all the positive $D_i$ and $W_{-}$ the sum of ranks among all negative $D_i$. We reject $H_0$ when $W_{+}$ is too large or too small.
 \end{theorem}
@@ -1403,99 +1312,5 @@ We just take $W:=\min(W_{+},W_{-})$ and check for small critical values from the
 If $0$ are present, they are discarded. If there are ties, then the $D_i$'s are given an average rank within all the ties, same as Mann-Whitney test.\\
 
 Both tests are robust to outliers.
-\clearpage
-\section{ANOVA}
-\subsection{One Way ANOVA}
-One-way layout is an experimental design in which independent measurements are made  under each of several treatments. The technique is generalized from comparing 2 independent samples.\\
-We first discuss the ANOVA and $F$ test in the case of $I$ treatments/groups and $J$ measurements each group.\\
-We define $Y_{ij}$ to be the $j$th observation of the $i$th group. We consider the observations are corrupted by random errors and that the error in one observation is independent of errors in other observation. Hence, the one-way ANOVA model is
-\[
-Y_{ij}=\mu+\alpha_i+e_{ij},\;\;\;i=1,\ldots, I; j=1,\ldots, J
-\]
-where $\mu$ is the overall mean, $\alpha_i$ the differential effect of the $i$th treatment and $e_{ij}$ are IID $N(0,\sigma^2)$.\\
-The $\alpha_i$ should be normalized, by 
-\[
-\sum_{i=1}^I \alpha_i=0
-\]
-The expected response tot he $i$th treatment is
-\[
-E(Y_{ij})=\mu+\alpha_i
-\]
-If $\alpha_i=0$ for all $i$, then all treatments will have the same response. In general, $\alpha_i-\alpha_k$ is the difference between the expected values under treatment $i$ and $k$.\\
-The null hypothesis is
-\[
-H_0: \alpha_1=\cdots=\alpha_I
-\]
-Define $\bar{Y}_i=\frac{1}{J}\sum_{j=1}^J Y_{ij}$ be the average of the observations under the $i$th treatment.\\
-Denote $\bar{\bar{Y}}=\frac{1}{IJ}\sum_{i=1}^I\sum_{j=1}^J Y_{ij}$ be overall average.\\
-The ANOVA is based on square of deviation of each observation from its overall average.\\
-\[
-\sum_{i=1}^I\sum_{j=1}^J(Y_{ij}-\bar{\bar{Y}})^2=\sum_{i=1}^I\sum_{j=1}^J(Y_{ij}-\bar{Y}_i)^2+J\sum_{i=1}^I(\bar{Y}_i-\bar{\bar{Y}})^2
-\]
-Or equivalently,
-\[
-SS_{TOT}=SS_W+SS_B
-\]
-It means, sum of squares = sum of squares within groups + sum of squares between groups.
-\begin{theorem}
-\hfill\\\normalfont Let $X_i$, $i=1,\ldots, n$ be independent random variables with $E(X_i)=\mu_i$ and $\var(X_i)=\sigma^2$. Then
-\[
-E[(X_i-\bar{X})^2]=(\mu_i-\bar{\mu})^2+\frac{n-1}{n}\sigma^2
-\]
-where $\bar{\mu}=\frac{1}{n}\sum_{i=1}^n \mu_i$.
-\end{theorem}
-\begin{theorem}
-\hfill\\\normalfont Under the assumption of model stated before,
-\begin{align*}
-E(SS_W)&=\sum_{i=1}^I\sum_{j=1}^J E(Y_{ij}-\bar{Y}_i)^2\\
-&=\sum_{i=1}^I\sum_{j=1}^J \frac{I-J}{J}\sigma^2 = I(J-1)\sigma^2
-\end{align*}
-\begin{align*}
-E(SS_B)&=J\sum_{i=1}^IE(\bar{Y}_i-\bar{\bar{Y}})^2\\
-&=J\sum_{i=1}^I[\alpha_i^2+\frac{(I-1)\sigma^2}{IJ}]\\
-&=J\sum_{i=1}^I\alpha_i^2+(I-1)\sigma^2
-\end{align*}
-\end{theorem}
-We can have an unbiased estimate for $\sigma^2$ to be $s_p^2:=\frac{SS_W}{I(J-1)}$. We can write $s_p^2$ as
-\[
-s_p^2=\sum_{i=1}^I(J-1)s_i^2
-\]
-where $s_i^2$ is the sample variance in the $i$th group. Hence, estiamtes of $\sigma^2$ is from the $I$ groups pooling together.\\
-If all $\alpha_i=0$, we can have $E[\frac{SS_B}{I-1}]=\sigma^2$, so $\frac{SS_W}{I(J-1)}$ and $\frac{SS_B}{I-1}$ should be about equal. Otherwise, $SS_B$ will be inflated.
-\begin{theorem}
-\hfill\\\normalfont If errors are $NID(0,\sigma^2)$, then
-\[
-\frac{SS_W}{\sigma^2}\sim \chi^2_{I(J-1)}
-\]
-If, additionally, $\alpha_i=0$ for all $i=1,\ldots, I$, then 
-\[
-\frac{SS_B}{\sigma^2}\sim \chi^2_{I-1}
-\]
-Furthermore, $\frac{SS_B}{\sigma^2}$ is independent of $SS_W$.
-\end{theorem}
-With this, we se tthe test statistics for the ANOVA null hypothesis $H_0=\alpha_1=\cdots=\alpha_I$ to be
-\[
-F=\frac{SS_B/(I-1)}{SS_W/[I(J-1)]}\sim F_{I-1,I(J-1)}
-\]
-We have
-\begin{itemize}
-  \item $E[SS_W/[I(J-1)]]=\sigma^2$
-  \item $E[SS_B/(I-1)]=J(I-1)^{-1}\sum_{i=1}^I\alpha_i^2+\sigma^2$
-\end{itemize}
-Therefore, if $H_0$ is true, $F$ should be close to $1$. Otherwise, $H_0$ will be large. Theerfore, we reject large values of $F$. To be exact, we reject $H_0$ if $F>F_{I-1, I(J-1)}(\alpha)$. The exact $p$-value is given by
-\[
-p-\text{value} = P(F_{I-1,I(J-1)}>F)
-\]
-\subsection{Groups with Different Size}
-Assume $I$ groups with different size $J_1,\ldots, J_I$, it can be shown that
-\[
-E(SS_W)=\sigma^2\sum_{i=1}^I(J_i-1)
-\]
-and 
-\[
-E(SS_B)=(I-1)\sigma^2+\sum_{i=1}^I J_i\alpha_i^2
-\]
-Test statistics $F$ still follows $F$ distribution of df $\sum_{i=1}^I J_i-1$ and $I-1$.\\
-If ANOVA is significant, it means the means are not ALL equal, but ANOVA does not tell us how they differ, and in particular we do not know which pairs are significantly different.\\
-To compare pairs or groups and estimate group means and differences, one naive approach is to use $t$ test pairwise. However, we need many tests.
+
 \end{document}

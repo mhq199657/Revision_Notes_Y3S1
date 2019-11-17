@@ -3,7 +3,7 @@
 
 
 
-\usepackage[margin=1in]{geometry}  
+\usepackage[margin=0.1in]{geometry}  
 \usepackage{graphicx}             
 \usepackage{amsmath}              
 \usepackage{amsfonts}              
@@ -17,6 +17,8 @@
 \usepackage[noend]{algpseudocode}
 \usepackage{enumitem}
 \usepackage{wrapfig}
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{0.1\baselineskip}{0.1\baselineskip}
 \algdef{SE}[SUBALG]{Indent}{EndIndent}{}{\algorithmicend\ }%
 \algtext*{Indent}
 \algtext*{EndIndent}
@@ -42,8 +44,8 @@
 \maketitle
 \tableofcontents
 
-\clearpage
-%\twocolumn
+
+\twocolumn
 \section{Classical Cipher System}
 \begin{definition}[Syntax of Encryption]
 \hfill\\\normalfont 
@@ -63,36 +65,6 @@
 \hfill\\\normalfont Security should rely \textit{only} on the secrecy of the key.
 \end{theorem}
 Therefore, there should never be ``security by obsecurity''.
-\subsection{Classical Cryptography}
-\begin{definition}[Caesar's Cipher]
-\hfill\\\normalfont Original Caesar Cipher encrypts messages by shifting the letters of the alphabet 3 places forward. \\
-\textbf{Problem}: There is \textbf{no key}.\\
-Keyed shift cipher, which shifts $k$(key) places forward, is also vulnerable to \textbf{brute-force or exhaustive search}.\\
-Also, key space is too small(26).
-\end{definition}
-\begin{theorem}[Sufficient Key-space Principle]
-\hfill\\\normalfont Any secure encryption scheme must have a key space that is sufficiently large to make an exhaustive-search attack infeasible.
-\end{theorem}
-\begin{definition}[Substitution Cipher]
-\hfill\\\normalfont Substitution cipher encrypts messages by mapping plaintext alphabet to ciphertext alphabet according to a \textbf{bijection}.\\
-\textbf{Problem}: Vulnerable to \textbf{Frequency analysis} of alphabet or $n$-gram.
-\end{definition}
-\begin{definition}[Vigenere Cipher]
-\hfill\\\normalfont Vigenere cipher has a key word, which is repeated until its length is the same as the plaintext. Then the shifting is done according to the key.\\
-\textbf{Problem}:
-\begin{enumerate}
-  \item When the length($t$) of the key is known,
-  \begin{itemize}
-    \item Divide ciphertext into $t$ parts
-    \item Perform statistical analysis for each part
-  \end{itemize}
-  \item When the length is unknown, but max length $T$ is known
-  \begin{itemize}
-    \item Repeat (1) $T$ times
-  \end{itemize}
-\end{enumerate}
-Apart from the breaking algorithm above, it is also vulnerable to the Kasiski's method.
-\end{definition}
 \subsection{Principles of Modern Cryptography}
 \begin{definition}[Security Definition]
 \hfill\\\normalfont Security Definition is a tuple
@@ -112,19 +84,19 @@ Typically, the security guarantee is to make it impossible for an attacker to \t
 There are two equivalent definition of perfect secrecy.
 \begin{definition}[Perfect Secrecy]
 \hfill\\\normalfont An encryption scheme(\texttt{Gen}, \texttt{Enc},\texttt{Dec}) with message space $\mathcal{M}$ is \textbf{perfectly secret} if for \textit{every} probability distribution over $\mathcal{M}$, every message $m\in \mathcal{M}$, and every ciphertext $c\in \mathcal{C}$ for which $P(C=c)>0$, we have
-\[
+$
 P(\mathcal{M}=m|\mathcal{C}=c) = P(\mathcal{M}=m)
-\]
+$
 \end{definition}
 \begin{definition}[Perfect Secrecy Equivalent Definition]
 \hfill\\\normalfont For every $m, m'\in\mathcal{M}$, and every $c\in\mathcal{C}$, we have
-\[
+$
 P(\texttt{Enc}_K(m)=c) = P(\texttt{Enc}_K(m') = c)
-\]
+$
 The equivalency can be derived by using the lemma below
-\[
+$
 P(\mathcal{C}=c\mid \mathcal{M}=m) = P(\mathcal{C}=c)
-\]
+$
 is equivalent to the perfect secrecy definition.
 \end{definition}
 \begin{definition}[Perfect Indistinguishability]
@@ -135,25 +107,11 @@ is equivalent to the perfect secrecy definition.
   \item $\mathcal{A}$ outputs the guess of $b$ as $b'$.
 \end{enumerate}
 We say that $\Pi$ is perfectly indistinguishable if for \textit{every} $\mathcal{A}$, it holds that
-\[
+$
 P(b'=b) = \frac{1}{2}
-\]
+$
 \end{definition}
 It is known that perfect indistinguishability is equivalent to perfect secrecy.
-\begin{definition}[Vernam's One Time Pad]
-\hfill\\\normalfont Fix an integer $l>0$. The space of $\mathcal{M}, \mathcal{K}, \mathcal{C}$ are all equal to $\{0,1\}^l$. We define the oracle as
-\begin{itemize}
-  \item \texttt{Gen}: choose a key from $\mathcal{K}$ with uniform distribution
-  \item \texttt{Enc}: $c=k\oplus m$.
-  \item \texttt{Dec}: $m=k\oplus c$.
-\end{itemize}
-\end{definition}
-It is known that one time pad has perfect secrecy. However, the problem of perfect secrecy is that
-\begin{itemize}
-  \item The key should be at least as long as the message
-  \item The key can be used only once
-\end{itemize}
-\clearpage
 
 
 
@@ -162,9 +120,9 @@ It is known that one time pad has perfect secrecy. However, the problem of perfe
 The perfect secrecy is unnecessarily strong, and therefore we relax the constraint from unlimited computational power and perfect indistinguishability to efficient computational power, and a weaker version of indistinguishability, called computational indistinguishability.
 \begin{definition}[Computationally {$(t,\epsilon)$}-indistinguishable]
 \hfill\\\normalfont Encryption scheme $\Pi=(\texttt{Gen},\texttt{Enc},\texttt{Dec})$ is $(t,\epsilon)$-indistinguishable if for every $\mathcal{A}$ running in time at most $t$, it holds that
-\[
+$
 P(\PrivK _{\mathcal{A},\Pi}^{eav} = 1) \leq \frac{1}{2}+\epsilon
-\]
+$
 \end{definition}
 The choice of $t$ and $\epsilon$ is troublesome. We can define computational indistinguishability in \textit{asymptotic} approach.
 \begin{definition}[Asymptotically Secure]
@@ -177,21 +135,6 @@ A function is negligible if for every positive polynomial $p$, there is an $N$, 
   \item suppose $f,g$ is negligible, and $p$ polynomial, then $f+g$ and $f\times p$ are both negligible.
   \item Both the running time and the probability can be parameterised by a single variable $n$, which is typically the key length.
 \end{itemize}
-\subsection{Proof by Reduction}
-To proof computational security of a scheme requires proving that the scheme cannot be broken by any polynomial-time algorithm, which is not possible now. Therefore, we \textit{need to at least assume} some low-level problems, such as factorisation of large integers, are hard to solve. We can then use these assumptions, which are conjectured to be true, to prove the security of the schemes.
-\begin{definition}[Proof by Reduction]
-\hfill\\\normalfont We \textbf{assume} some problem $X$ cannot be solved by any polynomial time algorithm, except with negligible probability. We proceed to \textbf{prove} that some cryptographic construction $\Pi$ is secure. To do this,
-\begin{enumerate}
-  \item Fix some efficient, i.e. probabilistic polynomial-time adversary $\mathcal{A}$ attacking $\Pi$. Denote the adversary's success probabilistic by $\epsilon(n)$.
-  \item Construct an efficient adversary $\mathcal{A}'$ that attempts to solve problem $X$ using adversary $\mathcal{A}$ as a subroutine. Therefore, given some instance $x$ of problem $X$, $\mathcal{A}'$ should simulate, for $\mathcal{A}$, an execution of $\Pi$ such that
-  \begin{enumerate}
-    \item As far as $\mathcal{A}$ can tell, it is interacting with $\Pi$.
-    \item Furthermore, if $\mathcal{A}$ succeeds in breaking the execution of $\Pi$ that is being simulated by $\mathcal{A}'$, this should allow $\mathcal{A}'$ to solve the instance $x$ given, with at least inverse polynomial probability $\frac{1}{p(n)}$.
-  \end{enumerate}
-  \item Point(2) implies that if $\epsilon(n)$ is not negligible, then $\mathcal{A}'$ will solve $X$ with non-negligible probability $\frac{\epsilon(n)}{p(n)}$. Also, $\mathcal{A}'$ is efficient, since it runs a PPT $\mathcal{A}$ as a subroutine. Therefore, we arrive at the conclusion that there is an efficient algorithm solving $X$ with non-negligible probability, which contradicts the initial assumption.
-  \item Therefore, $\epsilon(n)$ must be negligible, which means that $\mathcal{A}$ is computationally secure.
-\end{enumerate}
-\end{definition}
 \subsection{Security for Encryption}
 Before we define the security for encryption, we first define private key encryption scheme.
 \begin{definition}[Private Key Encryption]
@@ -209,9 +152,9 @@ We then define what we called, semantic security.
 The exact definition is mathematically complex and is not stated here. However, this definition of semantic security is equivalent to the indistinguishable encryption in the presense of an eavesdropper, whose definition is given below:
 \begin{definition}[Indistinguishable Encryption]
 \hfill\\\normalfont A private-key encryption scheme $\Pi$ has \textbf{indistinguishable encryptions in the presence of an eavesdropper} if for all probabilistic polynomial-time adversaries $\mathcal{A}$, there exists a negligible function $\mathbf{negl}$ such that
-\[
+$
 P(\PrivK _{\mathcal{A},\Pi}^\text{eav}(n))\leq \frac{1}{2}+\mathbf{negl}(n)
-\]
+$
 for all $n$, where $n$ is the security parameter.
 \end{definition}
 Note that the experiment now takes in $n$, which is used to generate the random key $k$.\\
@@ -220,9 +163,9 @@ We then introduce an equivalent definition as the above, which is used later in 
 \hfill\\\normalfont Define $\PrivK _{\mathcal{A},\Pi}^\text{eav}(n,b)$ to be the same as above, except that the fixed bit $b$ is used, rather than being chosen by $\Pi$ at random. In addition, denote the output bit $b'$ from $\mathcal{A}$ in $\PrivK _{\mathcal{A},\Pi}^\text{eav}(n,b)$ by $\text{output}(\PrivK _{\mathcal{A},\Pi}^\text{eav}(n,b))$. The following definition essentially states that $\mathcal{A}$ cannot determine whether it is running in experiment $\PrivK _{\mathcal{A},\Pi}^\text{eav}(n,0)$ or $\PrivK _{\mathcal{A},\Pi}^\text{eav}(n,1)$.\\
 
 A private key encryption scheme $\Pi$ has indistinguishable encryption in the presence of eavesdropper if for all probabilistic polynomial-time adversaries $\mathcal{A}$, there exists a negligible function $\mathbf{negl}$ such that
-\[
+$
 |P(\text{output}(\PrivK _{\mathcal{A},\Pi}^\text{eav}(n,0))=1)-P(\text{output}(\PrivK _{\mathcal{A},\Pi}^\text{eav}(n,1))=1)|\leq \mathbf{negl}(n)
-\]
+$
 \end{definition}
 \subsection{Pseudorandom Generators(PRG)}
 \begin{definition}[Pseudorandom Generator]
@@ -232,9 +175,9 @@ We say that $G$ is a \textbf{pseudorandom generator} if
 \begin{enumerate}
  \item \textbf{Expansion}: For every $n$, it holds that $l(n)>n$.
  \item \textbf{Pseudorandomness}: For all probabilistic polynomial-time(PPT) distinguishers $D$, there exists a negligible function $\mathbf{negl}$ such that
- \[
+ $
 |P(D(r)=1)-P(D(G(s))=1)|\leq \mathbf{negl}(n)
- \]
+ $
 where $r$ is chosen uniformly at random from $\{0,1\}^{l(n)}$, the seed $s$ is chosen uniformly at random from $\{0,1\}^n$.
 \end{enumerate}
 Here, $l$ is the expansion factor of $G$.
@@ -245,22 +188,22 @@ With PRG, we construct an encryption scheme that has indistinguishable encryptio
 \begin{itemize}
   \item $\texttt{Gen}$: on input of $n$, choose $k\leftarrow \{0,1\}^n$ uniformly at random and output it as the key
   \item $\texttt{Enc}$: on input a key $k\in\{0,1\}^n$ and a message $m\in\{0,1\}A^{l(n)}$, output the ciphertext
-  \[
+  $
 c:=G(k)\oplus m
-  \]
+  $
   \item $\texttt{Dec}$: on input a key $k\in\{0,1\}^n$ and a ciphertext $c\in\{0,1\}^{l(n)}$, output the plaintext message
-\[
+$
 m:=G(k)\oplus c
-\]
+$
 \end{itemize}
 \end{definition}
 We claim the above construction has indistinguishable encryption in presence of eavesdropper.\\
 \textbf{Proof}
 Suppose there is a PPT $\mathcal{A}$ such that it violates the definition of indistinguishable encryption, then we can construct a PPT that distinguishes the output of $G$ from a truly random string. \\
 Let $\mathcal{A}$ be a PPT adversary, and define $\varepsilon$ as
-\[
+$
 \varepsilon(n):=P[\PrivK _{\mathcal{A},\Pi}^\text{eav}(n)=1]-\frac{1}{2}
-\]
+$
 We use $\mathcal{A}$ to construct a distinguisher $D$ for pseudorandom generator $G$, such that $D$ can also succeed with probability $\epsilon(n)$.\\
 The distinguisher is given a string $w$ as input, and it is to determine whether $w$ is chosen uniformly at random, or whether $w$ is generated by choosing a random $k$ and computing $w:=G(k)$. $D$ emulates the eavesdropping experiment for $\mathcal{A}$ and observes whether $\mathcal{A}$ succeeds or not. If $\mathcal{A}$ succeeds then $D$ guesses that $w$ must have been a pseudorandom string, while if $\mathcal{A}$ does not succeed then $D$ guesses $w$ is a random string. In detail:
 \begin{itemize}
@@ -271,28 +214,28 @@ The distinguisher is given a string $w$ as input, and it is to determine whether
   \item[3.] Give $c$ to $\mathcal{A}$ and obtain output $b'$. In a sense, we output $1$ if $b'=b$ and $0$ otherwise.
 \end{itemize}
 We also, define a modified encryption scheme $\tilde{\Pi}$ that is exactly one-time pad encryption, i.e. \texttt{Gen} can output a completely random key $k$ of length $l(n)$. By perfect secrecy of one-time pad, we have
-\[
+$
 P[\PrivK _{\mathcal{A},\Pi}^\text{eav}(n)=1]=\frac{1}{2}
-\]
+$
 The main observations are:
 \begin{enumerate}
   \item If $w$ is chosedn uniformly at random from $\{0,1\}^{l(n)}$, then the view of $\mathcal{A}$ when run as a subroutine by the distinguisher $D$ is distributed identically to the view of $\mathcal{A}$ in teh experiment $\PrivK _{\mathcal{A},\tilde{\Pi}}^\text{eav}(n)$. This is because $\mathcal{A}$ is given a ciphertext $c=w\oplus m_b$ where $w$ is completely random.
   \item On the other hand, if $w=G(k)$, where $k\leftarrow\{0,1\}^n$ is chosen uniformly at random, the the view of $\mathcal{A}$ when run as a subroutine by $D$ is distributed identically to the view of $\mathcal{A}$ in experiment $\PrivK _{\mathcal{A},\Pi}^\text{eav}(n)$. This is because $\mathcal{A}$ is given a ciphertext $c=w\oplus m_b$ where $w=G(k)$ for a uniformly distributed value $k\in \{0,1\}^n$.
 \end{enumerate}
 Therefore, if $w$ is chosen uniformly at random 
-\[
+$
 P(D(w)=1)=\frac{1}{2}
-\]
+$
 In contrast, when $w=G(k)$, we have
-\[
+$
 P(D(w))=P(D(G(k)))=\frac{1}{2}+\varepsilon(n)
-\]
+$
 Therefore, 
-\[
+$
 |P(D(w)=1)-P(D(G(k))=1)|=\varepsilon(n)
-\]
+$
 where $w$ is randomly chosen in $\{0,1\}^{l(n)}$ and $k$ randomly chosen in $\{0,1\}^{n}$. Since $G$ is a pseudorandom generator, $\varepsilon$ must be negligible by its definition.  
-\clearpage
+
 \section{CPA Security}
 Our definition of $\PrivK _{\mathcal{A},\Pi}^\text{eav}$, although can be used to prove the security of encryption, has several limitations:
 \begin{itemize}
@@ -313,9 +256,9 @@ From this section onwards, we give more capabilities to adversary.
   \item $\mathcal{A}$ outputs $b'$. $\mathcal{A}$ succeeds if $b=b'$, in which we say $\PrivK_{\mathcal{A},\Pi}^\text{cpa}=1$.
 \end{itemize}
 $\Pi$ is secure against chosen plaintext attacks, i.e. \textbf{CPA secure} if for all PPT adversaries $\mathcal{A}$, there is a negligible function $\mathbf{negl}$ such that
-\[
+$
 P(\PrivK_{\mathcal{A},\Pi}^\text{cpa})\leq \frac{1}{2}+\mathbf{negl}(n)
-\]
+$
 \end{definition}
 \textbf{Remark}:\\ 
 \begin{itemize}
@@ -333,9 +276,9 @@ Here,we also assume that $F$ is \textbf{length preserving}, so that the key, inp
 A keyed function is \textbf{efficient} if there is a PPT algorithm that computes $F(k,x)$ given $k$ and $x$ as input.
 \begin{definition}[Pseudorandom Function(PRF)]
 \hfill\\\normalfont A pseudorandom function ``looks like'' a random function. Specifically, $F$ is a pseudorandom function if $F_k$ for key $k$ randomly chosen in $\{0,1\}^n$, is indistinguishable from a random function $f\in \text{Func}_n$. Formally, for all PPT distinguisher $D$, we need
-\[
+$
 |P_k(D^{F_k(\cdot)}=1)-P_{f}(D^{f(\cdot)}=1)|\leq \mathbf{negl}(n)
-\]
+$
 where $k$ and $f$ are chosen uniformly random.
 \end{definition}
 \textbf{Remark}: $D$ can interact freely with the oracle that uses either a random, or a pseudorandom function. However, since $D$ is PPT, it can only send over polynomial number of queries.
@@ -347,9 +290,9 @@ We can $F$ a \textbf{pseudorandom permutation}, if $F_k$ for any randomly chosen
 Here, $\text{Perm}_n$ has a size of $(2^n)!$. For large $n$, PRP is indistinguishable from PRF.
 \begin{definition}[Block Cipher]
 \hfill\\\normalfont Block Cipher is one practical construction designed to be secure instantiations of pseudorandom permutations, with fixed key length and block length.
-\[
+$
 F:\{0,1\}^n\times \{0,1\}^m\to \{0,1\}^m
-\]
+$
 where $n$ is key length and $m$ is block length.
 \end{definition}
 \subsection{CPA-secure Encryption from PRF}
@@ -415,7 +358,7 @@ Stateful Counter Mode is CPA secure.
 \hfill\\\normalfont In stateful CBC mode, IV is initialised as the last ciphertext block.
 \end{definition}
 Stateful CBC mode is insecure.
-\clearpage
+
 \section{Chosen Ciphertext Attack(CCA) Security}
 \begin{definition}[Chosen Ciphertext Attack Security]
 \hfill\\\normalfont Define teh experiment $\PrivK_{\mathcal{A},\Pi}^\text{cca}$ for encryption scheme $\Pi$ and adversary $\mathcal{A}$ as below:
@@ -427,9 +370,9 @@ Stateful CBC mode is insecure.
   \item $\mathcal{A}$ outputs $b'$. $\mathcal{A}$ succeeds if $b=b'$, in which scenario we say $\PrivK_{\mathcal{A},\Pi}^\text{cca}=1$.
 \end{enumerate}
 $\Pi$ is secure against chosen-ciphertext attacks if for all PPT adversaries $\mathcal{A}$, there is a negligible function $\mathbf{negl}$ such that 
-\[
+$
 P(\PrivK_{\mathcal{A},\Pi}^\text{cca}=1)\leq \frac{1}{2}+\mathbf{negl}(n)
-\]
+$
 \end{definition}
 Suppose the adversary sends ciphertext on behalf of users then observe the resposne, sometimes the adversary can carry out \textbf{padding oracle attack}.
 \begin{definition}[Non-malleability]
@@ -462,9 +405,9 @@ Algorithm $P_K(c)$:
 \end{definition}
 We know illustrate an attack where there is only 2 ciphertext block $c_0\|c_1$.\\
 Since $c_0\oplus f_K^{-1}(c_1)=m_1$ and $c_0'\oplus f_K^{-1}(c_1)=m_1'$, we have
-\[
+$
 c_0\oplus m_1 = c_0'\oplus m_1'\Rightarrow m_1=(c_0\oplus c_0')\oplus m_1'
-\]
+$
 and we know about $(c_0\oplus c_0')$. \\
 The aim is to find a $c_0'\|c_1$ such that $P_K(c_0'\|c_1)=1$. And if $c_0'$ is chosen randomly from $\{0,1\}^L$, then
 \begin{itemize}
@@ -505,7 +448,7 @@ Shannon's confusion-diffusion paradigm gives rise a way to construct a substitut
 \end{enumerate}
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\textwidth]{1.png}
+\includegraphics[width=0.4\textwidth]{1.png}
 \end{figure}
 For this network, we need to do key scheduling, where round key is derived from master key.
 \end{definition}
@@ -513,28 +456,28 @@ Enough rounds will guarantee an avalanche effect, where small change in the inpu
 However, this substitution permutation network is usually not invertible. However, we have the feistel network to make use of them to construct a invertible function.
 \begin{definition}[Fiestel Network]
 \hfill\\\normalfont In Fiestel network, we require $f_i$ to be keyed round found from $\{0,1\}^{\frac{l}{2}}\to\{0,1\}^{\frac{l}{2}}$. Then, in teh $i$th round, we have
-\[
+$
 L_i=R_{i-1}\text{ and }R_i=L_{i-1}\oplus f_i(R_{i-1})
-\]
+$
 and inverting $i$th round is
-\[
+$
 R_{i-1}=L_i\text{ and }L_{i-1}=R_i\oplus f_i(R_{i-1})
-\]
+$
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\textwidth]{2.png}
+\includegraphics[width=0.4\textwidth]{2.png}
 \end{figure}
 \end{definition}
 \begin{definition}[Data Encryption Scheme]
 \hfill\\\normalfont In Data Encryption Scheme, 16 rounds of Feistel netowrk with key length 56 and block length 64 are used. The single round function is illustrated in the figure below.
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\textwidth]{3.png}
+\includegraphics[width=0.4\textwidth]{3.png}
 \end{figure}
 Here, $E$ is a expansion function, and $S_i$ are $S$ boxes from $6$ bits to $4$ bits, that is non-invertible, publicly known and carefully designed. 
 \end{definition}
 Since the key length of DES is 56, it is not secure now. Double DES is also not secure due to meet-in-the-middle attack. Triple DES is equivalent to a DES of key length 112 and is still not secure.
-\clearpage
+
 \section{Private Key(Symmetric) Cyrptography}
 Apart from confidentiality, we also concern about \textbf{integrity} and \textbf{availability}. Under integrity, we have \textbf{user authentication}, which concerns the authenticity of sender, and also \textbf{message authentication}, which concerns the integrity of message.\\Do note that encryption does not ensure integrity:
 \begin{itemize}
@@ -572,9 +515,9 @@ For \textit{canonical} verification where \texttt{Mac} is deterministic, receive
 \end{itemize}
 When $\mathcal{A}$ succeeds, we say $\MacForge_{\mathcal{A},\Pi}(n)=1$.\\
 We say a MAC is \textbf{existentially unforgeable} under an adaptive chosen-message attack, if for all PPT adversary $\mathcal{A}$, there is a negligible function \textbf{negl} such that
-\[
+$
 P(\MacForge_{\mathcal{A},\Pi}(n)=1)\leq \mathbf{negl}(n)
-\]
+$
 \end{definition}
 It is not a ``too strong'' definition since we want MAC scheme to be application-independent.\\
 \textbf{Remark}: MAC is in general \textit{not} designed to detect \textbf{replays}. Replay attack can be prevented via application-dependent schemes such as \textbf{sequence number}, or \textbf{timestamp}.
@@ -592,9 +535,9 @@ In strong mac, we consider the following message authentication experiment $\Mac
 \end{itemize}
 When $\mathcal{A}$ succeeds, we say $\MacSForge_{\mathcal{A},\Pi}=1$.\\
 A MAC is a \textbf{strong MAC} under an adaptive chosen-message attack, if for all PPT adversary $\mathcal{A}$, there is a negligible function $\mathbf{negl}$ such that
-\[
+$
 P(\MacSForge_{\mathcal{A},\Pi}(n)=1)\leq \mathbf{negl}(n)
-\]
+$
 A secure MAC using canonical verification is also strongly secure.
 \end{definition}
 \textbf{Remark}: Authentication enables the receiver to verify origin, but the receiver cannot convince a third party of origin. On the other hand, signature enables the receiver to verify origin and receiver can convince third party of origin as well. The unique property of signature is called \textbf{non-repudiation}.
@@ -602,7 +545,7 @@ A secure MAC using canonical verification is also strongly secure.
 CBC-MAC is the standardized MAC, and is widely used.
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\textwidth]{4.png}
+\includegraphics[width=0.4\textwidth]{4.png}
 \end{figure}
 Here, we define $t_i=F_k(t_{i-1}\oplus m_i)$ and $t_0=0^n$. Output $t_l$ as the tag $t$.\\\texttt{Vrfy} will output 1 if and only if $t=\texttt{Mac}_k(m)$.\\
 CBC-MAC is only secure for fixed length messages as \textbf{concatenation attack} is possible for arbitrary length CBC-MAC:
@@ -650,9 +593,9 @@ Define the collision-finding experiment $\text{Hash-coll}_{\mathcal{A},\Pi}(n)$:
   \item $\text{Hash-coll}_{\mathcal{A},\Pi}(n)=1$ if and only if $x\neq x'$ and $H^s(x)=H^s(x')$.
 \end{itemize}
 $\Pi$ is collision resistant if for all PPT adversary $\mathcal{A}$, there is a \textbf{negl} such that 
-\[
+$
 P(\text{Hash-coll}_{\mathcal{A},\Pi}(n)=1)\leq \textbf{negl}(n)
-\]
+$
 \end{definition}
 \textbf{Remark}: Cryptographic hash functions in practice are usually \textbf{unkeyed}.
 \begin{theorem}[Hash-And-Mac]
@@ -683,13 +626,13 @@ Hash Function can be applied in
   \item Authenticating a sequence of data values: $D_0,\ldots, D_N$. This is done via \textbf{merkle hash trees}.\\
   \begin{figure}[h]
   \centering
-  \includegraphics[width=0.6\textwidth]{5.png}
+  \includegraphics[width=0.4\textwidth]{5.png}
   \end{figure}
   Merkle has tree makes the data the leaves of the tree and take hash recursively until root. Verifier knows $T_0$, the hash at the root. Verifier can authenticate leaf $D_i$, if the person can supply $D_i$ with the elements $D_j$ and $T_k$'s required in obtaining $T_0$ upstream to the root.
   \item Another way to do so in one-way hash chains. 
   \begin{figure}[h]
   \centering
-  \includegraphics[width=0.6\textwidth]{6.png}
+  \includegraphics[width=0.4\textwidth]{6.png}
   \end{figure}
   It picks a random $r_N$ with a public \textbf{one-way} function $F$. $r_i$ is calculated by $r_i=F(r_{i+1})$ and $r_0$ will be made public.\\
   It is used in reverse order of construction. Authentication of $r_i$ can be efficiently done given $r_j$ with $j>i$.
@@ -703,7 +646,7 @@ Hash Function can be applied in
   \item Commitment Schemes. Suppose $C(m)$ is the commitment to a value $m$. We can define $C(m)L=h(r\| m)$ to hide content of $m$ from the public, but also binds the bidder with the value $m$. Here, $r$ is a length-$l$ random sequence.\\
   This hash function $h$ requires \textbf{preimage resistence}, \textbf{collision resistance} and \textbf{non-malleability properties}.
 \end{itemize}
-\clearpage
+
 \section{Cryptographic Hardness Assumptions}
 Many private-key cryptography are based on assumption that pseudorandom permutation(PRP) exists. The \textit{existence} of PRP can be proved based on assumption that one-way function exist, whereas the existence of one-way function can be proved if factoring problem is hard.
 \subsection{Mathematics Preliminaries}
@@ -762,9 +705,9 @@ $\varphi(N)=N-1$ if $N$ prime. If $N=pq$ where $p,q$ are primes, then $\varphi(N
 \end{definition} 
 \begin{theorem}[Fermat's Little theorem]
 \hfill\\\normalfont Let $G$ be finite group of order $m$. Then for any $g\in G$, we have
-\[
+$
 g^m=1
-\]
+$
 \end{theorem}
 Specifically, for all $z\in\mathbb{Z}_N$, we have $N\cdot a=0\mid N$ and for all $z\in \mathbb{Z}_N^\ast$, we have $a^{\varphi(N)}=1\mod N$.
 \begin{theorem}\normalfont Let $G$ be finite gorup of order $m$. Then for $g\in G$ and $x\in \mathbb{Z}$, it holds that $g^x=g^{x\mod m}$.
@@ -828,9 +771,9 @@ The discrete-logarithm problem is hard relative to $\mathcal{G}$ if for all PPT 
 \hfill\\\normalfont Here we fix cyclic group $G$ with generator $g$. Suppose $h_1 = g^x,h_2=g^y\in G$, then define $\text{DH}_g(h_1,h_2)=DH(g^x,g^y)=g^{xy}$.\\
 For \textit{computational} Diffie-Hellman problem, given $g,h_1,h_2$, compute $\text{DH}_g(h_1,h_2)$.\\
 For \textit{decisional} Diffie-Hellman problem, given $g,h_1,h_2$, distinguish the correct $\text{DH}_g(h_1, h_2)$ from a uniform element of $G$. And the DDH problem is hard relative to $\mathcal{G}$ if for all PPT algorithm $\mathcal{A}$, we have
-\[
+$
 |P[A(G,q,g,g^x,g^y,g^z)=1]-P[A(G,q,g^x,g^y,g^{xy})=1]|\leq \mathbf{negl}(n)
-\]
+$
 \end{definition}
 \begin{theorem}[Relative Difficulty of Diffie-Hellman Problems]
 \hfill\\\normalfont It is known that, relative to $G$:
@@ -839,7 +782,7 @@ For \textit{decisional} Diffie-Hellman problem, given $g,h_1,h_2$, distinguish t
   \item If CDH is easy, so is DDH.
 \end{itemize}
 \end{theorem}
-\clearpage
+
 \section{Public Key Cryptography}
 The notion of public-key cryptography involves a pair of keys $(pk, sk)$, where
 \begin{itemize}
@@ -891,7 +834,7 @@ In CCA notion, we can also have CCA attack.
 \hfill\\\normalfont This optimal asymmetric encryption padding provides RSA-based CCA-secure encryption.
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.6\textwidth]{7.png}
+\includegraphics[width=0.2\textwidth]{7.png}
 \end{figure}
 Here, $G,H$ are independent hash functions, $r$ a unique random number per encryption.
 \end{definition}
@@ -901,7 +844,7 @@ However, if $a^{p-1}=1\mod p$ holds, and $p$ is long, then propability that $p$ 
 \textbf{Caveat}: Carmichael numbers. There exists $p$ such that $p$ not prime and $a^{p-1}=1\mod p$ for all choices of $0<a<p$.\\
 Another useful theorem: if $p$ is odd prime, then $x^2=1\mod p$ has only two solutions, namely $x=1$ and $x=-1$. So we can use its contrapositive to see whether a number $p$ is not prime.
 \end{theorem}
-\clearpage
+
 \section{Diffie Hellman and El Gamal}
 Recall the special cyclic group $\mathbb{Z}_p^\ast$ where $p$ is a prime. \textit{Not every} element of $\mathbb{Z}_p^\ast$ is a generator. 
 \begin{definition}[Order of Element in {$\mathbb{Z}^\ast_p$}]
@@ -921,17 +864,17 @@ This is due to the square root-able of $g^{k}$, where $g$ generator if and only 
 It is konwn that, if given $x\in \mathbb{Z}^\ast_p$, deciding whether $x$ is a quadratic residue is computationally \textbf{easy}. It can be checked using Legendre symbol.
 \begin{theorem}[Legendre Symbol]
 \hfill\\\normalfont Define Legendre symbol $\mathcal{L}_p(x)=x^{\frac{1}{2}(p-1)}\mod p$. It is known that
-\[
+$
 \mathcal{L}_p(x)=\begin{cases}
 1 & \text{ if }x\text{ is a QR}\\
 -1& \text{ if }x\text{ is not a QR}\\
 0 \text{ if }x=0\mod p
 \end{cases}
-\]
+$
 An useful property is
-\[
+$
 \mathcal{L}_p(xy)=\mathcal{L}_p(x)\mathcal{L}_p(y)
-\]
+$
 \end{theorem}
 Also, computing square roots in $\mathbb{Z}^\ast_p$ is also computationally feasible. It is known that $O(n^4)$ randomized algorithm exists.\\
 However,
@@ -983,9 +926,9 @@ To solve this, we need to pick $a, b$ that are even. Equivalently speaking, we n
 \begin{enumerate}
   \item Alice randomly chooses the public key and a parameter of RSA, i.e., $N$ and $e$, and sends them to Bob but keeps the private key secret.
   \item Bob randomly picks a session key $k$, encrypts it using public key and sends the ciphertext to Alice. That is, Bob sends
-  \[
+  $
 c=k^e\mod N
-  \]
+  $
   \item Alice uses her private key $d$ to encrypt the ciphertext $c$ and obtain $k$.
 \end{enumerate}
 \end{theorem}
@@ -1006,7 +949,7 @@ There are two major differences of DH and RSA:
 Imagine Mallory $M$ is a malicious attacker in between Alice and Bob that can modify messages. $M$ can carry out the MITM attack by sending his public key $g^z$ to both parties, so that 2 different session keys are established between Mallory and Alice and Bob respectively.
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.7\textwidth]{8.png}
+\includegraphics[width=0.4\textwidth]{8.png}
 \end{figure}
 \subsection{ElGamal Cryptosystem}
 In ElGamal Cryptosystem, any party will have 
@@ -1015,14 +958,14 @@ In ElGamal Cryptosystem, any party will have
 \item a public key $g$, which is the generator $g$ of a cyclic group , and $h:=g^x$.
 \end{itemize}
 Encryption of message $m$:
-\[
+$
 E(m)=\langle mh^r,g^r\rangle
-\]
+$
 where $m$ must be an element in the cyclic group and $r$ is randonly chosen.\\
 Decryption:
-\[
+$
 D(\langle a,b\rangle)=ab^{-x}
-\]
+$
 \begin{theorem}[Security of ElGamal]
 \hfill\\\normalfont \begin{itemize}
 \item If attacker can solve \textbf{DL}, he can calculate $x$ from $g,h$. Then attacker can decrypt any message.
@@ -1038,7 +981,7 @@ For example, pick $g\in QR_p\subset\mathbb{Z}_p^\ast$. Take group generated by $
 \end{theorem}
 Note, ElGamal in $QR_p$ is CPA secure.\\
 Elliptic Curve Cryptography(ECC) is basically ElGamal with another choice of cyclic group.
-\clearpage
+
 \section{Digital Signature Algorithm}
 Signature scheme usually admits the has-and-sign pattern. Where we have $m\to h(m)\to s(h(m))$, the cryptographic hash function $h$ reduces the size of message $m$ to a small, fixed-sized digest. Then we use $s$ and $\texttt{vrfy}$ to sign or verify, which is more costly than hash function $h$.
 \begin{definition}[Digital Signature Algorithm]
@@ -1098,7 +1041,7 @@ There are several scenarios where we need to invalidate certificates, for exampl
 Transport Layer Security is used in \texttt{HTTPS} connections. The TLS handshake is outlined in the diagram below.
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.7\textwidth]{9.png}
+\includegraphics[width=0.4\textwidth]{9.png}
 \end{figure}
 For the boxed part, the key exchange can be done in different key exchange protocol.
 \begin{itemize}
@@ -1107,7 +1050,7 @@ For the boxed part, the key exchange can be done in different key exchange proto
   \item \textbf{Ephemeral Diffie-Hellman}: Both $S$ and $C$ create fresh secret keys for new sessions. $S$' DH public key $g^{x_S}$ is signed by $S$'s RSA private key. Then $C$ and $S$ carry standard DH protocol to generate a fresh $pmk$.
 \end{itemize}
 For record-layer protocol, since parties now share $k_C,k_C', k_S, k_S'$, these key can be used for encryption and authentication. It prevents reflection attacks. Sequence numbers can be used to prevent replay attacks.
-\clearpage
+
 \section{Digital Cash and Shamir's Secret Sharing}
 For today's digital cash, we hope that we can achieve
 \begin{itemize}
@@ -1128,15 +1071,15 @@ Currently, we cannot acheive anonymous payment, since it requires
 We introduce Schnorr's identification protocol, which is the fundamental of Schnorr's blind signature.
 \begin{theorem}[Schnorr's Identification Protocol]
 \hfill\\\normalfont Let $p,q$ be large primes that satisfies
-\[
+$
 q\mid p-1
-\]
+$
 Let $G_q$ be the subgroup of order $q$ in $\mathbb{Z}_p^\ast$. Let $g$ be a generator of $G_q$. (A special choice of $p,q,G_q$ is actually $G_q=QR_p$, and $p=2q+1$)\\
 Let $H:\{0,1\}^\ast\to\mathbb{Z}_p^\ast$ be a collision-resistant hash.\\
 We set the \textbf{prover's} secret key $x$ to be $x\in\mathbb{Z}_q$. Its public key is a tuple:
-\[
+$
 (p,q,g,y:=g^x)
-\]
+$
 The Schnorr's identification protocol wants to achieve that the veritifier is convinced that prover has the private key $x$ corresponding to $y$ without learning $x$.:
 \begin{itemize}
   \item Prover chooses $r\in \mathbb{Z}_q$, and sends $a:=g^r$ to verifier
@@ -1147,13 +1090,13 @@ The Schnorr's identification protocol wants to achieve that the veritifier is co
 \end{theorem}
 \begin{theorem}[Schnorr's Signature]
 \hfill\\\normalfont The signer will have the same setting as identification protocol. Upon signing the message $m$, he will produce a pair $(c,b)$ where
-\[
+$
 c:=h(m\| a)
-\]
+$
 and 
-\[
+$
 b=r-cx
-\]
+$
 The signature can be verrified by checking $c=h(m\| g^b y^c)$.
 \end{theorem}
 This allows the signature scheme to be non-interactive. This scheme relies on the hardness of discrete logarithms of elements of $G_q$.\\
@@ -1208,17 +1151,13 @@ However, here we need a honest dealer. In case the dealer may not be honest, we 
   \item In addition, dealer broadcasts $c_j = g^{a_j}\mod q$ for $j=0,\cdots, t-1$.
 \end{itemize}
 Reconstruction is the same. For vertification, participants should check whether $s_i$ is consistent via $c_j$'s by doing:
-\[
+$
 g^{s_i}=(c_{t-1})^{i^{t-1}}\cdots(c_1)^i\cdot c_0\mod q
-\]
+$
 We can understand this scheme by treating $c_i$ as $a_i$'s digest.
 \end{theorem}
 This scheme depends on the security of discrete log. Therefore, it is not infomation theoretically secure. This poses a problem if entropy of $K$ is low.\\
 To fix this, we can use a semantically secure homomorphic PKC as the hash, e.g., Paillier Cryptosystem.
-\subsection{Distributed Ledger}
-
-\clearpage
-\subsection{Crypto Applications}
 \subsection{Commitment Schemes}
 One commitment scheme can be achieved using SHA-256. Suppose they want to exchange a single bit of content. Then,
 \begin{itemize}
@@ -1261,9 +1200,9 @@ One example is an RSA-based unconditionally binding scheme.\\
 \begin{enumerate}
   \item Setup: $T$ choose $N$ and sends $(e,N)$ to Alice and Bob.
   \item Commit: To commit a bit $a$, Alice randomly pick an \textit{non-zero} number $r$ from $\mathbb{Z}_N$, such that its \textit{least significant bit} is $a$. The commitment is
-  \[
+  $
 c=r^e\mod N
-  \]
+  $
   \item Open: Alice reveal $a$.
 \end{enumerate}
 Here, Alice is unconditioanlly bound with $a$, since there does not exist another $s$ such that $c=s^e\mod N$.\\
@@ -1272,15 +1211,15 @@ Another example is the unconditionally hiding scheme is ElGamal based.\\
 \begin{enumerate}
   \item $T$ picks a prime $p$, an element $g$ with order $p-1$. $T$ picks a random $x$ and computes $h=g^x\mod p$. $T$ sends $(p,h,g)$ to Alice and Bob. Alice does not know $x$.
   \item To commit $a$, Alice picks a random $r$ from $\mathbb{Z}_p$ and computes the commitment
-  \[
+  $
 c=g^rh^a\mod p
-  \]
+  $
   \item To open, Alice reveals $a$ and $r$. To check, Bob reencrypt.
 \end{enumerate}
 This achieves unconditionally hiding since whether $a=0$ or $1$, the corresponding $r$ can be equally likely chosen. However, this is conditionally binding, since if Alice can find
-\[
+$
 c=g^rh^0=g^sh^1\mod p
-\]
+$
 she can break this scheme. However, this requires Alice to break discrete log.\\
 There are other desired properties specific to some scenarios, for example:
 \begin{itemize}
@@ -1294,9 +1233,9 @@ There are other desired properties specific to some scenarios, for example:
   \item $c_2=g^{r_2}h^{b_2}\mod p$
 \end{itemize}
 Then we have
-\[
+$
 c_1c_2=g^{r_1+r_2}h^{b_1+b_2}\mod p
-\]
+$
 which is the commitment of $b_1+b_2\mod p-1$.
 \end{definition}
 \subsection{Zero Knowledge Proof}
@@ -1325,9 +1264,9 @@ Another zero-knowledge proof of committed value is non-zero is listed below:
 \subsection{Anonymous Communication and Mixnets}
 Internet is designed as a public network, so machine on your LAN may see your traffic, whereas routers see all traffic. Encryption does not hide identities, since it does not hide routing information.\\
 Basic Mix design requires any meesage sender to encrypt the message $M$ as
-\[
+$
 \{r_i,\{r_j,M\}_{pk(D)}, D\}_{pk(mix)}
-\]
+$
 where $r_i,r_j$ are random numbers, and $D$ is the receiver.\\
 To allow anonymous return address, $M$ shoudl include $\{K_1,A\}_{pk(mix)}$ and $K_2$ where $K_2$ is a fresh public key.
 \end{document}
